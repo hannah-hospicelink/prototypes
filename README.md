@@ -20,6 +20,7 @@ This repo uses a lightweight client-side password check:
 - Password prompt appears after clicking a `View prototype` link
 - Password can be different for each prototype card
 - Successful entry is remembered per prototype for the current browser tab session
+- Passwords should be a 4-word passphrase separated by dashes. See generator  here: https://www.randompassphrasegenerator.com/?r=4 
 
 Implementation details:
 

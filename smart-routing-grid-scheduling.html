@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART Routing — Data Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg-primary: #fcfcfb;
+    --color-bg-surface: #ffffff;
+    --table-header: #f5f5f4;
+    --color-border-light: #e7e5e4;
+    --color-text-heading: #1c1917;
+    --color-text-default: #57534e;
+    --color-text-muted: #78716c;
+    --color-text-link: #0080c5;       /* Color/Text/Link → Color/Primary/600 */
+    --btn-tertiary-content: #0080c5;  /* $btn-tertiary-content → Color/Primary/600 */
+    --color-text-link-hover: #3399d1; /* Color/Text/Link_Hover → Color/Primary/500 */
+    --color-text-link-active: #00669e;/* Color/Text/Link_Active → Color/Primary/700 */
+    --color-focus-outline: #00669e;   /* State/Focus/Outline/Color/Default → Color/Primary/700 */
+    --color-text-error: #a00d25;
+    --color-icon-caution: #f4b300;   /* Color/Icon/Caution → Color/Yellow/600 */
+    --color-icon-inline-muted: #78716c; /* Color/Icon/Inline/Muted */
+    --table-row-hover: #fcfcfb;      /* Table/Color/Background/Row/Hover → Color/Neutral/50 */
+    --button-ghost-bg-hover: #f5f5f4; /* Button/Color/Ghost/Background/Hover → Color/Neutral/200 */
+    --button-ghost-bg-active: #e7e5e4;/* Button/Color/Ghost/Background/Active → Color/Neutral/300 */
+
+    /* editable grid cell (generic) */
+    --menu-bg: #ffffff;               /* Color/Background/Surface → Color/Neutral/White */
+    --menu-option-hover: #f5f5f4;     /* Menu/Color/Option/Off/Hover → Color/Neutral/200 */
+    --menu-option-active: #e7e5e4;    /* Menu/Color/Option/Off/Active → Color/Neutral/300 */
+    --menu-option-selected: #f2f9fc;  /* Color/Background/Container/Active → Color/Info/50 */
+    --menu-option-selected-hover: #e5f2f9;  /* Menu/Color/Option/On/Hover → Color/Info/100 */
+    --menu-option-selected-active: #cce6f3; /* Menu/Color/Option/On/Active → Color/Info/200 */
+    --input-bg: #ffffff;              /* Color/Background/Surface → Color/Neutral/White */
+    --input-border: #e7e5e4;          /* Color/Border/Default → Color/Neutral/300 */
+    --input-border-focus: #00669e;    /* State/Focus/Outline/Color/Default → Color/Primary/700 */
+    --input-placeholder: #a8a29e;     /* Input/Text/Color/Placeholder → Color/Neutral/500 */
+    --chip-bg: #e7e5e4;               /* Tag/Color/Chip/Background → Color/Neutral/300 */
+    --icon-chevron-muted: #a8a29e;    /* collapse chevron → Color/Neutral/500 */
+
+    /* settings bar + stateful filter buttons */
+    --card-bg: #ffffff;               /* Card/Color/Container/Background/Default → Color/Neutral/White */
+    --card-border: #e7e5e4;           /* Card/Color/Container/Border/Default → Color/Neutral/300 */
+    --card-bg-nested: #fcfcfb;         /* Card/Color/Container/Background/Nested → Color/Neutral/50 */
+    --filter-text-inactive: #57534e;  /* Button/Color/Stateful/Content/Inactive → Color/Neutral/700 */
+    --filter-text-active: #0080c5;    /* Button/Color/Stateful/Content/Active → Color/Primary/600 */
+    --filter-bg-inactive: #eceae9;        /* Button/Color/Stateful/Background/Inactive/Default → Color/Neutral/250 */
+    --filter-bg-inactive-hover: #e0dedd;  /* Button/Color/Stateful/Background/Inactive/Hover → Color/Neutral/350 */
+    --filter-bg-active: #e5f2f9;          /* Button/Color/Stateful/Background/Active/Default → Color/Primary/100 */
+    --filter-bg-active-hover: #cce6f3;    /* Button/Color/Stateful/Background/Active/Hover → Color/Primary/200 */
+    --badge-error-bg: #c8102e;        /* Color/Error/600 */
+    --badge-error-text: #ffffff;      /* Color/Text/On_Dark → Color/Neutral/White */
+    --action-icon-color: #292524;     /* action icons → Color/Neutral/900 */
+    --btn-ghost-content-secondary: #292524; /* $btn-ghost-content-secondary → Color/Neutral/900 */
+    --indicator-visibility-high: #c8102e;   /* $indicator-visibility-high → Color/Error/600 */
+
+    /* filter popover */
+    --color-border-md: #d6d3d1;             /* $color-border-md → Color/Neutral/350 (input border) */
+    --input-text-adornment: #a8a29e;        /* $input-text-adornment → Color/Neutral/500 */
+    --color-icon-inline-default: #57534e;   /* $color-icon-inline-default → Color/Neutral/700 */
+    --color-error-600: #c8102e;             /* $color-error-600 */
+    --btn-bg-primary: #0080c5;              /* $btn-bg-primary → Color/Primary/600 */
+    --btn-bg-primary-hover: #3399d1;        /* Button/Filled/Background/Primary/Hover → Color/Primary/500 */
+    --btn-bg-primary-active: #00669e;       /* Button/Filled/Background/Primary/Active → Color/Primary/700 */
+    --btn-content: #ffffff;                 /* $btn-content → on-primary */
+    --btn-ghost-content-tertiary: #0080c5;  /* $btn-ghost-content-tertiary → Color/Primary/600 */
+    --filter-input-height: 40px;            /* $input-text-minHeight-md */
+    --filter-chip-input-height: 28px;       /* Input/Filter_Chip/Size/Height */
+    --filter-popover-width: 620px;          /* popover width in context */
+    --icon-xs: 14px;                        /* $icon-xs */
+
+    --badge-bg-neutral: #e7e5e4;  --badge-text-neutral: #292524;
+    --badge-bg-caution: #fef7e5;  --badge-text-caution: #926b00;
+    --badge-bg-error: #ffe9e8;    --badge-text-error: #780a1c;
+    --badge-bg-warning: #fff4e5;  --badge-text-warning: #8e4101;
+    --badge-bg-info: #e5f2f9;     --badge-text-info: #004d76;
+
+    --radius-md: 8px;
+    --radius-sm: 4px;
+    --radius-full: 9999px;
+    --border-width: 1px;
+
+    /* motion */
+    --transition-fast: 0.15s ease;
+    --ease-emphasized: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-expand: 0.32s;
+    --duration-chevron: 0.3s;
+    --duration-note-pulse: 1.8s;
+
+    /* spacing scale (Figma $spacing-*) */
+    --spacing-tiny: 4px;   /* $spacing-tiny */
+    --spacing-xxs: 8px;    /* $spacing-xxs */
+    --spacing-xs: 12px;    /* $spacing-xs */
+    --spacing-sm: 16px;    /* $spacing-sm */
+    --spacing-md: 20px;    /* $spacing-md */
+    --spacing-lg: 24px;    /* $spacing-lg */
+
+    /* size scale (Figma $size-*) */
+    --size-50: 2px;        /* $size-50 */
+    --size-150: 6px;       /* $size-150 */
+
+    /* icon + control sizes */
+    --icon-inline: 14px;       /* inline icon frame */
+    --icon-inline-glyph: 12px; /* inline icon glyph (frame minus padding) */
+    --icon-action: 18px;       /* action button glyph */
+    --icon-edit: 16px;         /* edit pencil glyph */
+    --edit-btn-size: 24px;     /* edit icon button */
+
+    /* menu + options + input field */
+    --menu-width: 164px;
+    --menu-padding: 8px;
+    --menu-item-gap: 4px;
+    --menu-radius: var(--radius-md);
+    --menu-option-height: 36px;
+    --menu-option-padding-x: 8px;
+    --menu-heading-height: 25px;
+    --input-height: 48px;
+    --input-radius: var(--radius-sm);
+    --input-border-width: 1px;
+    --input-padding-x: 12px;
+    --input-adornment: 20px;
+    --menu-shadow: 0 0.5px 2px rgba(0,0,0,0.20), 0 0.5px 1px rgba(0,0,0,0.16), 0 2px 4px 2px rgba(0,0,0,0.12);
+
+    /* component dimensions */
+    --row-height: 48px;
+    --badge-height: 18px;
+
+    /* density-driven tokens (default = Standard / Medium) */
+    --density-row-height: 48px;
+    --density-cell-pad-y: var(--spacing-xxs);  /* 8px */
+    --density-cell-pad-x: var(--spacing-xs);   /* 12px */
+    --density-cell-font: var(--font-body);     /* 14px */
+    --density-cell-lh: var(--lh-default);      /* 19.6px */
+    --density-badge-height: 18px;
+    --density-badge-pad-y: var(--size-50);     /* 2px */
+    --density-badge-pad-x: var(--size-150);    /* 6px */
+    --density-row-btn-size: 24px;              /* _BaseIconButton (Medium/Large) */
+    --density-row-btn-glyph: 16px;             /* glyph (Medium/Large) */
+    --density-detail-font: var(--font-body);   /* 14px */
+    --density-detail-lh: var(--lh-default);    /* 19.6px */
+    --density-detail-gap: var(--spacing-tiny); /* 4px between rows in a section */
+    --density-header-height: 48px;
+    --density-header-pad-x: var(--spacing-xs); /* 12px */
+    --density-header-font: var(--font-body);   /* 14px */
+    --density-field-font: var(--font-body);    /* 14px (editable cell input) */
+
+    /* focus */
+    --focus-ring-width: 2px;       /* button focus outline weight */
+    --focus-ring-width-link: 1px;  /* link focus outline weight */
+    --focus-ring-offset: 2px;
+    --radius-xs: 2px;
+
+    /* layout (prototype-specific, not from design tokens) */
+    --grid-max-width: 1900px;
+    --settings-gap: 20px;        /* gap between quick filters and action buttons */
+    --filter-gap: 16px;          /* gap between filter buttons */
+    --filter-height: 32px;       /* Size=Small stateful button */
+    --filter-padding-x: 12px;
+    --filter-label-gap: 8px;     /* gap between check, label */
+    --count-badge-size: 14px;
+    --action-btn-size: 32px;     /* _BaseIconButton ($btn-size-sm) */
+    --action-icon-size: 16px;    /* action glyph height ($icon-sm) */
+    --button-radius-icon: 8px;   /* $button-radius-icon */
+    --icon-padding-md: 2px;      /* $icon-padding-md */
+    --icon-padding-sm: 1px;      /* $icon-padding-sm */
+    --icon-sm: 16px;             /* $icon-sm */
+    --color-info-600: #0080c5;   /* $color-info-600 */
+    --size-350: 10px;            /* $size-350 (indicator dot) */
+    --chip-height: 20px;         /* $chip-height-md */
+    --chip-min-width: 24px;      /* $chip-minWidth-sm */
+    --chip-btn-color: #78716c;   /* $chip-btn → Color/Neutral/600 */
+    --card-padding: 16px;        /* $spacing-sm */
+    --page-padding-y: 60px;
+    --page-padding-x: 40px;
+    --detail-inset-x: 128px;  /* expandable panel horizontal inset (Figma frame) */
+    --detail-col-gap: 80px;   /* Figma grid column gap */
+    --detail-row-gap: 48px;   /* Figma grid row gap */
+
+    --font-body: 0.875rem;  /* 14px */
+    --font-heading-sm: 1rem;     /* 16px ($font-heading-sm) */
+    --lh-heading-sm: 19.2px;     /* $lineHeight-compact for 16px heading */
+    --font-caption: 0.75rem;/* 12px */
+    --lh-default: 19.6px;
+    --lh-compact: 16.8px;
+    --lh-reset: 12px;       /* $lineHeight-reset */
+  }
+
+  /* Row density overrides (Standard = default in :root) */
+  [data-density="condensed"] {
+    --density-row-height: 36px;
+    --density-cell-pad-y: var(--spacing-tiny);   /* 4px */
+    --density-cell-pad-x: var(--spacing-xxs);    /* 8px */
+    --density-cell-font: var(--font-caption);    /* 12px */
+    --density-cell-lh: 14.4px;                   /* Compact/Caption */
+    --density-badge-height: 18px;
+    --density-badge-pad-y: var(--size-50);       /* 2px */
+    --density-badge-pad-x: var(--size-150);      /* 6px */
+    --density-row-btn-size: 20px;                /* Small */
+    --density-row-btn-glyph: 14px;               /* Small glyph */
+    --density-detail-font: var(--font-caption);  /* 12px */
+    --density-detail-lh: 16.8px;
+    --density-detail-gap: var(--size-50);        /* 2px */
+    --density-header-height: 32px;
+    --density-header-pad-x: var(--spacing-xxs);  /* 8px */
+    --density-header-font: var(--font-caption);  /* 12px */
+    --density-field-font: var(--font-caption);   /* 12px */
+  }
+  [data-density="relaxed"] {
+    --density-header-height: 56px;
+    --density-row-height: 56px;
+    --density-cell-pad-y: var(--spacing-xs);     /* 12px */
+    --density-cell-pad-x: var(--spacing-sm);     /* 16px */
+    --density-cell-font: var(--font-body);       /* 14px */
+    --density-cell-lh: var(--lh-default);        /* 19.6px */
+    --density-badge-height: 24px;
+    --density-badge-pad-y: var(--spacing-tiny);  /* 4px */
+    --density-badge-pad-x: var(--spacing-xxs);   /* 8px */
+    --density-field-font: var(--font-caption);   /* 12px */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--color-bg-primary);
+    color: var(--color-text-default);
+    padding: var(--page-padding-y) var(--page-padding-x);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Settings bar ---------- */
+  .table-settings {
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto var(--spacing-xs);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--card-padding);
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+  }
+  .toolbar-row { display: flex; align-items: center; justify-content: space-between; gap: var(--settings-gap); width: 100%; }
+  .toolbar-filters { display: flex; align-items: center; gap: var(--spacing-sm); flex: 1; min-width: 0; }
+
+  /* primary (leading) filter button — blue icon button with indicator dot */
+  .filter-toggle-btn {
+    position: relative;
+    width: var(--action-btn-size); height: var(--action-btn-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: var(--button-radius-icon);
+    cursor: pointer;
+    color: var(--btn-ghost-content-secondary);
+    flex-shrink: 0;
+    transition: background var(--transition-fast);
+  }
+  .filter-toggle-btn:hover { background: var(--button-ghost-bg-hover); }
+  .filter-toggle-btn:active { background: var(--button-ghost-bg-active); }
+  .filter-toggle-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
+  .filter-toggle-btn svg { width: var(--icon-edit); height: auto; display: block; }
+  .filter-toggle-btn .filter-dot {
+    position: absolute;
+    top: -2px; right: -2px;
+    width: var(--size-350); height: var(--size-350);
+    border-radius: var(--radius-full);
+    background: var(--indicator-visibility-high);
+  }
+
+  .quick-filters { display: flex; align-items: center; gap: var(--filter-gap); }
+  .filter-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--filter-label-gap);
+    height: var(--filter-height);
+    padding: 0 var(--filter-padding-x);
+    background: var(--filter-bg-inactive);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--filter-text-inactive);
+    white-space: nowrap;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+  .filter-btn:hover { background: var(--filter-bg-inactive-hover); }
+  .filter-btn.active { background: var(--filter-bg-active); color: var(--filter-text-active); }
+  .filter-btn.active:hover { background: var(--filter-bg-active-hover); }
+  .filter-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+  .filter-btn .filter-check { width: var(--icon-edit); height: var(--icon-edit); display: none; flex-shrink: 0; }
+  .filter-btn.active .filter-check { display: block; }
+  .count-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(35%, -35%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--count-badge-size);
+    height: var(--count-badge-size);
+    padding: 0 var(--size-50);
+    box-sizing: border-box;
+    border-radius: var(--radius-full);
+    background: var(--badge-error-bg);
+    color: var(--badge-error-text);
+    font-size: var(--font-caption);
+    line-height: 1;
+  }
+  .table-actions { display: flex; align-items: center; gap: var(--spacing-xxs); flex-shrink: 0; }
+  .action-btn {
+    width: var(--action-btn-size); height: var(--action-btn-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--icon-padding-md);
+    background: none;
+    border: none;
+    border-radius: var(--button-radius-icon);
+    cursor: pointer;
+    color: var(--action-icon-color);
+    box-sizing: border-box;
+    transition: background var(--transition-fast);
+  }
+  .action-btn:hover { background: var(--button-ghost-bg-hover); }
+  .action-btn:active { background: var(--button-ghost-bg-active); }
+  .action-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
+  .action-btn svg { height: var(--action-icon-size); width: auto; display: block; }
+
+  /* applied filter chips */
+  .applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xs); width: 100%; }
+  /* shared chip base (same Figma component); font-size set per context below */
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    height: var(--chip-height);
+    min-width: var(--chip-min-width);
+    padding: var(--spacing-tiny) var(--spacing-xxs);
+    box-sizing: border-box;
+    border-radius: var(--radius-full);
+    background: var(--chip-bg);
+    line-height: var(--lh-reset);
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  /* toolbar applied-filter chips: 12px label/value */
+  .applied-filters .filter-chip { font-size: var(--font-caption); }
+  .filter-chip .chip-label { font-weight: 400; }
+  .filter-chip .chip-value { font-weight: 500; }
+  .chip-remove {
+    width: var(--icon-sm); height: var(--icon-sm);
+    padding: var(--icon-padding-sm);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--chip-btn-color);
+    flex-shrink: 0;
+  }
+  .chip-remove svg { width: 100%; height: 100%; display: block; }
+
+  .data-grid {
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+  }
+
+  /* ---------- Track (single width source for header + rows) ---------- */
+  .grid-track {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* ---------- Header ---------- */
+  .grid-header {
+    display: flex;
+    border-bottom: var(--border-width) solid var(--color-border-light);
+    width: 100%;
+  }
+  .header-cell {
+    background: var(--table-header);
+    height: var(--density-header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--density-header-pad-x);
+    font-weight: 500;
+    font-size: var(--density-header-font);
+    color: var(--color-text-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Column widths ---------- */
+  /* flex-grow proportional to natural width, basis = natural px, no shrink (scrolls below natural width) */
+  .col-assignee { flex: 116 0 116px; }
+  .col-order    { flex: 180 0 180px; }
+  .col-priority { flex: 148 0 148px; }
+  .col-patient  { flex: 148 0 148px; }
+  .col-ordered  { flex: 136 0 136px; }
+  .col-requested{ flex: 152 0 152px; }
+  .col-scheduled{ flex: 152 0 152px; }
+  .col-status   { flex: 136 0 136px; }
+  .col-tags     { flex: 248 0 248px; }
+  .col-actions  { flex: 80 0 80px; }
+
+  /* ---------- Rows ---------- */
+  .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
+  .grid-row:last-child { border-bottom: none; }
+
+  .row-main {
+    display: flex;
+    width: 100%;
+  }
+  .row-cell {
+    background: var(--color-bg-surface);
+    min-height: var(--density-row-height);
+    display: flex;
+    align-items: center;
+    padding: var(--density-cell-pad-y) var(--density-cell-pad-x);
+    flex-shrink: 0;
+    min-width: 0;
+    transition: background var(--transition-fast);
+  }
+  .row-main:hover .row-cell { background: var(--table-row-hover); }
+
+  .cell-stack { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+  .cell-main {
+    font-size: var(--density-cell-font);
+    line-height: var(--density-cell-lh);
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  .cell-caption {
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .link {
+    color: var(--color-text-link);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .link:hover { color: var(--color-text-link-hover); text-decoration: underline; }
+  .link:active { color: var(--color-text-link-active); text-decoration: none; }
+  .link:focus-visible {
+    outline: var(--focus-ring-width-link) solid var(--color-focus-outline);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-xs);
+  }
+  .stat { color: var(--color-text-error); }
+
+  .order-main { display: flex; align-items: center; gap: var(--spacing-tiny); }
+  .order-main .cell-main { display: inline-flex; align-items: center; }
+
+  /* New-note icon + pulse */
+  .note-icon {
+    width: var(--icon-inline); height: var(--icon-inline);
+    color: var(--color-icon-caution);
+    flex-shrink: 0;
+    display: block;
+    animation: notePulse var(--duration-note-pulse) ease-in-out infinite;
+  }
+  @keyframes notePulse {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%      { opacity: 0.35; transform: scale(0.86); }
+  }
+
+  /* Badges */
+  .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
+  .badge {
+    height: var(--density-badge-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--density-badge-pad-y) var(--density-badge-pad-x);
+    border-radius: var(--radius-full);
+    font-size: var(--font-caption);
+    line-height: var(--lh-reset);
+    white-space: nowrap;
+  }
+  .badge.neutral { background: var(--badge-bg-neutral); color: var(--badge-text-neutral); }
+  .badge.caution { background: var(--badge-bg-caution); color: var(--badge-text-caution); }
+  .badge.error   { background: var(--badge-bg-error);   color: var(--badge-text-error); }
+  .badge.warning { background: var(--badge-bg-warning); color: var(--badge-text-warning); }
+  .badge.info    { background: var(--badge-bg-info);    color: var(--badge-text-info); }
+
+  .status-cell, .tags-cell { justify-content: flex-start; }
+
+  /* Action buttons */
+  .actions { display: flex; gap: var(--spacing-xxs); align-items: center; justify-content: center; }
+  .icon-btn {
+    width: var(--density-row-btn-size);
+    height: var(--density-row-btn-size);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: background var(--transition-fast);
+  }
+  .icon-btn:hover { background: var(--button-ghost-bg-hover); }
+  .icon-btn:active { background: var(--button-ghost-bg-active); }
+  .icon-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-outline);
+    outline-offset: calc(-1 * var(--focus-ring-offset));
+  }
+  .icon-btn svg { width: var(--density-row-btn-glyph); height: var(--density-row-btn-glyph); display: block; }
+  .chevron { transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
+  .grid-row.expanded .chevron { transform: rotate(0deg); }
+
+  /* ---------- Editable grid cell (generic) ---------- */
+  .editable-cell { position: relative; }
+  .cell-display { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xxs); width: 100%; min-width: 0; overflow: hidden; }
+  .cell-display-text { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  /* edit (pencil) button — ghost icon button, hidden until row hover */
+  .edit-btn {
+    width: var(--density-row-btn-size); height: var(--density-row-btn-size);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-icon-inline-muted);
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity var(--transition-fast), background var(--transition-fast);
+  }
+  .editable-cell:hover .edit-btn { opacity: 1; }
+  .edit-btn:hover { background: var(--button-ghost-bg-hover); }
+  .edit-btn:active { background: var(--button-ghost-bg-active); }
+  .edit-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); opacity: 1; }
+  .edit-btn svg { width: var(--density-row-btn-glyph); height: var(--density-row-btn-glyph); display: block; }
+
+  /* input field (select trigger) — fills the cell edge-to-edge, no outer padding */
+  .editable-cell.editing { padding: 0; }
+  .cell-field {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    width: 100%;
+    height: var(--density-row-height);
+    padding: var(--spacing-xxs) var(--input-padding-x);
+    background: var(--input-bg);
+    border: var(--input-border-width) solid var(--input-border-focus);
+    border-radius: var(--input-radius);
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .cell-field-value { flex: 1; min-width: 0; font-size: var(--density-field-font); line-height: var(--density-detail-lh); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cell-field-chevron { width: var(--icon-action); height: var(--icon-action); flex-shrink: 0; color: var(--icon-chevron-muted); display: flex; align-items: center; justify-content: center; transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
+  .cell-field-chevron svg { width: var(--icon-edit); height: auto; display: block; }
+  .editable-cell.menu-open .cell-field-chevron { transform: rotate(0deg); }
+
+  /* dropdown menu */
+  .cell-menu {
+    position: fixed;
+    z-index: 1000;
+    width: var(--menu-width);
+    padding: var(--menu-padding);
+    background: var(--menu-bg);
+    border-radius: var(--menu-radius);
+    box-shadow: var(--menu-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-item-gap);
+  }
+  .menu-popover { width: max-content; min-width: 111px; }
+
+  /* history popover (My Recent Orders) */
+  .history-popover {
+    position: fixed;
+    z-index: 1000;
+    width: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-tiny);
+    padding: var(--spacing-sm);
+    background: var(--menu-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--menu-shadow);
+  }
+  .history-heading {
+    font-size: var(--font-heading-sm);
+    line-height: var(--lh-heading-sm);
+    font-weight: 600;
+    color: #000;
+    margin-bottom: var(--spacing-xxs);
+  }
+  .history-list { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .history-order {
+    background: var(--card-bg-nested);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xxs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-50);
+    min-width: 0;
+  }
+  .history-order-line { display: flex; align-items: center; gap: var(--size-50); }
+  .history-order-type { font-size: var(--font-body); line-height: var(--lh-default); font-weight: 500; color: var(--color-text-default); white-space: nowrap; }
+  .history-order-id { font-weight: 500; white-space: nowrap; }
+  .history-client { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); }
+
+  /* filter popover */
+  .filter-popover {
+    position: fixed;
+    z-index: 1000;
+    width: var(--filter-popover-width);
+    max-width: calc(100vw - 16px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--menu-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--menu-shadow);
+  }
+  .filter-field { display: flex; flex-direction: column; gap: var(--spacing-tiny); }
+  .filter-field-label {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+  .filter-field-label .req { color: var(--color-error-600); font-weight: 500; }
+  .filter-input {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    min-height: var(--filter-input-height);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+  .filter-input-search { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--input-text-adornment); display: flex; align-items: center; justify-content: center; }
+  .filter-input-search svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
+  .filter-input-content { flex: 1 1 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xxs); }
+  .filter-input-chevron { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--color-icon-inline-default); display: flex; align-items: center; justify-content: center; }
+  .filter-input-chevron svg { width: var(--icon-sm); height: auto; }
+  /* chips inside inputs (schedule status & warehouse): 14px medium, same base chip */
+  .filter-input-content .filter-chip { font-size: var(--font-body); font-weight: 500; }
+  .filter-chip .chip-remove { width: var(--icon-sm); height: var(--icon-sm); padding: var(--icon-padding-sm); box-sizing: border-box; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--chip-btn-color); flex-shrink: 0; }
+  .filter-chip .chip-remove svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
+  /* filter-chip toggle inputs (Assigned to) */
+  .filter-chip-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-tiny);
+    height: var(--filter-chip-input-height);
+    min-width: 80px;
+    padding: var(--size-150) var(--spacing-xs);
+    box-sizing: border-box;
+    border-radius: var(--radius-full);
+    background: var(--chip-bg);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-caption);
+    line-height: var(--lh-reset);
+    font-weight: 500;
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  .filter-chip-toggle .chip-check { width: var(--icon-xs); height: var(--icon-xs); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--color-icon-inline-default); }
+  .filter-chip-toggle .chip-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
+  .filter-chips-row { display: flex; gap: var(--spacing-xxs); }
+  /* buttons row — Small size: 32px tall, 12px text, 0 12px padding */
+  .filter-buttons { display: flex; align-items: center; justify-content: space-between; }
+  .filter-btn-reset {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: var(--btn-size-sm, 32px);
+    padding: 0 var(--btn-padding-sm, 12px);
+    background: none; border: none; cursor: pointer;
+    border-radius: var(--button-radius-text, 4px);
+    color: var(--btn-ghost-content-tertiary);
+    font-family: inherit;
+    font-size: var(--font-caption); line-height: 1; font-weight: 400;
+    transition: background var(--transition-fast);
+  }
+  .filter-btn-reset:hover { background: var(--button-ghost-bg-hover); }
+  .filter-btn-reset:active { background: var(--button-ghost-bg-active); }
+  .filter-btn-reset:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+  .filter-btn-apply {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: var(--btn-size-sm, 32px);
+    padding: 0 var(--btn-padding-sm, 12px);
+    background: var(--btn-bg-primary); border: none; cursor: pointer;
+    border-radius: var(--button-radius-text, 4px);
+    color: var(--btn-content);
+    font-family: inherit;
+    font-size: var(--font-caption); line-height: 1; font-weight: 400;
+    box-shadow: 0px 0.5px 2px rgba(0,128,197,0.2), 0px 0.5px 1px rgba(0,128,197,0.16), 0px 2px 4px rgba(0,128,197,0.12);
+    transition: background var(--transition-fast);
+  }
+  .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
+  .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
+  .filter-btn-apply:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+  .menu-heading {
+    height: var(--menu-heading-height);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-tiny) var(--menu-option-padding-x);
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+  .menu-option {
+    height: var(--menu-option-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--menu-option-padding-x);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+    cursor: pointer;
+    background: transparent;
+    transition: background var(--transition-fast);
+  }
+  .menu-option:hover { background: var(--menu-option-hover); }
+  .menu-option:active { background: var(--menu-option-active); }
+  .menu-option.selected { background: var(--menu-option-selected); }
+  .menu-option.selected:hover { background: var(--menu-option-selected-hover); }
+  .menu-option.selected:active { background: var(--menu-option-selected-active); }
+  .menu-option:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
+  .menu-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+
+  /* ---------- Expandable panel (grid-row 0fr/1fr trick) ---------- */
+  .expand-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-expand) var(--ease-emphasized);
+    background: var(--color-bg-surface);
+  }
+  .grid-row.expanded .expand-wrap { grid-template-rows: 1fr; }
+  .expand-inner { overflow: hidden; min-height: 0; }
+
+  .detail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--detail-col-gap);
+    row-gap: var(--detail-row-gap);
+    padding: var(--spacing-md) var(--detail-inset-x) var(--spacing-lg);
+  }
+  .detail-section { display: flex; flex-direction: column; gap: var(--density-detail-gap); }
+  .detail-heading {
+    font-weight: 600;
+    font-size: var(--density-detail-font);
+    line-height: var(--lh-compact);
+    color: var(--color-text-heading);
+  }
+  .lv { display: flex; gap: var(--size-50); align-items: flex-start; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  .lv .label { color: var(--color-text-default); white-space: nowrap; flex-shrink: 0; }
+  .lv .value { color: var(--color-text-default); font-weight: 500; }
+  /* stacked field: label on top, value below (e.g. Address) */
+  .lv-stacked { display: flex; flex-direction: column; gap: 0; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  .lv-stacked .label { color: var(--color-text-default); }
+  .lv-stacked .value { color: var(--color-text-default); font-weight: 500; }
+  /* tertiary "View on map" button */
+  .view-map-btn {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    margin-top: var(--spacing-tiny);
+    padding: var(--size-50) var(--spacing-tiny);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--btn-tertiary-content);
+    font-size: var(--density-detail-font);
+    line-height: var(--lh-default);
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+  }
+  .view-map-btn:hover { background: var(--button-ghost-bg-hover); }
+  .view-map-btn:active { background: var(--button-ghost-bg-active); }
+  .view-map-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+  .view-map-icon {
+    width: var(--icon-inline); height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+    box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .view-map-icon svg { width: 100%; height: 100%; display: block; }
+  .phone-line { display: flex; gap: var(--spacing-xxs); align-items: center; }
+  .phone-type { display: flex; gap: var(--size-50); align-items: center; color: var(--color-text-muted); font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  .phone-icon-frame {
+    width: var(--icon-inline); height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .phone-icon-frame svg { height: var(--icon-inline-glyph); width: auto; color: var(--color-icon-inline-muted); }
+</style>
+</head>
+<body data-density="standard">
+  <div class="table-settings">
+    <div class="toolbar-row">
+      <div class="toolbar-filters">
+        <button class="filter-toggle-btn" id="filterToggleBtn" aria-label="Filter"><span class="filter-dot"></span></button>
+        <div class="quick-filters" id="quickFilters">
+          <button class="filter-btn" data-filter="Rescheduled">
+            <span class="filter-check"></span><span class="filter-label">Rescheduled</span><span class="count-badge">1</span>
+          </button>
+          <button class="filter-btn" data-filter="STAT/Urgent">
+            <span class="filter-check"></span><span class="filter-label">STAT/Urgent</span><span class="count-badge">4</span>
+          </button>
+          <button class="filter-btn" data-filter="New Note">
+            <span class="filter-check"></span><span class="filter-label">New note</span><span class="count-badge">3</span>
+          </button>
+        </div>
+      </div>
+      <div class="table-actions">
+        <button class="action-btn" aria-label="Export"></button>
+        <button class="action-btn" id="historyBtn" aria-label="History"></button>
+        <button class="action-btn" aria-label="Customize columns"></button>
+        <button class="action-btn" id="settingsBtn" aria-label="Settings"></button>
+      </div>
+    </div>
+    <div class="applied-filters" id="appliedFilters">
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Birmingham, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Gadsden, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Me</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Unassigned</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+    </div>
+  </div>
+  <div class="data-grid" id="grid">
+    <div class="grid-track">
+      <div class="grid-header">
+        <div class="header-cell col-assignee">Assignee</div>
+        <div class="header-cell col-order">Order</div>
+        <div class="header-cell col-priority">Priority / Reason</div>
+        <div class="header-cell col-patient">Patient</div>
+        <div class="header-cell col-ordered">Ordered</div>
+        <div class="header-cell col-requested">Requested</div>
+        <div class="header-cell col-scheduled">Scheduled</div>
+        <div class="header-cell col-status">Schedule Status</div>
+        <div class="header-cell col-tags">Tags</div>
+        <div class="header-cell col-actions"></div>
+      </div>
+      <div id="rows"></div>
+    </div>
+  </div>
+
+<script>
+  const ICON_ELLIPSIS = '<svg viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 40C22 38.8929 22.8929 38 24 38C25.1071 38 26 38.8929 26 40C26 41.1071 25.1071 42 24 42C22.8929 42 22 41.1071 22 40ZM28 40C28 38.8929 28.8929 38 30 38C31.1071 38 32 38.8929 32 40C32 41.1071 31.1071 42 30 42C28.8929 42 28 41.1071 28 40ZM36 38C37.1071 38 38 38.8929 38 40C38 41.1071 37.1071 42 36 42C34.8929 42 34 41.1071 34 40C34 38.8929 34.8929 38 36 38Z"/></svg>';
+  const ICON_CHEVRON  = '<svg class="chevron" viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M29.1786 35.75C29.6429 35.3214 30.3571 35.3214 30.8214 35.75L37.6786 42.6071C38.1071 43.0714 38.1071 43.7857 37.6786 44.25C37.2143 44.6786 36.5 44.6786 36.0357 44.25L30 38.1786L23.9643 44.25C23.5 44.6786 22.7857 44.6786 22.3214 44.25C21.8929 43.7857 21.8929 43.0714 22.3214 42.6071L29.1786 35.75Z"/></svg>';
+  const ICON_NOTE     = '<svg class="note-icon" viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 35C22 33.3438 23.3438 32 25 32H35C36.6562 32 38 33.3438 38 35V42C38 43.6562 36.6562 45 35 45H31.25C31.0938 45 30.9375 45.0625 30.8125 45.1562L27.1875 47.8438C27.0625 47.9375 26.9062 48 26.75 48C26.3438 48 26 47.6562 26 47.25V45H25C23.3438 45 22 43.6562 22 42V35ZM30 34.75C29.5938 34.75 29.25 35.0938 29.25 35.5V39C29.25 39.4062 29.5938 39.75 30 39.75C30.4062 39.75 30.75 39.4062 30.75 39V35.5C30.75 35.0938 30.4062 34.75 30 34.75ZM29.1562 41.5C29.1562 41.8125 29.3125 42.0938 29.5625 42.25C29.8438 42.4375 30.1562 42.4375 30.4375 42.25C30.6875 42.0938 30.8438 41.8125 30.8438 41.5C30.8438 41.1875 30.6875 40.9062 30.4375 40.75C30.1562 40.5625 29.8438 40.5625 29.5625 40.75C29.3125 40.9062 29.1562 41.1875 29.1562 41.5Z"/></svg>';
+  const ICON_PHONE_LANDLINE = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.74471 0.592393L4.7055 2.86548C4.86954 3.26386 4.75237 3.70911 4.42429 3.96688L3.3932 4.8105C4.14309 6.49775 5.47882 7.85691 7.1192 8.6771L8.03312 7.57571C8.29089 7.24763 8.73614 7.13046 9.13451 7.2945L11.4076 8.25529C11.8529 8.44276 12.0872 8.91144 11.97 9.38012L11.9232 9.49729C11.5248 11.0205 10.0484 12.3094 8.26746 11.9344C4.16652 11.0674 0.932636 7.83348 0.0655802 3.73254C-0.309363 1.95156 0.979504 0.498657 2.50271 0.0768461L2.61988 0.0299783C3.08856 -0.0871914 3.55724 0.147148 3.74471 0.592393Z"/></svg>';
+  const ICON_PHONE_MOBILE = '<svg viewBox="0 0 8 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 0.679688 0.659091 0 1.45455 0H6.54545C7.34091 0 8 0.679688 8 1.5V10.5C8 11.3203 7.34091 12 6.54545 12H1.45455C0.659091 12 0 11.3203 0 10.5V1.5ZM1.45455 1.5V8.625H6.54545V1.5H1.45455ZM4 11.0625C4.40909 11.0625 4.72727 10.7344 4.72727 10.3125C4.72727 9.89062 4.40909 9.5625 4 9.5625C3.59091 9.5625 3.27273 9.89062 3.27273 10.3125C3.27273 10.7344 3.59091 11.0625 4 11.0625Z"/></svg>';
+  const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.11773 11.0466C1.27406 10.6098 1.49292 10.1729 1.83683 9.86084L7.49585 4.1815L8.55887 3.12052C9.09038 3.65101 10.1534 4.74319 11.8105 6.36586L12.8735 7.42684L6.15144 14.136C5.80752 14.4792 5.40107 14.7289 4.9321 14.8537L0.930142 15.9771C0.68002 16.0395 0.398632 15.9771 0.211041 15.7586C0.023449 15.5714 -0.0390816 15.2905 0.023449 15.0409L1.11773 11.0466ZM2.86859 10.953C2.74353 11.0778 2.61847 11.2651 2.5872 11.4523L1.83683 14.1672L4.55691 13.4182C4.7445 13.3558 4.9321 13.2622 5.08842 13.1062L2.86859 10.953ZM13.9365 6.36586C13.405 5.86658 12.342 4.7744 10.6849 3.12052L9.62189 2.09075C10.466 1.24821 10.9038 0.78013 11.0288 0.686514C11.4353 0.249642 12.0293 0 12.6234 0C13.2174 0 13.8114 0.249642 14.2179 0.686514L15.3434 1.7787C15.7499 2.21557 16 2.77726 16 3.37016C16 3.99427 15.7499 4.55596 15.3434 4.99283C15.2184 5.08645 14.7494 5.55453 13.9365 6.36586Z"/></svg>';
+  const ICON_COLLAPSE = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 0.321429C7.64286 -0.107143 8.35714 -0.107143 8.82143 0.321429L15.6786 7.17857C16.1071 7.64286 16.1071 8.35714 15.6786 8.82143C15.2143 9.25 14.5 9.25 14.0357 8.82143L8 2.75L1.96429 8.82143C1.5 9.25 0.785714 9.25 0.321429 8.82143C-0.107143 8.35714 -0.107143 7.64286 0.321429 7.17857L7.17857 0.321429Z"/></svg>';
+  const ICON_EXPORT = '<svg viewBox="0 0 12 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M0 2C0 0.90625 0.90625 0 2 0H6.6875C7.21875 0 7.71875 0.21875 8.09375 0.59375L11.4063 3.90625C11.7813 4.28125 12 4.8125 12 5.34375V14C12 15.0938 11.0938 16 10 16H2C0.90625 16 0 15.0938 0 14V2ZM6.5 1.84375V4.75C6.5 5.15625 6.84375 5.5 7.25 5.5H10.1875L6.5 1.84375ZM5.46875 13.7813C5.75 14.0625 6.25 14.0625 6.53125 13.7813L8.53125 11.7813C8.8125 11.5 8.8125 11 8.53125 10.7188C8.25 10.4375 7.75 10.4375 7.46875 10.7188L6.75 11.4375V8.75C6.75 8.34375 6.40625 8 6 8C5.59375 8 5.25 8.34375 5.25 8.75V11.4375L4.53125 10.7188C4.25 10.4375 3.75 10.4375 3.46875 10.7188C3.1875 11.0313 3.1875 11.5 3.46875 11.7813L5.46875 13.7813Z"/></svg>';
+  const ICON_COLUMNS = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.4286 1.71429V14.2857H13.7143C14.0357 14.2857 14.2857 14.0357 14.2857 13.7143V2.28571C14.2857 1.96429 14.0357 1.71429 13.7143 1.71429H11.4286ZM9.71429 1.71429H6.28571V14.2857H9.71429V1.71429ZM4.57143 14.2857V1.71429H2.28571C1.96429 1.71429 1.71429 1.96429 1.71429 2.28571V13.7143C1.71429 14.0357 1.96429 14.2857 2.28571 14.2857H4.57143ZM0 2.28571C0 1.03571 1.03571 0 2.28571 0H13.7143C14.9643 0 16 1.03571 16 2.28571V13.7143C16 14.9643 14.9643 16 13.7143 16H2.28571C1.03571 16 0 14.9643 0 13.7143V2.28571Z"/></svg>';
+  const ICON_SETTINGS = '<svg viewBox="0 0 15 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.69176 0.764706C5.77999 0.323529 6.16235 0 6.60352 0H8.36823C8.80941 0 9.22117 0.323529 9.30941 0.764706L9.72117 2.82353C10.1329 3 10.5153 3.20588 10.8682 3.47059L12.8682 2.82353C13.3094 2.67647 13.7506 2.85294 13.9859 3.23529L14.8682 4.76471C15.0741 5.14706 15.0153 5.64706 14.6623 5.94118L13.1035 7.32353C13.1329 7.55882 13.1329 7.76471 13.1329 8C13.1329 8.23529 13.1329 8.44118 13.1035 8.67647L14.6623 10.0588C15.0153 10.3529 15.0741 10.8529 14.8682 11.2353L13.9859 12.7647C13.7506 13.1471 13.3094 13.3235 12.8682 13.1765L10.8682 12.5294C10.5153 12.7941 10.1329 13.0294 9.72117 13.2059L9.30941 15.2647C9.22117 15.6765 8.83882 16 8.36823 16H6.63294C6.16235 16 5.77999 15.6765 5.69176 15.2647L5.27999 13.2059C4.86823 13.0294 4.48588 12.7941 4.13294 12.5294L2.13294 13.1765C1.69176 13.3235 1.22117 13.1471 1.01529 12.7647L0.132936 11.2353C-0.102358 10.8529 -0.0141228 10.3529 0.309407 10.0588L1.89764 8.67647C1.86823 8.44118 1.83882 8.23529 1.83882 8C1.83882 7.76471 1.86823 7.55882 1.89764 7.32353L0.309407 5.94118C-0.0141228 5.64706 -0.102358 5.14706 0.132936 4.76471L1.01529 3.23529C1.22117 2.85294 1.69176 2.67647 2.13294 2.82353L4.10352 3.47059C4.45647 3.20588 4.86823 3 5.27999 2.79412L5.69176 0.764706ZM7.48588 10.3529C8.77999 10.3529 9.83882 9.29412 9.83882 8C9.83882 6.70588 8.77999 5.64706 7.48588 5.64706C6.19176 5.64706 5.13294 6.70588 5.13294 8C5.13294 9.29412 6.19176 10.3529 7.48588 10.3529Z"/></svg>';
+  const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.28 3.03L5.53 12.78a.75.75 0 0 1-1.06 0L.72 9.03a.75.75 0 1 1 1.06-1.06l3.22 3.22L14.22 1.97a.75.75 0 1 1 1.06 1.06Z"/></svg>';
+  const ICON_FILTER = '<svg viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.01116 0H14.9888C15.3944 0 15.7688 0.249772 15.9248 0.62443C16.0809 0.999089 15.9872 1.43619 15.7064 1.71718L9.99681 7.3995V12.9882C9.99681 13.394 9.74721 13.7687 9.37281 13.9248C8.99841 14.0809 8.5928 13.9872 8.2808 13.7062L6.28399 11.7081C6.09679 11.5207 6.00319 11.271 6.00319 10.99V7.3995L0.293552 1.71718C0.0127506 1.43619 -0.08085 0.999089 0.0751509 0.62443C0.231152 0.249772 0.605554 0 1.01116 0Z"/></svg>';
+  const ICON_HISTORY = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8.24242 1.93939C6.09091 1.93939 4.21212 3.12121 3.21212 4.84848H4.36364C4.90909 4.84848 5.33333 5.27273 5.33333 5.81818C5.33333 6.36364 4.90909 6.78788 4.36364 6.78788H0.969697C0.424242 6.78788 0 6.36364 0 5.81818V2.42424C0 1.87879 0.424242 1.45455 0.969697 1.45455C1.51515 1.45455 1.93939 1.87879 1.93939 2.42424V3.24242C3.36364 1.27273 5.63636 0 8.24242 0C12.5152 0 16 3.48485 16 7.75758C16 12.0303 12.5152 15.5152 8.24242 15.5152C5.60606 15.5152 3.27273 14.2121 1.87879 12.1818C1.57576 11.7576 1.66667 11.1515 2.12121 10.8485C2.54545 10.5455 3.15152 10.6364 3.45455 11.0909C4.51515 12.6061 6.27273 13.5758 8.24242 13.5758C11.4545 13.5758 14.0606 10.9697 14.0606 7.75758C14.0606 4.54545 11.4545 1.93939 8.24242 1.93939ZM8.9697 4.60606V7.45455L10.9394 9.42424C11.2121 9.69697 11.2121 10.1818 10.9394 10.4545C10.6667 10.7273 10.1818 10.7273 9.90909 10.4545L7.72727 8.27273C7.60606 8.15152 7.51515 7.93939 7.51515 7.75758V4.60606C7.51515 4.21212 7.84848 3.87879 8.24242 3.87879C8.63636 3.87879 8.9697 4.21212 8.9697 4.60606Z"/></svg>';
+  const ICON_SEARCH = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13 6.5C13 7.9375 12.5312 9.25 11.75 10.3438L15.7188 14.2812C16.0938 14.6875 16.0938 15.3125 15.7188 15.7188C15.3125 16.0938 14.6875 16.0938 14.2812 15.7188L10.3438 11.75C9.25 12.5312 7.9375 13 6.5 13C2.90625 13 0 10.0938 0 6.5C0 2.90625 2.90625 0 6.5 0C10.0938 0 13 2.90625 13 6.5ZM6.5 11C9 11 11 9 11 6.5C11 4 9 2 6.5 2C4 2 2 4 2 6.5C2 9 4 11 6.5 11Z"/></svg>';
+  const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
+  const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
+  const ICON_MAP = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.90845 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z"/></svg>';
+
+  const rows = [
+    { assignee:'', order:'123455005', orderType:'Delivery', note:true,  priority:'STAT',         priorityStat:true,  reason:'Respiratory Distress', patient:'Sophia Lee',     orderedDate:'06/03/2026', orderedTime:'10:43 AM', reqDate:'06/04/2026', reqTime:'10:00 AM - 2:00 PM CT', schedDate:'', schedTime:'', status:{t:'Provider Review', v:'caution'}, tags:[{t:'Liquid O2',v:'neutral'},{t:'Time-Sensitive',v:'error'}],
+      client:'HarborLight Hospice Care', branch:'HarborLight Hospice Care - Birmingham', addrType:'Residence', addr:['7202 Riverchase Pkwy','Birmingham, AL, 35203'], contact:'Charles Williams', rel:'Spouse', phone:'(205) 580-0847', phoneType:'Landline', warehouse:'Birmingham, AL' },
+
+    { assignee:'', order:'123455003', orderType:'Delivery', note:false, priority:'STAT',         priorityStat:true,  reason:'Urgent Admission',     patient:'Oliver King',    orderedDate:'06/03/2026', orderedTime:'2:17 PM',  reqDate:'', reqTime:'', schedDate:'', schedTime:'', status:{t:'Patient Scheduling', v:'warning'}, tags:[{t:'Specialty',v:'neutral'}],
+      client:'Big Heart Hospice & Home Care', branch:'Big Heart Gadsden', addrType:'Residence', addr:['9055 Pinewood Ln','Gadsden, AL, 35903'], contact:'Marcus', rel:'Unknown', phone:'(659) 841-9754', phoneType:'Landline', warehouse:'Birmingham, AL' },
+
+    { assignee:'', order:'123455007', orderType:'Delivery', note:false, priority:'Urgent',       priorityStat:false, reason:'First Admission',      patient:'Liam Johnson',   orderedDate:'06/03/2026', orderedTime:'11:52 AM', reqDate:'06/04/2026', reqTime:'12:00 - 4:00 PM CT', schedDate:'06/04/2026', schedTime:'2:00 - 4:00 PM CT', status:{t:'Patient Approval', v:'warning'}, tags:[{t:'Facility',v:'neutral'}],
+      client:'Big Heart Hospice & Home Care', branch:'Big Heart Gadsden', addrType:'Residence', addr:['8986 Highland Ave #165','Gadsden, AL, 35901'], contact:'Mary', rel:'Caregiver', phone:'(659) 929-9407', phoneType:'Landline', warehouse:'Trussville, AL' },
+
+    { assignee:'', order:'123455009', orderType:'Pickup',   note:true,  priority:'Routine',      priorityStat:false, reason:'Live Discharge',      patient:'Nina Patel',     orderedDate:'06/03/2026', orderedTime:'9:03 AM',  reqDate:'06/04/2026', reqTime:'1:00 - 5:00 PM CT', schedDate:'', schedTime:'', status:{t:'Escalated', v:'error'}, tags:[{t:'Live Discharge Confirmed',v:'neutral'}],
+      client:'Comfort Home Health', branch:'Trussville, AL', addrType:'Residence', addr:['2040 Chalkville Rd','Trussville, AL, 35173'], contact:'Karen Thomas', rel:'Spouse', phone:'(938) 269-8174', phoneType:'Landline', warehouse:'Trussville, AL' },
+
+    { assignee:'', order:'123455011', orderType:'Delivery', note:false, priority:'Priority',     priorityStat:false, reason:'First Admission',      patient:'Isabella Brown', orderedDate:'06/04/2026', orderedTime:'4:29 PM',  reqDate:'06/04/2026', reqTime:'8:00 AM - 12:00 PM CT', schedDate:'', schedTime:'', status:{t:'Escalated', v:'error'}, tags:[],
+      client:'Comfort Home Health', branch:'Birmingham, AL', addrType:'Residence', addr:['4547 Lakeshore Dr','Birmingham, AL, 35211'], contact:'Lisa', rel:'Unknown', phone:'(205) 306-8639', phoneType:'Landline', warehouse:'Birmingham, AL' },
+
+    { assignee:'Me', order:'123455015', orderType:'Delivery', note:false, priority:'STAT',        priorityStat:true,  reason:'First Admission',      patient:'Chloe Davis',    orderedDate:'06/04/2026', orderedTime:'12:11 PM', reqDate:'06/04/2026', reqTime:'9:00 AM - 1:00 PM CT', schedDate:'', schedTime:'', status:{t:'Provider Review', v:'caution'}, tags:[],
+      client:'Big Heart Hospice & Home Care', branch:'Big Heart Gadsden', addrType:'Residence', addr:['8738 Oak Hill Rd #415','Gadsden, AL, 35904'], contact:'Gloria', rel:'Spouse', phone:'(334) 720-1853', phoneType:'Landline', warehouse:'Trussville, AL' },
+
+    { assignee:'Me', order:'123455017', orderType:'Pickup',   note:false, priority:'Routine',     priorityStat:false, reason:'Not Needed',          patient:'Lucas White',    orderedDate:'06/04/2026', orderedTime:'3:46 PM',  reqDate:'06/05/2026', reqTime:'3:00 - 7:00 PM CT', schedDate:'06/05/2026', schedTime:'4:00 - 8:00 PM CT', status:{t:'Rescheduled', v:'info'}, tags:[],
+      client:'Comfort Home Health', branch:'Trussville, AL', addrType:'Residence', addr:['6710 Montevallo Rd','Trussville, AL, 35235'], contact:'Betty', rel:'Spouse', phone:'(938) 274-1299', phoneType:'Landline', warehouse:'Trussville, AL' },
+
+    { assignee:'Me', order:'123455013', orderType:'Delivery', note:true,  priority:'Routine',     priorityStat:false, reason:'Add-On General',      patient:'Ethan Carter',   orderedDate:'06/04/2026', orderedTime:'7:02 AM',  reqDate:'06/05/2026', reqTime:'4:00 - 8:00 PM CT', schedDate:'06/05/2026', schedTime:'5:00 - 9:00 PM CT', status:{t:'Patient Approval', v:'warning'}, tags:[],
+      client:'HarborLight Hospice Care', branch:'HarborLight Hospice Care - Birmingham', addrType:'Residence', addr:['2778 Deerfoot Pkwy','Birmingham, AL, 35209'], contact:'Shaniqua', rel:'Spouse', phone:'(205) 738-6148', phoneType:'Landline', warehouse:'Birmingham, AL' },
+
+    { assignee:'Me', order:'123455019', orderType:'Delivery', note:false, priority:'Coordination',priorityStat:false, reason:'Hi-Tech Respiratory',  patient:'Ava Thompson',   orderedDate:'06/04/2026', orderedTime:'1:22 PM',  reqDate:'', reqTime:'', schedDate:'', schedTime:'', status:{t:'Patient Scheduling', v:'warning'}, tags:[],
+      client:'Comfort Home Health', branch:'Birmingham, AL', addrType:'Residence', addr:['5225 Black Creek Pkwy #349','Birmingham, AL, 35205'], contact:'Patricia Anderson', rel:'Caregiver', phone:'(256) 910-0634', phoneType:'Landline', warehouse:'Birmingham, AL' },
+
+    { assignee:'Me', order:'123455021', orderType:'Delivery', note:false, priority:'Standard',    priorityStat:false, reason:'Service: Bed Equipment', patient:'James Wilson', orderedDate:'06/04/2026', orderedTime:'5:49 PM',  reqDate:'06/05/2026', reqTime:'6:00 - 10:00 PM CT', schedDate:'', schedTime:'', status:{t:'Escalated', v:'error'}, tags:[{t:'Service',v:'neutral'}],
+      client:'HarborLight Hospice Care', branch:'HarborLight Hospice Care - Birmingham', addrType:'Residence', addr:['5469 Noble St','Birmingham, AL, 35209'], contact:'Mary Wilson', rel:'Child', phone:'(938) 249-3664', phoneType:'Landline', warehouse:'Birmingham, AL' },
+  ];
+
+  function dateCell(date, time) {
+    if (!date) return '<span class="cell-main">–</span>';
+    return `<div class="cell-stack">
+      <span class="cell-main">${date}</span>
+      ${time ? `<span class="cell-caption">${time}</span>` : ''}
+    </div>`;
+  }
+
+  function badge(b) { return `<span class="badge ${b.v}">${b.t}</span>`; }
+
+  function buildRow(r, i) {
+    const row = document.createElement('div');
+    row.className = 'grid-row';
+    row.innerHTML = `
+      <div class="row-main" data-index="${i}">
+        <div class="row-cell col-assignee editable-cell"></div>
+        <div class="row-cell col-order">
+          <div class="cell-stack">
+            <div class="order-main">
+              <span class="cell-main link" tabindex="0">${r.order}</span>
+              ${r.note ? ICON_NOTE : ''}
+            </div>
+            <span class="cell-caption">${r.orderType}</span>
+          </div>
+        </div>
+        <div class="row-cell col-priority">
+          <div class="cell-stack">
+            <span class="cell-main ${['STAT','Urgent'].includes(r.priority) ? 'stat' : ''}">${r.priority}</span>
+            <span class="cell-caption">${r.reason}</span>
+          </div>
+        </div>
+        <div class="row-cell col-patient"><span class="cell-main link" tabindex="0">${r.patient}</span></div>
+        <div class="row-cell col-ordered">${dateCell(r.orderedDate, r.orderedTime)}</div>
+        <div class="row-cell col-requested">${dateCell(r.reqDate, r.reqTime)}</div>
+        <div class="row-cell col-scheduled">${dateCell(r.schedDate, r.schedTime)}</div>
+        <div class="row-cell col-status status-cell">
+          <div class="badges">${badge(r.status)}</div>
+        </div>
+        <div class="row-cell col-tags tags-cell">
+          <div class="badges">${r.tags.map(badge).join('')}</div>
+        </div>
+        <div class="row-cell col-actions">
+          <div class="actions">
+            <button class="icon-btn" aria-label="More actions">${ICON_ELLIPSIS}</button>
+            <button class="icon-btn toggle-btn" aria-label="Toggle details">${ICON_CHEVRON}</button>
+          </div>
+        </div>
+      </div>
+      <div class="expand-wrap">
+        <div class="expand-inner">
+          <div class="detail">
+            <div class="detail-section">
+              <div class="detail-heading">Client</div>
+              <div class="lv"><span class="label">Client:</span><span class="value">${r.client}</span></div>
+              <div class="lv"><span class="label">Branch:</span><span class="value">${r.branch}</span></div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-heading">Provider</div>
+              <div class="lv"><span class="label">Warehouse:</span><span class="value">${r.warehouse}</span></div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-heading">Address</div>
+              <div class="lv"><span class="label">Address type:</span><span class="value">${r.addrType}</span></div>
+              <div class="lv-stacked"><span class="label">Address:</span><span class="value">${r.addr.join('<br>')}</span></div>
+              <button class="view-map-btn"><span class="view-map-icon">${ICON_MAP}</span>View on map</button>
+            </div>
+            <div class="detail-section">
+              <div class="detail-heading">Primary Contact</div>
+              <div class="lv"><span class="label">Name:</span><span class="value">${r.contact}</span></div>
+              <div class="lv"><span class="label">Relationship:</span><span class="value">${r.rel}</span></div>
+              <div class="phone-line">
+                <div class="lv"><span class="label">Phone:</span><span class="value">${r.phone}</span></div>
+                <span class="phone-type"><span class="phone-icon-frame">${r.phoneType === 'Mobile' ? ICON_PHONE_MOBILE : ICON_PHONE_LANDLINE}</span>${r.phoneType}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    row.querySelector('.toggle-btn').addEventListener('click', () => {
+      row.classList.toggle('expanded');
+    });
+    const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
+    setupEditableCell(row.querySelector('.editable-cell'), {
+      value: r.assignee || null,
+      options: ['Me', 'Purchasing', 'Respiratory Therapy', { label: 'Dispatch', disabled: !dispatchEnabled }],
+      heading: 'Select assignee',
+      ariaLabel: 'Edit assignee',
+      onChange: (v) => { r.assignee = v; }
+    });
+    return row;
+  }
+
+  // Generic single-select editable grid cell. Reusable for any column.
+  // config: { value, options:[], heading, ariaLabel, onChange(value) }
+  // Tracks the currently-editing cell so only one is open at a time.
+  const editableCells = new Set(); // each entry: { exitEdit }
+
+  function setupEditableCell(cell, config) {
+    let selected = config.value || null;
+    let menuOpen = false;
+
+    const api = { exitEdit: () => { if (cell.classList.contains('editing')) renderDisplay(); } };
+    editableCells.add(api);
+
+    function renderDisplay() {
+      closeMenu();
+      cell.classList.remove('editing', 'menu-open');
+      menuOpen = false;
+      cell.innerHTML = `
+        <div class="cell-display">
+          <span class="cell-display-text">${selected || ''}</span>
+          <button class="edit-btn" aria-label="${config.ariaLabel || 'Edit'}">${ICON_PENCIL}</button>
+        </div>`;
+      cell.querySelector('.edit-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        enterEdit(true);
+      });
+    }
+
+    function enterEdit(openMenu) {
+      // close any other cell currently in edit mode (saves its value via its own renderDisplay)
+      editableCells.forEach(other => { if (other !== api) other.exitEdit(); });
+      cell.classList.add('editing');
+      cell.innerHTML = `
+        <div class="cell-field" tabindex="0">
+          <span class="cell-field-value">${selected || ''}</span>
+          <span class="cell-field-chevron">${ICON_COLLAPSE}</span>
+        </div>`;
+      cell.querySelector('.cell-field').addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen ? closeMenu() : openMenuList();
+      });
+      if (openMenu) openMenuList();
+    }
+
+    let menuEl = null;
+
+    function positionMenu() {
+      if (!menuEl) return;
+      const field = cell.querySelector('.cell-field');
+      if (!field) return;
+      const r = field.getBoundingClientRect();
+      menuEl.style.top = r.bottom + 'px';
+      menuEl.style.left = r.left + 'px';
+    }
+
+    function openMenuList() {
+      if (menuEl) return;
+      menuEl = document.createElement('div');
+      menuEl.className = 'cell-menu';
+      menuEl.innerHTML = `
+        ${config.heading ? `<div class="menu-heading">${config.heading}</div>` : ''}
+        ${config.options.map(opt => {
+          const label = typeof opt === 'string' ? opt : opt.label;
+          const disabled = typeof opt === 'object' && opt.disabled;
+          return `<div class="menu-option ${label === selected ? 'selected' : ''} ${disabled ? 'disabled' : ''}" ${disabled ? 'aria-disabled="true"' : 'tabindex="0"'} data-value="${label}">${label}</div>`;
+        }).join('')}`;
+      document.body.appendChild(menuEl);
+      cell.classList.add('menu-open');
+      menuOpen = true;
+      positionMenu();
+      window.addEventListener('scroll', positionMenu, true);
+      window.addEventListener('resize', positionMenu);
+      menuEl.querySelectorAll('.menu-option:not(.disabled)').forEach(o => {
+        o.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selected = o.dataset.value;
+          if (config.onChange) config.onChange(selected);
+          closeMenu();
+          const val = cell.querySelector('.cell-field-value');
+          if (val) { val.textContent = selected; }
+        });
+      });
+    }
+
+    function closeMenu() {
+      if (menuEl) { menuEl.remove(); menuEl = null; }
+      window.removeEventListener('scroll', positionMenu, true);
+      window.removeEventListener('resize', positionMenu);
+      cell.classList.remove('menu-open');
+      menuOpen = false;
+    }
+
+    // click outside saves and reverts to text display (menu lives on body, so check it too)
+    document.addEventListener('click', (e) => {
+      if (cell.classList.contains('editing') && !cell.contains(e.target) && !(menuEl && menuEl.contains(e.target))) {
+        renderDisplay();
+      }
+    });
+
+    renderDisplay(); // initial render
+  }
+
+  const container = document.getElementById('rows');
+  const rowEls = rows.map((r, i) => {
+    const el = buildRow(r, i);
+    el._data = r;
+    container.appendChild(el);
+    return el;
+  });
+
+  // ---- Settings bar: inject icons + wire interactions ----
+  document.querySelectorAll('.filter-check').forEach(el => { el.innerHTML = ICON_CHECK; });
+  const filterToggle = document.querySelector('.filter-toggle-btn');
+  if (filterToggle) filterToggle.insertAdjacentHTML('afterbegin', ICON_FILTER);
+  const actionBtns = document.querySelectorAll('.table-actions .action-btn');
+  if (actionBtns[0]) actionBtns[0].innerHTML = ICON_EXPORT;
+  if (actionBtns[1]) actionBtns[1].innerHTML = ICON_HISTORY;
+  if (actionBtns[2]) actionBtns[2].innerHTML = ICON_COLUMNS;
+  if (actionBtns[3]) actionBtns[3].innerHTML = ICON_SETTINGS;
+  document.querySelectorAll('.chip-remove').forEach(el => { el.innerHTML = ICON_CHIP_REMOVE; });
+
+  // ---- Quick filters: mutually exclusive; filter the grid rows ----
+  const FILTER_PREDICATES = {
+    'STAT/Urgent': (r) => r.priority === 'STAT' || r.priority === 'Urgent',
+    'New Note':    (r) => r.note === true,
+    'Rescheduled': (r) => r.status && r.status.t === 'Rescheduled',
+  };
+
+  function applyFilter(activeFilter) {
+    const pred = activeFilter ? FILTER_PREDICATES[activeFilter] : null;
+    rowEls.forEach(el => {
+      el.style.display = (!pred || pred(el._data)) ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wasActive = btn.classList.contains('active');
+      // mutually exclusive: clear all, then activate this one unless it was already active (toggle off)
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (!wasActive) btn.classList.add('active');
+      const active = document.querySelector('.filter-btn.active');
+      applyFilter(active ? active.dataset.filter : null);
+    });
+  });
+
+  // initial state: STAT/Urgent starts active in the markup, so apply it
+  (function initFilter(){
+    const active = document.querySelector('.filter-btn.active');
+    if (active) applyFilter(active.dataset.filter);
+  })();
+
+  // ---- Generic anchored menu popover (reuses .cell-menu / .menu-heading / .menu-option styling) ----
+  // config: { heading, options:[], selected, align ('left'|'right'), onSelect(value) }
+  function setupMenuPopover(trigger, config) {
+    let menuEl = null;
+    let selected = config.selected || null;
+
+    function positionMenu() {
+      if (!menuEl) return;
+      const r = trigger.getBoundingClientRect();
+      menuEl.style.top = (r.bottom + 4) + 'px';
+      if (config.align === 'right') {
+        menuEl.style.left = (r.right - menuEl.offsetWidth) + 'px';
+      } else {
+        menuEl.style.left = r.left + 'px';
+      }
+    }
+
+    function open() {
+      if (menuEl) return;
+      menuEl = document.createElement('div');
+      menuEl.className = 'cell-menu menu-popover';
+      menuEl.innerHTML = `
+        ${config.heading ? `<div class="menu-heading">${config.heading}</div>` : ''}
+        ${config.options.map(opt =>
+          `<div class="menu-option ${opt === selected ? 'selected' : ''}" tabindex="0" data-value="${opt}">${opt}</div>`
+        ).join('')}`;
+      document.body.appendChild(menuEl);
+      trigger.classList.add('active');
+      positionMenu();
+      window.addEventListener('scroll', positionMenu, true);
+      window.addEventListener('resize', positionMenu);
+      menuEl.querySelectorAll('.menu-option').forEach(o => {
+        o.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selected = o.dataset.value;
+          if (config.onSelect) config.onSelect(selected);
+          close();
+        });
+      });
+    }
+
+    function close() {
+      if (menuEl) { menuEl.remove(); menuEl = null; }
+      window.removeEventListener('scroll', positionMenu, true);
+      window.removeEventListener('resize', positionMenu);
+      trigger.classList.remove('active');
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuEl ? close() : open();
+    });
+    document.addEventListener('click', (e) => {
+      if (menuEl && !menuEl.contains(e.target) && e.target !== trigger) close();
+    });
+  }
+
+  setupMenuPopover(document.getElementById('settingsBtn'), {
+    heading: 'Row density',
+    options: ['Condensed', 'Standard', 'Relaxed'],
+    selected: 'Standard',
+    align: 'right',
+    onSelect: (value) => { document.body.dataset.density = value.toLowerCase(); }
+  });
+
+  // ---- History popover (My Recent Orders) ----
+  const RECENT_ORDERS = [
+    { type: 'Delivery', id: '#123455789', patient: 'John Smith',     client: 'HarborLight Hospice Care - HarborLight Hospice Care - Birmingham' },
+    { type: 'Pickup',   id: '#123455123', patient: 'Emily Johnson',  client: 'Big Heart Hospice & Home Care - Big Heart Birmingham' },
+    { type: 'Pickup',   id: '#123455456', patient: 'Michael Brown',  client: 'Big Heart Hospice & Home Care - Big Heart Gadsden' },
+    { type: 'Delivery', id: '#123455234', patient: 'Sarah Davis',    client: 'Big Heart Hospice & Home Care - Big Heart Gadsden' },
+    { type: 'Delivery', id: '#123455678', patient: 'David Wilson',   client: 'Comfort Home Health - Trussville, AL' },
+  ];
+
+  (function setupHistoryPopover() {
+    const trigger = document.getElementById('historyBtn');
+    let popEl = null;
+
+    function position() {
+      if (!popEl) return;
+      const r = trigger.getBoundingClientRect();
+      popEl.style.top = (r.bottom + 4) + 'px';
+      // center the popover on the trigger; only clamp if it would actually leave the viewport
+      let left = r.left + r.width / 2 - popEl.offsetWidth / 2;
+      if (left < 0) left = 0;
+      else if (left + popEl.offsetWidth > window.innerWidth) left = window.innerWidth - popEl.offsetWidth;
+      popEl.style.left = left + 'px';
+    }
+
+    function open() {
+      if (popEl) return;
+      popEl = document.createElement('div');
+      popEl.className = 'history-popover';
+      popEl.innerHTML = `
+        <div class="history-heading">My Recent Orders</div>
+        <div class="history-list">
+          ${RECENT_ORDERS.map(o => `
+            <div class="history-order">
+              <div class="history-order-line">
+                <span class="history-order-type">${o.type}</span>
+                <span class="link history-order-id" tabindex="0">${o.id}</span>
+              </div>
+              <span class="link" tabindex="0">${o.patient}</span>
+              <span class="history-client">${o.client}</span>
+            </div>`).join('')}
+        </div>`;
+      document.body.appendChild(popEl);
+      trigger.classList.add('active');
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+    }
+
+    function close() {
+      if (popEl) { popEl.remove(); popEl = null; }
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+      trigger.classList.remove('active');
+    }
+
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); popEl ? close() : open(); });
+    document.addEventListener('click', (e) => {
+      if (popEl && !popEl.contains(e.target) && e.target !== trigger) close();
+    });
+  })();
+
+  // ---- Filter popover (scheduling filters) ----
+  (function setupFilterPopover() {
+    const trigger = document.getElementById('filterToggleBtn');
+    let popEl = null;
+
+    // input field with optional search adornment and pre-filled chips
+    function field(label, { search = false, chips = [], required = false } = {}) {
+      const chipHtml = chips.map(c =>
+        `<span class="filter-chip">${c}${'<button class="chip-remove">' + ICON_CHIP_REMOVE + '</button>'}</span>`
+      ).join('');
+      return `
+        <div class="filter-field">
+          <span class="filter-field-label">${label}${required ? ' <span class="req">*</span>' : ''}</span>
+          <div class="filter-input">
+            ${search ? `<span class="filter-input-search">${ICON_SEARCH}</span>` : ''}
+            <span class="filter-input-content">${chipHtml}</span>
+            <span class="filter-input-chevron">${ICON_CHEVRON_DOWN}</span>
+          </div>
+        </div>`;
+    }
+
+    function position() {
+      if (!popEl) return;
+      const r = trigger.getBoundingClientRect();
+      popEl.style.top = (r.bottom + 4) + 'px';
+      // left-aligned to the trigger, clamped only to prevent true off-screen overflow
+      let left = r.left;
+      if (left + popEl.offsetWidth > window.innerWidth) left = window.innerWidth - popEl.offsetWidth;
+      if (left < 0) left = 0;
+      popEl.style.left = left + 'px';
+    }
+
+    function open() {
+      if (popEl) return;
+      popEl = document.createElement('div');
+      popEl.className = 'filter-popover';
+      popEl.innerHTML = `
+        ${field('Warehouses', { search: true, chips: ['2 warehouses selected'] })}
+        ${field('Order type')}
+        ${field('Order priority')}
+        ${field('Order reason')}
+        ${field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'] })}
+        ${field('Tags')}
+        <div class="filter-field">
+          <span class="filter-field-label">Assigned to <span class="req">*</span></span>
+          <div class="filter-chips-row">
+            <button class="filter-chip-toggle"><span class="chip-check">${ICON_CHECK}</span>Me</button>
+            <button class="filter-chip-toggle"><span class="chip-check">${ICON_CHECK}</span>Unassigned</button>
+          </div>
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn-reset">Reset</button>
+          <button class="filter-btn-apply">Filter</button>
+        </div>`;
+      document.body.appendChild(popEl);
+      trigger.classList.add('active');
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+    }
+
+    function close() {
+      if (popEl) { popEl.remove(); popEl = null; }
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+      trigger.classList.remove('active');
+    }
+
+    trigger.addEventListener('click', (e) => { e.stopPropagation(); popEl ? close() : open(); });
+    document.addEventListener('click', (e) => {
+      if (popEl && !popEl.contains(e.target) && e.target !== trigger) close();
+    });
+  })();
+
+</script>
+</body>
+</html>

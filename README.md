@@ -2,10 +2,6 @@
 
 HTML prototype gallery for stakeholder review, hosted on GitHub Pages.
 
-## Repo URL
-
-- https://github.com/hannah-hospicelink/prototypes
-
 ## Live URL
 
 - https://hannah-hospicelink.github.io/prototypes/

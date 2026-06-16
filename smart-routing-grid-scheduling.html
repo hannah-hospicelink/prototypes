@@ -490,6 +490,8 @@
 
   /* Badges */
   .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
+  .tags-cell .badges { flex: 1; min-width: 0; }
+  .tags-edit-btn { margin-left: auto; }
   .badge {
     height: var(--density-badge-height);
     display: inline-flex;
@@ -538,6 +540,8 @@
 
   /* ---------- Editable grid cell (generic) ---------- */
   .editable-cell { position: relative; }
+  /* blue outline when a cell's editor/popover is active (tags + assignee) */
+  .cell-edit-active { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-width)); }
   .cell-display { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xxs); width: 100%; min-width: 0; overflow: hidden; }
   .cell-display-text { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 
@@ -732,6 +736,52 @@
   .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
   .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
   .filter-btn-apply:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+
+  /* tag edit popover */
+  .tag-popover {
+    position: fixed;
+    z-index: 1000;
+    width: 360px;
+    max-width: calc(100vw - 16px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-tiny);
+    padding: var(--spacing-xxs);
+    background: var(--menu-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--menu-shadow);
+  }
+  .tag-search {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    min-height: var(--filter-input-height);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-md);
+    border-radius: var(--radius-md);
+  }
+  .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--input-text-adornment); display: flex; align-items: center; justify-content: center; }
+  .tag-search-icon svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
+  .tag-list { display: flex; flex-direction: column; max-height: 200px; overflow-y: auto; }
+  .tag-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    cursor: pointer;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+    transition: background var(--transition-fast);
+  }
+  .tag-option:hover { background: var(--menu-option-hover); }
+  .tag-option.selected { background: var(--menu-option-selected); }
+  .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
+  .tag-buttons { display: flex; align-items: center; justify-content: space-between; }
+  /* Deselect all reuses tertiary button styling; Save reuses primary — alias to filter button classes */
   .menu-heading {
     height: var(--menu-heading-height);
     display: flex;
@@ -901,6 +951,8 @@
   const ICON_FILTER = '<svg viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.01116 0H14.9888C15.3944 0 15.7688 0.249772 15.9248 0.62443C16.0809 0.999089 15.9872 1.43619 15.7064 1.71718L9.99681 7.3995V12.9882C9.99681 13.394 9.74721 13.7687 9.37281 13.9248C8.99841 14.0809 8.5928 13.9872 8.2808 13.7062L6.28399 11.7081C6.09679 11.5207 6.00319 11.271 6.00319 10.99V7.3995L0.293552 1.71718C0.0127506 1.43619 -0.08085 0.999089 0.0751509 0.62443C0.231152 0.249772 0.605554 0 1.01116 0Z"/></svg>';
   const ICON_HISTORY = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8.24242 1.93939C6.09091 1.93939 4.21212 3.12121 3.21212 4.84848H4.36364C4.90909 4.84848 5.33333 5.27273 5.33333 5.81818C5.33333 6.36364 4.90909 6.78788 4.36364 6.78788H0.969697C0.424242 6.78788 0 6.36364 0 5.81818V2.42424C0 1.87879 0.424242 1.45455 0.969697 1.45455C1.51515 1.45455 1.93939 1.87879 1.93939 2.42424V3.24242C3.36364 1.27273 5.63636 0 8.24242 0C12.5152 0 16 3.48485 16 7.75758C16 12.0303 12.5152 15.5152 8.24242 15.5152C5.60606 15.5152 3.27273 14.2121 1.87879 12.1818C1.57576 11.7576 1.66667 11.1515 2.12121 10.8485C2.54545 10.5455 3.15152 10.6364 3.45455 11.0909C4.51515 12.6061 6.27273 13.5758 8.24242 13.5758C11.4545 13.5758 14.0606 10.9697 14.0606 7.75758C14.0606 4.54545 11.4545 1.93939 8.24242 1.93939ZM8.9697 4.60606V7.45455L10.9394 9.42424C11.2121 9.69697 11.2121 10.1818 10.9394 10.4545C10.6667 10.7273 10.1818 10.7273 9.90909 10.4545L7.72727 8.27273C7.60606 8.15152 7.51515 7.93939 7.51515 7.75758V4.60606C7.51515 4.21212 7.84848 3.87879 8.24242 3.87879C8.63636 3.87879 8.9697 4.21212 8.9697 4.60606Z"/></svg>';
   const ICON_SEARCH = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13 6.5C13 7.9375 12.5312 9.25 11.75 10.3438L15.7188 14.2812C16.0938 14.6875 16.0938 15.3125 15.7188 15.7188C15.3125 16.0938 14.6875 16.0938 14.2812 15.7188L10.3438 11.75C9.25 12.5312 7.9375 13 6.5 13C2.90625 13 0 10.0938 0 6.5C0 2.90625 2.90625 0 6.5 0C10.0938 0 13 2.90625 13 6.5ZM6.5 11C9 11 11 9 11 6.5C11 4 9 2 6.5 2C4 2 2 4 2 6.5C2 9 4 11 6.5 11Z"/></svg>';
+  const ICON_CHECKBOX_OFF = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 1.56771H1.56771V12.4323H12.4323V1.56771ZM12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323Z" fill="#A8A29E"/></svg>';
+  const ICON_CHECKBOX_ON = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323ZM5.97917 10.3542L11.8854 4.44792C12.2135 4.11979 12.2135 3.64583 11.8854 3.35417C11.5938 3.02604 11.0833 3.02604 10.7917 3.35417L5.43229 8.67708L3.20833 6.45312C2.91667 6.16146 2.40625 6.16146 2.11458 6.45312C1.78646 6.74479 1.78646 7.25521 2.11458 7.54688L4.88542 10.3542C5.21354 10.6458 5.6875 10.6458 5.97917 10.3542Z" fill="#3399D1"/></svg>';
   const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
   const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
   const ICON_MAP = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.90845 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z"/></svg>';
@@ -947,6 +999,19 @@
 
   function badge(b) { return `<span class="badge ${b.v}">${b.t}</span>`; }
 
+  // All selectable tags with their badge color (neutral except Time-Sensitive = error), in display order
+  const ALL_TAGS = [
+    { t: 'Back order',               v: 'neutral' },
+    { t: 'Disaster prep',            v: 'neutral' },
+    { t: 'Facility',                 v: 'neutral' },
+    { t: 'Liquid O2',                v: 'neutral' },
+    { t: 'Live Discharge Confirmed', v: 'neutral' },
+    { t: 'Specialty',                v: 'neutral' },
+    { t: 'Service',                  v: 'neutral' },
+    { t: 'Time-Sensitive',           v: 'error' },
+  ];
+  const TAG_COLOR = Object.fromEntries(ALL_TAGS.map(t => [t.t, t.v]));
+
   function buildRow(r, i) {
     const row = document.createElement('div');
     row.className = 'grid-row';
@@ -975,8 +1040,9 @@
         <div class="row-cell col-status status-cell">
           <div class="badges">${badge(r.status)}</div>
         </div>
-        <div class="row-cell col-tags tags-cell">
+        <div class="row-cell col-tags tags-cell editable-cell">
           <div class="badges">${r.tags.map(badge).join('')}</div>
+          <button class="edit-btn tags-edit-btn" aria-label="Edit tags">${ICON_PENCIL}</button>
         </div>
         <div class="row-cell col-actions">
           <div class="actions">
@@ -1020,13 +1086,14 @@
       row.classList.toggle('expanded');
     });
     const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
-    setupEditableCell(row.querySelector('.editable-cell'), {
+    setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
       value: r.assignee || null,
       options: ['Me', 'Purchasing', 'Respiratory Therapy', { label: 'Dispatch', disabled: !dispatchEnabled }],
       heading: 'Select assignee',
       ariaLabel: 'Edit assignee',
       onChange: (v) => { r.assignee = v; }
     });
+    setupTagCell(row.querySelector('.col-tags.editable-cell'), r);
     return row;
   }
 
@@ -1044,7 +1111,7 @@
 
     function renderDisplay() {
       closeMenu();
-      cell.classList.remove('editing', 'menu-open');
+      cell.classList.remove('editing', 'menu-open', 'cell-edit-active');
       menuOpen = false;
       cell.innerHTML = `
         <div class="cell-display">
@@ -1060,7 +1127,7 @@
     function enterEdit(openMenu) {
       // close any other cell currently in edit mode (saves its value via its own renderDisplay)
       editableCells.forEach(other => { if (other !== api) other.exitEdit(); });
-      cell.classList.add('editing');
+      cell.classList.add('editing', 'cell-edit-active');
       cell.innerHTML = `
         <div class="cell-field" tabindex="0">
           <span class="cell-field-value">${selected || ''}</span>
@@ -1129,6 +1196,111 @@
     });
 
     renderDisplay(); // initial render
+  }
+
+  // Tags edit cell: pencil on hover opens a checkbox popover (max-height scroll), Deselect all + Save.
+  // Escape / outside-click closes WITHOUT saving. Active cell gets a blue outline.
+  function setupTagCell(cell, row) {
+    let popEl = null;
+    let working = null; // working copy of selected tag names while editing
+
+    function renderBadges() {
+      const badgesEl = cell.querySelector('.badges');
+      badgesEl.innerHTML = row.tags.map(badge).join('');
+    }
+
+    function position() {
+      if (!popEl) return;
+      const r = cell.getBoundingClientRect();
+      popEl.style.top = (r.bottom + 4) + 'px';
+      let left = r.left;
+      if (left + popEl.offsetWidth > window.innerWidth) left = window.innerWidth - popEl.offsetWidth;
+      if (left < 0) left = 0;
+      popEl.style.left = left + 'px';
+    }
+
+    function syncOption(o) {
+      const on = working.includes(o.dataset.tag);
+      o.classList.toggle('selected', on);
+      o.querySelector('.tag-option-check').innerHTML = on ? ICON_CHECKBOX_ON : ICON_CHECKBOX_OFF;
+    }
+
+    function renderOptions() {
+      const list = popEl.querySelector('.tag-list');
+      list.innerHTML = ALL_TAGS.map(t => {
+        const on = working.includes(t.t);
+        return `<div class="tag-option ${on ? 'selected' : ''}" role="option" tabindex="0" data-tag="${t.t}">
+          <span class="tag-option-check">${on ? ICON_CHECKBOX_ON : ICON_CHECKBOX_OFF}</span>
+          <span class="tag-option-label">${t.t}</span>
+        </div>`;
+      }).join('');
+      list.querySelectorAll('.tag-option').forEach(o => {
+        o.addEventListener('click', () => {
+          const tag = o.dataset.tag;
+          const idx = working.indexOf(tag);
+          if (idx >= 0) working.splice(idx, 1); else working.push(tag);
+          syncOption(o); // update in place; do NOT rebuild (would detach the click target mid-event)
+        });
+      });
+    }
+
+    function syncAllOptions() {
+      if (!popEl) return;
+      popEl.querySelectorAll('.tag-option').forEach(syncOption);
+    }
+
+    function open() {
+      if (popEl) return;
+      // close any other editable cell (assignee) that's open
+      editableCells.forEach(c => c.exitEdit());
+      working = row.tags.map(t => t.t);
+      popEl = document.createElement('div');
+      popEl.className = 'tag-popover';
+      popEl.innerHTML = `
+        <div class="tag-search">
+          <span class="tag-search-icon">${ICON_SEARCH}</span>
+        </div>
+        <div class="tag-list" role="listbox" aria-multiselectable="true"></div>
+        <div class="tag-buttons">
+          <button class="filter-btn-reset tag-deselect">Deselect all</button>
+          <button class="filter-btn-apply tag-save">Save</button>
+        </div>`;
+      document.body.appendChild(popEl);
+      cell.classList.add('cell-edit-active');
+      renderOptions();
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+      popEl.querySelector('.tag-deselect').addEventListener('click', (e) => {
+        e.stopPropagation();
+        working = [];
+        syncAllOptions();
+      });
+      popEl.querySelector('.tag-save').addEventListener('click', (e) => {
+        e.stopPropagation();
+        row.tags = ALL_TAGS.filter(t => working.includes(t.t)).map(t => ({ t: t.t, v: t.v }));
+        renderBadges();
+        close();
+      });
+    }
+
+    function close() {
+      if (popEl) { popEl.remove(); popEl = null; }
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+      cell.classList.remove('cell-edit-active');
+    }
+
+    cell.querySelector('.tags-edit-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      popEl ? close() : open();
+    });
+    document.addEventListener('click', (e) => {
+      if (popEl && !popEl.contains(e.target) && !cell.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (popEl && e.key === 'Escape') close();
+    });
   }
 
   const container = document.getElementById('rows');

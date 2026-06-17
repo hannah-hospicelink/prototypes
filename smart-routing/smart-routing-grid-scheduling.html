@@ -135,9 +135,11 @@
     --density-cell-pad-x: var(--spacing-xs);   /* 12px */
     --density-cell-font: var(--font-body);     /* 14px */
     --density-cell-lh: var(--lh-default);      /* 19.6px */
-    --density-badge-height: 18px;
-    --density-badge-pad-y: var(--size-50);     /* 2px */
+    --density-badge-height: 16px;              /* $badge-height-md */
+    --density-badge-min-width: 28px;           /* $badge-minWidth-md */
     --density-badge-pad-x: var(--size-150);    /* 6px */
+    --density-badge-font: var(--font-caption); /* 12px */
+    --density-badge-lh: var(--lh-reset);       /* 12px */
     --density-row-btn-size: 24px;              /* _BaseIconButton (Medium/Large) */
     --density-row-btn-glyph: 16px;             /* glyph (Medium/Large) */
     --density-detail-font: var(--font-body);   /* 14px */
@@ -184,6 +186,7 @@
     --font-heading-sm: 1rem;     /* 16px ($font-heading-sm) */
     --lh-heading-sm: 19.2px;     /* $lineHeight-compact for 16px heading */
     --font-caption: 0.75rem;/* 12px */
+    --font-meta: 0.66rem;   /* 10.56px ($font-meta) */
     --lh-default: 19.6px;
     --lh-compact: 16.8px;
     --lh-reset: 12px;       /* $lineHeight-reset */
@@ -196,9 +199,11 @@
     --density-cell-pad-x: var(--spacing-xxs);    /* 8px */
     --density-cell-font: var(--font-caption);    /* 12px */
     --density-cell-lh: 14.4px;                   /* Compact/Caption */
-    --density-badge-height: 18px;
-    --density-badge-pad-y: var(--size-50);       /* 2px */
-    --density-badge-pad-x: var(--size-150);      /* 6px */
+    --density-badge-height: 14px;                /* condensed badge */
+    --density-badge-min-width: 24px;
+    --density-badge-pad-x: var(--spacing-tiny);  /* 4px */
+    --density-badge-font: var(--font-meta);      /* 10.56px */
+    --density-badge-lh: var(--font-meta);        /* 10.56px */
     --density-row-btn-size: 20px;                /* Small */
     --density-row-btn-glyph: 14px;               /* Small glyph */
     --density-detail-font: var(--font-caption);  /* 12px */
@@ -216,9 +221,11 @@
     --density-cell-pad-x: var(--spacing-sm);     /* 16px */
     --density-cell-font: var(--font-body);       /* 14px */
     --density-cell-lh: var(--lh-default);        /* 19.6px */
-    --density-badge-height: 24px;
-    --density-badge-pad-y: var(--spacing-tiny);  /* 4px */
-    --density-badge-pad-x: var(--spacing-xxs);   /* 8px */
+    --density-badge-height: 20px;                /* relaxed badge */
+    --density-badge-min-width: 32px;
+    --density-badge-pad-x: var(--size-150);      /* 6px */
+    --density-badge-font: var(--font-body);      /* 14px */
+    --density-badge-lh: 14px;                    /* relaxed badge line-height */
     --density-field-font: var(--font-caption);   /* 12px */
   }
 
@@ -494,14 +501,16 @@
   .tags-edit-btn { margin-left: auto; }
   .badge {
     height: var(--density-badge-height);
+    min-width: var(--density-badge-min-width);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--density-badge-pad-y) var(--density-badge-pad-x);
+    padding: 0 var(--density-badge-pad-x);
     border-radius: var(--radius-full);
-    font-size: var(--font-caption);
-    line-height: var(--lh-reset);
+    font-size: var(--density-badge-font);
+    line-height: var(--density-badge-lh);
     white-space: nowrap;
+    box-sizing: border-box;
   }
   .badge.neutral { background: var(--badge-bg-neutral); color: var(--badge-text-neutral); }
   .badge.caution { background: var(--badge-bg-caution); color: var(--badge-text-caution); }
@@ -741,7 +750,7 @@
   .tag-popover {
     position: fixed;
     z-index: 1000;
-    width: 360px;
+    width: 361px;
     max-width: calc(100vw - 16px);
     box-sizing: border-box;
     display: flex;
@@ -999,6 +1008,11 @@
 
   function badge(b) { return `<span class="badge ${b.v}">${b.t}</span>`; }
 
+  // Always display Time-Sensitive first; preserve relative order of the rest.
+  function sortTags(tags) {
+    return [...tags].sort((a, b) => (b.t === 'Time-Sensitive') - (a.t === 'Time-Sensitive'));
+  }
+
   // All selectable tags with their badge color (neutral except Time-Sensitive = error), in display order
   const ALL_TAGS = [
     { t: 'Back order',               v: 'neutral' },
@@ -1041,7 +1055,7 @@
           <div class="badges">${badge(r.status)}</div>
         </div>
         <div class="row-cell col-tags tags-cell editable-cell">
-          <div class="badges">${r.tags.map(badge).join('')}</div>
+          <div class="badges">${sortTags(r.tags).map(badge).join('')}</div>
           <button class="edit-btn tags-edit-btn" aria-label="Edit tags">${ICON_PENCIL}</button>
         </div>
         <div class="row-cell col-actions">
@@ -1206,7 +1220,7 @@
 
     function renderBadges() {
       const badgesEl = cell.querySelector('.badges');
-      badgesEl.innerHTML = row.tags.map(badge).join('');
+      badgesEl.innerHTML = sortTags(row.tags).map(badge).join('');
     }
 
     function position() {

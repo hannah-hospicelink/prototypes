@@ -7,148 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/prototype-gallery.css">
   <script src="password-gate.js" defer></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #25273A;
-      color: #57534E;
-      min-height: 100vh;
-    }
-
-    header {
-      background: #f5f5f4;
-      padding: 24px 40px;
-    }
-
-    header h1 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #1C1917;
-    }
-
-    header p {
-      margin-top: 4px;
-      font-size: 14px;
-      color: #78716c;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 40px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: #ffffff;
-      border: 1px solid #e7e5e4;
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease;
-    }
-
-    .card:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      border-color: #d6d3d1;
-    }
-
-    .card-thumbnail {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #e7e5e4;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .card-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body {
-      padding: 20px 20px 8px 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1c1917;
-      line-height: 1.4;
-    }
-
-    .card-description {
-      margin-top: 8px;
-      font-size: 14px;
-      color: #57534E;
-      line-height: 1.6;
-    }
-
-    .card-review {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #57534E;
-      line-height: 1.5;
-    }
-
-    .card-review-label {
-      font-weight: 600;
-    }
-
-    .card-updated {
-      margin-top: 8px;
-      font-size: 11px;
-      color: #57534E;
-      line-height: 1.4;
-      margin-bottom: 8px;
-      flex: 1;
-    }
-
-    .card-footer {
-      padding: 0 20px 20px;
-    }
-
-    .card-link {
-      background: #0080C5;
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 500;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 7px 14px;
-      border-radius: 4px;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .card-link:hover {
-      background: #3399D1;
-    }
-
-    .card-link:active {
-      background: #00669E;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- <header>
+  <header>
     <h1>Prototypes</h1>
-    <p>Select a prototype below to view it.</p>
-  </header> -->
+    <p>Select a prototype or project folder below to view it.</p>
+  </header>
 
   <main>
     <div class="grid">
@@ -156,24 +23,30 @@
       <!-- Add new prototype cards below this line -->
 
 
-      <!-- Card: SMART Routing — Scheduling Grid -->
+      <!-- Card: SMART Routing -->
       <div class="card">
         <!-- <div class="card-thumbnail">
           <img src="screenshots/smart-routing-grid-scheduling.png" alt="SMART Routing Scheduling Grid screenshot" loading="lazy">
         </div> -->
         <div class="card-body">
-          <div class="card-title">SMART Routing — Scheduling Grid</div>
-          <div class="card-description">Order management grid for the new provider portal.</div>
-          <div class="card-review"><span class="card-review-label">Areas to review:</span> overall UI, column density, column content, assignment action, updating tags</div>
+          <div class="card-title-row">
+            <span class="card-folder-icon" aria-hidden="true">
+              <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.708774 5.72926L0 7.79651V1.89006C0 0.856435 0.856435 0 1.89006 0H5.99505C6.4085 0 6.79242 0.147661 7.14681 0.383919L8.26903 1.24035C8.41669 1.35848 8.62342 1.41755 8.83014 1.41755H12.2854C13.3486 1.41755 14.1755 2.27398 14.1755 3.30761V3.78013H3.39621C2.18539 3.78013 1.09269 4.54797 0.708774 5.72926ZM13.1714 12.2854H1.97866C1.0041 12.2854 0.324855 11.3404 0.64971 10.4249L2.06726 6.17224C2.24445 5.5816 2.77603 5.19768 3.39621 5.19768H14.5889C15.5635 5.19768 16.2427 6.14271 15.9179 7.05821L14.5003 11.3109C14.3231 11.9015 13.762 12.2854 13.1714 12.2854Z" fill="#57534E"/>
+              </svg>
+            </span>
+            <div class="card-title">SMART Routing</div>
+          </div>
+          <div class="card-description">Collection of SMART Routing screens and flows.</div>
+          <div class="card-review"><span class="card-review-label">Areas to review:</span> navigation, information architecture, screen coverage</div>
           <div class="card-updated">Last updated: 2026-06-16</div>
         </div>
         <div class="card-footer">
           <a
             class="card-link"
-            href="smart-routing-grid-scheduling.html"
-            data-prototype-title="SMART Routing — Scheduling Grid"
-            data-prototype-password="employ-skip-pot-fault"
-          >View prototype</a>
+            href="smart-routing/index.html"
+            data-prototype-title="SMART Routing"
+          >View projects</a>
         </div>
       </div>
 

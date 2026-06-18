@@ -769,13 +769,7 @@
         ${field('Order reason')}
         ${field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'], removable: true })}
         ${field('Tags')}
-        <div class="filter-field">
-          <span class="filter-field-label">Assigned to <span class="req">*</span></span>
-          <div class="filter-chips-row">
-            <button class="filter-chip-toggle"><span class="chip-check">${ICON_CHECK}</span>Me</button>
-            <button class="filter-chip-toggle"><span class="chip-check">${ICON_CHECK}</span>Unassigned</button>
-          </div>
-        </div>
+        ${field('Assigned to', { search: true, required: true })}
         <div class="filter-buttons">
           <button class="filter-btn-reset">Reset</button>
           <button class="filter-btn-apply">Filter</button>

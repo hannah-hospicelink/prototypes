@@ -141,11 +141,16 @@
     });
   }
   // Renders up to 4 tag badges; appends "+ X more" for any beyond that.
+  // Stores overflow tag data on the element so the hover popover can display them.
   function tagBadgesHtml(tags) {
     const sorted = sortTags(tags);
     const visible = sorted.slice(0, 4);
     const overflow = sorted.length - 4;
-    return visible.map(badge).join('') + (overflow > 0 ? `<span class="tags-overflow">+${overflow} more</span>` : '');
+    if (overflow <= 0) return visible.map(badge).join('');
+    const overflowTags = sorted.slice(4);
+    const encoded = encodeURIComponent(JSON.stringify(overflowTags));
+    return visible.map(badge).join('') +
+      `<span class="tags-overflow" data-overflow="${encoded}">+${overflow} more</span>`;
   }
 
   // All selectable tags with their badge color (neutral except Time-Sensitive = error), in display order
@@ -613,25 +618,61 @@
   const SIDE_SHEET_BODY = `
     <div class="equipment-group">
       <div class="equipment-group-heading">Delivery (3)</div>
-      <div class="equipment-list">
-        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Over bed table</span><span class="equipment-qty">1</span></div></div>
-        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Bed full-electric</span><span class="equipment-qty">1</span></div></div>
-        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">O2 Cylinder</span><span class="equipment-qty">12</span></div></div>
+      <div class="equipment-table equipment-table--two-col">
+        <div class="equipment-table-head">
+          <div class="equipment-head-cell equipment-col-item">Item</div>
+          <div class="equipment-head-cell equipment-col-qty">Qty</div>
+        </div>
+        <div class="equipment-table-body">
+          <div class="equipment-row">
+            <div class="equipment-cell equipment-col-item"><span class="equipment-cell-text">Over bed table</span></div>
+            <div class="equipment-cell equipment-col-qty"><span class="equipment-cell-text">1</span></div>
+          </div>
+          <div class="equipment-row">
+            <div class="equipment-cell equipment-col-item"><span class="equipment-cell-text">Bed full-electric</span></div>
+            <div class="equipment-cell equipment-col-qty"><span class="equipment-cell-text">1</span></div>
+          </div>
+          <div class="equipment-row">
+            <div class="equipment-cell equipment-col-item"><span class="equipment-cell-text">O2 Cylinder</span></div>
+            <div class="equipment-cell equipment-col-qty"><span class="equipment-cell-text">12</span></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="equipment-group">
       <div class="equipment-group-heading">Pick up (1)</div>
-      <div class="equipment-list">
-        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Bed full-electric</span><span class="equipment-qty">1</span></div></div>
+      <div class="equipment-table equipment-table--two-col">
+        <div class="equipment-table-head">
+          <div class="equipment-head-cell equipment-col-item">Item</div>
+          <div class="equipment-head-cell equipment-col-qty">Qty</div>
+        </div>
+        <div class="equipment-table-body">
+          <div class="equipment-row">
+            <div class="equipment-cell equipment-col-item"><span class="equipment-cell-text">Bed full-electric</span></div>
+            <div class="equipment-cell equipment-col-qty"><span class="equipment-cell-text">1</span></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="equipment-group">
       <div class="equipment-group-heading">Service (1)</div>
-      <div class="equipment-list">
-        <div class="equipment-card">
-          <div class="equipment-item"><span class="equipment-name">Hoyer lift</span></div>
-          <div class="equipment-detail"><span class="equipment-detail-label">Service reason:</span><span class="equipment-detail-value">Equipment does not power on</span></div>
-          <div class="equipment-detail"><span class="equipment-detail-label">Service details:</span><span class="equipment-detail-value">light blinks once then goes out</span></div>
+      <div class="equipment-table equipment-table--service">
+        <div class="equipment-table-head">
+          <div class="equipment-head-cell equipment-col-item">Item</div>
+          <div class="equipment-head-cell equipment-col-details">Service Details</div>
+          <div class="equipment-head-cell equipment-col-qty">Qty</div>
+        </div>
+        <div class="equipment-table-body">
+          <div class="equipment-row">
+            <div class="equipment-cell equipment-col-item"><span class="equipment-cell-text">Hoyer lift</span></div>
+            <div class="equipment-cell equipment-col-details">
+              <div class="equipment-cell-stack">
+                <span class="equipment-cell-text">Equipment does not power on</span>
+                <span class="equipment-cell-subtext">light blinks once then goes out</span>
+              </div>
+            </div>
+            <div class="equipment-cell equipment-col-qty"><span class="equipment-cell-text">1</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -663,6 +704,54 @@
     el.addEventListener('transitionend', () => el.remove(), { once: true });
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSideSheet(); });
+
+  // ---- Tags overflow hover popover ----
+  // Shows a popover below the "+X more" text listing the hidden tag badges.
+  // The popover is non-interactive (pointer-events: none); it dismisses on mouseleave.
+  (function setupTagsOverflowPopover() {
+    let popEl = null;
+
+    function show(target) {
+      if (popEl) hide();
+      let overflowTags;
+      try { overflowTags = JSON.parse(decodeURIComponent(target.dataset.overflow || '[]')); }
+      catch (e) { return; }
+      if (!overflowTags.length) return;
+
+      popEl = document.createElement('div');
+      popEl.className = 'cell-menu tags-overflow-pop';
+      popEl.innerHTML =
+        '<svg class="tags-overflow-pop-arrow" viewBox="0 0 28 10" xmlns="http://www.w3.org/2000/svg"><polygon points="0,10 14,0 28,10" fill="white"/></svg>' +
+        overflowTags.map(badge).join('');
+      document.body.appendChild(popEl);
+
+      const r = target.getBoundingClientRect();
+      const popW = popEl.offsetWidth;
+      let left = r.left + r.width / 2 - popW / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+      popEl.style.left = left + 'px';
+      popEl.style.top = (r.bottom + 4) + 'px';
+
+      const arrowEl = popEl.querySelector('.tags-overflow-pop-arrow');
+      if (arrowEl) {
+        const arrowLeft = (r.left + r.width / 2) - parseFloat(popEl.style.left) - 14;
+        arrowEl.style.left = arrowLeft + 'px';
+        arrowEl.style.transform = 'none';
+      }
+    }
+
+    function hide() {
+      if (popEl) { popEl.remove(); popEl = null; }
+    }
+
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target.closest('.tags-overflow[data-overflow]');
+      if (target) show(target);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (popEl && e.target.closest('.tags-overflow[data-overflow]')) hide();
+    });
+  })();
 
   // ---- History popover (My Recent Orders) ----
   const RECENT_ORDERS = [

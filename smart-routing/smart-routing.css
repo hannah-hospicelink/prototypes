@@ -152,6 +152,7 @@
 
     /* density-driven tokens (default = Standard / Medium) */
     --density-row-height: 48px;
+    --density-note-icon: var(--icon-inline);   /* 14px — overridden per density */
     --density-cell-pad-y: var(--spacing-xxs);  /* 8px */
     --density-cell-pad-x: var(--spacing-xs);   /* 12px */
     --density-cell-font: var(--font-body);     /* 14px */
@@ -238,6 +239,7 @@
     --density-header-pad-x: var(--spacing-xxs);  /* 8px */
     --density-header-font: var(--font-caption);  /* 12px */
     --density-field-font: var(--font-caption);   /* 12px */
+    --density-note-icon: var(--icon-inline-glyph); /* 12px — 14px frame − 1px icon-padding-sm × 2 */
   }
   [data-density="relaxed"] {
     --density-header-height: 56px;
@@ -252,6 +254,8 @@
     --density-badge-font: var(--font-body);      /* 14px */
     --density-badge-lh: 14px;                    /* relaxed badge line-height */
     --density-field-font: var(--font-caption);   /* 12px */
+    --density-row-btn-size: 28px;                /* 24px icon frame + 2px outer padding × 2 */
+    --density-row-btn-glyph: 20px;               /* 24px icon frame − 2px icon-padding-md × 2 */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -640,7 +644,7 @@
 
   /* New-note icon + pulse */
   .note-icon {
-    width: var(--icon-inline); height: var(--icon-inline);
+    width: var(--density-note-icon); height: var(--density-note-icon);
     color: var(--color-icon-caution);
     flex-shrink: 0;
     display: block;
@@ -661,8 +665,30 @@
     color: var(--color-text-muted);
     white-space: nowrap;
     flex-shrink: 0;
+    cursor: default;
   }
   [data-density="condensed"] .tags-overflow { font-size: var(--font-meta); }
+
+  /* Tags overflow hover popover */
+  .tags-overflow-pop {
+    width: max-content;
+    min-width: 0;
+    align-items: flex-start;
+    gap: var(--spacing-tiny);        /* 4px */
+    padding: var(--spacing-xxs);     /* 8px */
+    pointer-events: none;
+  }
+  .tags-overflow-pop-arrow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 10px;
+    display: block;
+    pointer-events: none;
+    filter: drop-shadow(0 -0.5px 1px rgba(0,0,0,0.16));
+  }
   .badge {
     height: var(--density-badge-height);
     min-width: var(--density-badge-min-width);
@@ -1004,56 +1030,100 @@
   }
 
   /* equipment group (Delivery / Pick up / Service) */
-  .equipment-group { display: flex; flex-direction: column; gap: var(--spacing-xxs); width: 100%; }
+  .equipment-group { display: flex; flex-direction: column; gap: var(--spacing-xs); width: 100%; }
   .equipment-group-heading {
     font-size: var(--font-heading-sm);   /* 16px (Heading 5) */
     line-height: var(--lh-heading-sm);
     font-weight: 600;
     color: var(--color-text-heading);
   }
-  .equipment-list { display: flex; flex-direction: column; gap: var(--spacing-tiny); width: 100%; }
-  .equipment-card {
+  .equipment-table {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-tiny);
     width: 100%;
-    padding: var(--spacing-xxs) var(--spacing-sm);
-    background: var(--card-bg-nested);
-    border: var(--border-width) solid var(--card-border);
+    border: var(--border-width) solid var(--color-border-light);
     border-radius: var(--radius-md);
     overflow: hidden;
   }
-  .equipment-item { display: flex; align-items: center; gap: var(--size-50); width: 100%; }
-  .equipment-name {
-    flex: 1;
+  .equipment-table-head,
+  .equipment-row { display: flex; align-items: stretch; width: 100%; }
+  .equipment-table-head { border-bottom: var(--border-width) solid var(--color-border-light); }
+  .equipment-table-body .equipment-row { border-bottom: var(--border-width) solid var(--color-border-light); }
+  .equipment-table-body .equipment-row:last-child { border-bottom: none; }
+
+  .equipment-head-cell,
+  .equipment-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs) var(--spacing-xs);
     min-width: 0;
-    font-size: var(--font-heading-xs);   /* 14px (Heading 6) */
-    line-height: var(--lh-compact);
-    font-weight: 600;
-    color: var(--color-text-default);
   }
-  .equipment-qty {
-    flex-shrink: 0;
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--color-text-default);
-  }
-  /* label : value pair (e.g. Service reason: …) */
-  .equipment-detail { display: flex; align-items: flex-start; gap: var(--size-50); width: 100%; }
-  .equipment-detail-label {
-    flex-shrink: 0;
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--color-text-default);
-    white-space: nowrap;
-  }
-  .equipment-detail-value {
-    flex: 1;
-    min-width: 0;
+  .equipment-head-cell {
+    min-height: 40px; /* Figma basic table header cell = 40px (node 2032:12003) */
+    background: var(--table-header);
+    color: var(--color-text-heading);
     font-size: var(--font-body);
     line-height: var(--lh-default);
     font-weight: 500;
+  }
+  .equipment-cell {
+    min-height: var(--row-height); /* 48px body rows */
+    background: var(--color-bg-surface);
     color: var(--color-text-default);
+  }
+
+  .equipment-col-item {
+    flex: 1;
+    min-width: 0;
+  }
+  .equipment-col-qty {
+    flex: 0 0 80px;
+    width: 80px;
+  }
+  .equipment-table--service .equipment-col-item {
+    flex: 0 0 180px;
+    width: 180px;
+  }
+  .equipment-col-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .equipment-cell-text {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 400;
+    color: var(--color-text-default);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .equipment-cell-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-50);
+    min-width: 0;
+    width: 100%;
+  }
+  .equipment-cell-subtext {
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .equipment-head-cell.equipment-col-qty,
+  .equipment-cell.equipment-col-qty {
+    justify-content: flex-start;
+  }
+  .equipment-head-cell.equipment-col-details,
+  .equipment-cell.equipment-col-details,
+  .equipment-head-cell.equipment-col-item,
+  .equipment-cell.equipment-col-item {
+    justify-content: flex-start;
+    min-width: 0;
   }
 
   /* actions row + secondary (View order) button */

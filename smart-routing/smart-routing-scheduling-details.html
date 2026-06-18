@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Management Dashboard Update - Scheduling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/prototype-gallery.css?v=2026-06-18">
+</head>
+<body class="subpage details-page">
+  <header>
+    <h1>Order Management Dashboard Update - Scheduling</h1>
+    <p>Overview of scope, role behavior, filtering, and grid interactions for scheduling prototypes.</p>
+    <a class="crumb" href="./index.html" aria-label="Back to SMART Routing prototypes">
+      <span class="crumb-icon" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.28 3.22a.75.75 0 0 1 0 1.06L4.56 7H13a.75.75 0 0 1 0 1.5H4.56l2.72 2.72a.75.75 0 1 1-1.06 1.06L2.22 8.53a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 0Z"/>
+        </svg>
+      </span>
+      <span>Back to SMART Routing</span>
+    </a>
+  </header>
+
+  <main>
+    <div class="details-layout">
+      <aside class="details-toc" aria-label="Table of contents">
+        <h2 class="details-toc-title">On this page</h2>
+        <ul class="details-toc-list">
+          <li><a href="#overview-goals">Overview and Goals</a></li>
+          <li><a href="#roles">Roles</a></li>
+          <li><a href="#filtering">Filtering</a></li>
+          <li><a href="#toolbar-actions">Table Toolbar Actions</a></li>
+          <li><a href="#grid-columns">Grid Columns</a></li>
+          <li><a href="#expanded-row-content">Expanded Row Content</a></li>
+          <li><a href="#grid-actions">Grid Actions</a></li>
+        </ul>
+      </aside>
+
+      <article class="details-article" aria-label="Scheduling details overview">
+      <h3 id="overview-goals">Overview and Goals</h3>
+      <p>The goal of this project is to modernize and simplify the DMETrack order management dashboard to provide only information relevant to a user's role presented in an easy-to-digest manner.</p>
+      <p>These prototypes demonstrate the content that would be available and allow users to interact with a limited set of functionality for testing purposes.</p>
+
+      <h3 id="roles">Roles</h3>
+      <p>We're updating DMETrack to better assign users to roles, which will allow us to customize what content is displayed and unlock different sets of functionality.</p>
+      <p>The prototypes here demonstrate what the grid would look and act like for users with the <strong>Scheduling</strong> role alone as well as users with both <strong>Scheduling</strong> and <strong>Manager</strong> roles.</p>
+
+      <h3 id="filtering">Filtering</h3>
+
+      <h4>Standard Filters</h4>
+      <p>Scheduling users can filter on the following fields:</p>
+      <ul>
+        <li>Warehouses</li>
+        <li>Order type</li>
+        <li>Order priority</li>
+        <li>Order reason</li>
+        <li>Schedule status</li>
+        <li>Tags</li>
+        <li>Assigned to</li>
+      </ul>
+      <p>All dropdown and autocomplete inputs allow selecting multiple options.</p>
+      <p>The "Assigned to" field changes depending on the user's role:</p>
+      <ul>
+        <li><em>Standard scheduling users</em> can select "Me" and/or "Unassigned" to view orders they have claimed and/or orders that have not been claimed yet.</li>
+        <li><em>Scheduling manager users</em> see a searchable dropdown where they can select the scheduling users whose they would like to view and/or unassigned orders.</li>
+      </ul>
+      <p><em>Note: Filtering is not enabled in this limited prototype. It simply displays an example of the available filters.</em></p>
+
+      <h4>Quick Filters</h4>
+      <p>Quick filters are buttons that allow the user to further narrow down the results returned from the standard filters.</p>
+      <p>Available quick filters:</p>
+      <ul>
+        <li>Rescheduled</li>
+        <li>STAT/Urgent</li>
+        <li>New note</li>
+      </ul>
+      <p>Behavior:</p>
+      <ul>
+        <li>Mutually exclusive (only one can be active at a time)</li>
+        <li>Clicking an active filter toggles it off</li>
+        <li>Grid rows are shown/hidden by predicate logic tied to each filter</li>
+        <li>Each filter displays a badge with the number of orders in the list that match the filter criteria</li>
+      </ul>
+
+      <h4>Applied Filter Chips</h4>
+      <p>Behavior:</p>
+      <ul>
+        <li>Chips are rendered to display the active filter values</li>
+        <li>Individual filter values can be removed using the included remove buttons</li>
+      </ul>
+      <p><em>Note: Filtering is not enabled in this limited prototype. It simply displays an example of the applied filters.</em></p>
+
+      <h3 id="toolbar-actions">Table Toolbar Actions</h3>
+      <ul>
+        <li><strong>Download:</strong> Download a spreadsheet of the current order results (<em>display only, not currently functional</em>)</li>
+        <li><strong>Order history:</strong> View a list of the last 5 orders changed by the user
+          <ul>
+            <li>Error prevention should the user move the order into the dispatch queue prematurely</li>
+            <li>Displays high-level order details and links to the Edit Order page and Patient Profile</li>
+          </ul>
+        </li>
+        <li><strong>Column customization:</strong> Allows the user to show or hide columns (<em>display only, not currently functional</em>)</li>
+        <li><strong>Table customization:</strong> Allows the user to select a density for the table data.
+          <ul>
+            <li>Condensed: smaller content with less space around it</li>
+            <li>Standard: default content size and spacing</li>
+            <li>Relaxed: default content size with more space around it</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="grid-columns">Grid Columns</h3>
+
+      <h4>All Scheduling Users</h4>
+      <p>Visible columns:</p>
+      <ul>
+        <li>Assignee</li>
+        <li>Order</li>
+        <li>Priority / Reason</li>
+        <li>Patient</li>
+        <li>Ordered</li>
+        <li>Requested</li>
+        <li>Scheduled</li>
+        <li>Schedule Status</li>
+        <li>Tags</li>
+        <li>Actions</li>
+      </ul>
+
+      <p>What each column shows:</p>
+      <ul>
+        <li><strong>Assignee:</strong>
+          <ul>
+            <li>Name of the user who is working the order (blank when unassigned)</li>
+            <li>Edit pencil button on hover to allow changing assignee (<em>see interactive features below</em>)</li>
+          </ul>
+        </li>
+        <li><strong>Order:</strong>
+          <ul>
+            <li>Order ID (links to Edit Order page)</li>
+            <li>Flashing "New Note" icon when applicable</li>
+            <li>Order type</li>
+          </ul>
+        </li>
+        <li><strong>Priority / Reason:</strong>
+          <ul>
+            <li>Order priority (STAT and Urgent emphasized in red)</li>
+            <li>Order reason</li>
+          </ul>
+        </li>
+        <li><strong>Patient:</strong>
+          <ul>
+            <li>Patient name (links to Patient Profile)</li>
+          </ul>
+        </li>
+        <li><strong>Ordered:</strong>
+          <ul>
+            <li>Date and time order was placed (dash if empty)</li>
+          </ul>
+        </li>
+        <li><strong>Requested:</strong>
+          <ul>
+            <li>Date and time window requested by client, patient, or caregiver (dash if empty)</li>
+          </ul>
+        </li>
+        <li><strong>Scheduled:</strong>
+          <ul>
+            <li>Date and time window of order schedule (dash if empty)</li>
+          </ul>
+        </li>
+        <li><strong>Schedule Status:</strong>
+          <ul>
+            <li>Color-coded badge showing where the order is in the scheduling process</li>
+          </ul>
+        </li>
+        <li><strong>Tags:</strong>
+          <ul>
+            <li>Badges displaying attributes about the order, patient, or client</li>
+            <li>Some badges are sorted to the front when present, then all remaning badges are displayed alphabetically
+              <ol>
+                <li>Time-Sensitive</li>
+                <li>Facility</li>
+                <li>Service</li>
+                <li>Liquid O2</li>
+                <li>All other tags in alphabetical order</li>
+              </ol>
+            </li>
+            <li>Edit pencil button on hover to add or remove tags</li>
+            <li>When more than 4 tags are displayed, they are truncated with text displaying how many more tags are present.</li>
+            <li>Hovering over this text displays a popup listing the other tags.</li>
+          </ul>
+        </li>
+        <li><strong>Actions:</strong>
+          <ul>
+            <li>More actions menu button (...)</li>
+            <li>Expand/collapse toggle button</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>Scheduling Manager Users</h4>
+      <p>In addition to the content above, manager users have an additional column in the header and each row containing a checkbox. This will allow them to perform bulk actions.</p>
+
+      <h3 id="expanded-row-content">Expanded Row Content</h3>
+      <p>The chevron button on the far right of the row allows the users to expand or collapse more content about the order.</p>
+      <p>When a row is expanded, two detail sections are displayed:</p>
+      <ul>
+        <li>Client:
+          <ul>
+            <li>Corporate client name</li>
+            <li>Branch name</li>
+          </ul>
+        </li>
+        <li>Provider:
+          <ul>
+            <li>Warehouse name</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 id="grid-actions">Grid Actions</h3>
+
+      <h4>Edit Assignee</h4>
+      <p>When hovering over the Assignee row, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
+      <p><strong>Standard scheduling users</strong> can select "Me" to claim the order for working. They cannot assign to other users or unassign the order from themselves.</p>
+      <p><strong>Scheduling manager users</strong> can assign the order to themselves or search a list of scheduling users to someone else. They can also clear the assignment.</p>
+      <p><strong>All scheduling users</strong> can also assign the order to other user groups so the order is added to the boards for that user type and removed from the scheduling queue.</p>
+      <ul>
+        <li>Purchasing</li>
+        <li>Respiratory Therapy</li>
+        <li>Dispatch</li>
+      </ul>
+      <p>Orders can only be assigned to Dispatch if they have a schedule set and are in the Confirmed or Rescheduled schedule status.</p>
+
+      <h4>Edit Tags</h4>
+      <p>When hovering over the Tags row, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
+      <p>Users can search a list of tags and select one or more to apply. They may also remove tags.</p>
+      <p><em>Note: The list of tags presented here is an example, not a comprehensive or finalized list of tags that will be available.</em></p>
+
+      <h4>More Actions Menu</h4>
+      <p>Clicking the 3 dots icon on the far right opens the row action menu.</p>
+      <p>Available actions:</p>
+      <ul>
+        <li><strong>Schedule order:</strong> Respond to the schedule request or set a schedule for the order (<em>display only, not currently functional</em>)</li>
+        <li><strong>Reset order:</strong> Clear the order schedule and reset it to Received/Acknowledged status (<em>display only, not currently functional</em>)</li>
+        <li><strong>View equipment:</strong> Slides out a view to see the equipment available on the order.
+          <ul>
+            <li>Individual sections for delivery, pickup, and service equipment (when applicable)</li>
+            <li>Displays equipment item name and quantity</li>
+            <li>Service items display the service details selected by the client during ordering when available</li>
+            <li>"View order" button takes the user to the Edit Order page for more details (<em>display only, not currently functional</em>)</li>
+          </ul>
+        </li>
+      </ul>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

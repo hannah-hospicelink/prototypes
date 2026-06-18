@@ -1,906 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMART Routing — Data Grid</title>
+<title>SMART Routing - Scheduling Grid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --color-bg-primary: #fcfcfb;
-    --color-bg-surface: #ffffff;
-    --table-header: #f5f5f4;
-    --color-border-light: #e7e5e4;
-    --color-text-heading: #1c1917;
-    --color-text-default: #57534e;
-    --color-text-muted: #78716c;
-    --color-text-link: #0080c5;       /* Color/Text/Link → Color/Primary/600 */
-    --btn-tertiary-content: #0080c5;  /* $btn-tertiary-content → Color/Primary/600 */
-    --color-text-link-hover: #3399d1; /* Color/Text/Link_Hover → Color/Primary/500 */
-    --color-text-link-active: #00669e;/* Color/Text/Link_Active → Color/Primary/700 */
-    --color-focus-outline: #00669e;   /* State/Focus/Outline/Color/Default → Color/Primary/700 */
-    --color-text-error: #a00d25;
-    --color-icon-caution: #f4b300;   /* Color/Icon/Caution → Color/Yellow/600 */
-    --color-icon-inline-muted: #78716c; /* Color/Icon/Inline/Muted */
-    --table-row-hover: #fcfcfb;      /* Table/Color/Background/Row/Hover → Color/Neutral/50 */
-    --button-ghost-bg-hover: #f5f5f4; /* Button/Color/Ghost/Background/Hover → Color/Neutral/200 */
-    --button-ghost-bg-active: #e7e5e4;/* Button/Color/Ghost/Background/Active → Color/Neutral/300 */
-
-    /* editable grid cell (generic) */
-    --menu-bg: #ffffff;               /* Color/Background/Surface → Color/Neutral/White */
-    --menu-option-hover: #f5f5f4;     /* Menu/Color/Option/Off/Hover → Color/Neutral/200 */
-    --menu-option-active: #e7e5e4;    /* Menu/Color/Option/Off/Active → Color/Neutral/300 */
-    --menu-option-selected: #f2f9fc;  /* Color/Background/Container/Active → Color/Info/50 */
-    --menu-option-selected-hover: #e5f2f9;  /* Menu/Color/Option/On/Hover → Color/Info/100 */
-    --menu-option-selected-active: #cce6f3; /* Menu/Color/Option/On/Active → Color/Info/200 */
-    --input-bg: #ffffff;              /* Color/Background/Surface → Color/Neutral/White */
-    --input-border: #e7e5e4;          /* Color/Border/Default → Color/Neutral/300 */
-    --input-border-focus: #00669e;    /* State/Focus/Outline/Color/Default → Color/Primary/700 */
-    --input-placeholder: #a8a29e;     /* Input/Text/Color/Placeholder → Color/Neutral/500 */
-    --chip-bg: #e7e5e4;               /* Tag/Color/Chip/Background → Color/Neutral/300 */
-    --icon-chevron-muted: #a8a29e;    /* collapse chevron → Color/Neutral/500 */
-
-    /* settings bar + stateful filter buttons */
-    --card-bg: #ffffff;               /* Card/Color/Container/Background/Default → Color/Neutral/White */
-    --card-border: #e7e5e4;           /* Card/Color/Container/Border/Default → Color/Neutral/300 */
-    --card-bg-nested: #fcfcfb;         /* Card/Color/Container/Background/Nested → Color/Neutral/50 */
-    --filter-text-inactive: #57534e;  /* Button/Color/Stateful/Content/Inactive → Color/Neutral/700 */
-    --filter-text-active: #0080c5;    /* Button/Color/Stateful/Content/Active → Color/Primary/600 */
-    --filter-bg-inactive: #eceae9;        /* Button/Color/Stateful/Background/Inactive/Default → Color/Neutral/250 */
-    --filter-bg-inactive-hover: #e0dedd;  /* Button/Color/Stateful/Background/Inactive/Hover → Color/Neutral/350 */
-    --filter-bg-active: #e5f2f9;          /* Button/Color/Stateful/Background/Active/Default → Color/Primary/100 */
-    --filter-bg-active-hover: #cce6f3;    /* Button/Color/Stateful/Background/Active/Hover → Color/Primary/200 */
-    --badge-error-bg: #c8102e;        /* Color/Error/600 */
-    --badge-error-text: #ffffff;      /* Color/Text/On_Dark → Color/Neutral/White */
-    --action-icon-color: #292524;     /* action icons → Color/Neutral/900 */
-    --btn-ghost-content-secondary: #292524; /* $btn-ghost-content-secondary → Color/Neutral/900 */
-    --indicator-visibility-high: #c8102e;   /* $indicator-visibility-high → Color/Error/600 */
-
-    /* filter popover */
-    --color-border-md: #d6d3d1;             /* $color-border-md → Color/Neutral/350 (input border) */
-    --input-text-adornment: #a8a29e;        /* $input-text-adornment → Color/Neutral/500 */
-    --color-icon-inline-default: #57534e;   /* $color-icon-inline-default → Color/Neutral/700 */
-    --color-error-600: #c8102e;             /* $color-error-600 */
-    --btn-bg-primary: #0080c5;              /* $btn-bg-primary → Color/Primary/600 */
-    --btn-bg-primary-hover: #3399d1;        /* Button/Filled/Background/Primary/Hover → Color/Primary/500 */
-    --btn-bg-primary-active: #00669e;       /* Button/Filled/Background/Primary/Active → Color/Primary/700 */
-    --btn-content: #ffffff;                 /* $btn-content → on-primary */
-    --btn-ghost-content-tertiary: #0080c5;  /* $btn-ghost-content-tertiary → Color/Primary/600 */
-    --filter-input-height: 40px;            /* $input-text-minHeight-md */
-    --filter-chip-input-height: 28px;       /* Input/Filter_Chip/Size/Height */
-    --filter-popover-width: 620px;          /* popover width in context */
-    --icon-xs: 14px;                        /* $icon-xs */
-
-    --badge-bg-neutral: #e7e5e4;  --badge-text-neutral: #292524;
-    --badge-bg-caution: #fef7e5;  --badge-text-caution: #926b00;
-    --badge-bg-error: #ffe9e8;    --badge-text-error: #780a1c;
-    --badge-bg-warning: #fff4e5;  --badge-text-warning: #8e4101;
-    --badge-bg-info: #e5f2f9;     --badge-text-info: #004d76;
-
-    --radius-md: 8px;
-    --radius-sm: 4px;
-    --radius-full: 9999px;
-    --border-width: 1px;
-
-    /* motion */
-    --transition-fast: 0.15s ease;
-    --ease-emphasized: cubic-bezier(0.4, 0, 0.2, 1);
-    --duration-expand: 0.32s;
-    --duration-chevron: 0.3s;
-    --duration-note-pulse: 1.8s;
-
-    /* spacing scale (Figma $spacing-*) */
-    --spacing-tiny: 4px;   /* $spacing-tiny */
-    --spacing-xxs: 8px;    /* $spacing-xxs */
-    --spacing-xs: 12px;    /* $spacing-xs */
-    --spacing-sm: 16px;    /* $spacing-sm */
-    --spacing-md: 20px;    /* $spacing-md */
-    --spacing-lg: 24px;    /* $spacing-lg */
-
-    /* size scale (Figma $size-*) */
-    --size-50: 2px;        /* $size-50 */
-    --size-150: 6px;       /* $size-150 */
-
-    /* icon + control sizes */
-    --icon-inline: 14px;       /* inline icon frame */
-    --icon-inline-glyph: 12px; /* inline icon glyph (frame minus padding) */
-    --icon-action: 18px;       /* action button glyph */
-    --icon-edit: 16px;         /* edit pencil glyph */
-    --edit-btn-size: 24px;     /* edit icon button */
-
-    /* menu + options + input field */
-    --menu-width: 164px;
-    --menu-padding: 8px;
-    --menu-item-gap: 4px;
-    --menu-radius: var(--radius-md);
-    --menu-option-height: 36px;
-    --menu-option-padding-x: 8px;
-    --menu-heading-height: 25px;
-    --input-height: 48px;
-    --input-radius: var(--radius-sm);
-    --input-border-width: 1px;
-    --input-padding-x: 12px;
-    --input-adornment: 20px;
-    --menu-shadow: 0 0.5px 2px rgba(0,0,0,0.20), 0 0.5px 1px rgba(0,0,0,0.16), 0 2px 4px 2px rgba(0,0,0,0.12);
-
-    /* component dimensions */
-    --row-height: 48px;
-    --badge-height: 18px;
-
-    /* density-driven tokens (default = Standard / Medium) */
-    --density-row-height: 48px;
-    --density-cell-pad-y: var(--spacing-xxs);  /* 8px */
-    --density-cell-pad-x: var(--spacing-xs);   /* 12px */
-    --density-cell-font: var(--font-body);     /* 14px */
-    --density-cell-lh: var(--lh-default);      /* 19.6px */
-    --density-badge-height: 16px;              /* $badge-height-md */
-    --density-badge-min-width: 28px;           /* $badge-minWidth-md */
-    --density-badge-pad-x: var(--size-150);    /* 6px */
-    --density-badge-font: var(--font-caption); /* 12px */
-    --density-badge-lh: var(--lh-reset);       /* 12px */
-    --density-row-btn-size: 24px;              /* _BaseIconButton (Medium/Large) */
-    --density-row-btn-glyph: 16px;             /* glyph (Medium/Large) */
-    --density-detail-font: var(--font-body);   /* 14px */
-    --density-detail-lh: var(--lh-default);    /* 19.6px */
-    --density-detail-gap: var(--spacing-tiny); /* 4px between rows in a section */
-    --density-header-height: 48px;
-    --density-header-pad-x: var(--spacing-xs); /* 12px */
-    --density-header-font: var(--font-body);   /* 14px */
-    --density-field-font: var(--font-body);    /* 14px (editable cell input) */
-
-    /* focus */
-    --focus-ring-width: 2px;       /* button focus outline weight */
-    --focus-ring-width-link: 1px;  /* link focus outline weight */
-    --focus-ring-offset: 2px;
-    --radius-xs: 2px;
-
-    /* layout (prototype-specific, not from design tokens) */
-    --grid-max-width: 1900px;
-    --settings-gap: 20px;        /* gap between quick filters and action buttons */
-    --filter-gap: 16px;          /* gap between filter buttons */
-    --filter-height: 32px;       /* Size=Small stateful button */
-    --filter-padding-x: 12px;
-    --filter-label-gap: 8px;     /* gap between check, label */
-    --count-badge-size: 14px;
-    --action-btn-size: 32px;     /* _BaseIconButton ($btn-size-sm) */
-    --action-icon-size: 16px;    /* action glyph height ($icon-sm) */
-    --button-radius-icon: 8px;   /* $button-radius-icon */
-    --icon-padding-md: 2px;      /* $icon-padding-md */
-    --icon-padding-sm: 1px;      /* $icon-padding-sm */
-    --icon-sm: 16px;             /* $icon-sm */
-    --color-info-600: #0080c5;   /* $color-info-600 */
-    --size-350: 10px;            /* $size-350 (indicator dot) */
-    --chip-height: 20px;         /* $chip-height-md */
-    --chip-min-width: 24px;      /* $chip-minWidth-sm */
-    --chip-btn-color: #78716c;   /* $chip-btn → Color/Neutral/600 */
-    --card-padding: 16px;        /* $spacing-sm */
-    --page-padding-y: 60px;
-    --page-padding-x: 40px;
-    --detail-inset-x: 128px;  /* expandable panel horizontal inset (Figma frame) */
-    --detail-col-gap: 80px;   /* Figma grid column gap */
-    --detail-row-gap: 48px;   /* Figma grid row gap */
-
-    --font-body: 0.875rem;  /* 14px */
-    --font-heading-sm: 1rem;     /* 16px ($font-heading-sm) */
-    --lh-heading-sm: 19.2px;     /* $lineHeight-compact for 16px heading */
-    --font-caption: 0.75rem;/* 12px */
-    --font-meta: 0.66rem;   /* 10.56px ($font-meta) */
-    --lh-default: 19.6px;
-    --lh-compact: 16.8px;
-    --lh-reset: 12px;       /* $lineHeight-reset */
-  }
-
-  /* Row density overrides (Standard = default in :root) */
-  [data-density="condensed"] {
-    --density-row-height: 36px;
-    --density-cell-pad-y: var(--spacing-tiny);   /* 4px */
-    --density-cell-pad-x: var(--spacing-xxs);    /* 8px */
-    --density-cell-font: var(--font-caption);    /* 12px */
-    --density-cell-lh: 14.4px;                   /* Compact/Caption */
-    --density-badge-height: 14px;                /* condensed badge */
-    --density-badge-min-width: 24px;
-    --density-badge-pad-x: var(--spacing-tiny);  /* 4px */
-    --density-badge-font: var(--font-meta);      /* 10.56px */
-    --density-badge-lh: var(--font-meta);        /* 10.56px */
-    --density-row-btn-size: 20px;                /* Small */
-    --density-row-btn-glyph: 14px;               /* Small glyph */
-    --density-detail-font: var(--font-caption);  /* 12px */
-    --density-detail-lh: 16.8px;
-    --density-detail-gap: var(--size-50);        /* 2px */
-    --density-header-height: 32px;
-    --density-header-pad-x: var(--spacing-xxs);  /* 8px */
-    --density-header-font: var(--font-caption);  /* 12px */
-    --density-field-font: var(--font-caption);   /* 12px */
-  }
-  [data-density="relaxed"] {
-    --density-header-height: 56px;
-    --density-row-height: 56px;
-    --density-cell-pad-y: var(--spacing-xs);     /* 12px */
-    --density-cell-pad-x: var(--spacing-sm);     /* 16px */
-    --density-cell-font: var(--font-body);       /* 14px */
-    --density-cell-lh: var(--lh-default);        /* 19.6px */
-    --density-badge-height: 20px;                /* relaxed badge */
-    --density-badge-min-width: 32px;
-    --density-badge-pad-x: var(--size-150);      /* 6px */
-    --density-badge-font: var(--font-body);      /* 14px */
-    --density-badge-lh: 14px;                    /* relaxed badge line-height */
-    --density-field-font: var(--font-caption);   /* 12px */
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: var(--color-bg-primary);
-    color: var(--color-text-default);
-    padding: var(--page-padding-y) var(--page-padding-x);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ---------- Settings bar ---------- */
-  .table-settings {
-    width: 100%;
-    max-width: var(--grid-max-width);
-    margin: 0 auto var(--spacing-xs);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    padding: var(--card-padding);
-    background: var(--card-bg);
-    border: var(--border-width) solid var(--card-border);
-    border-radius: var(--radius-md);
-  }
-  .toolbar-row { display: flex; align-items: center; justify-content: space-between; gap: var(--settings-gap); width: 100%; }
-  .toolbar-filters { display: flex; align-items: center; gap: var(--spacing-sm); flex: 1; min-width: 0; }
-
-  /* primary (leading) filter button — blue icon button with indicator dot */
-  .filter-toggle-btn {
-    position: relative;
-    width: var(--action-btn-size); height: var(--action-btn-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    border-radius: var(--button-radius-icon);
-    cursor: pointer;
-    color: var(--btn-ghost-content-secondary);
-    flex-shrink: 0;
-    transition: background var(--transition-fast);
-  }
-  .filter-toggle-btn:hover { background: var(--button-ghost-bg-hover); }
-  .filter-toggle-btn:active { background: var(--button-ghost-bg-active); }
-  .filter-toggle-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
-  .filter-toggle-btn svg { width: var(--icon-edit); height: auto; display: block; }
-  .filter-toggle-btn .filter-dot {
-    position: absolute;
-    top: -2px; right: -2px;
-    width: var(--size-350); height: var(--size-350);
-    border-radius: var(--radius-full);
-    background: var(--indicator-visibility-high);
-  }
-
-  .quick-filters { display: flex; align-items: center; gap: var(--filter-gap); }
-  .filter-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--filter-label-gap);
-    height: var(--filter-height);
-    padding: 0 var(--filter-padding-x);
-    background: var(--filter-bg-inactive);
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--filter-text-inactive);
-    white-space: nowrap;
-    transition: background var(--transition-fast), color var(--transition-fast);
-  }
-  .filter-btn:hover { background: var(--filter-bg-inactive-hover); }
-  .filter-btn.active { background: var(--filter-bg-active); color: var(--filter-text-active); }
-  .filter-btn.active:hover { background: var(--filter-bg-active-hover); }
-  .filter-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
-  .filter-btn .filter-check { width: var(--icon-edit); height: var(--icon-edit); display: none; flex-shrink: 0; }
-  .filter-btn.active .filter-check { display: block; }
-  .count-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(35%, -35%);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--count-badge-size);
-    height: var(--count-badge-size);
-    padding: 0 var(--size-50);
-    box-sizing: border-box;
-    border-radius: var(--radius-full);
-    background: var(--badge-error-bg);
-    color: var(--badge-error-text);
-    font-size: var(--font-caption);
-    line-height: 1;
-  }
-  .table-actions { display: flex; align-items: center; gap: var(--spacing-xxs); flex-shrink: 0; }
-  .action-btn {
-    width: var(--action-btn-size); height: var(--action-btn-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--icon-padding-md);
-    background: none;
-    border: none;
-    border-radius: var(--button-radius-icon);
-    cursor: pointer;
-    color: var(--action-icon-color);
-    box-sizing: border-box;
-    transition: background var(--transition-fast);
-  }
-  .action-btn:hover { background: var(--button-ghost-bg-hover); }
-  .action-btn:active { background: var(--button-ghost-bg-active); }
-  .action-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
-  .action-btn svg { height: var(--action-icon-size); width: auto; display: block; }
-
-  /* applied filter chips */
-  .applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xs); width: 100%; }
-  /* shared chip base (same Figma component); font-size set per context below */
-  .filter-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-tiny);
-    height: var(--chip-height);
-    min-width: var(--chip-min-width);
-    padding: var(--spacing-tiny) var(--spacing-xxs);
-    box-sizing: border-box;
-    border-radius: var(--radius-full);
-    background: var(--chip-bg);
-    line-height: var(--lh-reset);
-    color: var(--color-text-default);
-    white-space: nowrap;
-  }
-  /* toolbar applied-filter chips: 12px label/value */
-  .applied-filters .filter-chip { font-size: var(--font-caption); }
-  .filter-chip .chip-label { font-weight: 400; }
-  .filter-chip .chip-value { font-weight: 500; }
-  .chip-remove {
-    width: var(--icon-sm); height: var(--icon-sm);
-    padding: var(--icon-padding-sm);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--chip-btn-color);
-    flex-shrink: 0;
-  }
-  .chip-remove svg { width: 100%; height: 100%; display: block; }
-
-  .data-grid {
-    background: var(--color-bg-surface);
-    border: var(--border-width) solid var(--color-border-light);
-    border-radius: var(--radius-md);
-    overflow-x: auto;
-    width: 100%;
-    max-width: var(--grid-max-width);
-    margin: 0 auto;
-  }
-
-  /* ---------- Track (single width source for header + rows) ---------- */
-  .grid-track {
-    width: max-content;
-    min-width: 100%;
-  }
-
-  /* ---------- Header ---------- */
-  .grid-header {
-    display: flex;
-    border-bottom: var(--border-width) solid var(--color-border-light);
-    width: 100%;
-  }
-  .header-cell {
-    background: var(--table-header);
-    height: var(--density-header-height);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--density-header-pad-x);
-    font-weight: 500;
-    font-size: var(--density-header-font);
-    color: var(--color-text-heading);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 0;
-  }
-
-  /* ---------- Column widths ---------- */
-  /* flex-grow proportional to natural width, basis = natural px, no shrink (scrolls below natural width) */
-  .col-assignee { flex: 116 0 116px; }
-  .col-order    { flex: 180 0 180px; }
-  .col-priority { flex: 148 0 148px; }
-  .col-patient  { flex: 148 0 148px; }
-  .col-ordered  { flex: 136 0 136px; }
-  .col-requested{ flex: 152 0 152px; }
-  .col-scheduled{ flex: 152 0 152px; }
-  .col-status   { flex: 136 0 136px; }
-  .col-tags     { flex: 248 0 248px; }
-  .col-actions  { flex: 80 0 80px; }
-
-  /* ---------- Rows ---------- */
-  .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
-  .grid-row:last-child { border-bottom: none; }
-
-  .row-main {
-    display: flex;
-    width: 100%;
-  }
-  .row-cell {
-    background: var(--color-bg-surface);
-    min-height: var(--density-row-height);
-    display: flex;
-    align-items: center;
-    padding: var(--density-cell-pad-y) var(--density-cell-pad-x);
-    flex-shrink: 0;
-    min-width: 0;
-    transition: background var(--transition-fast);
-  }
-  .row-main:hover .row-cell { background: var(--table-row-hover); }
-
-  .cell-stack { display: flex; flex-direction: column; gap: 0; min-width: 0; }
-  .cell-main {
-    font-size: var(--density-cell-font);
-    line-height: var(--density-cell-lh);
-    color: var(--color-text-default);
-    white-space: nowrap;
-  }
-  .cell-caption {
-    font-size: var(--font-caption);
-    line-height: var(--lh-compact);
-    color: var(--color-text-muted);
-    white-space: nowrap;
-  }
-  .link {
-    color: var(--color-text-link);
-    cursor: pointer;
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-  .link:hover { color: var(--color-text-link-hover); text-decoration: underline; }
-  .link:active { color: var(--color-text-link-active); text-decoration: none; }
-  .link:focus-visible {
-    outline: var(--focus-ring-width-link) solid var(--color-focus-outline);
-    outline-offset: var(--focus-ring-offset);
-    border-radius: var(--radius-xs);
-  }
-  .stat { color: var(--color-text-error); }
-
-  .order-main { display: flex; align-items: center; gap: var(--spacing-tiny); }
-  .order-main .cell-main { display: inline-flex; align-items: center; }
-
-  /* New-note icon + pulse */
-  .note-icon {
-    width: var(--icon-inline); height: var(--icon-inline);
-    color: var(--color-icon-caution);
-    flex-shrink: 0;
-    display: block;
-    animation: notePulse var(--duration-note-pulse) ease-in-out infinite;
-  }
-  @keyframes notePulse {
-    0%, 100% { opacity: 1;   transform: scale(1); }
-    50%      { opacity: 0.35; transform: scale(0.86); }
-  }
-
-  /* Badges */
-  .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
-  .tags-cell .badges { flex: 1; min-width: 0; }
-  .tags-edit-btn { margin-left: auto; }
-  .badge {
-    height: var(--density-badge-height);
-    min-width: var(--density-badge-min-width);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 var(--density-badge-pad-x);
-    border-radius: var(--radius-full);
-    font-size: var(--density-badge-font);
-    line-height: var(--density-badge-lh);
-    white-space: nowrap;
-    box-sizing: border-box;
-  }
-  .badge.neutral { background: var(--badge-bg-neutral); color: var(--badge-text-neutral); }
-  .badge.caution { background: var(--badge-bg-caution); color: var(--badge-text-caution); }
-  .badge.error   { background: var(--badge-bg-error);   color: var(--badge-text-error); }
-  .badge.warning { background: var(--badge-bg-warning); color: var(--badge-text-warning); }
-  .badge.info    { background: var(--badge-bg-info);    color: var(--badge-text-info); }
-
-  .status-cell, .tags-cell { justify-content: flex-start; }
-
-  /* Action buttons */
-  .actions { display: flex; gap: var(--spacing-xxs); align-items: center; justify-content: center; }
-  .icon-btn {
-    width: var(--density-row-btn-size);
-    height: var(--density-row-btn-size);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-    transition: background var(--transition-fast);
-  }
-  .icon-btn:hover { background: var(--button-ghost-bg-hover); }
-  .icon-btn:active { background: var(--button-ghost-bg-active); }
-  .icon-btn:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus-outline);
-    outline-offset: calc(-1 * var(--focus-ring-offset));
-  }
-  .icon-btn svg { width: var(--density-row-btn-glyph); height: var(--density-row-btn-glyph); display: block; }
-  .chevron { transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
-  .grid-row.expanded .chevron { transform: rotate(0deg); }
-
-  /* ---------- Editable grid cell (generic) ---------- */
-  .editable-cell { position: relative; }
-  /* blue outline when a cell's editor/popover is active (tags + assignee) */
-  .cell-edit-active { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-width)); }
-  .cell-display { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xxs); width: 100%; min-width: 0; overflow: hidden; }
-  .cell-display-text { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-
-  /* edit (pencil) button — ghost icon button, hidden until row hover */
-  .edit-btn {
-    width: var(--density-row-btn-size); height: var(--density-row-btn-size);
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-icon-inline-muted);
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity var(--transition-fast), background var(--transition-fast);
-  }
-  .editable-cell:hover .edit-btn { opacity: 1; }
-  .edit-btn:hover { background: var(--button-ghost-bg-hover); }
-  .edit-btn:active { background: var(--button-ghost-bg-active); }
-  .edit-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); opacity: 1; }
-  .edit-btn svg { width: var(--density-row-btn-glyph); height: var(--density-row-btn-glyph); display: block; }
-
-  /* input field (select trigger) — fills the cell edge-to-edge, no outer padding */
-  .editable-cell.editing { padding: 0; }
-  .cell-field {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-tiny);
-    width: 100%;
-    height: var(--density-row-height);
-    padding: var(--spacing-xxs) var(--input-padding-x);
-    background: var(--input-bg);
-    border: var(--input-border-width) solid var(--input-border-focus);
-    border-radius: var(--input-radius);
-    cursor: pointer;
-    box-sizing: border-box;
-  }
-  .cell-field-value { flex: 1; min-width: 0; font-size: var(--density-field-font); line-height: var(--density-detail-lh); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .cell-field-chevron { width: var(--icon-action); height: var(--icon-action); flex-shrink: 0; color: var(--icon-chevron-muted); display: flex; align-items: center; justify-content: center; transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
-  .cell-field-chevron svg { width: var(--icon-edit); height: auto; display: block; }
-  .editable-cell.menu-open .cell-field-chevron { transform: rotate(0deg); }
-
-  /* dropdown menu */
-  .cell-menu {
-    position: fixed;
-    z-index: 1000;
-    width: var(--menu-width);
-    padding: var(--menu-padding);
-    background: var(--menu-bg);
-    border-radius: var(--menu-radius);
-    box-shadow: var(--menu-shadow);
-    display: flex;
-    flex-direction: column;
-    gap: var(--menu-item-gap);
-  }
-  .menu-popover { width: max-content; min-width: 111px; }
-
-  /* history popover (My Recent Orders) */
-  .history-popover {
-    position: fixed;
-    z-index: 1000;
-    width: 300px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-tiny);
-    padding: var(--spacing-sm);
-    background: var(--menu-bg);
-    border-radius: var(--radius-md);
-    box-shadow: var(--menu-shadow);
-  }
-  .history-heading {
-    font-size: var(--font-heading-sm);
-    line-height: var(--lh-heading-sm);
-    font-weight: 600;
-    color: #000;
-    margin-bottom: var(--spacing-xxs);
-  }
-  .history-list { display: flex; flex-direction: column; gap: var(--spacing-xs); }
-  .history-order {
-    background: var(--card-bg-nested);
-    border: var(--border-width) solid var(--card-border);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xxs);
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-50);
-    min-width: 0;
-  }
-  .history-order-line { display: flex; align-items: center; gap: var(--size-50); }
-  .history-order-type { font-size: var(--font-body); line-height: var(--lh-default); font-weight: 500; color: var(--color-text-default); white-space: nowrap; }
-  .history-order-id { font-weight: 500; white-space: nowrap; }
-  .history-client { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); }
-
-  /* filter popover */
-  .filter-popover {
-    position: fixed;
-    z-index: 1000;
-    width: var(--filter-popover-width);
-    max-width: calc(100vw - 16px);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
-    background: var(--menu-bg);
-    border-radius: var(--radius-md);
-    box-shadow: var(--menu-shadow);
-  }
-  .filter-field { display: flex; flex-direction: column; gap: var(--spacing-tiny); }
-  .filter-field-label {
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    font-weight: 500;
-    color: var(--color-text-muted);
-  }
-  .filter-field-label .req { color: var(--color-error-600); font-weight: 500; }
-  .filter-input {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xxs);
-    min-height: var(--filter-input-height);
-    padding: var(--spacing-xxs) var(--spacing-xs);
-    background: var(--color-bg-surface);
-    border: var(--border-width) solid var(--color-border-md);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-  }
-  .filter-input-search { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--input-text-adornment); display: flex; align-items: center; justify-content: center; }
-  .filter-input-search svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
-  .filter-input-content { flex: 1 1 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xxs); }
-  .filter-input-chevron { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--color-icon-inline-default); display: flex; align-items: center; justify-content: center; }
-  .filter-input-chevron svg { width: var(--icon-sm); height: auto; }
-  /* chips inside inputs (schedule status & warehouse): 14px medium, same base chip */
-  .filter-input-content .filter-chip { font-size: var(--font-body); font-weight: 500; }
-  .filter-chip .chip-remove { width: var(--icon-sm); height: var(--icon-sm); padding: var(--icon-padding-sm); box-sizing: border-box; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--chip-btn-color); flex-shrink: 0; }
-  .filter-chip .chip-remove svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
-  /* filter-chip toggle inputs (Assigned to) */
-  .filter-chip-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-tiny);
-    height: var(--filter-chip-input-height);
-    min-width: 80px;
-    padding: var(--size-150) var(--spacing-xs);
-    box-sizing: border-box;
-    border-radius: var(--radius-full);
-    background: var(--chip-bg);
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: var(--font-caption);
-    line-height: var(--lh-reset);
-    font-weight: 500;
-    color: var(--color-text-default);
-    white-space: nowrap;
-  }
-  .filter-chip-toggle .chip-check { width: var(--icon-xs); height: var(--icon-xs); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--color-icon-inline-default); }
-  .filter-chip-toggle .chip-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
-  .filter-chips-row { display: flex; gap: var(--spacing-xxs); }
-  /* buttons row — Small size: 32px tall, 12px text, 0 12px padding */
-  .filter-buttons { display: flex; align-items: center; justify-content: space-between; }
-  .filter-btn-reset {
-    display: inline-flex; align-items: center; justify-content: center;
-    height: var(--btn-size-sm, 32px);
-    padding: 0 var(--btn-padding-sm, 12px);
-    background: none; border: none; cursor: pointer;
-    border-radius: var(--button-radius-text, 4px);
-    color: var(--btn-ghost-content-tertiary);
-    font-family: inherit;
-    font-size: var(--font-caption); line-height: 1; font-weight: 400;
-    transition: background var(--transition-fast);
-  }
-  .filter-btn-reset:hover { background: var(--button-ghost-bg-hover); }
-  .filter-btn-reset:active { background: var(--button-ghost-bg-active); }
-  .filter-btn-reset:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
-  .filter-btn-apply {
-    display: inline-flex; align-items: center; justify-content: center;
-    height: var(--btn-size-sm, 32px);
-    padding: 0 var(--btn-padding-sm, 12px);
-    background: var(--btn-bg-primary); border: none; cursor: pointer;
-    border-radius: var(--button-radius-text, 4px);
-    color: var(--btn-content);
-    font-family: inherit;
-    font-size: var(--font-caption); line-height: 1; font-weight: 400;
-    box-shadow: 0px 0.5px 2px rgba(0,128,197,0.2), 0px 0.5px 1px rgba(0,128,197,0.16), 0px 2px 4px rgba(0,128,197,0.12);
-    transition: background var(--transition-fast);
-  }
-  .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
-  .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
-  .filter-btn-apply:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
-
-  /* tag edit popover */
-  .tag-popover {
-    position: fixed;
-    z-index: 1000;
-    width: 361px;
-    max-width: calc(100vw - 16px);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-tiny);
-    padding: var(--spacing-xxs);
-    background: var(--menu-bg);
-    border-radius: var(--radius-md);
-    box-shadow: var(--menu-shadow);
-  }
-  .tag-search {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xxs);
-    min-height: var(--filter-input-height);
-    padding: var(--spacing-xxs) var(--spacing-xs);
-    background: var(--color-bg-surface);
-    border: var(--border-width) solid var(--color-border-md);
-    border-radius: var(--radius-md);
-  }
-  .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); flex-shrink: 0; color: var(--input-text-adornment); display: flex; align-items: center; justify-content: center; }
-  .tag-search-icon svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
-  .tag-list { display: flex; flex-direction: column; max-height: 200px; overflow-y: auto; }
-  .tag-option {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xxs);
-    padding: var(--spacing-xxs) var(--spacing-xs);
-    cursor: pointer;
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--color-text-default);
-    transition: background var(--transition-fast);
-  }
-  .tag-option:hover { background: var(--menu-option-hover); }
-  .tag-option.selected { background: var(--menu-option-selected); }
-  .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
-  .tag-buttons { display: flex; align-items: center; justify-content: space-between; }
-  /* Deselect all reuses tertiary button styling; Save reuses primary — alias to filter button classes */
-  .menu-heading {
-    height: var(--menu-heading-height);
-    display: flex;
-    align-items: center;
-    padding: var(--spacing-tiny) var(--menu-option-padding-x);
-    font-size: var(--font-caption);
-    line-height: var(--lh-compact);
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-  }
-  .menu-option {
-    height: var(--menu-option-height);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--menu-option-padding-x);
-    border-radius: var(--radius-sm);
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--color-text-default);
-    cursor: pointer;
-    background: transparent;
-    transition: background var(--transition-fast);
-  }
-  .menu-option:hover { background: var(--menu-option-hover); }
-  .menu-option:active { background: var(--menu-option-active); }
-  .menu-option.selected { background: var(--menu-option-selected); }
-  .menu-option.selected:hover { background: var(--menu-option-selected-hover); }
-  .menu-option.selected:active { background: var(--menu-option-selected-active); }
-  .menu-option:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-offset)); }
-  .menu-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
-
-  /* ---------- Expandable panel (grid-row 0fr/1fr trick) ---------- */
-  .expand-wrap {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows var(--duration-expand) var(--ease-emphasized);
-    background: var(--color-bg-surface);
-  }
-  .grid-row.expanded .expand-wrap { grid-template-rows: 1fr; }
-  .expand-inner { overflow: hidden; min-height: 0; }
-
-  .detail {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: var(--detail-col-gap);
-    row-gap: var(--detail-row-gap);
-    padding: var(--spacing-md) var(--detail-inset-x) var(--spacing-lg);
-  }
-  .detail-section { display: flex; flex-direction: column; gap: var(--density-detail-gap); }
-  .detail-heading {
-    font-weight: 600;
-    font-size: var(--density-detail-font);
-    line-height: var(--lh-compact);
-    color: var(--color-text-heading);
-  }
-  .lv { display: flex; gap: var(--size-50); align-items: flex-start; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
-  .lv .label { color: var(--color-text-default); white-space: nowrap; flex-shrink: 0; }
-  .lv .value { color: var(--color-text-default); font-weight: 500; }
-  /* stacked field: label on top, value below (e.g. Address) */
-  .lv-stacked { display: flex; flex-direction: column; gap: 0; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
-  .lv-stacked .label { color: var(--color-text-default); }
-  .lv-stacked .value { color: var(--color-text-default); font-weight: 500; }
-  /* tertiary "View on map" button */
-  .view-map-btn {
-    display: inline-flex;
-    align-self: flex-start;
-    align-items: center;
-    gap: var(--spacing-tiny);
-    margin-top: var(--spacing-tiny);
-    padding: var(--size-50) var(--spacing-tiny);
-    background: none;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    color: var(--btn-tertiary-content);
-    font-size: var(--density-detail-font);
-    line-height: var(--lh-default);
-    white-space: nowrap;
-    transition: background var(--transition-fast);
-  }
-  .view-map-btn:hover { background: var(--button-ghost-bg-hover); }
-  .view-map-btn:active { background: var(--button-ghost-bg-active); }
-  .view-map-btn:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
-  .view-map-icon {
-    width: var(--icon-inline); height: var(--icon-inline);
-    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
-    box-sizing: border-box;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .view-map-icon svg { width: 100%; height: 100%; display: block; }
-  .phone-line { display: flex; gap: var(--spacing-xxs); align-items: center; }
-  .phone-type { display: flex; gap: var(--size-50); align-items: center; color: var(--color-text-muted); font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
-  .phone-icon-frame {
-    width: var(--icon-inline); height: var(--icon-inline);
-    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .phone-icon-frame svg { height: var(--icon-inline-glyph); width: auto; color: var(--color-icon-inline-muted); }
-</style>
+<link rel="stylesheet" href="smart-routing.css?v=2026-06-18d">
 </head>
 <body data-density="standard">
   <div class="table-settings">
     <div class="toolbar-row">
       <div class="toolbar-filters">
-        <button class="filter-toggle-btn" id="filterToggleBtn" aria-label="Filter"><span class="filter-dot"></span></button>
+        <button class="icon-btn icon-btn--lg filter-toggle-btn" id="filterToggleBtn" aria-label="Filter"><span class="filter-dot"></span></button>
         <div class="quick-filters" id="quickFilters">
           <button class="filter-btn" data-filter="Rescheduled">
             <span class="filter-check"></span><span class="filter-label">Rescheduled</span><span class="count-badge">1</span>
@@ -914,10 +27,10 @@
         </div>
       </div>
       <div class="table-actions">
-        <button class="action-btn" aria-label="Export"></button>
-        <button class="action-btn" id="historyBtn" aria-label="History"></button>
-        <button class="action-btn" aria-label="Customize columns"></button>
-        <button class="action-btn" id="settingsBtn" aria-label="Settings"></button>
+        <button class="icon-btn icon-btn--lg action-btn" aria-label="Export"></button>
+        <button class="icon-btn icon-btn--lg action-btn" id="historyBtn" aria-label="History"></button>
+        <button class="icon-btn icon-btn--lg action-btn" aria-label="Customize columns"></button>
+        <button class="icon-btn icon-btn--lg action-btn" id="settingsBtn" aria-label="Settings"></button>
       </div>
     </div>
     <div class="applied-filters" id="appliedFilters">
@@ -965,6 +78,9 @@
   const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
   const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
   const ICON_MAP = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.90845 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z"/></svg>';
+  const ICON_CLOSE = '<svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.27828 2.375L10.0208 8.125L15.7217 2.375C16.2211 1.875 17.0949 1.875 17.5943 2.375C18.1352 2.91667 18.1352 3.75 17.5943 4.29167L11.8934 10L17.5943 15.7083C18.1352 16.25 18.1352 17.0833 17.5943 17.625C17.0949 18.125 16.2211 18.125 15.7217 17.625L10.0208 11.875L4.27828 17.625C3.77893 18.125 2.90507 18.125 2.40572 17.625C1.86476 17.0833 1.86476 16.25 2.40572 15.7083L8.10663 10L2.40572 4.29167C1.86476 3.75 1.86476 2.91667 2.40572 2.375C2.90507 1.875 3.77893 1.875 4.27828 2.375Z"/></svg>';
+  // Font Awesome arrow-up-right-from-square (solid) — the "External Link" icon named in the design
+  const ICON_EXTERNAL = '<svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>';
 
   const rows = [
     { assignee:'', order:'123455005', orderType:'Delivery', note:true,  priority:'STAT',         priorityStat:true,  reason:'Respiratory Distress', patient:'Sophia Lee',     orderedDate:'06/03/2026', orderedTime:'10:43 AM', reqDate:'06/04/2026', reqTime:'10:00 AM - 2:00 PM CT', schedDate:'', schedTime:'', status:{t:'Provider Review', v:'caution'}, tags:[{t:'Liquid O2',v:'neutral'},{t:'Time-Sensitive',v:'error'}],
@@ -1056,11 +172,11 @@
         </div>
         <div class="row-cell col-tags tags-cell editable-cell">
           <div class="badges">${sortTags(r.tags).map(badge).join('')}</div>
-          <button class="edit-btn tags-edit-btn" aria-label="Edit tags">${ICON_PENCIL}</button>
+          <button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">${ICON_PENCIL}</button>
         </div>
         <div class="row-cell col-actions">
           <div class="actions">
-            <button class="icon-btn" aria-label="More actions">${ICON_ELLIPSIS}</button>
+            <button class="icon-btn more-btn" aria-label="More actions">${ICON_ELLIPSIS}</button>
             <button class="icon-btn toggle-btn" aria-label="Toggle details">${ICON_CHEVRON}</button>
           </div>
         </div>
@@ -1099,10 +215,16 @@
     row.querySelector('.toggle-btn').addEventListener('click', () => {
       row.classList.toggle('expanded');
     });
+    // Row "more actions" menu (Schedule order / Reset order / View equipment)
+    setupMenuPopover(row.querySelector('.more-btn'), {
+      options: ['Schedule order', 'Reset order', 'View equipment'],
+      align: 'right',
+      onSelect: (value) => { if (value === 'View equipment') openSideSheet(r.order); },
+    });
     const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
     setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
       value: r.assignee || null,
-      options: ['Me', 'Purchasing', 'Respiratory Therapy', { label: 'Dispatch', disabled: !dispatchEnabled }],
+      options: ['Me', { label: 'Dispatch', disabled: !dispatchEnabled }, 'Purchasing', 'Respiratory Therapy'],
       heading: 'Select assignee',
       ariaLabel: 'Edit assignee',
       onChange: (v) => { r.assignee = v; }
@@ -1115,6 +237,7 @@
   // config: { value, options:[], heading, ariaLabel, onChange(value) }
   // Tracks the currently-editing cell so only one is open at a time.
   const editableCells = new Set(); // each entry: { exitEdit }
+  const openMenuPopovers = new Set(); // close() fns of currently-open menu popovers (only one open at a time)
 
   function setupEditableCell(cell, config) {
     let selected = config.value || null;
@@ -1130,7 +253,7 @@
       cell.innerHTML = `
         <div class="cell-display">
           <span class="cell-display-text">${selected || ''}</span>
-          <button class="edit-btn" aria-label="${config.ariaLabel || 'Edit'}">${ICON_PENCIL}</button>
+          <button class="icon-btn icon-btn--reveal edit-btn" aria-label="${config.ariaLabel || 'Edit'}">${ICON_PENCIL}</button>
         </div>`;
       cell.querySelector('.edit-btn').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1369,7 +492,11 @@
 
   // ---- Generic anchored menu popover (reuses .cell-menu / .menu-heading / .menu-option styling) ----
   // config: { heading, options:[], selected, align ('left'|'right'), onSelect(value) }
+  // Pass `selected` for a single-select menu (tracks + highlights the chosen option, e.g. row
+  // density). Omit it for a command menu (Schedule/Reset/View equipment) — clicking invokes the
+  // action without leaving a persistent .selected highlight.
   function setupMenuPopover(trigger, config) {
+    const selectable = 'selected' in config;
     let menuEl = null;
     let selected = config.selected || null;
 
@@ -1386,23 +513,26 @@
 
     function open() {
       if (menuEl) return;
+      openMenuPopovers.forEach(closeOther => closeOther()); // only one menu popover open at a time
       menuEl = document.createElement('div');
       menuEl.className = 'cell-menu menu-popover';
       menuEl.innerHTML = `
         ${config.heading ? `<div class="menu-heading">${config.heading}</div>` : ''}
         ${config.options.map(opt =>
-          `<div class="menu-option ${opt === selected ? 'selected' : ''}" tabindex="0" data-value="${opt}">${opt}</div>`
+          `<div class="menu-option ${selectable && opt === selected ? 'selected' : ''}" tabindex="0" data-value="${opt}">${opt}</div>`
         ).join('')}`;
       document.body.appendChild(menuEl);
       trigger.classList.add('active');
+      openMenuPopovers.add(close);
       positionMenu();
       window.addEventListener('scroll', positionMenu, true);
       window.addEventListener('resize', positionMenu);
       menuEl.querySelectorAll('.menu-option').forEach(o => {
         o.addEventListener('click', (e) => {
           e.stopPropagation();
-          selected = o.dataset.value;
-          if (config.onSelect) config.onSelect(selected);
+          const value = o.dataset.value;
+          if (selectable) selected = value;
+          if (config.onSelect) config.onSelect(value);
           close();
         });
       });
@@ -1410,6 +540,7 @@
 
     function close() {
       if (menuEl) { menuEl.remove(); menuEl = null; }
+      openMenuPopovers.delete(close);
       window.removeEventListener('scroll', positionMenu, true);
       window.removeEventListener('resize', positionMenu);
       trigger.classList.remove('active');
@@ -1431,6 +562,62 @@
     align: 'right',
     onSelect: (value) => { document.body.dataset.density = value.toLowerCase(); }
   });
+
+  // ---- Side sheet (slides in from the right; heading is the order ID) ----
+  // Static equipment content — same for every order row for now.
+  const SIDE_SHEET_BODY = `
+    <div class="equipment-group">
+      <div class="equipment-group-heading">Delivery (3)</div>
+      <div class="equipment-list">
+        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Over bed table</span><span class="equipment-qty">1</span></div></div>
+        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Bed full-electric</span><span class="equipment-qty">1</span></div></div>
+        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">O2 Cylinder</span><span class="equipment-qty">12</span></div></div>
+      </div>
+    </div>
+    <div class="equipment-group">
+      <div class="equipment-group-heading">Pick up (1)</div>
+      <div class="equipment-list">
+        <div class="equipment-card"><div class="equipment-item"><span class="equipment-name">Bed full-electric</span><span class="equipment-qty">1</span></div></div>
+      </div>
+    </div>
+    <div class="equipment-group">
+      <div class="equipment-group-heading">Service (1)</div>
+      <div class="equipment-list">
+        <div class="equipment-card">
+          <div class="equipment-item"><span class="equipment-name">Hoyer lift</span></div>
+          <div class="equipment-detail"><span class="equipment-detail-label">Service reason:</span><span class="equipment-detail-value">Equipment does not power on</span></div>
+          <div class="equipment-detail"><span class="equipment-detail-label">Service details:</span><span class="equipment-detail-value">light blinks once then goes out</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="side-sheet-actions">
+      <button class="btn-secondary" type="button">View order<span class="btn-icon-end">${ICON_EXTERNAL}</span></button>
+    </div>`;
+
+  let sheetEl = null;
+  function openSideSheet(orderId) {
+    if (sheetEl) sheetEl.remove();        // replace any open sheet immediately
+    sheetEl = document.createElement('div');
+    sheetEl.className = 'side-sheet';
+    sheetEl.innerHTML = `
+      <div class="side-sheet-header">
+        <div class="side-sheet-title">Order #${orderId}</div>
+        <button class="icon-btn side-sheet-close" aria-label="Close">${ICON_CLOSE}</button>
+      </div>
+      <div class="side-sheet-body">${SIDE_SHEET_BODY}</div>`;
+    document.body.appendChild(sheetEl);
+    void sheetEl.offsetWidth;             // force reflow so the slide-in transition runs
+    sheetEl.classList.add('open');
+    sheetEl.querySelector('.side-sheet-close').addEventListener('click', closeSideSheet);
+  }
+  function closeSideSheet() {
+    if (!sheetEl) return;
+    const el = sheetEl;
+    sheetEl = null;
+    el.classList.remove('open');          // slide out, then remove after the transition
+    el.addEventListener('transitionend', () => el.remove(), { once: true });
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSideSheet(); });
 
   // ---- History popover (My Recent Orders) ----
   const RECENT_ORDERS = [
@@ -1498,10 +685,12 @@
     const trigger = document.getElementById('filterToggleBtn');
     let popEl = null;
 
-    // input field with optional search adornment and pre-filled chips
-    function field(label, { search = false, chips = [], required = false } = {}) {
+    // input field with optional search adornment and pre-filled chips.
+    // removable: chips show a remove (✕) button (individual selections, e.g. schedule
+    // status). Omit for summary chips like "2 warehouses selected" (no remove button).
+    function field(label, { search = false, chips = [], required = false, removable = false } = {}) {
       const chipHtml = chips.map(c =>
-        `<span class="filter-chip">${c}${'<button class="chip-remove">' + ICON_CHIP_REMOVE + '</button>'}</span>`
+        `<span class="filter-chip">${c}${removable ? '<button class="chip-remove">' + ICON_CHIP_REMOVE + '</button>' : ''}</span>`
       ).join('');
       return `
         <div class="filter-field">
@@ -1534,7 +723,7 @@
         ${field('Order type')}
         ${field('Order priority')}
         ${field('Order reason')}
-        ${field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'] })}
+        ${field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'], removable: true })}
         ${field('Tags')}
         <div class="filter-field">
           <span class="filter-field-label">Assigned to <span class="req">*</span></span>
@@ -1570,3 +759,4 @@
 </script>
 </body>
 </html>
+

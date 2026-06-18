@@ -1,0 +1,1026 @@
+  :root {
+    --color-bg-primary: #fcfcfb;
+    --color-bg-surface: #ffffff;
+    --table-header: #f5f5f4;
+    --color-border-light: #e7e5e4;
+    --color-text-heading: #1c1917;
+    --color-text-default: #57534e;
+    --color-text-muted: #78716c;
+    --color-text-link: #0080c5;       /* Color/Text/Link → Color/Primary/600 */
+    --btn-tertiary-content: #0080c5;  /* $btn-tertiary-content → Color/Primary/600 */
+    --color-text-link-hover: #3399d1; /* Color/Text/Link_Hover → Color/Primary/500 */
+    --color-text-link-active: #00669e;/* Color/Text/Link_Active → Color/Primary/700 */
+    --color-focus-outline: #00669e;   /* State/Focus/Outline/Color/Default → Color/Primary/700 */
+    --color-text-error: #a00d25;
+    --color-icon-caution: #f4b300;   /* Color/Icon/Caution → Color/Yellow/600 */
+    --color-icon-inline-muted: #78716c; /* Color/Icon/Inline/Muted */
+    --table-row-hover: #fcfcfb;      /* Table/Color/Background/Row/Hover → Color/Neutral/50 */
+    --button-ghost-bg-hover: #f5f5f4; /* Button/Color/Ghost/Background/Hover → Color/Neutral/200 */
+    --button-ghost-bg-active: #e7e5e4;/* Button/Color/Ghost/Background/Active → Color/Neutral/300 */
+
+    /* editable grid cell (generic) */
+    --menu-bg: #ffffff;               /* Color/Background/Surface → Color/Neutral/White */
+    --menu-option-hover: #f5f5f4;     /* Menu/Color/Option/Off/Hover → Color/Neutral/200 */
+    --menu-option-active: #e7e5e4;    /* Menu/Color/Option/Off/Active → Color/Neutral/300 */
+    --menu-option-selected: #f2f9fc;  /* Color/Background/Container/Active → Color/Info/50 */
+    --menu-option-selected-hover: #e5f2f9;  /* Menu/Color/Option/On/Hover → Color/Info/100 */
+    --menu-option-selected-active: #cce6f3; /* Menu/Color/Option/On/Active → Color/Info/200 */
+    --input-bg: #ffffff;              /* Color/Background/Surface → Color/Neutral/White */
+    --input-border: #e7e5e4;          /* Color/Border/Default → Color/Neutral/300 */
+    --input-border-focus: #00669e;    /* State/Focus/Outline/Color/Default → Color/Primary/700 */
+    --input-placeholder: #a8a29e;     /* Input/Text/Color/Placeholder → Color/Neutral/500 */
+    --chip-bg: #e7e5e4;               /* Tag/Color/Chip/Background → Color/Neutral/300 */
+    --icon-chevron-muted: #a8a29e;    /* collapse chevron → Color/Neutral/500 */
+
+    /* settings bar + stateful filter buttons */
+    --card-bg: #ffffff;               /* Card/Color/Container/Background/Default → Color/Neutral/White */
+    --card-border: #e7e5e4;           /* Card/Color/Container/Border/Default → Color/Neutral/300 */
+    --card-bg-nested: #fcfcfb;         /* Card/Color/Container/Background/Nested → Color/Neutral/50 */
+    --filter-text-inactive: #57534e;  /* Button/Color/Stateful/Content/Inactive → Color/Neutral/700 */
+    --filter-text-active: #0080c5;    /* Button/Color/Stateful/Content/Active → Color/Primary/600 */
+    --filter-bg-inactive: #eceae9;        /* Button/Color/Stateful/Background/Inactive/Default → Color/Neutral/250 */
+    --filter-bg-inactive-hover: #e0dedd;  /* Button/Color/Stateful/Background/Inactive/Hover → Color/Neutral/350 */
+    --filter-bg-active: #e5f2f9;          /* Button/Color/Stateful/Background/Active/Default → Color/Primary/100 */
+    --filter-bg-active-hover: #cce6f3;    /* Button/Color/Stateful/Background/Active/Hover → Color/Primary/200 */
+    --badge-error-bg: #c8102e;        /* Color/Error/600 */
+    --badge-error-text: #ffffff;      /* Color/Text/On_Dark → Color/Neutral/White */
+    --action-icon-color: #292524;     /* action icons → Color/Neutral/900 */
+    --btn-ghost-content-secondary: #292524; /* $btn-ghost-content-secondary → Color/Neutral/900 */
+    --indicator-visibility-high: #c8102e;   /* $indicator-visibility-high → Color/Error/600 */
+
+    /* filter popover */
+    --color-border-md: #d6d3d1;             /* $color-border-md → Color/Neutral/350 (input border) */
+    --input-text-adornment: #a8a29e;        /* $input-text-adornment → Color/Neutral/500 */
+    --color-icon-inline-default: #57534e;   /* $color-icon-inline-default → Color/Neutral/700 */
+    --color-error-600: #c8102e;             /* $color-error-600 */
+    --btn-bg-primary: #0080c5;              /* $btn-bg-primary → Color/Primary/600 */
+    --btn-bg-primary-hover: #3399d1;        /* Button/Filled/Background/Primary/Hover → Color/Primary/500 */
+    --btn-bg-primary-active: #00669e;       /* Button/Filled/Background/Primary/Active → Color/Primary/700 */
+    --btn-content: #ffffff;                 /* $btn-content → on-primary */
+    --btn-ghost-content-tertiary: #0080c5;  /* $btn-ghost-content-tertiary → Color/Primary/600 */
+    --filter-input-height: 40px;            /* $input-text-minHeight-md */
+    --filter-chip-input-height: 28px;       /* Input/Filter_Chip/Size/Height */
+    --filter-popover-width: 620px;          /* popover width in context */
+    --icon-xs: 14px;                        /* $icon-xs */
+
+    --badge-bg-neutral: #e7e5e4;  --badge-text-neutral: #292524;
+    --badge-bg-caution: #fef7e5;  --badge-text-caution: #926b00;
+    --badge-bg-error: #ffe9e8;    --badge-text-error: #780a1c;
+    --badge-bg-warning: #fff4e5;  --badge-text-warning: #8e4101;
+    --badge-bg-info: #e5f2f9;     --badge-text-info: #004d76;
+
+    --radius-md: 8px;
+    --radius-sm: 4px;
+    --radius-full: 9999px;
+    --border-width: 1px;
+
+    /* text-button sizing (Small) — referenced by the shared text-button base */
+    --btn-size-sm: 32px;          /* $btn-size-sm */
+    --btn-padding-sm: 12px;       /* $btn-padding-sm */
+    --button-radius-text: 4px;    /* $button-radius-text */
+
+    /* secondary button (View order) — Medium */
+    --btn-bg-secondary: #ffffff;        /* $btn-bg-secondary → Color/Neutral/White */
+    --btn-bg-secondary-hover: #f5f5f4;  /* Secondary/Background/Hover (read from variant) */
+    --btn-bg-secondary-active: #e7e5e4; /* Secondary/Background/Active (read from variant) */
+    --btn-border-secondary: #d6d3d1;  /* $btn-border-secondary → Color/Neutral/350 */
+    --btn-content-secondary: #292524; /* $btn-content-secondary → Color/Neutral/900 */
+    --btn-gap-md: 8px;                /* $btn-gap-md */
+    --btn-size-md: 40px;              /* $btn-size-md */
+    --btn-padding-md: 14px;           /* $btn-padding-md */
+    --btn-font-md: 0.875rem;          /* 14px ($btn-font-md) */
+
+    /* motion */
+    --transition-fast: 0.15s ease;
+    --ease-emphasized: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-expand: 0.32s;
+    --duration-chevron: 0.3s;
+    --duration-note-pulse: 1.8s;
+
+    /* spacing scale (Figma $spacing-*) */
+    --spacing-tiny: 4px;   /* $spacing-tiny */
+    --spacing-xxs: 8px;    /* $spacing-xxs */
+    --spacing-xs: 12px;    /* $spacing-xs */
+    --spacing-sm: 16px;    /* $spacing-sm */
+    --spacing-md: 20px;    /* $spacing-md */
+    --spacing-lg: 24px;    /* $spacing-lg */
+
+    /* size scale (Figma $size-*) */
+    --size-50: 2px;        /* $size-50 */
+    --size-150: 6px;       /* $size-150 */
+    --size-1200: 48px;     /* $size-1200 */
+
+    /* icon + control sizes */
+    --icon-inline: 14px;       /* inline icon frame */
+    --icon-inline-glyph: 12px; /* inline icon glyph (frame minus padding) */
+    --icon-action: 18px;       /* action button glyph */
+    --icon-edit: 16px;         /* edit pencil glyph */
+    --icon-md: 20px;           /* $icon-md */
+    --edit-btn-size: 24px;     /* edit icon button */
+
+    /* menu + options + input field */
+    --menu-width: 164px;
+    --menu-padding: 8px;
+    --menu-item-gap: 4px;
+    --menu-radius: var(--radius-md);
+    --menu-option-height: 36px;
+    --menu-option-padding-x: 8px;
+    --menu-heading-height: 25px;
+    --input-height: 48px;
+    --input-radius: var(--radius-sm);
+    --input-border-width: 1px;
+    --input-padding-x: 12px;
+    --input-adornment: 20px;
+    --menu-shadow: 0 0.5px 2px rgba(0,0,0,0.20), 0 0.5px 1px rgba(0,0,0,0.16), 0 2px 4px 2px rgba(0,0,0,0.12);
+
+    /* component dimensions */
+    --row-height: 48px;
+    --badge-height: 18px;
+
+    /* density-driven tokens (default = Standard / Medium) */
+    --density-row-height: 48px;
+    --density-cell-pad-y: var(--spacing-xxs);  /* 8px */
+    --density-cell-pad-x: var(--spacing-xs);   /* 12px */
+    --density-cell-font: var(--font-body);     /* 14px */
+    --density-cell-lh: var(--lh-default);      /* 19.6px */
+    --density-badge-height: 16px;              /* $badge-height-md */
+    --density-badge-min-width: 28px;           /* $badge-minWidth-md */
+    --density-badge-pad-x: var(--size-150);    /* 6px */
+    --density-badge-font: var(--font-caption); /* 12px */
+    --density-badge-lh: var(--lh-reset);       /* 12px */
+    --density-row-btn-size: 24px;              /* _BaseIconButton (Medium/Large) */
+    --density-row-btn-glyph: 16px;             /* glyph (Medium/Large) */
+    --density-detail-font: var(--font-body);   /* 14px */
+    --density-detail-lh: var(--lh-default);    /* 19.6px */
+    --density-detail-gap: var(--spacing-tiny); /* 4px between rows in a section */
+    --density-header-height: 48px;
+    --density-header-pad-x: var(--spacing-xs); /* 12px */
+    --density-header-font: var(--font-body);   /* 14px */
+    --density-field-font: var(--font-body);    /* 14px (editable cell input) */
+
+    /* focus */
+    --focus-ring-width: 2px;       /* button focus outline weight */
+    --focus-ring-width-link: 1px;  /* link focus outline weight */
+    --focus-ring-offset: 2px;
+    --radius-xs: 2px;
+
+    /* layout (prototype-specific, not from design tokens) */
+    --grid-max-width: 1900px;
+    --side-sheet-width: 600px;   /* $sideSheet-md */
+    --settings-gap: 20px;        /* gap between quick filters and action buttons */
+    --filter-gap: 16px;          /* gap between filter buttons */
+    --filter-height: 32px;       /* Size=Small stateful button */
+    --filter-padding-x: 12px;
+    --filter-label-gap: 8px;     /* gap between check, label */
+    --count-badge-size: 14px;
+    --action-btn-size: 32px;     /* _BaseIconButton ($btn-size-sm) */
+    --action-icon-size: 16px;    /* action glyph height ($icon-sm) */
+    --button-radius-icon: 8px;   /* $button-radius-icon */
+    --icon-padding-md: 2px;      /* $icon-padding-md */
+    --icon-padding-sm: 1px;      /* $icon-padding-sm */
+    --icon-sm: 16px;             /* $icon-sm */
+    --color-info-600: #0080c5;   /* $color-info-600 */
+    --size-350: 10px;            /* $size-350 (indicator dot) */
+    --chip-height: 20px;         /* $chip-height-md */
+    --chip-min-width: 24px;      /* $chip-minWidth-sm */
+    --chip-btn-color: #78716c;   /* $chip-btn → Color/Neutral/600 */
+    --card-padding: 16px;        /* $spacing-sm */
+    --page-padding-y: 60px;
+    --page-padding-x: 40px;
+    --detail-inset-x: 128px;  /* expandable panel horizontal inset (Figma frame) */
+    --detail-col-gap: 80px;   /* Figma grid column gap */
+    --detail-row-gap: 48px;   /* Figma grid row gap */
+
+    --font-body: 0.875rem;  /* 14px */
+    --font-heading-sm: 1rem;     /* 16px ($font-heading-sm) */
+    --lh-heading-sm: 19.2px;     /* $lineHeight-compact for 16px heading */
+    --font-heading-md: 1.25rem;  /* 20px ($font-heading-md) */
+    --lh-heading-md: 24px;       /* $lineHeight-compact for 20px heading */
+    --font-heading-xs: 0.875rem; /* 14px ($font-heading-xs); line-height = --lh-compact (16.8px) */
+    --font-caption: 0.75rem;/* 12px */
+    --font-meta: 0.66rem;   /* 10.56px ($font-meta) */
+    --lh-default: 19.6px;
+    --lh-compact: 16.8px;
+    --lh-reset: 12px;       /* $lineHeight-reset */
+  }
+
+  /* Row density overrides (Standard = default in :root) */
+  [data-density="condensed"] {
+    --density-row-height: 36px;
+    --density-cell-pad-y: var(--spacing-tiny);   /* 4px */
+    --density-cell-pad-x: var(--spacing-xxs);    /* 8px */
+    --density-cell-font: var(--font-caption);    /* 12px */
+    --density-cell-lh: 14.4px;                   /* Compact/Caption */
+    --density-badge-height: 14px;                /* condensed badge */
+    --density-badge-min-width: 24px;
+    --density-badge-pad-x: var(--spacing-tiny);  /* 4px */
+    --density-badge-font: var(--font-meta);      /* 10.56px */
+    --density-badge-lh: var(--font-meta);        /* 10.56px */
+    --density-row-btn-size: 20px;                /* Small */
+    --density-row-btn-glyph: 14px;               /* Small glyph */
+    --density-detail-font: var(--font-caption);  /* 12px */
+    --density-detail-lh: 16.8px;
+    --density-detail-gap: var(--size-50);        /* 2px */
+    --density-header-height: 32px;
+    --density-header-pad-x: var(--spacing-xxs);  /* 8px */
+    --density-header-font: var(--font-caption);  /* 12px */
+    --density-field-font: var(--font-caption);   /* 12px */
+  }
+  [data-density="relaxed"] {
+    --density-header-height: 56px;
+    --density-row-height: 56px;
+    --density-cell-pad-y: var(--spacing-xs);     /* 12px */
+    --density-cell-pad-x: var(--spacing-sm);     /* 16px */
+    --density-cell-font: var(--font-body);       /* 14px */
+    --density-cell-lh: var(--lh-default);        /* 19.6px */
+    --density-badge-height: 20px;                /* relaxed badge */
+    --density-badge-min-width: 32px;
+    --density-badge-pad-x: var(--size-150);      /* 6px */
+    --density-badge-font: var(--font-body);      /* 14px */
+    --density-badge-lh: 14px;                    /* relaxed badge line-height */
+    --density-field-font: var(--font-caption);   /* 12px */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--color-bg-primary);
+    color: var(--color-text-default);
+    padding: var(--page-padding-y) var(--page-padding-x);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============================================================
+     Shared primitives
+     Standardized, reusable styles consolidated from the
+     components below. Each grouped rule is the "standard"; the
+     component sections that follow add only their own overrides
+     (size, color, padding, etc.). Add new instances by listing
+     their selector in the relevant group here.
+     ============================================================ */
+
+  /* Icon button — ONE ghost icon button used everywhere; the modifiers below
+     only change size/glyph/radius/color. Those four are private custom props
+     so a modifier (or an ancestor context) can retarget them without having
+     to re-list the base declarations. Default = the 24px row button. */
+  .icon-btn {
+    --_icon-btn-size: var(--density-row-btn-size);    /* 24 (row default) */
+    --_icon-btn-glyph: var(--density-row-btn-glyph);  /* 16 / 14 by density */
+    --_icon-btn-radius: var(--radius-sm);
+    --_icon-btn-color: var(--color-text-muted);
+    width: var(--_icon-btn-size);
+    height: var(--_icon-btn-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--_icon-btn-radius);
+    color: var(--_icon-btn-color);
+    transition: background var(--transition-fast);
+  }
+  /* glyph sized by a single box; viewBox preserves each icon's aspect ratio */
+  .icon-btn svg { width: var(--_icon-btn-glyph); height: var(--_icon-btn-glyph); display: block; }
+  .icon-btn:hover { background: var(--button-ghost-bg-hover); }
+  .icon-btn:active { background: var(--button-ghost-bg-active); }
+  .icon-btn:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-outline);
+    outline-offset: calc(-1 * var(--focus-ring-offset));
+  }
+
+  /* Large (toolbar) icon button — 32px box, larger radius, darker glyph. */
+  .icon-btn--lg {
+    --_icon-btn-size: var(--action-btn-size);      /* 32 */
+    --_icon-btn-glyph: var(--action-icon-size);    /* 16 */
+    --_icon-btn-radius: var(--button-radius-icon); /* 8 */
+    --_icon-btn-color: var(--action-icon-color);   /* neutral-900 */
+  }
+
+  /* Reveal icon button — hidden until its editable cell is hovered or it's focused. */
+  .icon-btn--reveal {
+    opacity: 0;
+    transition: opacity var(--transition-fast), background var(--transition-fast);
+  }
+  .editable-cell:hover .icon-btn--reveal { opacity: 1; }
+  .icon-btn--reveal:focus-visible { opacity: 1; }
+
+  /* Icon frame — non-button wrappers that just center an SVG glyph.
+     Override width/height/color/padding per use. */
+  .chip-remove,
+  .filter-input-search,
+  .filter-input-chevron,
+  .tag-search-icon,
+  .tag-option-check,
+  .filter-chip-toggle .chip-check,
+  .cell-field-chevron,
+  .view-map-icon,
+  .phone-icon-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Ghost surfaces — tertiary text buttons borrow the icon button's hover/active bg. */
+  .view-map-btn:hover,
+  .filter-btn-reset:hover { background: var(--button-ghost-bg-hover); }
+  .view-map-btn:active,
+  .filter-btn-reset:active { background: var(--button-ghost-bg-active); }
+
+  /* Focus ring (inset) — menu options (icon buttons carry their own, above). */
+  .menu-option:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-outline);
+    outline-offset: calc(-1 * var(--focus-ring-offset));
+  }
+
+  /* Focus ring (outset) — standalone/text buttons. */
+  .filter-btn:focus-visible,
+  .view-map-btn:focus-visible,
+  .filter-btn-reset:focus-visible,
+  .filter-btn-apply:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus-outline);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* Field — clickable input-like container (filter inputs, tag search). */
+  .filter-input,
+  .tag-search {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    min-height: var(--filter-input-height);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-md);
+    border-radius: var(--radius-md);
+  }
+
+  /* Overlay popover — floating surface anchored in a top-level layer via JS.
+     Override width/padding/gap/max-width per use. */
+  .cell-menu,
+  .history-popover,
+  .filter-popover,
+  .tag-popover {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    background: var(--menu-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--menu-shadow);
+  }
+
+  /* Text button — shared box + typography (Small). Override color/background/shadow per variant. */
+  .filter-btn-reset,
+  .filter-btn-apply {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--btn-size-sm);
+    padding: 0 var(--btn-padding-sm);
+    border: none;
+    cursor: pointer;
+    border-radius: var(--button-radius-text);
+    font-family: inherit;
+    font-size: var(--font-caption);
+    line-height: 1;
+    font-weight: 400;
+    transition: background var(--transition-fast);
+  }
+
+  /* ---------- Settings bar ---------- */
+  .table-settings {
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--card-padding);
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+  }
+  .toolbar-row { display: flex; align-items: center; justify-content: space-between; gap: var(--settings-gap); width: 100%; }
+  .toolbar-filters { display: flex; align-items: center; gap: var(--spacing-sm); flex: 1; min-width: 0; }
+
+  /* primary (leading) filter button — .icon-btn.icon-btn--lg, plus the indicator dot */
+  .filter-toggle-btn { position: relative; }
+  .filter-toggle-btn .filter-dot {
+    position: absolute;
+    top: -2px; right: -2px;
+    width: var(--size-350); height: var(--size-350);
+    border-radius: var(--radius-full);
+    background: var(--indicator-visibility-high);
+  }
+
+  .quick-filters { display: flex; align-items: center; gap: var(--filter-gap); }
+  .filter-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--filter-label-gap);
+    height: var(--filter-height);
+    padding: 0 var(--filter-padding-x);
+    background: var(--filter-bg-inactive);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--filter-text-inactive);
+    white-space: nowrap;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+  .filter-btn:hover { background: var(--filter-bg-inactive-hover); }
+  .filter-btn.active { background: var(--filter-bg-active); color: var(--filter-text-active); }
+  .filter-btn.active:hover { background: var(--filter-bg-active-hover); }
+  .filter-btn .filter-check { width: var(--icon-edit); height: var(--icon-edit); display: none; flex-shrink: 0; }
+  .filter-btn.active .filter-check { display: block; }
+  .count-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(35%, -35%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--count-badge-size);
+    height: var(--count-badge-size);
+    padding: 0 var(--size-50);
+    border-radius: var(--radius-full);
+    background: var(--badge-error-bg);
+    color: var(--badge-error-text);
+    font-size: var(--font-caption);
+    line-height: 1;
+  }
+  .table-actions { display: flex; align-items: center; gap: var(--spacing-xxs); flex-shrink: 0; }
+  /* export / history / columns / settings buttons use .icon-btn.icon-btn--lg */
+
+  /* applied filter chips */
+  .applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xs); width: 100%; }
+  /* shared chip base (same Figma component); font-size set per context below */
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    height: var(--chip-height);
+    min-width: var(--chip-min-width);
+    padding: var(--spacing-tiny) var(--spacing-xxs);
+    border-radius: var(--radius-full);
+    background: var(--chip-bg);
+    line-height: var(--lh-reset);
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  /* toolbar applied-filter chips: 12px label/value */
+  .applied-filters .filter-chip { font-size: var(--font-caption); }
+  .filter-chip .chip-label { font-weight: 400; }
+  .filter-chip .chip-value { font-weight: 500; }
+  /* chip remove button (icon frame base) */
+  .chip-remove {
+    width: var(--icon-sm); height: var(--icon-sm);
+    padding: var(--icon-padding-sm);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--chip-btn-color);
+  }
+  .chip-remove svg { width: 100%; height: 100%; display: block; }
+
+  .data-grid {
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+  }
+
+  /* ---------- Track (single width source for header + rows) ---------- */
+  .grid-track {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* ---------- Header ---------- */
+  .grid-header {
+    display: flex;
+    border-bottom: var(--border-width) solid var(--color-border-light);
+    width: 100%;
+  }
+  .header-cell {
+    background: var(--table-header);
+    height: var(--density-header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--density-header-pad-x);
+    font-weight: 500;
+    font-size: var(--density-header-font);
+    color: var(--color-text-heading);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Column widths ---------- */
+  /* flex-grow proportional to natural width, basis = natural px, no shrink (scrolls below natural width) */
+  .col-assignee { flex: 116 0 116px; }
+  .col-order    { flex: 180 0 180px; }
+  .col-priority { flex: 148 0 148px; }
+  .col-patient  { flex: 148 0 148px; }
+  .col-ordered  { flex: 136 0 136px; }
+  .col-requested{ flex: 152 0 152px; }
+  .col-scheduled{ flex: 152 0 152px; }
+  .col-status   { flex: 136 0 136px; }
+  .col-tags     { flex: 248 0 248px; }
+  .col-actions  { flex: 80 0 80px; }
+
+  /* ---------- Rows ---------- */
+  .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
+  .grid-row:last-child { border-bottom: none; }
+
+  .row-main {
+    display: flex;
+    width: 100%;
+  }
+  .row-cell {
+    background: var(--color-bg-surface);
+    min-height: var(--density-row-height);
+    display: flex;
+    align-items: center;
+    padding: var(--density-cell-pad-y) var(--density-cell-pad-x);
+    flex-shrink: 0;
+    min-width: 0;
+    transition: background var(--transition-fast);
+  }
+  .row-main:hover .row-cell { background: var(--table-row-hover); }
+
+  .cell-stack { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+  .cell-main {
+    font-size: var(--density-cell-font);
+    line-height: var(--density-cell-lh);
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  .cell-caption {
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .link {
+    color: var(--color-text-link);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .link:hover { color: var(--color-text-link-hover); text-decoration: underline; }
+  .link:active { color: var(--color-text-link-active); text-decoration: none; }
+  .link:focus-visible {
+    outline: var(--focus-ring-width-link) solid var(--color-focus-outline);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: var(--radius-xs);
+  }
+  .stat { color: var(--color-text-error); }
+
+  .order-main { display: flex; align-items: center; gap: var(--spacing-tiny); }
+  .order-main .cell-main { display: inline-flex; align-items: center; }
+
+  /* New-note icon + pulse */
+  .note-icon {
+    width: var(--icon-inline); height: var(--icon-inline);
+    color: var(--color-icon-caution);
+    flex-shrink: 0;
+    display: block;
+    animation: notePulse var(--duration-note-pulse) ease-in-out infinite;
+  }
+  @keyframes notePulse {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%      { opacity: 0.35; transform: scale(0.86); }
+  }
+
+  /* Badges */
+  .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
+  .tags-cell .badges { flex: 1; min-width: 0; }
+  .tags-edit-btn { margin-left: auto; }
+  .badge {
+    height: var(--density-badge-height);
+    min-width: var(--density-badge-min-width);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--density-badge-pad-x);
+    border-radius: var(--radius-full);
+    font-size: var(--density-badge-font);
+    line-height: var(--density-badge-height);
+    white-space: nowrap;
+  }
+  .badge.neutral { background: var(--badge-bg-neutral); color: var(--badge-text-neutral); }
+  .badge.caution { background: var(--badge-bg-caution); color: var(--badge-text-caution); }
+  .badge.error   { background: var(--badge-bg-error);   color: var(--badge-text-error); }
+  .badge.warning { background: var(--badge-bg-warning); color: var(--badge-text-warning); }
+  .badge.info    { background: var(--badge-bg-info);    color: var(--badge-text-info); }
+
+  .status-cell, .tags-cell { justify-content: flex-start; }
+
+  /* Row action buttons (more-actions, expand toggle) use the .icon-btn base as-is */
+  .actions { display: flex; gap: var(--spacing-xxs); align-items: center; justify-content: center; }
+  .chevron { transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
+  .grid-row.expanded .chevron { transform: rotate(0deg); }
+
+  /* ---------- Editable grid cell (generic) ---------- */
+  .editable-cell { position: relative; }
+  /* blue outline when a cell's editor/popover is active (tags + assignee) */
+  .cell-edit-active { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-width)); }
+  .cell-display { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xxs); width: 100%; min-width: 0; overflow: hidden; }
+  .cell-display-text { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  /* edit (pencil) button — .icon-btn.icon-btn--reveal (hover-reveal handled in shared section) */
+
+  /* input field (select trigger) — fills the cell edge-to-edge, no outer padding */
+  .editable-cell.editing { padding: 0; }
+  .cell-field {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    width: 100%;
+    height: var(--density-row-height);
+    padding: var(--spacing-xxs) var(--input-padding-x);
+    background: var(--input-bg);
+    border: var(--input-border-width) solid var(--input-border-focus);
+    border-radius: var(--input-radius);
+    cursor: pointer;
+  }
+  .cell-field-value { flex: 1; min-width: 0; font-size: var(--density-field-font); line-height: var(--density-detail-lh); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* icon frame base; adds rotation for the open/closed state */
+  .cell-field-chevron { width: var(--icon-action); height: var(--icon-action); color: var(--icon-chevron-muted); transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
+  .cell-field-chevron svg { width: var(--icon-edit); height: auto; display: block; }
+  .editable-cell.menu-open .cell-field-chevron { transform: rotate(0deg); }
+
+  /* dropdown menu (overlay popover base) */
+  .cell-menu {
+    width: var(--menu-width);
+    padding: var(--menu-padding);
+    gap: var(--menu-item-gap);
+  }
+  .menu-popover { width: max-content; min-width: 111px; }
+
+  /* history popover (My Recent Orders) (overlay popover base) */
+  .history-popover {
+    width: 300px;
+    gap: var(--spacing-tiny);
+    padding: var(--spacing-sm);
+  }
+  .history-heading {
+    font-size: var(--font-heading-sm);
+    line-height: var(--lh-heading-sm);
+    font-weight: 600;
+    color: #000;
+    margin-bottom: var(--spacing-xxs);
+  }
+  .history-list { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+  .history-order {
+    background: var(--card-bg-nested);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xxs);
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-50);
+    min-width: 0;
+  }
+  .history-order-line { display: flex; align-items: center; gap: var(--size-50); }
+  .history-order-type { font-size: var(--font-body); line-height: var(--lh-default); font-weight: 500; color: var(--color-text-default); white-space: nowrap; }
+  .history-order-id { font-weight: 500; white-space: nowrap; }
+  .history-client { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); }
+
+  /* filter popover (overlay popover base) */
+  .filter-popover {
+    width: var(--filter-popover-width);
+    max-width: calc(100vw - 16px);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  .filter-field { display: flex; flex-direction: column; gap: var(--spacing-tiny); }
+  .filter-field-label {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+  .filter-field-label .req { color: var(--color-error-600); font-weight: 500; }
+  /* field base; clickable */
+  .filter-input { cursor: pointer; }
+  .filter-input-search { width: var(--icon-sm); height: var(--icon-sm); color: var(--input-text-adornment); }
+  .filter-input-search svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
+  .filter-input-content { flex: 1 1 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-xxs); }
+  .filter-input-chevron { width: var(--icon-sm); height: var(--icon-sm); color: var(--color-icon-inline-default); }
+  .filter-input-chevron svg { width: var(--icon-sm); height: auto; }
+  /* chips inside inputs (schedule status & warehouse): 14px regular, same base chip */
+  .filter-input-content .filter-chip { font-size: var(--font-body); font-weight: 400; }
+  /* chip-remove inside filter chips: same button (icon frame base), smaller glyph */
+  .filter-chip .chip-remove svg { width: var(--icon-xs); height: var(--icon-xs); }
+  /* filter-chip toggle inputs (Assigned to) */
+  .filter-chip-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-tiny);
+    height: var(--filter-chip-input-height);
+    min-width: 80px;
+    padding: var(--size-150) var(--spacing-xs);
+    border-radius: var(--radius-full);
+    background: var(--chip-bg);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-caption);
+    line-height: var(--lh-reset);
+    font-weight: 500;
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  .filter-chip-toggle .chip-check { width: var(--icon-xs); height: var(--icon-xs); color: var(--color-icon-inline-default); }
+  .filter-chip-toggle .chip-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
+  .filter-chips-row { display: flex; gap: var(--spacing-xxs); }
+  /* buttons row — Small text buttons (text-button base) */
+  .filter-buttons { display: flex; align-items: center; justify-content: space-between; }
+  /* tertiary (ghost) text button */
+  .filter-btn-reset {
+    background: none;
+    color: var(--btn-ghost-content-tertiary);
+  }
+  /* primary (filled) text button */
+  .filter-btn-apply {
+    background: var(--btn-bg-primary);
+    color: var(--btn-content);
+    box-shadow: 0px 0.5px 2px rgba(0,128,197,0.2), 0px 0.5px 1px rgba(0,128,197,0.16), 0px 2px 4px rgba(0,128,197,0.12);
+  }
+  .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
+  .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
+
+  /* tag edit popover (overlay popover base) */
+  .tag-popover {
+    width: 361px;
+    max-width: calc(100vw - 16px);
+    gap: var(--spacing-tiny);
+    padding: var(--spacing-xxs);
+  }
+  /* field base (search variant, no pointer cursor) */
+  .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); color: var(--input-text-adornment); }
+  .tag-search-icon svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
+  .tag-list { display: flex; flex-direction: column; max-height: 200px; overflow-y: auto; }
+  .tag-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    cursor: pointer;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+    transition: background var(--transition-fast);
+  }
+  .tag-option:hover { background: var(--menu-option-hover); }
+  .tag-option.selected { background: var(--menu-option-selected); }
+  .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); }
+  .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
+  .tag-buttons { display: flex; align-items: center; justify-content: space-between; }
+  /* Deselect all reuses tertiary button styling; Save reuses primary — alias to filter button classes */
+  .menu-heading {
+    height: var(--menu-heading-height);
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-tiny) var(--menu-option-padding-x);
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+  .menu-option {
+    height: var(--menu-option-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--menu-option-padding-x);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+    cursor: pointer;
+    background: transparent;
+    transition: background var(--transition-fast);
+  }
+  .menu-option:hover { background: var(--menu-option-hover); }
+  .menu-option:active { background: var(--menu-option-active); }
+  .menu-option.selected { background: var(--menu-option-selected); }
+  .menu-option.selected:hover { background: var(--menu-option-selected-hover); }
+  .menu-option.selected:active { background: var(--menu-option-selected-active); }
+  .menu-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+
+  /* ---------- Expandable panel (grid-row 0fr/1fr trick) ---------- */
+  .expand-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-expand) var(--ease-emphasized);
+    background: var(--color-bg-surface);
+  }
+  .grid-row.expanded .expand-wrap { grid-template-rows: 1fr; }
+  .expand-inner { overflow: hidden; min-height: 0; }
+
+  .detail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--detail-col-gap);
+    row-gap: var(--detail-row-gap);
+    padding: var(--spacing-md) var(--detail-inset-x) var(--spacing-lg);
+  }
+  .detail-section { display: flex; flex-direction: column; gap: var(--density-detail-gap); }
+  .detail-heading {
+    font-weight: 600;
+    font-size: var(--density-detail-font);
+    line-height: var(--lh-compact);
+    color: var(--color-text-heading);
+  }
+  .lv { display: flex; gap: var(--size-50); align-items: flex-start; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  .lv .label { color: var(--color-text-default); white-space: nowrap; flex-shrink: 0; }
+  .lv .value { color: var(--color-text-default); font-weight: 500; }
+  /* stacked field: label on top, value below (e.g. Address) */
+  .lv-stacked { display: flex; flex-direction: column; gap: 0; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  .lv-stacked .label { color: var(--color-text-default); }
+  .lv-stacked .value { color: var(--color-text-default); font-weight: 500; }
+  /* tertiary "View on map" button (ghost hover/active + outset focus shared above) */
+  .view-map-btn {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    margin-top: var(--spacing-tiny);
+    padding: var(--size-50) var(--spacing-tiny);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--btn-tertiary-content);
+    font-size: var(--density-detail-font);
+    line-height: var(--lh-default);
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+  }
+  /* icon frame base; padded so the glyph occupies the inner footprint */
+  .view-map-icon {
+    width: var(--icon-inline); height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+  }
+  .view-map-icon svg { width: 100%; height: 100%; display: block; }
+  .phone-line { display: flex; gap: var(--spacing-xxs); align-items: center; }
+  .phone-type { display: flex; gap: var(--size-50); align-items: center; color: var(--color-text-muted); font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  /* icon frame base; padded so the glyph occupies the inner footprint */
+  .phone-icon-frame {
+    width: var(--icon-inline); height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+  }
+  .phone-icon-frame svg { height: var(--icon-inline-glyph); width: auto; color: var(--color-icon-inline-muted); }
+
+  /* ---------- Side sheet (slides in from the right) ---------- */
+  .side-sheet {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: var(--side-sheet-width);
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-surface);
+    box-shadow: var(--menu-shadow);
+    z-index: 1100;                       /* above popovers/menus (1000) */
+    transform: translateX(100%);         /* off-screen right until .open */
+    transition: transform var(--duration-expand) var(--ease-emphasized);
+  }
+  .side-sheet.open { transform: translateX(0); }
+  .side-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    width: 100%;
+  }
+  .side-sheet-title {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-heading-md);
+    line-height: var(--lh-heading-md);
+    font-weight: 600;
+    color: var(--color-text-heading);
+  }
+  /* close button uses the .icon-btn base: 24px box (20px glyph + 2px padding), default-text glyph */
+  .side-sheet-close {
+    --_icon-btn-size: calc(var(--icon-md) + 2 * var(--icon-padding-md));
+    --_icon-btn-glyph: var(--icon-md);
+    --_icon-btn-color: var(--color-text-default);
+  }
+  .side-sheet-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-lg) var(--size-1200);
+    overflow-y: auto;
+  }
+
+  /* equipment group (Delivery / Pick up / Service) */
+  .equipment-group { display: flex; flex-direction: column; gap: var(--spacing-xxs); width: 100%; }
+  .equipment-group-heading {
+    font-size: var(--font-heading-sm);   /* 16px (Heading 5) */
+    line-height: var(--lh-heading-sm);
+    font-weight: 600;
+    color: var(--color-text-heading);
+  }
+  .equipment-list { display: flex; flex-direction: column; gap: var(--spacing-tiny); width: 100%; }
+  .equipment-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-tiny);
+    width: 100%;
+    padding: var(--spacing-xxs) var(--spacing-sm);
+    background: var(--card-bg-nested);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .equipment-item { display: flex; align-items: center; gap: var(--size-50); width: 100%; }
+  .equipment-name {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-heading-xs);   /* 14px (Heading 6) */
+    line-height: var(--lh-compact);
+    font-weight: 600;
+    color: var(--color-text-default);
+  }
+  .equipment-qty {
+    flex-shrink: 0;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+  }
+  /* label : value pair (e.g. Service reason: …) */
+  .equipment-detail { display: flex; align-items: flex-start; gap: var(--size-50); width: 100%; }
+  .equipment-detail-label {
+    flex-shrink: 0;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+    white-space: nowrap;
+  }
+  .equipment-detail-value {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 500;
+    color: var(--color-text-default);
+  }
+
+  /* actions row + secondary (View order) button */
+  .side-sheet-actions { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap-md);
+    height: var(--btn-size-md);
+    padding: 0 var(--btn-padding-md);
+    background: var(--btn-bg-secondary);
+    border: var(--border-width) solid var(--btn-border-secondary);
+    border-radius: var(--button-radius-text);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--btn-font-md);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--btn-content-secondary);
+    box-shadow: 0 0.5px 2px rgba(214,211,209,0.2), 0 0.5px 1px rgba(214,211,209,0.16), 0 2px 4px rgba(214,211,209,0.12);
+    transition: background var(--transition-fast);
+  }
+  /* hover/active/focus read from the button-secondary Medium variants */
+  .btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
+  .btn-secondary:active { background: var(--btn-bg-secondary-active); }
+  .btn-secondary:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
+  /* external-link icon: 14px frame with a 12px glyph (1px padding), per the placed instance */
+  .btn-icon-end {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--icon-inline);
+    height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+  }
+  .btn-icon-end svg { width: 100%; height: 100%; display: block; }

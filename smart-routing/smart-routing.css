@@ -655,6 +655,14 @@
   .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
   .tags-cell .badges { flex: 1; min-width: 0; }
   .tags-edit-btn { margin-left: auto; }
+  .tags-overflow {
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  [data-density="condensed"] .tags-overflow { font-size: var(--font-meta); }
   .badge {
     height: var(--density-badge-height);
     min-width: var(--density-badge-min-width);
@@ -688,7 +696,8 @@
   .status-cell, .tags-cell { justify-content: flex-start; }
 
   /* Row action buttons (more-actions, expand toggle) use the .icon-btn base as-is */
-  .actions { display: flex; gap: var(--spacing-xxs); align-items: center; justify-content: center; }
+  .actions { display: flex; gap: var(--spacing-sm); align-items: center; justify-content: center; }
+  [data-density="condensed"] .actions { gap: var(--spacing-xs); }
   .chevron { transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
   .grid-row.expanded .chevron { transform: rotate(0deg); }
 

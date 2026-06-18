@@ -128,9 +128,24 @@
 
   function badge(b) { return `<span class="badge ${b.v}">${b.t}</span>`; }
 
-  // Always display Time-Sensitive first; preserve relative order of the rest.
+  // Explicit display order for priority tags; everything else is alphabetical after them.
+  const TAG_SORT_ORDER = ['Time-Sensitive', 'Facility', 'Service', 'Liquid O2'];
   function sortTags(tags) {
-    return [...tags].sort((a, b) => (b.t === 'Time-Sensitive') - (a.t === 'Time-Sensitive'));
+    return [...tags].sort((a, b) => {
+      const ai = TAG_SORT_ORDER.indexOf(a.t);
+      const bi = TAG_SORT_ORDER.indexOf(b.t);
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
+      return a.t.localeCompare(b.t);
+    });
+  }
+  // Renders up to 4 tag badges; appends "+ X more" for any beyond that.
+  function tagBadgesHtml(tags) {
+    const sorted = sortTags(tags);
+    const visible = sorted.slice(0, 4);
+    const overflow = sorted.length - 4;
+    return visible.map(badge).join('') + (overflow > 0 ? `<span class="tags-overflow">+${overflow} more</span>` : '');
   }
 
   // All selectable tags with their badge color (neutral except Time-Sensitive = error), in display order
@@ -142,6 +157,7 @@
     { t: 'Live Discharge Confirmed', v: 'neutral' },
     { t: 'Specialty',                v: 'neutral' },
     { t: 'Service',                  v: 'neutral' },
+    { t: 'Spanish',                  v: 'neutral' },
     { t: 'Time-Sensitive',           v: 'error' },
   ];
   const TAG_COLOR = Object.fromEntries(ALL_TAGS.map(t => [t.t, t.v]));
@@ -176,7 +192,7 @@
           <div class="badges">${badge(r.status)}</div>
         </div>
         <div class="row-cell col-tags tags-cell editable-cell">
-          <div class="badges">${sortTags(r.tags).map(badge).join('')}</div>
+          <div class="badges">${tagBadgesHtml(r.tags)}</div>
           <button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">${ICON_PENCIL}</button>
         </div>
         <div class="row-cell col-actions">
@@ -348,7 +364,7 @@
 
     function renderBadges() {
       const badgesEl = cell.querySelector('.badges');
-      badgesEl.innerHTML = sortTags(row.tags).map(badge).join('');
+      badgesEl.innerHTML = tagBadgesHtml(row.tags);
     }
 
     function position() {

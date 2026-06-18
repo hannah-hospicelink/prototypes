@@ -197,21 +197,6 @@
               <div class="detail-heading">Provider</div>
               <div class="lv"><span class="label">Warehouse:</span><span class="value">${r.warehouse}</span></div>
             </div>
-            <div class="detail-section">
-              <div class="detail-heading">Address</div>
-              <div class="lv"><span class="label">Address type:</span><span class="value">${r.addrType}</span></div>
-              <div class="lv-stacked"><span class="label">Address:</span><span class="value">${r.addr.join('<br>')}</span></div>
-              <button class="view-map-btn"><span class="view-map-icon">${ICON_MAP}</span>View on map</button>
-            </div>
-            <div class="detail-section">
-              <div class="detail-heading">Primary Contact</div>
-              <div class="lv"><span class="label">Name:</span><span class="value">${r.contact}</span></div>
-              <div class="lv"><span class="label">Relationship:</span><span class="value">${r.rel}</span></div>
-              <div class="phone-line">
-                <div class="lv"><span class="label">Phone:</span><span class="value">${r.phone}</span></div>
-                <span class="phone-type"><span class="phone-icon-frame">${r.phoneType === 'Mobile' ? ICON_PHONE_MOBILE : ICON_PHONE_LANDLINE}</span>${r.phoneType}</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

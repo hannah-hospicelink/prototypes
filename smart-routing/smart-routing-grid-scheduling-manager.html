@@ -1,15 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMART Routing - Scheduling Grid</title>
+<title>SMART Routing - Scheduling Manager Grid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="smart-routing.css?v=2026-06-18h">
-<meta name="prototype-title" content="SMART Routing — Scheduling Grid">
-<meta name="prototype-password" content="employ-skip-pot-fault">
+<meta name="prototype-title" content="SMART Routing — Scheduling Manager Grid">
+<meta name="prototype-password" content="wage-music-norm-yeah">
 <meta name="prototype-back" content="index.html">
 <script src="../password-gate.js?v=2026-06-18b"></script>
 </head>
@@ -40,13 +40,12 @@
     <div class="applied-filters" id="appliedFilters">
       <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Birmingham, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
       <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Gadsden, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
-      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Me</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
-      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Unassigned</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
     </div>
   </div>
   <div class="data-grid" id="grid">
     <div class="grid-track">
       <div class="grid-header">
+        <div class="header-cell col-select"><span class="checkbox" id="selectAll" role="checkbox" aria-checked="false" aria-label="Select all rows" tabindex="0"></span></div>
         <div class="header-cell col-assignee">Assignee</div>
         <div class="header-cell col-order">Order</div>
         <div class="header-cell col-priority">Priority / Reason</div>
@@ -69,7 +68,6 @@
   const ICON_PHONE_LANDLINE = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.74471 0.592393L4.7055 2.86548C4.86954 3.26386 4.75237 3.70911 4.42429 3.96688L3.3932 4.8105C4.14309 6.49775 5.47882 7.85691 7.1192 8.6771L8.03312 7.57571C8.29089 7.24763 8.73614 7.13046 9.13451 7.2945L11.4076 8.25529C11.8529 8.44276 12.0872 8.91144 11.97 9.38012L11.9232 9.49729C11.5248 11.0205 10.0484 12.3094 8.26746 11.9344C4.16652 11.0674 0.932636 7.83348 0.0655802 3.73254C-0.309363 1.95156 0.979504 0.498657 2.50271 0.0768461L2.61988 0.0299783C3.08856 -0.0871914 3.55724 0.147148 3.74471 0.592393Z"/></svg>';
   const ICON_PHONE_MOBILE = '<svg viewBox="0 0 8 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 0.679688 0.659091 0 1.45455 0H6.54545C7.34091 0 8 0.679688 8 1.5V10.5C8 11.3203 7.34091 12 6.54545 12H1.45455C0.659091 12 0 11.3203 0 10.5V1.5ZM1.45455 1.5V8.625H6.54545V1.5H1.45455ZM4 11.0625C4.40909 11.0625 4.72727 10.7344 4.72727 10.3125C4.72727 9.89062 4.40909 9.5625 4 9.5625C3.59091 9.5625 3.27273 9.89062 3.27273 10.3125C3.27273 10.7344 3.59091 11.0625 4 11.0625Z"/></svg>';
   const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.11773 11.0466C1.27406 10.6098 1.49292 10.1729 1.83683 9.86084L7.49585 4.1815L8.55887 3.12052C9.09038 3.65101 10.1534 4.74319 11.8105 6.36586L12.8735 7.42684L6.15144 14.136C5.80752 14.4792 5.40107 14.7289 4.9321 14.8537L0.930142 15.9771C0.68002 16.0395 0.398632 15.9771 0.211041 15.7586C0.023449 15.5714 -0.0390816 15.2905 0.023449 15.0409L1.11773 11.0466ZM2.86859 10.953C2.74353 11.0778 2.61847 11.2651 2.5872 11.4523L1.83683 14.1672L4.55691 13.4182C4.7445 13.3558 4.9321 13.2622 5.08842 13.1062L2.86859 10.953ZM13.9365 6.36586C13.405 5.86658 12.342 4.7744 10.6849 3.12052L9.62189 2.09075C10.466 1.24821 10.9038 0.78013 11.0288 0.686514C11.4353 0.249642 12.0293 0 12.6234 0C13.2174 0 13.8114 0.249642 14.2179 0.686514L15.3434 1.7787C15.7499 2.21557 16 2.77726 16 3.37016C16 3.99427 15.7499 4.55596 15.3434 4.99283C15.2184 5.08645 14.7494 5.55453 13.9365 6.36586Z"/></svg>';
-  const ICON_COLLAPSE = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 0.321429C7.64286 -0.107143 8.35714 -0.107143 8.82143 0.321429L15.6786 7.17857C16.1071 7.64286 16.1071 8.35714 15.6786 8.82143C15.2143 9.25 14.5 9.25 14.0357 8.82143L8 2.75L1.96429 8.82143C1.5 9.25 0.785714 9.25 0.321429 8.82143C-0.107143 8.35714 -0.107143 7.64286 0.321429 7.17857L7.17857 0.321429Z"/></svg>';
   const ICON_EXPORT = '<svg viewBox="0 0 12 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M0 2C0 0.90625 0.90625 0 2 0H6.6875C7.21875 0 7.71875 0.21875 8.09375 0.59375L11.4063 3.90625C11.7813 4.28125 12 4.8125 12 5.34375V14C12 15.0938 11.0938 16 10 16H2C0.90625 16 0 15.0938 0 14V2ZM6.5 1.84375V4.75C6.5 5.15625 6.84375 5.5 7.25 5.5H10.1875L6.5 1.84375ZM5.46875 13.7813C5.75 14.0625 6.25 14.0625 6.53125 13.7813L8.53125 11.7813C8.8125 11.5 8.8125 11 8.53125 10.7188C8.25 10.4375 7.75 10.4375 7.46875 10.7188L6.75 11.4375V8.75C6.75 8.34375 6.40625 8 6 8C5.59375 8 5.25 8.34375 5.25 8.75V11.4375L4.53125 10.7188C4.25 10.4375 3.75 10.4375 3.46875 10.7188C3.1875 11.0313 3.1875 11.5 3.46875 11.7813L5.46875 13.7813Z"/></svg>';
   const ICON_COLUMNS = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.4286 1.71429V14.2857H13.7143C14.0357 14.2857 14.2857 14.0357 14.2857 13.7143V2.28571C14.2857 1.96429 14.0357 1.71429 13.7143 1.71429H11.4286ZM9.71429 1.71429H6.28571V14.2857H9.71429V1.71429ZM4.57143 14.2857V1.71429H2.28571C1.96429 1.71429 1.71429 1.96429 1.71429 2.28571V13.7143C1.71429 14.0357 1.96429 14.2857 2.28571 14.2857H4.57143ZM0 2.28571C0 1.03571 1.03571 0 2.28571 0H13.7143C14.9643 0 16 1.03571 16 2.28571V13.7143C16 14.9643 14.9643 16 13.7143 16H2.28571C1.03571 16 0 14.9643 0 13.7143V2.28571Z"/></svg>';
   const ICON_SETTINGS = '<svg viewBox="0 0 15 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.69176 0.764706C5.77999 0.323529 6.16235 0 6.60352 0H8.36823C8.80941 0 9.22117 0.323529 9.30941 0.764706L9.72117 2.82353C10.1329 3 10.5153 3.20588 10.8682 3.47059L12.8682 2.82353C13.3094 2.67647 13.7506 2.85294 13.9859 3.23529L14.8682 4.76471C15.0741 5.14706 15.0153 5.64706 14.6623 5.94118L13.1035 7.32353C13.1329 7.55882 13.1329 7.76471 13.1329 8C13.1329 8.23529 13.1329 8.44118 13.1035 8.67647L14.6623 10.0588C15.0153 10.3529 15.0741 10.8529 14.8682 11.2353L13.9859 12.7647C13.7506 13.1471 13.3094 13.3235 12.8682 13.1765L10.8682 12.5294C10.5153 12.7941 10.1329 13.0294 9.72117 13.2059L9.30941 15.2647C9.22117 15.6765 8.83882 16 8.36823 16H6.63294C6.16235 16 5.77999 15.6765 5.69176 15.2647L5.27999 13.2059C4.86823 13.0294 4.48588 12.7941 4.13294 12.5294L2.13294 13.1765C1.69176 13.3235 1.22117 13.1471 1.01529 12.7647L0.132936 11.2353C-0.102358 10.8529 -0.0141228 10.3529 0.309407 10.0588L1.89764 8.67647C1.86823 8.44118 1.83882 8.23529 1.83882 8C1.83882 7.76471 1.86823 7.55882 1.89764 7.32353L0.309407 5.94118C-0.0141228 5.64706 -0.102358 5.14706 0.132936 4.76471L1.01529 3.23529C1.22117 2.85294 1.69176 2.67647 2.13294 2.82353L4.10352 3.47059C4.45647 3.20588 4.86823 3 5.27999 2.79412L5.69176 0.764706ZM7.48588 10.3529C8.77999 10.3529 9.83882 9.29412 9.83882 8C9.83882 6.70588 8.77999 5.64706 7.48588 5.64706C6.19176 5.64706 5.13294 6.70588 5.13294 8C5.13294 9.29412 6.19176 10.3529 7.48588 10.3529Z"/></svg>';
@@ -79,6 +77,8 @@
   const ICON_SEARCH = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13 6.5C13 7.9375 12.5312 9.25 11.75 10.3438L15.7188 14.2812C16.0938 14.6875 16.0938 15.3125 15.7188 15.7188C15.3125 16.0938 14.6875 16.0938 14.2812 15.7188L10.3438 11.75C9.25 12.5312 7.9375 13 6.5 13C2.90625 13 0 10.0938 0 6.5C0 2.90625 2.90625 0 6.5 0C10.0938 0 13 2.90625 13 6.5ZM6.5 11C9 11 11 9 11 6.5C11 4 9 2 6.5 2C4 2 2 4 2 6.5C2 9 4 11 6.5 11Z"/></svg>';
   const ICON_CHECKBOX_OFF = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 1.56771H1.56771V12.4323H12.4323V1.56771ZM12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323Z" fill="#A8A29E"/></svg>';
   const ICON_CHECKBOX_ON = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323ZM5.97917 10.3542L11.8854 4.44792C12.2135 4.11979 12.2135 3.64583 11.8854 3.35417C11.5938 3.02604 11.0833 3.02604 10.7917 3.35417L5.43229 8.67708L3.20833 6.45312C2.91667 6.16146 2.40625 6.16146 2.11458 6.45312C1.78646 6.74479 1.78646 7.25521 2.11458 7.54688L4.88542 10.3542C5.21354 10.6458 5.6875 10.6458 5.97917 10.3542Z" fill="#3399D1"/></svg>';
+  // Indeterminate (some-but-not-all selected): filled box + horizontal dash. Derived from the ON box; verify against the mockup if exactness matters.
+  const ICON_CHECKBOX_INDETERMINATE = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="14" rx="1.56771" fill="#3399D1"/><rect x="3.20833" y="6.29167" width="7.58333" height="1.41667" rx="0.708333" fill="white"/></svg>';
   const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
   const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
   const ICON_MAP = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.90845 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z"/></svg>';
@@ -151,6 +151,7 @@
     row.className = 'grid-row';
     row.innerHTML = `
       <div class="row-main" data-index="${i}">
+        <div class="row-cell col-select"><span class="checkbox row-checkbox" role="checkbox" aria-checked="false" aria-label="Select row" tabindex="0">${ICON_CHECKBOX_OFF}</span></div>
         <div class="row-cell col-assignee editable-cell"></div>
         <div class="row-cell col-order">
           <div class="cell-stack">
@@ -228,8 +229,7 @@
     const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
     setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
       value: r.assignee || null,
-      options: ['Me', { label: 'Dispatch', disabled: !dispatchEnabled }, 'Purchasing', 'Respiratory Therapy'],
-      heading: 'Select assignee',
+      options: ['Me', 'Carmen M.', 'Cece L.', 'Hannah S.', { label: 'Dispatch', disabled: !dispatchEnabled }, 'Purchasing', 'Respiratory Therapy'],
       ariaLabel: 'Edit assignee',
       onChange: (v) => { r.assignee = v; }
     });
@@ -237,23 +237,23 @@
     return row;
   }
 
-  // Generic single-select editable grid cell. Reusable for any column.
-  // config: { value, options:[], heading, ariaLabel, onChange(value) }
-  // Tracks the currently-editing cell so only one is open at a time.
+  // Searchable single-select cell editor (manager-grid assignee). Modeled on the tag
+  // dropdown: the pencil opens a popover with a search field + single-select list and
+  // Clear/Save buttons. Selection only commits on Save; outside-click/Escape cancels.
+  // config: { value, options:[], ariaLabel, onChange(value) }; an option is a string or
+  // { label, disabled }. Only one editor (assignee or tags) is open at a time.
   const editableCells = new Set(); // each entry: { exitEdit }
   const openMenuPopovers = new Set(); // close() fns of currently-open menu popovers (only one open at a time)
 
   function setupEditableCell(cell, config) {
-    let selected = config.value || null;
-    let menuOpen = false;
+    let selected = config.value || null; // committed value
+    let working = null;                  // working selection while the popover is open
+    let popEl = null;
 
-    const api = { exitEdit: () => { if (cell.classList.contains('editing')) renderDisplay(); } };
+    const api = { exitEdit: () => { if (popEl) close(); } };
     editableCells.add(api);
 
     function renderDisplay() {
-      closeMenu();
-      cell.classList.remove('editing', 'menu-open', 'cell-edit-active');
-      menuOpen = false;
       cell.innerHTML = `
         <div class="cell-display">
           <span class="cell-display-text">${selected || ''}</span>
@@ -261,79 +261,95 @@
         </div>`;
       cell.querySelector('.edit-btn').addEventListener('click', (e) => {
         e.stopPropagation();
-        enterEdit(true);
+        popEl ? close() : open();
       });
     }
 
-    function enterEdit(openMenu) {
-      // close any other cell currently in edit mode (saves its value via its own renderDisplay)
-      editableCells.forEach(other => { if (other !== api) other.exitEdit(); });
-      cell.classList.add('editing', 'cell-edit-active');
-      cell.innerHTML = `
-        <div class="cell-field" tabindex="0">
-          <span class="cell-field-value">${selected || ''}</span>
-          <span class="cell-field-chevron">${ICON_COLLAPSE}</span>
+    function position() {
+      if (!popEl) return;
+      const r = cell.getBoundingClientRect();
+      popEl.style.top = (r.bottom + 4) + 'px';
+      let left = r.left;
+      if (left + popEl.offsetWidth > window.innerWidth) left = window.innerWidth - popEl.offsetWidth;
+      if (left < 0) left = 0;
+      popEl.style.left = left + 'px';
+    }
+
+    // Single-select list: highlight the working value, no checkbox. Filtered by the search query.
+    function renderOptions(query) {
+      const q = (query || '').trim().toLowerCase();
+      const list = popEl.querySelector('.tag-list');
+      list.innerHTML = config.options.map((opt) => {
+        const label = typeof opt === 'string' ? opt : opt.label;
+        const disabled = typeof opt === 'object' && opt.disabled;
+        if (q && label.toLowerCase().indexOf(q) === -1) return '';
+        return `<div class="tag-option ${label === working ? 'selected' : ''} ${disabled ? 'disabled' : ''}" role="option" ${disabled ? 'aria-disabled="true"' : 'tabindex="0"'} data-value="${label}">
+          <span class="tag-option-label">${label}</span>
         </div>`;
-      cell.querySelector('.cell-field').addEventListener('click', (e) => {
-        e.stopPropagation();
-        menuOpen ? closeMenu() : openMenuList();
-      });
-      if (openMenu) openMenuList();
-    }
-
-    let menuEl = null;
-
-    function positionMenu() {
-      if (!menuEl) return;
-      const field = cell.querySelector('.cell-field');
-      if (!field) return;
-      const r = field.getBoundingClientRect();
-      menuEl.style.top = r.bottom + 'px';
-      menuEl.style.left = r.left + 'px';
-    }
-
-    function openMenuList() {
-      if (menuEl) return;
-      menuEl = document.createElement('div');
-      menuEl.className = 'cell-menu';
-      menuEl.innerHTML = `
-        ${config.heading ? `<div class="menu-heading">${config.heading}</div>` : ''}
-        ${config.options.map(opt => {
-          const label = typeof opt === 'string' ? opt : opt.label;
-          const disabled = typeof opt === 'object' && opt.disabled;
-          return `<div class="menu-option ${label === selected ? 'selected' : ''} ${disabled ? 'disabled' : ''}" ${disabled ? 'aria-disabled="true"' : 'tabindex="0"'} data-value="${label}">${label}</div>`;
-        }).join('')}`;
-      document.body.appendChild(menuEl);
-      cell.classList.add('menu-open');
-      menuOpen = true;
-      positionMenu();
-      window.addEventListener('scroll', positionMenu, true);
-      window.addEventListener('resize', positionMenu);
-      menuEl.querySelectorAll('.menu-option:not(.disabled)').forEach(o => {
-        o.addEventListener('click', (e) => {
-          e.stopPropagation();
-          selected = o.dataset.value;
-          if (config.onChange) config.onChange(selected);
-          closeMenu();
-          const val = cell.querySelector('.cell-field-value');
-          if (val) { val.textContent = selected; }
+      }).join('');
+      list.querySelectorAll('.tag-option:not(.disabled)').forEach((o) => {
+        o.addEventListener('click', () => {
+          working = o.dataset.value;
+          // single-select: highlight only the clicked option (update in place, no rebuild)
+          list.querySelectorAll('.tag-option').forEach((x) => x.classList.toggle('selected', x === o));
         });
       });
     }
 
-    function closeMenu() {
-      if (menuEl) { menuEl.remove(); menuEl = null; }
-      window.removeEventListener('scroll', positionMenu, true);
-      window.removeEventListener('resize', positionMenu);
-      cell.classList.remove('menu-open');
-      menuOpen = false;
+    function open() {
+      if (popEl) return;
+      editableCells.forEach((c) => { if (c !== api) c.exitEdit(); }); // only one editor open at a time
+      working = selected;
+      popEl = document.createElement('div');
+      popEl.className = 'tag-popover';
+      popEl.innerHTML = `
+        <div class="tag-search">
+          <span class="tag-search-icon">${ICON_SEARCH}</span>
+          <input class="tag-search-input" type="text" placeholder="Search" aria-label="${config.ariaLabel || 'Search'}">
+        </div>
+        <div class="tag-list" role="listbox"></div>
+        <div class="tag-buttons">
+          <button class="filter-btn-reset assignee-clear">Clear assignment</button>
+          <button class="filter-btn-apply assignee-save">Save</button>
+        </div>`;
+      document.body.appendChild(popEl);
+      cell.classList.add('cell-edit-active');
+      renderOptions('');
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+      const input = popEl.querySelector('.tag-search-input');
+      input.addEventListener('input', () => renderOptions(input.value));
+      input.focus();
+      // Clear assignment: deselect everything in the working copy (still must Save to commit)
+      popEl.querySelector('.assignee-clear').addEventListener('click', (e) => {
+        e.stopPropagation();
+        working = null;
+        popEl.querySelectorAll('.tag-option').forEach((x) => x.classList.remove('selected'));
+      });
+      // Save: commit the working selection
+      popEl.querySelector('.assignee-save').addEventListener('click', (e) => {
+        e.stopPropagation();
+        selected = working;
+        if (config.onChange) config.onChange(selected);
+        close();
+        renderDisplay();
+      });
     }
 
-    // click outside saves and reverts to text display (menu lives on body, so check it too)
+    function close() {
+      if (popEl) { popEl.remove(); popEl = null; }
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+      cell.classList.remove('cell-edit-active');
+    }
+
+    // outside-click / Escape closes WITHOUT saving
     document.addEventListener('click', (e) => {
-      if (cell.classList.contains('editing') && !cell.contains(e.target) && !(menuEl && menuEl.contains(e.target))) {
-        renderDisplay();
-      }
+      if (popEl && !popEl.contains(e.target) && !cell.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (popEl && e.key === 'Escape') close();
     });
 
     renderDisplay(); // initial render
@@ -432,6 +448,7 @@
       cell.classList.remove('cell-edit-active');
     }
 
+    editableCells.add({ exitEdit: () => { if (popEl) close(); } }); // close when the assignee editor opens
     cell.querySelector('.tags-edit-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       popEl ? close() : open();
@@ -451,6 +468,29 @@
     container.appendChild(el);
     return el;
   });
+
+  // ---- Row selection (manager grid) ----
+  const selectAllEl = document.getElementById('selectAll');
+  const isSel = el => el.classList.contains('selected');
+  function setRowSelected(el, on) {
+    el.classList.toggle('selected', on);
+    const cb = el.querySelector('.row-checkbox');
+    cb.innerHTML = on ? ICON_CHECKBOX_ON : ICON_CHECKBOX_OFF;
+    cb.setAttribute('aria-checked', on ? 'true' : 'false');
+  }
+  function updateSelectAll() {
+    const n = rowEls.filter(isSel).length;
+    const state = n === 0 ? 'off' : (n === rowEls.length ? 'on' : 'mixed');
+    selectAllEl.innerHTML = state === 'on' ? ICON_CHECKBOX_ON : state === 'mixed' ? ICON_CHECKBOX_INDETERMINATE : ICON_CHECKBOX_OFF;
+    selectAllEl.setAttribute('aria-checked', state === 'on' ? 'true' : state === 'mixed' ? 'mixed' : 'false');
+  }
+  function attachCheckbox(el, onToggle) {
+    el.addEventListener('click', (e) => { e.stopPropagation(); onToggle(); });
+    el.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); onToggle(); } });
+  }
+  rowEls.forEach(el => attachCheckbox(el.querySelector('.row-checkbox'), () => { setRowSelected(el, !isSel(el)); updateSelectAll(); }));
+  selectAllEl.innerHTML = ICON_CHECKBOX_OFF;
+  attachCheckbox(selectAllEl, () => { const allOn = rowEls.every(isSel); rowEls.forEach(el => setRowSelected(el, !allOn)); updateSelectAll(); });
 
   // ---- Settings bar: inject icons + wire interactions ----
   document.querySelectorAll('.filter-check').forEach(el => { el.innerHTML = ICON_CHECK; });

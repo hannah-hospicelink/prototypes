@@ -17,7 +17,7 @@ HTML prototype gallery for stakeholder review, hosted on GitHub Pages.
 
 This repo uses a lightweight client-side password check:
 
-- Password prompt appears after clicking a `View prototype` link
+- Password prompt appears after clicking a `View prototype` link or navigating to the prototype page directly via URL.
 - Password can be different for each prototype card
 - Successful entry is remembered per prototype for the current browser tab session
 - Passwords should be a 4-word passphrase separated by dashes. See generator  here: https://www.randompassphrasegenerator.com/?r=4 
@@ -29,6 +29,11 @@ Implementation details:
 - Each card link can define:
   - `data-prototype-title="..."`
   - `data-prototype-password="..."`
+- Each prototype page can define:
+  - `<meta name="prototype-title" content="...">`
+  - `<meta name="prototype-password" content="...">`
+  - `<meta name="prototype-back" content="index.html">`
+
 
 ### Important Security Note
 

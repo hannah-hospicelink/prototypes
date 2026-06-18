@@ -15,6 +15,8 @@
     --color-icon-caution: #f4b300;   /* Color/Icon/Caution → Color/Yellow/600 */
     --color-icon-inline-muted: #78716c; /* Color/Icon/Inline/Muted */
     --table-row-hover: #fcfcfb;      /* Table/Color/Background/Row/Hover → Color/Neutral/50 */
+    --color-bg-container-active: #f2f9fc;      /* selected row background → Color/Info/50 */
+    --table-bg-row-selected-hover: #e5f2f9;    /* $table-bg-row-selected-hover → Color/Info/100 */
     --button-ghost-bg-hover: #f5f5f4; /* Button/Color/Ghost/Background/Hover → Color/Neutral/200 */
     --button-ghost-bg-active: #e7e5e4;/* Button/Color/Ghost/Background/Active → Color/Neutral/300 */
 
@@ -68,6 +70,17 @@
     --badge-bg-error: #ffe9e8;    --badge-text-error: #780a1c;
     --badge-bg-warning: #fff4e5;  --badge-text-warning: #8e4101;
     --badge-bg-info: #e5f2f9;     --badge-text-info: #004d76;
+    --badge-bg-success: #ecf7e9;  --badge-text-success: #256816;
+
+    /* bold badge variant (.badge.bold): background changes per variant; text stays the
+       variant default except caution, which has its own bold text token */
+    --badge-bg-bold-neutral: #d6d3d1;
+    --badge-bg-bold-info: #cce6f3;
+    --badge-bg-bold-success: #d8efd3;
+    --badge-bg-bold-caution: #fdf0cc;
+    --badge-bg-bold-warning: #fbe2cc;
+    --badge-bg-bold-error: #ffd7d4;
+    --badge-text-bold-caution: #926b00;
 
     --radius-md: 8px;
     --radius-sm: 4px;
@@ -357,6 +370,20 @@
     border: var(--border-width) solid var(--color-border-md);
     border-radius: var(--radius-md);
   }
+  /* functional search input inside the search field (assignee single-select popover) */
+  .tag-search-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    color: var(--color-text-default);
+  }
+  .tag-search-input::placeholder { color: var(--input-placeholder); }
 
   /* Overlay popover — floating surface anchored in a top-level layer via JS.
      Override width/padding/gap/max-width per use. */
@@ -477,9 +504,9 @@
     white-space: nowrap;
   }
   /* toolbar applied-filter chips: 12px label/value */
-  .applied-filters .filter-chip { font-size: var(--font-caption); }
-  .filter-chip .chip-label { font-weight: 400; }
-  .filter-chip .chip-value { font-weight: 500; }
+  .applied-filters .filter-chip { font-size: var(--font-body); }
+  .filter-chip .chip-label { color: var(--color-text-muted); }
+
   /* chip remove button (icon frame base) */
   .chip-remove {
     width: var(--icon-sm); height: var(--icon-sm);
@@ -540,6 +567,7 @@
   .col-status   { flex: 136 0 136px; }
   .col-tags     { flex: 248 0 248px; }
   .col-actions  { flex: 80 0 80px; }
+  .col-select   { flex: 44 0 44px; }   /* checkbox column (manager grid) */
 
   /* ---------- Rows ---------- */
   .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
@@ -560,6 +588,24 @@
     transition: background var(--transition-fast);
   }
   .row-main:hover .row-cell { background: var(--table-row-hover); }
+
+  /* ---------- Row selection (manager grid) ---------- */
+  .checkbox {
+    width: var(--icon-xs);
+    height: var(--icon-xs);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .checkbox svg { width: 100%; height: 100%; display: block; }
+  .checkbox:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); border-radius: var(--radius-xs); }
+  /* selected row: cells + the expandable panel get the active container background */
+  .grid-row.selected .row-cell { background: var(--color-bg-container-active); }
+  .grid-row.selected .expand-wrap { background: var(--color-bg-container-active); }
+  /* selected + hovered: cells get the slightly darker blue (highest specificity wins over both above) */
+  .grid-row.selected .row-main:hover .row-cell { background: var(--table-bg-row-selected-hover); }
 
   .cell-stack { display: flex; flex-direction: column; gap: 0; min-width: 0; }
   .cell-main {
@@ -620,12 +666,24 @@
     font-size: var(--density-badge-font);
     line-height: var(--density-badge-height);
     white-space: nowrap;
+    transition: background-color var(--transition-fast);
   }
   .badge.neutral { background: var(--badge-bg-neutral); color: var(--badge-text-neutral); }
   .badge.caution { background: var(--badge-bg-caution); color: var(--badge-text-caution); }
   .badge.error   { background: var(--badge-bg-error);   color: var(--badge-text-error); }
   .badge.warning { background: var(--badge-bg-warning); color: var(--badge-text-warning); }
   .badge.info    { background: var(--badge-bg-info);    color: var(--badge-text-info); }
+  .badge.success { background: var(--badge-bg-success); color: var(--badge-text-success); }
+
+  /* Bold badge variant — reusable on any page via `.badge.bold`, and applied automatically
+     to badges inside a selected grid row. Only the background changes; text keeps the
+     variant's default, except caution which uses its own bold text token. */
+  .badge.bold.neutral, .grid-row.selected .badge.neutral { background: var(--badge-bg-bold-neutral); }
+  .badge.bold.info,    .grid-row.selected .badge.info    { background: var(--badge-bg-bold-info); }
+  .badge.bold.success, .grid-row.selected .badge.success { background: var(--badge-bg-bold-success); }
+  .badge.bold.warning, .grid-row.selected .badge.warning { background: var(--badge-bg-bold-warning); }
+  .badge.bold.error,   .grid-row.selected .badge.error   { background: var(--badge-bg-bold-error); }
+  .badge.bold.caution, .grid-row.selected .badge.caution { background: var(--badge-bg-bold-caution); color: var(--badge-text-bold-caution); }
 
   .status-cell, .tags-cell { justify-content: flex-start; }
 
@@ -789,6 +847,7 @@
   }
   .tag-option:hover { background: var(--menu-option-hover); }
   .tag-option.selected { background: var(--menu-option-selected); }
+  .tag-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
   .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); }
   .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
   .tag-buttons { display: flex; align-items: center; justify-content: space-between; }

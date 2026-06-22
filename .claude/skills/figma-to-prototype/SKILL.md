@@ -23,6 +23,28 @@ The user may invoke either mode explicitly, or ask you to run both in one shot. 
 
 ---
 
+## Mandatory Invocation & Access Gate (hard requirement)
+
+Use this skill on **every** user request that includes a Figma URL and asks for prototype work, design implementation, planning, or design-driven edits.
+
+Before any planning or code changes:
+1. Attempt to access the Figma link via MCP (`get_metadata` / `get_design_context`).
+2. If access fails (auth gate, network, permissions, invalid URL, unavailable MCP), **STOP immediately**.
+3. Send a blocking question to the user asking how to proceed. Do not continue with implementation while blocked.
+
+Required blocking question format:
+```
+I cannot access this Figma link from my environment ([reason]).
+How would you like to proceed?
+1. Share screenshots/specs for the target node(s)
+2. Grant/check Figma access and I will retry MCP reads
+3. Proceed with your explicit values for spacing/colors/states
+```
+
+Never infer or approximate design details after an access failure unless the user explicitly chooses option 3 and provides the required values.
+
+---
+
 ## Rule 0 — Never fill gaps with assumptions (read the source, or ask)
 
 This overrides everything below. Every value, dimension, color, position, layout, and behavior in the output must come from one of two places: **(a) read directly from the Figma source** (design context, metadata, variable defs, screenshot, or the Plugin API), or **(b) explicitly confirmed by the user.** There is no third source. You may not invent, approximate, "reason about," or carry over a plausible value — not for spacing, not for a hover color, not for where a popover sits relative to its trigger, not for anything.

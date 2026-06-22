@@ -92,6 +92,39 @@
     return ['Me', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
   }
 
+  function buildRowHtml(r, i, manager) {
+    const selectCell = manager
+      ? '<div class="row-cell col-select"><span class="checkbox row-checkbox" role="checkbox" aria-checked="false" aria-label="Select row" tabindex="0">' + ICON_CHECKBOX_OFF + '</span></div>'
+      : '';
+
+    const priorityClass = ['STAT', 'Urgent'].includes(r.priority) ? 'stat' : '';
+
+    return '<div class="row-main" data-index="' + i + '">' +
+      selectCell +
+      '<div class="row-cell col-assignee editable-cell"></div>' +
+      '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><span class="cell-caption">' + r.orderType + '</span></div></div>' +
+      '<div class="row-cell col-priority"><div class="cell-stack"><span class="cell-main ' + priorityClass + '">' + r.priority + '</span><span class="cell-caption">' + r.reason + '</span></div></div>' +
+      '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +
+      '<div class="row-cell col-ordered">' + dateCell(r.orderedDate, r.orderedTime) + '</div>' +
+      '<div class="row-cell col-requested">' + dateCell(r.reqDate, r.reqTime) + '</div>' +
+      '<div class="row-cell col-scheduled">' + dateCell(r.schedDate, r.schedTime) + '</div>' +
+      '<div class="row-cell col-status status-cell"><div class="badges">' + badge(r.status) + '</div></div>' +
+      '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
+      '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
+      '</div>' +
+      '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div></div></div></div>';
+  }
+
+  function buildSideSheetHtml(orderId) {
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Order #' + orderId + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div><div class="side-sheet-body">' + SIDE_SHEET_BODY + '</div>';
+  }
+
+  function buildHistoryPopoverHtml() {
+    return '<div class="history-heading">My Recent Orders</div><div class="history-list">' + RECENT_ORDERS.map(function (o) {
+      return '<div class="history-order"><div class="history-order-line"><span class="history-order-type">' + o.type + '</span><span class="link history-order-id" tabindex="0">' + o.id + '</span></div><span class="link" tabindex="0">' + o.patient + '</span><span class="history-client">' + o.client + '</span></div>';
+    }).join('') + '</div>';
+  }
+
   function setupMenuPopover(trigger, config, state) {
     if (!trigger) return;
     const selectable = Object.prototype.hasOwnProperty.call(config, 'selected');
@@ -442,20 +475,7 @@
     const manager = variant === 'manager';
     const row = document.createElement('div');
     row.className = 'grid-row';
-    row.innerHTML = '<div class="row-main" data-index="' + i + '">' +
-      (manager ? '<div class="row-cell col-select"><span class="checkbox row-checkbox" role="checkbox" aria-checked="false" aria-label="Select row" tabindex="0">' + ICON_CHECKBOX_OFF + '</span></div>' : '') +
-      '<div class="row-cell col-assignee editable-cell"></div>' +
-      '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><span class="cell-caption">' + r.orderType + '</span></div></div>' +
-      '<div class="row-cell col-priority"><div class="cell-stack"><span class="cell-main ' + (['STAT', 'Urgent'].includes(r.priority) ? 'stat' : '') + '">' + r.priority + '</span><span class="cell-caption">' + r.reason + '</span></div></div>' +
-      '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +
-      '<div class="row-cell col-ordered">' + dateCell(r.orderedDate, r.orderedTime) + '</div>' +
-      '<div class="row-cell col-requested">' + dateCell(r.reqDate, r.reqTime) + '</div>' +
-      '<div class="row-cell col-scheduled">' + dateCell(r.schedDate, r.schedTime) + '</div>' +
-      '<div class="row-cell col-status status-cell"><div class="badges">' + badge(r.status) + '</div></div>' +
-      '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
-      '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
-      '</div>' +
-      '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div></div></div></div>';
+    row.innerHTML = buildRowHtml(r, i, manager);
 
     row.querySelector('.toggle-btn').addEventListener('click', function () {
       row.classList.toggle('expanded');
@@ -575,7 +595,7 @@
     const sheetEl = document.createElement('div');
     state.sheetEl = sheetEl;
     sheetEl.className = 'side-sheet';
-    sheetEl.innerHTML = '<div class="side-sheet-header"><div class="side-sheet-title">Order #' + orderId + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div><div class="side-sheet-body">' + SIDE_SHEET_BODY + '</div>';
+    sheetEl.innerHTML = buildSideSheetHtml(orderId);
     document.body.appendChild(sheetEl);
     void sheetEl.offsetWidth;
     sheetEl.classList.add('open');
@@ -658,9 +678,7 @@
       if (popEl) return;
       popEl = document.createElement('div');
       popEl.className = 'history-popover';
-      popEl.innerHTML = '<div class="history-heading">My Recent Orders</div><div class="history-list">' + RECENT_ORDERS.map(function (o) {
-        return '<div class="history-order"><div class="history-order-line"><span class="history-order-type">' + o.type + '</span><span class="link history-order-id" tabindex="0">' + o.id + '</span></div><span class="link" tabindex="0">' + o.patient + '</span><span class="history-client">' + o.client + '</span></div>';
-      }).join('') + '</div>';
+      popEl.innerHTML = buildHistoryPopoverHtml();
       document.body.appendChild(popEl);
       trigger.classList.add('active');
       position();

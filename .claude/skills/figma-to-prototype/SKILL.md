@@ -194,6 +194,14 @@ Once the plan is approved, build the prototype following the approved plan and t
 
 ### Execution principles
 
+**Framework-reuse pre-flight (required before writing code in existing HTML/CSS/JS prototypes):**
+1. Inventory existing shared assets in scope: linked CSS files, shared JS modules, and global entry points already used by the target page(s).
+2. Search for existing reusable primitives/helpers first (base button/icon classes, popover/menu patterns, editable-cell utilities, state/focus patterns, shared data helpers).
+3. Map each planned UI element/interaction to an existing class/function if possible; only mark as "new" when no existing option can be configured or extended.
+4. For style reuse, prefer base + modifier/helper classes in markup over per-instance class styling; avoid introducing one-off declaration blocks.
+5. For behavior reuse, prefer extending existing function APIs/config objects over creating parallel functions with duplicated logic.
+6. Before finalizing, run a duplication check: if two new rules/functions share the same structure, refactor into one shared helper before presenting.
+
 **If the technology is HTML/CSS/JS, ignore React/framework Code Connect mappings.** `get_design_context` may return framework-specific component code — `import { Button } from '@mui/material'`, `<CodeConnectSnippet>` wrappers, React JSX — when a node has Code Connect mappings. For an HTML/CSS/JS prototype these are noise: never import a component library or emit React because Figma suggested it. Build plain HTML/CSS/JS that reproduces the design. When a Code Connect snippet *replaces* a node's real styling (so you can't see its fills/border/padding/typography), re-fetch that node with `get_design_context`'s `disableCodeConnect: true` to get the raw design, then translate it by hand. The mapping tells you *which* design-system component it is, not *how to build it here*.
 
 **Extract design tokens first.** Before writing any component code, declare the design's tokens — colors, font sizes/families/weights, line heights, spacing, radii, borders, shadows — as CSS custom properties or a JS constants object. This keeps the output faithful and easy to tweak.
@@ -218,7 +226,15 @@ Prefer relative units where the design system does (e.g. font sizes in `rem`), a
 
 **Build reusable, generic components — not one-offs tied to a specific instance.** Figma designs are component-driven, and a pattern shown on one element (an editable cell in one column, a status badge on one row, a specific button) almost always recurs elsewhere. Even when asked to implement it for a single instance, build it as a reusable component: use generic, role-based class names (`editable-cell`, `cell-field`, `cell-menu` — not `assignee-cell`, `assignee-field`) and drive behavior through configuration/parameters (e.g. a `setupEditableCell(cell, { value, options, heading, onChange })` function) rather than hard-coding the specific field's data or labels inside the logic. The instance-specific details (its options, its data binding, its labels) are passed in at the call site. This way the same component serves future columns/rows without a rewrite, and matches how the design system itself is structured.
 
-**Centralize shared styles; never duplicate a declaration block.** When two or more elements share styling, define it once and reuse it — do not copy a rule and tweak it. Reuse happens at two levels, and the **markup level is the one that matters**:
+**For HTML/CSS/JS in an existing prototype repo: reuse existing framework code before writing new code.**
+- Start by scanning existing JS and CSS in the target prototype (shared script files, utility/helper functions, base components, modifier patterns, tokenized variables).
+- Use existing functions/components first. Only add a new function when no existing function can be configured or extended to cover the new behavior.
+- Extend existing component APIs (config objects, options, modifiers) before creating parallel components with duplicated logic.
+- Reuse existing CSS primitives/helper classes for layout, icon frames, popovers, text buttons, and focus/interaction states before introducing new selectors.
+- If a new helper is truly needed, define it as a shared primitive (single source of truth) and migrate repeated declarations to it rather than adding one-off styles.
+- If a class/function is used as a JS hook, keep the hook class/function contract stable and move styling/behavior reuse into shared base+modifier layers.
+
+**Centralize shared styles with helper classes; never duplicate a declaration block.** When two or more elements share styling, define it once in a shared helper/base class and reuse it — do not copy a rule and tweak it. Reuse happens at two levels, and the **markup level is the one that matters**:
 - **In the markup (preferred):** give a recurring element ONE base class plus small modifier classes for the genuine differences (`.icon-btn` + `.icon-btn--lg` + `.icon-btn--reveal`), not a distinct class per instance (`.filter-toggle-btn`, `.action-btn`, `.edit-btn`, … each with its own full rule). Grouping selectors in the CSS while leaving a unique class on every element only de-duplicates the *stylesheet*, not the *design* — the parallel class names remain, and so does the temptation to re-add per-instance styles. Push the reuse into the HTML.
 - **Make variants cheap with private custom properties.** Expose what a variant changes (size, color, radius, glyph) as `--_*` custom properties on the base, so a modifier retargets them by setting a few variables instead of re-declaring layout — e.g. `.icon-btn { --_size: 24px; width: var(--_size); … }` and `.icon-btn--lg { --_size: 32px; }`.
 
@@ -231,7 +247,14 @@ Prefer relative units where the design system does (e.g. font sizes in `rem`), a
 
 **Leave no dead code.** When an interaction or structure changes, remove code that no longer serves a purpose — don't keep it because it seems harmless. For example, if a click handler moves from the row to a button, remove any `stopPropagation` that existed only to manage the old parent handler. Orphaned handlers, unused classes, and defensive code for removed behavior all add confusion and should be deleted as part of the change.
 
-**Cache-bust external CSS/JS, and bump the version on every change.** When a prototype references external asset files (`<link href="styles.css">`, `<script src="app.js">`) rather than inlining them, append a version query string — e.g. `href="smart-routing.css?v=2026-06-18"` — so browsers don't serve a stale cached copy after the file changes. This is not optional once assets are external: a cached old stylesheet produces confusing, hard-to-diagnose "it looks broken but the code is correct" reports. Every time you edit a referenced asset, bump its version (a date stamp or incrementing integer), and update the query in **every** HTML file that links that asset (keep them in sync). Inline `<style>`/`<script>` blocks don't need this — only externally-referenced files do.
+**Cache-bust external CSS/JS — bump the version as the final step of every edit that touches an external file.** When a prototype references external asset files (`<link href="styles.css">`, `<script src="app.js">`), append a version query string — e.g. `href="smart-routing.css?v=2026-06-22b"` — so browsers don't serve a stale cached copy after the file changes. This is not optional once assets are external: a cached old stylesheet produces confusing, hard-to-diagnose "it looks broken but the code is correct" reports.
+
+Required process — after **any** edit to a CSS or JS file:
+1. Determine every HTML file in the repo that loads that asset via a `<link>` or `<script src>` tag.
+2. Bump the `?v=` string in **all** of them to today's date + an incrementing suffix (e.g. `2026-06-22a` → `2026-06-22b`). Never leave any file at a stale version.
+3. Do this as the last step before presenting output — not after, not "separately."
+4. Inline `<style>`/`<script>` blocks don't need this — only externally-referenced files do.
+5. If multiple external files were edited in one session, bump each one's version independently (the CSS gets its own bump, the JS gets its own bump) so it is clear which file changed.
 
 **Implement one interaction at a time.** Don't try to wire up all interactions simultaneously. Get the static render right, then layer in hover states, then click behavior, then transitions.
 

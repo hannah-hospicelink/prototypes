@@ -28,7 +28,6 @@
     --menu-option-selected-hover: #e5f2f9;  /* Menu/Color/Option/On/Hover → Color/Info/100 */
     --menu-option-selected-active: #cce6f3; /* Menu/Color/Option/On/Active → Color/Info/200 */
     --input-bg: #ffffff;              /* Color/Background/Surface → Color/Neutral/White */
-    --input-border: #e7e5e4;          /* Color/Border/Default → Color/Neutral/300 */
     --input-border-focus: #00669e;    /* State/Focus/Outline/Color/Default → Color/Primary/700 */
     --input-placeholder: #a8a29e;     /* Input/Text/Color/Placeholder → Color/Neutral/500 */
     --chip-bg: #e7e5e4;               /* Tag/Color/Chip/Background → Color/Neutral/300 */
@@ -58,6 +57,7 @@
     --btn-bg-primary: #0080c5;              /* $btn-bg-primary → Color/Primary/600 */
     --btn-bg-primary-hover: #3399d1;        /* Button/Filled/Background/Primary/Hover → Color/Primary/500 */
     --btn-bg-primary-active: #00669e;       /* Button/Filled/Background/Primary/Active → Color/Primary/700 */
+    --btn-shadow-primary: 0 0.5px 2px rgba(0,128,197,0.2), 0 0.5px 1px rgba(0,128,197,0.16), 0 2px 4px rgba(0,128,197,0.12);
     --btn-content: #ffffff;                 /* $btn-content → on-primary */
     --btn-ghost-content-tertiary: #0080c5;  /* $btn-ghost-content-tertiary → Color/Primary/600 */
     --filter-input-height: 40px;            /* $input-text-minHeight-md */
@@ -98,6 +98,7 @@
     --btn-bg-secondary-active: #e7e5e4; /* Secondary/Background/Active (read from variant) */
     --btn-border-secondary: #d6d3d1;  /* $btn-border-secondary → Color/Neutral/350 */
     --btn-content-secondary: #292524; /* $btn-content-secondary → Color/Neutral/900 */
+    --btn-shadow-secondary: 0 0.5px 2px rgba(214,211,209,0.2), 0 0.5px 1px rgba(214,211,209,0.16), 0 2px 4px rgba(214,211,209,0.12);
     --btn-gap-md: 8px;                /* $btn-gap-md */
     --btn-size-md: 40px;              /* $btn-size-md */
     --btn-padding-md: 14px;           /* $btn-padding-md */
@@ -129,26 +130,21 @@
     --icon-action: 18px;       /* action button glyph */
     --icon-edit: 16px;         /* edit pencil glyph */
     --icon-md: 20px;           /* $icon-md */
-    --edit-btn-size: 24px;     /* edit icon button */
 
     /* menu + options + input field */
     --menu-width: 164px;
     --menu-padding: 8px;
     --menu-item-gap: 4px;
-    --menu-radius: var(--radius-md);
     --menu-option-height: 36px;
     --menu-option-padding-x: 8px;
     --menu-heading-height: 25px;
-    --input-height: 48px;
     --input-radius: var(--radius-sm);
     --input-border-width: 1px;
     --input-padding-x: 12px;
-    --input-adornment: 20px;
     --menu-shadow: 0 0.5px 2px rgba(0,0,0,0.20), 0 0.5px 1px rgba(0,0,0,0.16), 0 2px 4px 2px rgba(0,0,0,0.12);
 
     /* component dimensions */
     --row-height: 48px;
-    --badge-height: 18px;
 
     /* density-driven tokens (default = Standard / Medium) */
     --density-row-height: 48px;
@@ -334,12 +330,24 @@
   .filter-chip-toggle .chip-check,
   .cell-field-chevron,
   .view-map-icon,
-  .phone-icon-frame {
+  .phone-icon-frame,
+  .btn-icon-end {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
+
+  /* Inline icon frame sizing/padding shared by map/phone/external-link adornments. */
+  .view-map-icon,
+  .phone-icon-frame,
+  .btn-icon-end {
+    width: var(--icon-inline);
+    height: var(--icon-inline);
+    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
+  }
+  .view-map-icon svg,
+  .btn-icon-end svg { width: 100%; height: 100%; display: block; }
 
   /* Ghost surfaces — tertiary text buttons borrow the icon button's hover/active bg. */
   .view-map-btn:hover,
@@ -357,7 +365,8 @@
   .filter-btn:focus-visible,
   .view-map-btn:focus-visible,
   .filter-btn-reset:focus-visible,
-  .filter-btn-apply:focus-visible {
+  .filter-btn-apply:focus-visible,
+  .btn-secondary:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus-outline);
     outline-offset: var(--focus-ring-offset);
   }
@@ -395,10 +404,18 @@
   .history-popover,
   .filter-popover,
   .tag-popover {
+    --_popover-width: auto;
+    --_popover-max-width: none;
+    --_popover-gap: 0;
+    --_popover-padding: 0;
     position: fixed;
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    width: var(--_popover-width);
+    max-width: var(--_popover-max-width);
+    gap: var(--_popover-gap);
+    padding: var(--_popover-padding);
     background: var(--menu-bg);
     border-radius: var(--radius-md);
     box-shadow: var(--menu-shadow);
@@ -511,7 +528,7 @@
   .applied-filters .filter-chip { font-size: var(--font-body); }
   .filter-chip .chip-label { color: var(--color-text-muted); }
 
-  /* chip remove button (icon frame base) */
+  /* chip remove button (icon frame primitive) */
   .chip-remove {
     width: var(--icon-sm); height: var(--icon-sm);
     padding: var(--icon-padding-sm);
@@ -751,30 +768,30 @@
     cursor: pointer;
   }
   .cell-field-value { flex: 1; min-width: 0; font-size: var(--density-field-font); line-height: var(--density-detail-lh); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  /* icon frame base; adds rotation for the open/closed state */
+  /* icon frame primitive; adds rotation for the open/closed state */
   .cell-field-chevron { width: var(--icon-action); height: var(--icon-action); color: var(--icon-chevron-muted); transition: transform var(--duration-chevron) var(--ease-emphasized); transform: rotate(180deg); }
   .cell-field-chevron svg { width: var(--icon-edit); height: auto; display: block; }
   .editable-cell.menu-open .cell-field-chevron { transform: rotate(0deg); }
 
-  /* dropdown menu (overlay popover base) */
+  /* dropdown menu (popover variant config) */
   .cell-menu {
-    width: var(--menu-width);
-    padding: var(--menu-padding);
-    gap: var(--menu-item-gap);
+    --_popover-width: var(--menu-width);
+    --_popover-padding: var(--menu-padding);
+    --_popover-gap: var(--menu-item-gap);
   }
   .menu-popover { width: max-content; min-width: 111px; }
 
-  /* history popover (My Recent Orders) (overlay popover base) */
+  /* history popover (My Recent Orders) (popover variant config) */
   .history-popover {
-    width: 300px;
-    gap: var(--spacing-tiny);
-    padding: var(--spacing-sm);
+    --_popover-width: 300px;
+    --_popover-gap: var(--spacing-tiny);
+    --_popover-padding: var(--spacing-sm);
   }
   .history-heading {
     font-size: var(--font-heading-sm);
     line-height: var(--lh-heading-sm);
     font-weight: 600;
-    color: #000;
+    color: var(--color-text-heading);
     margin-bottom: var(--spacing-xxs);
   }
   .history-list { display: flex; flex-direction: column; gap: var(--spacing-xs); }
@@ -793,12 +810,12 @@
   .history-order-id { font-weight: 500; white-space: nowrap; }
   .history-client { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); }
 
-  /* filter popover (overlay popover base) */
+  /* filter popover (popover variant config) */
   .filter-popover {
-    width: var(--filter-popover-width);
-    max-width: calc(100vw - 16px);
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm);
+    --_popover-width: var(--filter-popover-width);
+    --_popover-max-width: calc(100vw - 16px);
+    --_popover-gap: var(--spacing-sm);
+    --_popover-padding: var(--spacing-sm);
   }
   .filter-field { display: flex; flex-direction: column; gap: var(--spacing-tiny); }
   .filter-field-label {
@@ -817,7 +834,7 @@
   .filter-input-chevron svg { width: var(--icon-sm); height: auto; }
   /* chips inside inputs (schedule status & warehouse): 14px regular, same base chip */
   .filter-input-content .filter-chip { font-size: var(--font-body); font-weight: 400; }
-  /* chip-remove inside filter chips: same button (icon frame base), smaller glyph */
+  /* chip-remove inside filter chips: same button (icon frame primitive), smaller glyph */
   .filter-chip .chip-remove svg { width: var(--icon-xs); height: var(--icon-xs); }
   /* filter-chip toggle inputs (Assigned to) */
   .filter-chip-toggle {
@@ -853,40 +870,44 @@
   .filter-btn-apply {
     background: var(--btn-bg-primary);
     color: var(--btn-content);
-    box-shadow: 0px 0.5px 2px rgba(0,128,197,0.2), 0px 0.5px 1px rgba(0,128,197,0.16), 0px 2px 4px rgba(0,128,197,0.12);
+    box-shadow: var(--btn-shadow-primary);
   }
   .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
   .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
 
-  /* tag edit popover (overlay popover base) */
+  /* tag edit popover (popover variant config) */
   .tag-popover {
-    width: 361px;
-    max-width: calc(100vw - 16px);
-    gap: var(--spacing-tiny);
-    padding: var(--spacing-xxs);
+    --_popover-width: 361px;
+    --_popover-max-width: calc(100vw - 16px);
+    --_popover-gap: var(--spacing-tiny);
+    --_popover-padding: var(--spacing-xxs);
   }
   /* field base (search variant, no pointer cursor) */
   .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); color: var(--input-text-adornment); }
   .tag-search-icon svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
   .tag-list { display: flex; flex-direction: column; max-height: 200px; overflow-y: auto; }
+  .menu-option,
   .tag-option {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xxs);
-    padding: var(--spacing-xxs) var(--spacing-xs);
+    gap: var(--_option-gap, var(--spacing-xxs));
+    padding: var(--_option-padding, var(--spacing-xxs) var(--spacing-xs));
     cursor: pointer;
     font-size: var(--font-body);
     line-height: var(--lh-default);
     color: var(--color-text-default);
     transition: background var(--transition-fast);
   }
+  .menu-option:hover,
   .tag-option:hover { background: var(--menu-option-hover); }
+  .menu-option.selected,
   .tag-option.selected { background: var(--menu-option-selected); }
+  .menu-option.disabled,
   .tag-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
   .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); }
   .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
   .tag-buttons { display: flex; align-items: center; justify-content: space-between; }
-  /* Deselect all reuses tertiary button styling; Save reuses primary — alias to filter button classes */
+  /* Deselect all and Save reuse shared text-button classes (tertiary + primary). */
   .menu-heading {
     height: var(--menu-heading-height);
     display: flex;
@@ -898,24 +919,15 @@
     text-transform: uppercase;
   }
   .menu-option {
+    --_option-gap: 0;
+    --_option-padding: 0 var(--menu-option-padding-x);
     height: var(--menu-option-height);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--menu-option-padding-x);
     border-radius: var(--radius-sm);
-    font-size: var(--font-body);
-    line-height: var(--lh-default);
-    color: var(--color-text-default);
-    cursor: pointer;
     background: transparent;
-    transition: background var(--transition-fast);
   }
-  .menu-option:hover { background: var(--menu-option-hover); }
   .menu-option:active { background: var(--menu-option-active); }
-  .menu-option.selected { background: var(--menu-option-selected); }
   .menu-option.selected:hover { background: var(--menu-option-selected-hover); }
   .menu-option.selected:active { background: var(--menu-option-selected-active); }
-  .menu-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
 
   /* ---------- Expandable panel (grid-row 0fr/1fr trick) ---------- */
   .expand-wrap {
@@ -941,12 +953,19 @@
     line-height: var(--lh-compact);
     color: var(--color-text-heading);
   }
-  .lv { display: flex; gap: var(--size-50); align-items: flex-start; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
+  /* Detail field — shared base for inline (lv) and stacked (lv-stacked) label/value pairs.
+     .lv is row-direction (default); .lv-stacked overrides to column with no gap. */
+  .lv,
+  .lv-stacked {
+    display: flex;
+    font-size: var(--density-detail-font);
+    line-height: var(--density-detail-lh);
+  }
+  .lv { gap: var(--size-50); align-items: flex-start; }
+  .lv-stacked { flex-direction: column; gap: 0; }
   .lv .label { color: var(--color-text-default); white-space: nowrap; flex-shrink: 0; }
-  .lv .value { color: var(--color-text-default); font-weight: 500; }
-  /* stacked field: label on top, value below (e.g. Address) */
-  .lv-stacked { display: flex; flex-direction: column; gap: 0; font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
   .lv-stacked .label { color: var(--color-text-default); }
+  .lv .value,
   .lv-stacked .value { color: var(--color-text-default); font-weight: 500; }
   /* tertiary "View on map" button (ghost hover/active + outset focus shared above) */
   .view-map-btn {
@@ -966,19 +985,9 @@
     white-space: nowrap;
     transition: background var(--transition-fast);
   }
-  /* icon frame base; padded so the glyph occupies the inner footprint */
-  .view-map-icon {
-    width: var(--icon-inline); height: var(--icon-inline);
-    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
-  }
-  .view-map-icon svg { width: 100%; height: 100%; display: block; }
+  /* icon frame base; dimensions/padding come from shared inline icon frame primitive */
   .phone-line { display: flex; gap: var(--spacing-xxs); align-items: center; }
   .phone-type { display: flex; gap: var(--size-50); align-items: center; color: var(--color-text-muted); font-size: var(--density-detail-font); line-height: var(--density-detail-lh); }
-  /* icon frame base; padded so the glyph occupies the inner footprint */
-  .phone-icon-frame {
-    width: var(--icon-inline); height: var(--icon-inline);
-    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
-  }
   .phone-icon-frame svg { height: var(--icon-inline-glyph); width: auto; color: var(--color-icon-inline-muted); }
 
   /* ---------- Side sheet (slides in from the right) ---------- */
@@ -1144,21 +1153,11 @@
     line-height: 1;
     font-weight: 400;
     color: var(--btn-content-secondary);
-    box-shadow: 0 0.5px 2px rgba(214,211,209,0.2), 0 0.5px 1px rgba(214,211,209,0.16), 0 2px 4px rgba(214,211,209,0.12);
+    box-shadow: var(--btn-shadow-secondary);
     transition: background var(--transition-fast);
   }
-  /* hover/active/focus read from the button-secondary Medium variants */
+    /* hover/active read from the button-secondary Medium variants.
+      Focus-visible is handled by the shared outset focus ring primitive above. */
   .btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
   .btn-secondary:active { background: var(--btn-bg-secondary-active); }
-  .btn-secondary:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: var(--focus-ring-offset); }
-  /* external-link icon: 14px frame with a 12px glyph (1px padding), per the placed instance */
-  .btn-icon-end {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: var(--icon-inline);
-    height: var(--icon-inline);
-    padding: calc((var(--icon-inline) - var(--icon-inline-glyph)) / 2);
-  }
-  .btn-icon-end svg { width: 100%; height: 100%; display: block; }
+  /* external-link icon frame uses the shared inline icon frame primitive */

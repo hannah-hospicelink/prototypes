@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="smart-routing.css?v=2026-06-23a">
+<link rel="stylesheet" href="smart-routing.css?v=2026-06-23f">
 <meta name="prototype-title" content="SMART Routing — Dispatch Grid">
 <meta name="prototype-password" content="lamp-govern-grave-return">
 <meta name="prototype-back" content="index.html">
@@ -20,9 +20,9 @@
         <button class="icon-btn icon-btn--lg filter-toggle-btn" id="filterToggleBtn" aria-label="Filter"><span class="filter-dot"></span></button>
         <div class="quick-filters" id="quickFilters">
           <button class="filter-btn" data-filter="STAT / Urgent"><span class="filter-check"></span><span class="filter-label">STAT / Urgent</span><span class="count-badge">4</span></button>
-          <button class="filter-btn" data-filter="SLA approaching"><span class="filter-check"></span><span class="filter-label">SLA approaching</span><span class="count-badge">2</span></button>
-          <button class="filter-btn" data-filter="Missed schedule"><span class="filter-check"></span><span class="filter-label">Missed schedule</span><span class="count-badge">2</span></button>
-          <button class="filter-btn" data-filter="Delayed"><span class="filter-check"></span><span class="filter-label">Delayed</span><span class="count-badge">5</span></button>
+          <button class="filter-btn" data-filter="SLA approaching"><span class="filter-check"></span><span class="filter-label">SLA approaching</span><span class="count-badge">6</span></button>
+          <button class="filter-btn" data-filter="Missed schedule"><span class="filter-check"></span><span class="filter-label">Missed schedule</span><span class="count-badge">3</span></button>
+          <button class="filter-btn" data-filter="Delayed"><span class="filter-check"></span><span class="filter-label">Delayed</span><span class="count-badge">1</span></button>
           <button class="filter-btn" data-filter="Rescheduled"><span class="filter-check"></span><span class="filter-label">Rescheduled</span><span class="count-badge">1</span></button>
           <button class="filter-btn" data-filter="New note"><span class="filter-check"></span><span class="filter-label">New note</span><span class="count-badge">3</span></button>
         </div>
@@ -42,26 +42,33 @@
       <span class="filter-chip"><span class="chip-text"><span class="chip-label">Schedule date:</span> <span class="chip-value">Tomorrow</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
     </div>
   </div>
-  <div class="data-grid" id="grid">
-    <div class="grid-track">
-      <div class="grid-header">
-        <div class="header-cell col-select"><span class="checkbox" id="selectAll" role="checkbox" aria-checked="false" aria-label="Select all rows" tabindex="0"></span></div>
-        <div class="header-cell col-zip">ZIP</div>
-        <div class="header-cell col-order">Order</div>
-        <div class="header-cell col-priority">Priority / Reason</div>
-        <div class="header-cell col-patient">Patient</div>
-        <div class="header-cell col-scheduled">Scheduled</div>
-        <div class="header-cell col-eta">ETA</div>
-        <div class="header-cell col-completed">Completed</div>
-        <div class="header-cell col-tags">Tags</div>
-        <div class="header-cell col-actions"></div>
+  <div class="dispatch-grid-shell">
+    <div class="data-grid" id="grid">
+      <div class="grid-track">
+        <div class="grid-header">
+          <div class="header-cell col-select"><span class="checkbox" id="selectAll" role="checkbox" aria-checked="false" aria-label="Select all rows" tabindex="0"></span></div>
+          <div class="header-cell col-zip">ZIP</div>
+          <div class="header-cell col-order">Order</div>
+          <div class="header-cell col-priority">Priority / Reason</div>
+          <div class="header-cell col-patient">Patient</div>
+          <div class="header-cell col-scheduled">Scheduled</div>
+          <div class="header-cell col-eta">ETA</div>
+          <div class="header-cell col-completed">Completed</div>
+          <div class="header-cell col-driver">Driver</div>
+          <div class="header-cell col-route">Route</div>
+          <div class="header-cell col-tags">Tags</div>
+          <div class="header-cell col-actions"></div>
+        </div>
+        <div id="rows"></div>
       </div>
-      <div id="rows"></div>
     </div>
+    <aside class="route-snapshot-panel" aria-label="Route snapshot">
+      <p class="route-snapshot-text">route snapshot</p>
+    </aside>
   </div>
 
-<script src="smart-routing-grid-data.js?v=2026-06-23b"></script>
-<script src="smart-routing-grid.js?v=2026-06-23b"></script>
+<script src="smart-routing-grid-data.js?v=2026-06-23e"></script>
+<script src="smart-routing-grid.js?v=2026-06-23i"></script>
 <script>
   SmartRoutingGrid.init({
     variant: 'dispatch',

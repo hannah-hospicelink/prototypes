@@ -14,6 +14,9 @@
   const ICON_CHECKBOX_ON = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323ZM5.97917 10.3542L11.8854 4.44792C12.2135 4.11979 12.2135 3.64583 11.8854 3.35417C11.5938 3.02604 11.0833 3.02604 10.7917 3.35417L5.43229 8.67708L3.20833 6.45312C2.91667 6.16146 2.40625 6.16146 2.11458 6.45312C1.78646 6.74479 1.78646 7.25521 2.11458 7.54688L4.88542 10.3542C5.21354 10.6458 5.6875 10.6458 5.97917 10.3542Z" fill="#3399D1"/></svg>';
   const ICON_CHECKBOX_INDETERMINATE = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="14" rx="1.56771" fill="#3399D1"/><rect x="3.20833" y="6.29167" width="7.58333" height="1.41667" rx="0.708333" fill="white"/></svg>';
   const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
+  const ICON_MAP_PIN = '<svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.9084 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z" fill="currentColor"/></svg>';
+  const ICON_PHONE_LANDLINE = '<svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.74471 0.592393L4.7055 2.86548C4.86954 3.26386 4.75237 3.70911 4.42429 3.96688L3.3932 4.8105C4.14309 6.49775 5.47882 7.85691 7.1192 8.6771L8.03312 7.57571C8.29089 7.24763 8.73614 7.13046 9.13451 7.2945L11.4076 8.25529C11.8529 8.44276 12.0872 8.91144 11.97 9.38012L11.9232 9.49729C11.5248 11.0205 10.0484 12.3094 8.26746 11.9344C4.16652 11.0674 0.932636 7.83348 0.0655802 3.73254C-0.309363 1.95156 0.979504 0.498657 2.50271 0.0768461L2.61988 0.0299783C3.0885 -0.0871914 3.55724 0.147148 3.74471 0.592393Z" fill="currentColor"/></svg>';
+  const ICON_PHONE_MOBILE = '<svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 0.679688 0.659091 0 1.45455 0H6.54545C7.34091 0 8 0.679688 8 1.5V10.5C8 11.3203 7.34091 12 6.54545 12H1.45455C0.659091 12 0 11.3203 0 10.5V1.5ZM1.45455 1.5V8.625H6.54545V1.5H1.45455ZM4 11.0625C4.40909 11.0625 4.72727 10.7344 4.72727 10.3125C4.72727 9.89062 4.40909 9.5625 4 9.5625C3.59091 9.5625 3.27273 9.89062 3.27273 10.3125C3.27273 10.7344 3.59091 11.0625 4 11.0625Z" fill="currentColor"/></svg>';
   const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
   const ICON_CLOSE = '<svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.27828 2.375L10.0208 8.125L15.7217 2.375C16.2211 1.875 17.0949 1.875 17.5943 2.375C18.1352 2.91667 18.1352 3.75 17.5943 4.29167L11.8934 10L17.5943 15.7083C18.1352 16.25 18.1352 17.0833 17.5943 17.625C17.0949 18.125 16.2211 18.125 15.7217 17.625L10.0208 11.875L4.27828 17.625C3.77893 18.125 2.90507 18.125 2.40572 17.625C1.86476 17.0833 1.86476 16.25 2.40572 15.7083L8.10663 10L2.40572 4.29167C1.86476 3.75 1.86476 2.91667 2.40572 2.375C2.90507 1.875 3.77893 1.875 4.27828 2.375Z"/></svg>';
   const ICON_EXTERNAL = '<svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>';
@@ -61,6 +64,12 @@
       if (bi !== -1) return 1;
       return a.t.localeCompare(b.t);
     });
+  }
+
+  function phoneTypeMarkup(phoneType) {
+    var type = (phoneType || '').trim() || 'Landline';
+    var icon = type === 'Mobile' ? ICON_PHONE_MOBILE : ICON_PHONE_LANDLINE;
+    return '<span class="phone-type"><span class="phone-icon-frame">' + icon + '</span>' + type + '</span>';
   }
 
   function tagBadgesHtml(tags) {
@@ -131,6 +140,12 @@
     return '<span class="cell-main">–</span>';
   }
 
+  function linkValueOrDash(value) {
+    var text = String(value || '').trim();
+    if (!text) return '<span class="cell-main">–</span>';
+    return '<span class="cell-main link" tabindex="0">' + text + '</span>';
+  }
+
   function buildRowHtml(r, i, variant) {
     const managerLike = variant === 'manager' || variant === 'dispatch';
     const dispatch = variant === 'dispatch';
@@ -154,10 +169,12 @@
         '<div class="row-cell col-scheduled">' + dateCell(r.schedDate || r.reqDate, r.schedTime || r.reqTime) + '</div>' +
         '<div class="row-cell col-eta">' + etaCell(r) + '</div>' +
         '<div class="row-cell col-completed">' + completedCell(r) + '</div>' +
+        '<div class="row-cell col-driver editable-cell"><div class="cell-display">' + linkValueOrDash(r.driver) + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="Edit driver">' + ICON_PENCIL + '</button></div></div>' +
+        '<div class="row-cell col-route editable-cell"><div class="cell-display">' + linkValueOrDash(r.route) + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="Edit route">' + ICON_PENCIL + '</button></div></div>' +
         '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
         '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
         '</div>' +
-        '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div><div class="detail-section"><div class="detail-heading">Address</div><div class="lv"><span class="label">Address type:</span><span class="value">' + r.addrType + '</span></div><div class="lv-stacked"><span class="label">Address:</span><span class="value">' + r.addr.join('<br>') + '</span></div><button class="view-map-btn" type="button">View on map</button></div><div class="detail-section"><div class="detail-heading">Primary Contact</div><div class="lv"><span class="label">Name:</span><span class="value">' + r.contact + '</span></div><div class="lv"><span class="label">Relationship:</span><span class="value">' + r.rel + '</span></div><div class="phone-line"><div class="lv"><span class="label">Phone:</span><span class="value">' + r.phone + '</span></div><span class="phone-type">' + r.phoneType + '</span></div></div></div></div></div>';
+        '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div><div class="detail-section"><div class="detail-heading">Address</div><div class="lv"><span class="label">Address type:</span><span class="value">' + r.addrType + '</span></div><div class="lv-stacked"><span class="label">Address:</span><span class="value">' + r.addr.join('<br>') + '</span></div><button class="view-map-btn" type="button"><span class="view-map-icon">' + ICON_MAP_PIN + '</span>View on map</button></div><div class="detail-section"><div class="detail-heading">Primary Contact</div><div class="lv"><span class="label">Name:</span><span class="value">' + r.contact + '</span></div><div class="lv"><span class="label">Relationship:</span><span class="value">' + r.rel + '</span></div><div class="phone-line"><div class="lv"><span class="label">Phone:</span><span class="value">' + r.phone + '</span></div>' + phoneTypeMarkup(r.phoneType) + '</div></div></div></div></div>';
     }
 
     return '<div class="row-main" data-index="' + i + '">' +
@@ -210,7 +227,9 @@
       menuEl.className = 'cell-menu menu-popover';
       menuEl.innerHTML = (config.heading ? '<div class="menu-heading">' + config.heading + '</div>' : '') +
         config.options.map(function (opt) {
-          return '<div class="menu-option ' + (selectable && opt === selected ? 'selected' : '') + '" tabindex="0" data-value="' + opt + '">' + opt + '</div>';
+          var label = (typeof opt === 'object') ? opt.label : opt;
+          var disabled = (typeof opt === 'object') && opt.disabled;
+          return '<div class="menu-option' + (selectable && opt === selected ? ' selected' : '') + (disabled ? ' disabled' : '') + '" tabindex="' + (disabled ? '-1' : '0') + '" data-value="' + label + '" ' + (disabled ? 'aria-disabled="true"' : '') + '>' + label + '</div>';
         }).join('');
       document.body.appendChild(menuEl);
       trigger.classList.add('active');
@@ -221,6 +240,7 @@
       menuEl.querySelectorAll('.menu-option').forEach(function (o) {
         o.addEventListener('click', function (e) {
           e.stopPropagation();
+          if (o.classList.contains('disabled')) return;
           const value = o.dataset.value;
           if (selectable) selected = value;
           if (config.onSelect) config.onSelect(value);
@@ -542,8 +562,12 @@
       row.classList.toggle('expanded');
     });
 
+    const moreOptions = dispatch
+      ? ['Edit driver / route', 'Add on', 'Reset order', 'View equipment']
+      : ['Schedule order', 'Reset order', 'View equipment'];
+
     setupMenuPopover(row.querySelector('.more-btn'), {
-      options: ['Schedule order', 'Reset order', 'View equipment'],
+      options: moreOptions,
       align: 'right',
       onSelect: function (value) { if (value === 'View equipment') openSideSheet(r.order, state); }
     }, state);
@@ -633,7 +657,7 @@
       'STAT/Urgent': function (r) { return r.priority === 'STAT' || r.priority === 'Urgent'; },
       'SLA approaching': function (r) { return r.status && (r.status.t === 'Patient Scheduling' || r.status.t === 'Patient Approval' || r.status.t === 'Provider Review'); },
       'Missed schedule': function (r) { return r.status && r.status.t === 'Escalated'; },
-      'Delayed': function (r) { return r.status && (r.status.t === 'Provider Review' || r.status.t === 'Patient Approval' || r.status.t === 'Escalated'); },
+      'Delayed': function (r) { return (r.etaCaption || '').trim().toLowerCase() === 'delayed'; },
       'New note': function (r) { return r.note === true; },
       'New Note': function (r) { return r.note === true; },
       'Rescheduled': function (r) { return r.status && r.status.t === 'Rescheduled'; }
@@ -803,6 +827,44 @@
       if (popEl) return;
       popEl = document.createElement('div');
       popEl.className = 'filter-popover';
+
+      if (variant === 'dispatch') {
+        function chipGroupField(label, options) {
+          return '<div class="filter-field"><span class="filter-field-label">' + label + ' <span class="req">*</span></span><div class="filter-chips-row">' +
+            options.map(function (opt) {
+              var active = !!opt.active;
+              return '<button class="filter-chip-toggle ' + (active ? 'is-active' : 'is-inactive') + '" type="button">' +
+                (active ? '<span class="chip-check">' + ICON_CHECK + '</span>' : '') +
+                '<span>' + opt.label + '</span></button>';
+            }).join('') +
+            '</div></div>';
+        }
+
+        popEl.innerHTML =
+          field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
+          chipGroupField('Order status', [
+            { label: 'Open', active: true },
+            { label: 'Closed last 48 hours', active: true }
+          ]) +
+          chipGroupField('Schedule date', [
+            { label: 'Yesterday', active: false },
+            { label: 'Today', active: true },
+            { label: 'Tomorrow', active: true }
+          ]) +
+          field('Order reason') +
+          field('Order priority') +
+          field('Driver', { search: true }) +
+          field('Route') +
+          field('Tags', { search: true }) +
+          '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
+
+        document.body.appendChild(popEl);
+        trigger.classList.add('active');
+        position();
+        window.addEventListener('scroll', position, true);
+        window.addEventListener('resize', position);
+        return;
+      }
 
       const assignedToHtml = variant === 'manager'
         ? field('Assigned to', { search: true, required: true })

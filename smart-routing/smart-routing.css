@@ -168,6 +168,9 @@
     --density-header-pad-x: var(--spacing-xs); /* 12px */
     --density-header-font: var(--font-body);   /* 14px */
     --density-field-font: var(--font-body);    /* 14px (editable cell input) */
+    --density-select-pad-x: var(--spacing-xs); /* 12px */
+    --density-select-col-width: calc(var(--icon-xs) + (var(--density-select-pad-x) * 2));
+    --density-actions-col-width: 88px; /* 2×12px pad + 16px gap + 2×24px buttons */
 
     /* focus */
     --focus-ring-width: 2px;       /* button focus outline weight */
@@ -237,6 +240,8 @@
     --density-header-font: var(--font-caption);  /* 12px */
     --density-field-font: var(--font-caption);   /* 12px */
     --density-note-icon: var(--icon-inline-glyph); /* 12px — 14px frame − 1px icon-padding-sm × 2 */
+    --density-select-pad-x: var(--spacing-xxs);  /* 8px */
+    --density-actions-col-width: 68px; /* 2×8px pad + 12px gap + 2×20px buttons */
   }
   [data-density="relaxed"] {
     --density-header-height: 56px;
@@ -253,6 +258,8 @@
     --density-field-font: var(--font-caption);   /* 12px */
     --density-row-btn-size: 28px;                /* 24px icon frame + 2px outer padding × 2 */
     --density-row-btn-glyph: 20px;               /* 24px icon frame − 2px icon-padding-md × 2 */
+    --density-select-pad-x: var(--spacing-sm);   /* 16px */
+    --density-actions-col-width: 104px; /* 2×16px pad + 16px gap + 2×28px buttons */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -550,10 +557,60 @@
     margin: 0 auto;
   }
 
+  /* Dispatch page: data table with adjacent route snapshot column. */
+  .dispatch-grid-shell {
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+  .dispatch-grid-shell .data-grid {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    /* sidebar is 300px + 12px gap; cap the grid so it never pushes the panel out */
+    max-width: calc(var(--grid-max-width) - 300px - var(--spacing-xs));
+    margin: 0;
+  }
+  .route-snapshot-panel {
+    width: 300px;
+    flex: 0 0 300px;
+    min-height: 600px;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: var(--color-border-light);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .route-snapshot-text {
+    width: 100%;
+    text-align: center;
+    color: #000000;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+  }
+
+  @media (max-width: 1280px) {
+    .dispatch-grid-shell {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    .dispatch-grid-shell .data-grid {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+    .route-snapshot-panel {
+      width: 100%;
+      min-height: 240px;
+    }
+  }
+
   /* ---------- Track (single width source for header + rows) ---------- */
   .grid-track {
-    width: max-content;
-    min-width: 100%;
+    width: 100%;
   }
 
   /* ---------- Header ---------- */
@@ -588,22 +645,35 @@
   .col-scheduled{ flex: 152 0 152px; }
   .col-status   { flex: 136 0 136px; }
   .col-tags     { flex: 248 0 248px; }
-  .col-actions  { flex: 80 0 80px; }
-  .col-select   { flex: 44 0 44px; }   /* checkbox column (manager grid) */
+  .col-actions  { flex: 0 0 var(--density-actions-col-width); }
+  .col-select   { flex: 0 0 var(--density-select-col-width); }   /* checkbox column hugs checkbox + density padding */
   .col-zip      { flex: 80 0 80px; }
   .col-eta      { flex: 152 0 152px; }
   .col-completed{ flex: 136 0 136px; }
+  .col-driver   { flex: 124 0 124px; }
+  .col-route    { flex: 80 0 80px; }
 
-  /* Dispatch-only table layout from Figma node 2078:67247 */
-  .dispatch-layout .col-select    { flex: 46 0 46px; }
-  .dispatch-layout .col-zip       { flex: 64 0 64px; }
-  .dispatch-layout .col-order     { flex: 180 0 180px; }
-  .dispatch-layout .col-priority  { flex: 148 0 148px; }
-  .dispatch-layout .col-patient   { flex: 136 0 136px; }
-  .dispatch-layout .col-scheduled { flex: 152 0 152px; }
-  .dispatch-layout .col-eta       { flex: 152 0 152px; }
-  .dispatch-layout .col-completed { flex: 136 0 136px; }
-  .dispatch-layout .col-tags      { flex: 374 0 374px; }
+  /* Dispatch-only table layout — all fixed cols use flex-grow:0 so they stay at exact Figma basis */
+  .dispatch-layout .col-select    { flex: 0 0 var(--density-select-col-width); }
+  .dispatch-layout .col-zip       { flex: 0 0 64px; }
+  .dispatch-layout .col-order     { flex: 0 0 152px; }
+  .dispatch-layout .col-priority  { flex: 0 0 148px; }
+  .dispatch-layout .col-patient   { flex: 0 0 136px; }
+  .dispatch-layout .col-scheduled { flex: 0 0 152px; }
+  .dispatch-layout .col-eta       { flex: 0 0 152px; }
+  .dispatch-layout .col-completed { flex: 0 0 100px; }
+  .dispatch-layout .col-driver    { flex: 0 0 124px; }
+  .dispatch-layout .col-route     { flex: 0 0 80px; }
+  .dispatch-layout .col-tags      { flex: 1 0 160px; }  /* grows to fill remaining space */
+  .dispatch-layout .col-actions   { flex: 0 0 var(--density-actions-col-width); }
+
+  /* Keep select-column checkboxes centered in both header and row cells. */
+  .header-cell.col-select,
+  .row-cell.col-select {
+    justify-content: center;
+    padding-left: var(--density-select-pad-x);
+    padding-right: var(--density-select-pad-x);
+  }
 
   /* ---------- Rows ---------- */
   .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
@@ -655,6 +725,14 @@
     line-height: var(--lh-compact);
     color: var(--color-text-muted);
     white-space: nowrap;
+  }
+  [data-density="condensed"] .cell-main {
+    font-size: var(--font-caption);
+    line-height: var(--lh-compact);
+  }
+  [data-density="condensed"] .cell-caption {
+    font-size: var(--font-meta);
+    line-height: var(--font-meta);
   }
   .eta-caption         { color: var(--color-text-warning); }  /* En route / Delayed */
   .eta-caption--success { color: var(--badge-text-success); }  /* Arrived */
@@ -762,6 +840,15 @@
     line-height: var(--font-meta);
   }
 
+  /* In relaxed density, order-status badges are medium size in the mockup. */
+  [data-density="relaxed"] .order-status-badge {
+    height: 16px;
+    min-width: 28px;
+    padding: 0 var(--size-150);
+    font-size: var(--font-caption);
+    line-height: var(--lh-reset);
+  }
+
   .status-cell, .tags-cell { justify-content: flex-start; }
 
   /* Row action buttons (more-actions, expand toggle) use the .icon-btn base as-is */
@@ -775,7 +862,7 @@
   /* blue outline when a cell's editor/popover is active (tags + assignee) */
   .cell-edit-active { outline: var(--focus-ring-width) solid var(--color-focus-outline); outline-offset: calc(-1 * var(--focus-ring-width)); }
   .cell-display { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xxs); width: 100%; min-width: 0; overflow: hidden; }
-  .cell-display-text { font-size: var(--font-body); line-height: var(--lh-default); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .cell-display-text { font-size: var(--density-cell-font); line-height: var(--density-cell-lh); color: var(--color-text-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 
   /* edit (pencil) button — .icon-btn.icon-btn--reveal (hover-reveal handled in shared section) */
 
@@ -881,6 +968,16 @@
     font-weight: 500;
     color: var(--color-text-default);
     white-space: nowrap;
+  }
+  .filter-chip-toggle.is-inactive {
+    background: var(--table-header);
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+  .filter-chip-toggle.is-active {
+    background: var(--chip-bg);
+    color: var(--color-text-default);
+    font-weight: 500;
   }
   .filter-chip-toggle .chip-check { width: var(--icon-xs); height: var(--icon-xs); color: var(--color-icon-inline-default); }
   .filter-chip-toggle .chip-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }

@@ -547,6 +547,18 @@
   }
   .chip-remove svg { width: 100%; height: 100%; display: block; }
 
+  @media (max-width: 1000px) {
+    .toolbar-row {
+      align-items: flex-start;
+    }
+    .toolbar-filters {
+      flex-wrap: wrap;
+    }
+    .quick-filters {
+      flex-wrap: wrap;
+    }
+  }
+
   .data-grid {
     background: var(--color-bg-surface);
     border: var(--border-width) solid var(--color-border-light);
@@ -610,13 +622,21 @@
 
   /* ---------- Track (single width source for header + rows) ---------- */
   .grid-track {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* Dispatch: constrain the track to the container so the tags column can shrink
+     to fill available space. Once the track reaches its min-content (all fixed
+     columns + the tags 200px floor), it overflows and the grid scrolls. */
+  .dispatch-layout .grid-track {
     width: 100%;
+    min-width: min-content;
   }
 
   /* ---------- Header ---------- */
   .grid-header {
     display: flex;
-    border-bottom: var(--border-width) solid var(--color-border-light);
     width: 100%;
   }
   .header-cell {
@@ -632,6 +652,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 0;
+    border-bottom: var(--border-width) solid var(--color-border-light);
   }
 
   /* ---------- Column widths ---------- */
@@ -664,7 +685,7 @@
   .dispatch-layout .col-completed { flex: 0 0 100px; }
   .dispatch-layout .col-driver    { flex: 0 0 124px; }
   .dispatch-layout .col-route     { flex: 0 0 80px; }
-  .dispatch-layout .col-tags      { flex: 1 0 160px; }  /* grows to fill remaining space */
+  .dispatch-layout .col-tags      { flex: 1 1 200px; min-width: 200px; }  /* fills remaining space; shrinks to a 200px floor before the grid scrolls */
   .dispatch-layout .col-actions   { flex: 0 0 var(--density-actions-col-width); }
 
   /* Keep select-column checkboxes centered in both header and row cells. */
@@ -676,8 +697,7 @@
   }
 
   /* ---------- Rows ---------- */
-  .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
-  .grid-row:last-child { border-bottom: none; }
+  .grid-row { width: 100%; }
 
   .row-main {
     display: flex;
@@ -770,6 +790,13 @@
   /* Badges */
   .badges { display: flex; flex-wrap: wrap; gap: var(--spacing-tiny); align-items: center; }
   .tags-cell .badges { flex: 1; min-width: 0; }
+  .tags-cell .badge {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: flex-start;
+  }
   .tags-edit-btn { margin-left: auto; }
   .tags-overflow {
     font-size: var(--font-caption);
@@ -1069,6 +1096,12 @@
     transition: grid-template-rows var(--duration-expand) var(--ease-emphasized);
     background: var(--color-bg-surface);
   }
+  .row-divider {
+    width: 100%;
+    height: var(--border-width);
+    background: var(--color-border-light);
+  }
+  .grid-row:last-child .row-divider { display: none; }
   .grid-row.expanded .expand-wrap { grid-template-rows: 1fr; }
   .expand-inner { overflow: hidden; min-height: 0; }
 

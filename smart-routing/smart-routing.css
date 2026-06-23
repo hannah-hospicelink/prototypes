@@ -1294,3 +1294,186 @@
   .btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
   .btn-secondary:active { background: var(--btn-bg-secondary-active); }
   /* external-link icon frame uses the shared inline icon frame primitive */
+
+  /* ---------- Dispatch edit driver/route modal ---------- */
+  .edit-driver-route-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: var(--spacing-md);
+  }
+  .edit-driver-route-modal {
+    width: 100%;
+    max-width: 700px;
+    background: var(--color-bg-surface);
+    border: var(--border-width) solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 18px 3px rgba(0, 0, 0, 0.12), 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 5px 6px -3px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  .edit-driver-route-modal-header {
+    min-height: 56px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    border-bottom: var(--border-width) solid var(--color-border-light);
+    background: #fafaf9;
+  }
+  .edit-driver-route-modal-title {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-heading-md);
+    line-height: var(--lh-heading-md);
+    font-weight: 600;
+    color: var(--color-text-heading);
+  }
+  .edit-driver-route-close {
+    --_icon-btn-size: 32px;
+    --_icon-btn-glyph: 20px;
+    --_icon-btn-radius: var(--button-radius-icon);
+    --_icon-btn-color: var(--color-text-default);
+  }
+  .edit-driver-route-modal-body {
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .edit-driver-route-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    gap: var(--spacing-lg);
+  }
+  .edit-driver-route-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-tiny);
+    min-width: 0;
+  }
+  .edit-driver-route-label {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+  .edit-driver-route-input {
+    min-height: 40px;
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border: var(--border-width) solid var(--color-border-md);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    color: var(--color-text-default);
+  }
+  .edit-driver-route-input-icon {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+    color: var(--input-text-adornment);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .edit-driver-route-input-icon svg,
+  .edit-driver-route-input-chevron svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .edit-driver-route-input-value {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .edit-driver-route-input-chevron {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+    color: var(--color-icon-inline-default);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .edit-driver-route-input-tags {
+    align-items: center;
+  }
+  .edit-driver-route-chip-list {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .edit-driver-route-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-tiny);
+    height: var(--chip-height);
+    min-width: var(--chip-min-width);
+    padding: var(--spacing-tiny) var(--spacing-xxs);
+    border-radius: var(--radius-full);
+    background: var(--chip-bg);
+    color: var(--color-text-default);
+    flex-shrink: 0;
+  }
+  .edit-driver-route-chip-text {
+    font-size: var(--font-body);
+    line-height: var(--lh-reset);
+    white-space: nowrap;
+  }
+  .edit-driver-route-chip-remove {
+    flex-shrink: 0;
+  }
+  .edit-driver-route-modal-footer {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: var(--border-width) solid var(--color-border-light);
+    background: var(--color-bg-surface);
+  }
+  .edit-driver-route-btn {
+    min-height: var(--btn-size-md);
+    padding: 0 var(--btn-padding-md);
+    border-radius: var(--button-radius-text);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--btn-font-md);
+    line-height: 1;
+    font-weight: 400;
+    transition: background var(--transition-fast);
+  }
+  .edit-driver-route-btn-cancel {
+    background: none;
+    color: var(--btn-ghost-content-tertiary);
+  }
+  .edit-driver-route-btn-cancel:hover { background: var(--button-ghost-bg-hover); }
+  .edit-driver-route-btn-cancel:active { background: var(--button-ghost-bg-active); }
+  .edit-driver-route-btn-save {
+    background: var(--btn-bg-primary);
+    color: var(--btn-content);
+    box-shadow: var(--btn-shadow-primary);
+  }
+  .edit-driver-route-btn-save:hover { background: var(--btn-bg-primary-hover); }
+  .edit-driver-route-btn-save:active { background: var(--btn-bg-primary-active); }
+
+  @media (max-width: 900px) {
+    .edit-driver-route-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--spacing-md);
+    }
+  }

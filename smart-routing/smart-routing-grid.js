@@ -215,6 +215,55 @@
     }).join('') + '</div>';
   }
 
+  function buildEditDriverRouteModalHtml(row) {
+    var orderId = row && row.order ? String(row.order) : '';
+    var driver = row && row.driver ? String(row.driver) : '';
+    var route = row && row.route ? String(row.route) : '';
+    var chips = ((row && row.tags) || []).map(function (tag) {
+      var text = tag && tag.t ? String(tag.t).replace(/-/g, ' ') : '';
+      if (!text) return '';
+      return '<span class="edit-driver-route-chip"><span class="edit-driver-route-chip-text">' + text + '</span></span>';
+    }).join('');
+
+    return '<div class="edit-driver-route-modal" role="dialog" aria-modal="true" aria-label="Edit driver / route">' +
+      '<div class="edit-driver-route-modal-header">' +
+      '<h2 class="edit-driver-route-modal-title">Order #' + orderId + '</h2>' +
+      '<button class="icon-btn edit-driver-route-close" type="button" aria-label="Close">' + ICON_CLOSE + '</button>' +
+      '</div>' +
+      '<div class="edit-driver-route-modal-body">' +
+      '<div class="edit-driver-route-grid">' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Driver</span>' +
+      '<div class="edit-driver-route-input">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-input-value">' + (driver || '') + '</span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Route</span>' +
+      '<div class="edit-driver-route-input">' +
+      '<span class="edit-driver-route-input-value">' + (route || '') + '</span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Tags</span>' +
+      '<div class="edit-driver-route-input edit-driver-route-input-tags">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-chip-list">' + chips + '</span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-modal-footer">' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel" type="button">Cancel</button>' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-save" type="button">Save</button>' +
+      '</div>' +
+      '</div>';
+  }
+
   function setupMenuPopover(trigger, config, state) {
     if (!trigger) return;
     const selectable = Object.prototype.hasOwnProperty.call(config, 'selected');
@@ -599,7 +648,10 @@
     setupMenuPopover(row.querySelector('.more-btn'), {
       options: moreOptions,
       align: 'right',
-      onSelect: function (value) { if (value === 'View equipment') openSideSheet(r.order, state); }
+      onSelect: function (value) {
+        if (value === 'View equipment') openSideSheet(r.order, state);
+        if (value === 'Edit driver / route' && dispatch) openEditDriverRouteModal(r, state);
+      }
     }, state);
 
     if (!dispatch) {
@@ -746,6 +798,33 @@
     state.sheetEl = null;
     el.classList.remove('open');
     el.addEventListener('transitionend', function () { el.remove(); }, { once: true });
+  }
+
+  function openEditDriverRouteModal(row, state) {
+    closeEditDriverRouteModal(state);
+    const overlayEl = document.createElement('div');
+    state.editDriverRouteModalEl = overlayEl;
+    overlayEl.className = 'edit-driver-route-overlay';
+    overlayEl.innerHTML = buildEditDriverRouteModalHtml(row);
+    document.body.appendChild(overlayEl);
+
+    function close() {
+      closeEditDriverRouteModal(state);
+    }
+
+    const modalEl = overlayEl.querySelector('.edit-driver-route-modal');
+    overlayEl.addEventListener('click', function (e) {
+      if (!modalEl.contains(e.target)) close();
+    });
+    overlayEl.querySelector('.edit-driver-route-close').addEventListener('click', close);
+    overlayEl.querySelector('.edit-driver-route-btn-cancel').addEventListener('click', close);
+    overlayEl.querySelector('.edit-driver-route-btn-save').addEventListener('click', close);
+  }
+
+  function closeEditDriverRouteModal(state) {
+    if (!state.editDriverRouteModalEl) return;
+    state.editDriverRouteModalEl.remove();
+    state.editDriverRouteModalEl = null;
   }
 
   function setupTagsOverflowPopover() {
@@ -966,7 +1045,8 @@
     const state = {
       editableCells: new Set(),
       openMenuPopovers: new Set(),
-      sheetEl: null
+      sheetEl: null,
+      editDriverRouteModalEl: null
     };
 
     container.innerHTML = '';
@@ -997,7 +1077,10 @@
     setupFilterPopover(variant);
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeSideSheet(state);
+      if (e.key === 'Escape') {
+        closeSideSheet(state);
+        closeEditDriverRouteModal(state);
+      }
     });
   }
 

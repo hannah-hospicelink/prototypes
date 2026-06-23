@@ -36,6 +36,11 @@
     { t: 'Time-Sensitive', v: 'error' }
   ];
 
+  const DRIVER_SECTIONS = [
+    { heading: 'Birmingham, AL', options: ['Eric E.', 'Hannah S.'] },
+    { heading: 'Gadsden, AL', options: ['Eric E.', 'Martin L.'] }
+  ];
+
   const RECENT_ORDERS = [
     { type: 'Delivery', id: '#123455789', patient: 'John Smith', client: 'HarborLight Hospice Care - HarborLight Hospice Care - Birmingham' },
     { type: 'Pickup', id: '#123455123', patient: 'Emily Johnson', client: 'Big Heart Hospice & Home Care - Big Heart Birmingham' },
@@ -85,6 +90,13 @@
   function normalizeOption(option) {
     if (typeof option === 'string') return { label: option, disabled: false };
     return { label: option.label, disabled: !!option.disabled };
+  }
+
+  function normalizeSearchEntry(option) {
+    if (typeof option === 'string') return { type: 'option', label: option, disabled: false };
+    if (option && option.type === 'heading') return { type: 'heading', label: option.label };
+    if (option && option.heading) return { type: 'heading', label: option.heading };
+    return { type: 'option', label: option.label, disabled: !!option.disabled };
   }
 
   function clampPopoverLeft(left, popWidth) {
@@ -169,7 +181,7 @@
         '<div class="row-cell col-scheduled">' + dateCell(r.schedDate || r.reqDate, r.schedTime || r.reqTime) + '</div>' +
         '<div class="row-cell col-eta">' + etaCell(r) + '</div>' +
         '<div class="row-cell col-completed">' + completedCell(r) + '</div>' +
-        '<div class="row-cell col-driver editable-cell"><div class="cell-display">' + linkValueOrDash(r.driver) + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="Edit driver">' + ICON_PENCIL + '</button></div></div>' +
+        '<div class="row-cell col-driver editable-cell"></div>' +
         '<div class="row-cell col-route editable-cell"><div class="cell-display">' + linkValueOrDash(r.route) + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="Edit route">' + ICON_PENCIL + '</button></div></div>' +
         '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
         '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
@@ -278,7 +290,8 @@
     state.editableCells.add(api);
 
     function renderDisplay() {
-      cell.innerHTML = '<div class="cell-display"><span class="cell-display-text">' + (selected || '') + '</span><button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
+      var displayHtml = config.renderDisplay ? config.renderDisplay(selected) : '<span class="cell-display-text">' + (selected || '') + '</span>';
+      cell.innerHTML = '<div class="cell-display">' + displayHtml + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
       cell.querySelector('.edit-btn').addEventListener('click', function (e) {
         e.stopPropagation();
         popEl ? close() : open();
@@ -296,13 +309,30 @@
     function renderOptions(query) {
       const q = (query || '').trim().toLowerCase();
       const list = popEl.querySelector('.tag-list');
-      list.innerHTML = config.options.map(function (opt) {
-        const option = normalizeOption(opt);
-        const label = option.label;
-        const disabled = option.disabled;
-        if (q && label.toLowerCase().indexOf(q) === -1) return '';
-        return '<div class="tag-option ' + (label === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '"><span class="tag-option-label">' + label + '</span></div>';
-      }).join('');
+      if (config.sections && config.sections.length) {
+        list.innerHTML = config.sections.map(function (section, sectionIndex) {
+          const options = section.options.map(normalizeOption).filter(function (option) {
+            if (!q) return true;
+            return option.label.toLowerCase().indexOf(q) !== -1;
+          });
+          if (!options.length) return '';
+          var divider = sectionIndex > 0 ? '<div class="menu-divider" role="presentation"></div>' : '';
+          return divider + '<div class="menu-heading">' + section.heading + '</div>' + options.map(function (option) {
+            const label = option.label;
+            const disabled = option.disabled;
+            return '<div class="tag-option ' + (label === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '"><span class="tag-option-label">' + label + '</span></div>';
+          }).join('');
+        }).join('');
+      } else {
+        list.innerHTML = config.options.map(function (opt) {
+          const entry = normalizeSearchEntry(opt);
+          if (entry.type === 'heading') return '<div class="menu-heading">' + entry.label + '</div>';
+          const label = entry.label;
+          const disabled = entry.disabled;
+          if (q && label.toLowerCase().indexOf(q) === -1) return '';
+          return '<div class="tag-option ' + (label === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '"><span class="tag-option-label">' + label + '</span></div>';
+        }).join('');
+      }
       list.querySelectorAll('.tag-option:not(.disabled)').forEach(function (o) {
         o.addEventListener('click', function () {
           working = o.dataset.value;
@@ -317,7 +347,7 @@
       working = selected;
       popEl = document.createElement('div');
       popEl.className = 'tag-popover';
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" placeholder="Search" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">Clear assignment</button><button class="filter-btn-apply assignee-save">Save</button></div>';
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">Save</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
@@ -583,6 +613,20 @@
         ariaLabel: 'Edit assignee',
         onChange: function (v) { r.assignee = v; }
       }, state, assigneeMode);
+    } else {
+      setupEditableCell(row.querySelector('.col-driver.editable-cell'), {
+        value: r.driver || null,
+        options: [],
+        sections: DRIVER_SECTIONS,
+        clearLabel: 'Clear driver',
+        ariaLabel: 'Edit driver',
+        renderDisplay: function (value) {
+          var text = String(value || '').trim();
+          if (!text) return '<span class="cell-main">–</span>';
+          return '<span class="cell-main link" tabindex="0">' + text + '</span>';
+        },
+        onChange: function (v) { r.driver = v || ''; }
+      }, state, 'search');
     }
 
     setupTagCell(row.querySelector('.col-tags.editable-cell'), r, state);

@@ -1041,6 +1041,16 @@
     color: var(--color-text-muted);
     text-transform: uppercase;
   }
+  .menu-divider {
+    width: 100%;
+    padding: var(--spacing-tiny) 0;
+  }
+  .menu-divider::before {
+    content: '';
+    display: block;
+    width: 100%;
+    border-bottom: var(--border-width) solid var(--color-border-light);
+  }
   .menu-option {
     --_option-gap: 0;
     --_option-padding: 0 var(--menu-option-padding-x);

@@ -193,6 +193,13 @@ body.subpage main {
   background: #00669E;
 }
 
+.grid-divider {
+  grid-column: 1 / -1;
+  border: none;
+  border-top: 1px solid #d6d3d1;
+  margin: 12px 0;
+}
+
 .card--details {
   border-color: #99cce8;
   background: #f7fbfd;

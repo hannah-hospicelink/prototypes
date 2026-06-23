@@ -92,12 +92,73 @@
     return ['Me', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
   }
 
-  function buildRowHtml(r, i, manager) {
-    const selectCell = manager
+  function extractZip(r) {
+    const source = Array.isArray(r.addr) ? r.addr.join(' ') : '';
+    const match = source.match(/\b\d{5}\b/);
+    return match ? match[0] : '';
+  }
+
+  function getOrderStatusBadgeText(r) {
+    if (r.dispatchBadgeText) return r.dispatchBadgeText;
+    if (!r.status || !r.status.t) return r.orderType;
+    return r.orderType + ' ' + r.status.t;
+  }
+
+  function getOrderStatusBadgeVariant(r) {
+    if (r.dispatchBadgeVariant) return r.dispatchBadgeVariant;
+    if (!r.status || !r.status.v) return 'neutral';
+    if (r.status.v === 'warning') return 'warning';
+    if (r.status.v === 'error') return 'error';
+    if (r.status.v === 'info') return 'info';
+    if (r.status.v === 'caution') return 'caution';
+    if (r.status.v === 'success') return 'success';
+    return 'neutral';
+  }
+
+  function etaCell(r) {
+    if (r.etaDate) return dateCell(r.etaDate, r.etaTime);
+    if (!r.etaTime && !r.etaCaption) return '<span class="cell-main">–</span>';
+    var main = r.etaTime || '–';
+    var captionClass = 'cell-caption' + (r.etaCaptionColor === 'success' ? ' eta-caption--success' : ' eta-caption');
+    var captionHtml = r.etaCaption ? '<span class="' + captionClass + '">' + r.etaCaption + '</span>' : '';
+    return '<div class="cell-stack"><span class="cell-main">' + main + '</span>' + captionHtml + '</div>';
+  }
+
+  function completedCell(r) {
+    if (r.completedDate || r.completedTime) {
+      return dateCell(r.completedDate, r.completedTime);
+    }
+    return '<span class="cell-main">–</span>';
+  }
+
+  function buildRowHtml(r, i, variant) {
+    const managerLike = variant === 'manager' || variant === 'dispatch';
+    const dispatch = variant === 'dispatch';
+    const selectCell = managerLike
       ? '<div class="row-cell col-select"><span class="checkbox row-checkbox" role="checkbox" aria-checked="false" aria-label="Select row" tabindex="0">' + ICON_CHECKBOX_OFF + '</span></div>'
       : '';
 
     const priorityClass = ['STAT', 'Urgent'].includes(r.priority) ? 'stat' : '';
+
+    if (dispatch) {
+      const zip = extractZip(r);
+      const orderBadgeText = getOrderStatusBadgeText(r);
+      const orderBadgeVariant = getOrderStatusBadgeVariant(r);
+
+      return '<div class="row-main" data-index="' + i + '">' +
+        selectCell +
+        '<div class="row-cell col-zip"><span class="cell-main">' + (zip || '-') + '</span></div>' +
+        '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><div class="badges"><span class="badge order-status-badge ' + orderBadgeVariant + '">' + orderBadgeText + '</span></div></div></div>' +
+        '<div class="row-cell col-priority"><div class="cell-stack"><span class="cell-main ' + priorityClass + '">' + r.priority + '</span><span class="cell-caption">' + r.reason + '</span></div></div>' +
+        '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +
+        '<div class="row-cell col-scheduled">' + dateCell(r.schedDate || r.reqDate, r.schedTime || r.reqTime) + '</div>' +
+        '<div class="row-cell col-eta">' + etaCell(r) + '</div>' +
+        '<div class="row-cell col-completed">' + completedCell(r) + '</div>' +
+        '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
+        '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
+        '</div>' +
+        '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div><div class="detail-section"><div class="detail-heading">Address</div><div class="lv"><span class="label">Address type:</span><span class="value">' + r.addrType + '</span></div><div class="lv-stacked"><span class="label">Address:</span><span class="value">' + r.addr.join('<br>') + '</span></div><button class="view-map-btn" type="button">View on map</button></div><div class="detail-section"><div class="detail-heading">Primary Contact</div><div class="lv"><span class="label">Name:</span><span class="value">' + r.contact + '</span></div><div class="lv"><span class="label">Relationship:</span><span class="value">' + r.rel + '</span></div><div class="phone-line"><div class="lv"><span class="label">Phone:</span><span class="value">' + r.phone + '</span></div><span class="phone-type">' + r.phoneType + '</span></div></div></div></div></div>';
+    }
 
     return '<div class="row-main" data-index="' + i + '">' +
       selectCell +
@@ -472,10 +533,10 @@
   }
 
   function buildRow(r, i, state, variant, assigneeMode) {
-    const manager = variant === 'manager';
+    const dispatch = variant === 'dispatch';
     const row = document.createElement('div');
     row.className = 'grid-row';
-    row.innerHTML = buildRowHtml(r, i, manager);
+    row.innerHTML = buildRowHtml(r, i, variant);
 
     row.querySelector('.toggle-btn').addEventListener('click', function () {
       row.classList.toggle('expanded');
@@ -487,16 +548,18 @@
       onSelect: function (value) { if (value === 'View equipment') openSideSheet(r.order, state); }
     }, state);
 
-    const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
-    const options = buildAssigneeOptions(assigneeMode, dispatchEnabled);
+    if (!dispatch) {
+      const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
+      const options = buildAssigneeOptions(assigneeMode, dispatchEnabled);
 
-    setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
-      value: r.assignee || null,
-      options: options,
-      heading: assigneeMode === 'search' ? null : 'Select assignee',
-      ariaLabel: 'Edit assignee',
-      onChange: function (v) { r.assignee = v; }
-    }, state, assigneeMode);
+      setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
+        value: r.assignee || null,
+        options: options,
+        heading: assigneeMode === 'search' ? null : 'Select assignee',
+        ariaLabel: 'Edit assignee',
+        onChange: function (v) { r.assignee = v; }
+      }, state, assigneeMode);
+    }
 
     setupTagCell(row.querySelector('.col-tags.editable-cell'), r, state);
     return row;
@@ -554,17 +617,24 @@
     document.querySelectorAll('.filter-check').forEach(function (el) { el.innerHTML = ICON_CHECK; });
     const filterToggle = document.querySelector('.filter-toggle-btn');
     if (filterToggle) filterToggle.insertAdjacentHTML('afterbegin', ICON_FILTER);
-    const actionBtns = document.querySelectorAll('.table-actions .action-btn');
-    if (actionBtns[0]) actionBtns[0].innerHTML = ICON_EXPORT;
-    if (actionBtns[1]) actionBtns[1].innerHTML = ICON_HISTORY;
-    if (actionBtns[2]) actionBtns[2].innerHTML = ICON_COLUMNS;
-    if (actionBtns[3]) actionBtns[3].innerHTML = ICON_SETTINGS;
+    document.querySelectorAll('.table-actions .action-btn').forEach(function (btn) {
+      const label = (btn.getAttribute('aria-label') || '').toLowerCase();
+      if (label.indexOf('export') !== -1) btn.innerHTML = ICON_EXPORT;
+      else if (label.indexOf('history') !== -1) btn.innerHTML = ICON_HISTORY;
+      else if (label.indexOf('column') !== -1) btn.innerHTML = ICON_COLUMNS;
+      else if (label.indexOf('setting') !== -1) btn.innerHTML = ICON_SETTINGS;
+    });
     document.querySelectorAll('.chip-remove').forEach(function (el) { el.innerHTML = ICON_CHIP_REMOVE; });
   }
 
   function wireQuickFilters(rowEls) {
     const FILTER_PREDICATES = {
+      'STAT / Urgent': function (r) { return r.priority === 'STAT' || r.priority === 'Urgent'; },
       'STAT/Urgent': function (r) { return r.priority === 'STAT' || r.priority === 'Urgent'; },
+      'SLA approaching': function (r) { return r.status && (r.status.t === 'Patient Scheduling' || r.status.t === 'Patient Approval' || r.status.t === 'Provider Review'); },
+      'Missed schedule': function (r) { return r.status && r.status.t === 'Escalated'; },
+      'Delayed': function (r) { return r.status && (r.status.t === 'Provider Review' || r.status.t === 'Patient Approval' || r.status.t === 'Escalated'); },
+      'New note': function (r) { return r.note === true; },
       'New Note': function (r) { return r.note === true; },
       'Rescheduled': function (r) { return r.status && r.status.t === 'Rescheduled'; }
     };
@@ -780,9 +850,10 @@
 
   function init(config) {
     const cfg = config || {};
-    const variant = cfg.variant === 'manager' ? 'manager' : 'scheduling';
+    const variant = cfg.variant === 'manager' ? 'manager' : cfg.variant === 'dispatch' ? 'dispatch' : 'scheduling';
     const assigneeMode = cfg.assigneeMode || (variant === 'manager' ? 'search' : 'menu');
-    const rows = cloneRows(cfg.rows || DEFAULT_ROWS);
+    const DISPATCH_ROWS = window.SMART_ROUTING_DISPATCH_ROWS || DEFAULT_ROWS;
+    const rows = cloneRows(cfg.rows || (variant === 'dispatch' ? DISPATCH_ROWS : DEFAULT_ROWS));
     const container = document.getElementById('rows');
     if (!container) return;
 
@@ -800,7 +871,7 @@
       return el;
     });
 
-    if (variant === 'manager') {
+    if (variant === 'manager' || variant === 'dispatch') {
       wireRowSelection(rowEls, state);
     }
 

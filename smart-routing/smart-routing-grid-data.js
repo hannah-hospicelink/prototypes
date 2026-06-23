@@ -21,4 +21,25 @@
     { assignee: 'Me', order: '123455021', orderType: 'Delivery', note: false, priority: 'Standard', priorityStat: false, reason: 'Service: Bed Equipment', patient: 'James Wilson', orderedDate: '06/04/2026', orderedTime: '5:49 PM', reqDate: '06/05/2026', reqTime: '6:00 - 10:00 PM CT', schedDate: '', schedTime: '', status: { t: 'Escalated', v: 'error' }, tags: [{ t: 'Service', v: 'neutral' }],
       client: 'HarborLight Hospice Care', branch: 'HarborLight Hospice Care - Birmingham', addrType: 'Residence', addr: ['5469 Noble St', 'Birmingham, AL, 35209'], contact: 'Mary Wilson', rel: 'Child', phone: '(938) 249-3664', phoneType: 'Landline', warehouse: 'Birmingham, AL' }
   ];
+
+  /* Dispatch-specific overrides — applied on top of DEFAULT_ROWS for the dispatch variant.
+     Only fields that differ from (or are absent in) the scheduling/manager view are listed here. */
+  var DISPATCH_OVERRIDES = {
+    '123455005': { dispatchBadgeText: 'Delivery En route',     dispatchBadgeVariant: 'warning', etaTime: '11:12 - 11:54 AM', etaCaption: 'En route', etaCaptionColor: 'warning',  completedDate: '',           completedTime: ''       },
+    '123455003': { schedDate: '06/04/2026', schedTime: '11:00 AM - 3:00 PM CT',
+                   dispatchBadgeText: 'Delivery Acknowledged', dispatchBadgeVariant: 'caution', etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       },
+    '123455007': { dispatchBadgeText: 'Delivery En route',     dispatchBadgeVariant: 'warning', etaTime: '',              etaCaption: 'Delayed', etaCaptionColor: 'warning',  completedDate: '',           completedTime: ''       },
+    '123455009': { dispatchBadgeText: 'Pickup Completed',      dispatchBadgeVariant: 'success', etaTime: '4:04 PM',       etaCaption: 'Arrived', etaCaptionColor: 'success',  completedDate: '06/04/2026', completedTime: '4:26 PM' },
+    '123455011': { dispatchBadgeText: 'Delivery En route',     dispatchBadgeVariant: 'warning', etaTime: '10:11 AM',      etaCaption: 'En route', etaCaptionColor: 'warning', completedDate: '',           completedTime: ''       },
+    '123455015': { dispatchBadgeText: 'Delivery Acknowledged', dispatchBadgeVariant: 'caution', etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       },
+    '123455017': { dispatchBadgeText: 'Pickup Acknowledged',   dispatchBadgeVariant: 'caution', etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       },
+    '123455013': { dispatchBadgeText: 'Delivery En route',     dispatchBadgeVariant: 'warning', etaTime: '6:54 PM',       etaCaption: 'Arrived', etaCaptionColor: 'success',  completedDate: '',           completedTime: ''       },
+    '123455019': { schedDate: '06/05/2026', schedTime: '6:00 - 10:00 PM',
+                   dispatchBadgeText: 'Delivery Completed',    dispatchBadgeVariant: 'success', etaDate: '06/04/2026', etaTime: '1:22 PM',   completedDate: '06/04/2026', completedTime: '1:22 PM' },
+    '123455021': { dispatchBadgeText: 'Delivery Acknowledged', dispatchBadgeVariant: 'caution', etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       }
+  };
+
+  window.SMART_ROUTING_DISPATCH_ROWS = window.SMART_ROUTING_DEFAULT_ROWS.map(function (r) {
+    return Object.assign({}, r, DISPATCH_OVERRIDES[r.order] || {});
+  });
 })();

@@ -69,6 +69,7 @@
     --badge-bg-caution: #fef7e5;  --badge-text-caution: #926b00;
     --badge-bg-error: #ffe9e8;    --badge-text-error: #780a1c;
     --badge-bg-warning: #fff4e5;  --badge-text-warning: #8e4101;
+    --color-text-warning: #a64c01;   /* $color-text-warning → Color/Warning/700 */
     --badge-bg-info: #e5f2f9;     --badge-text-info: #004d76;
     --badge-bg-success: #ecf7e9;  --badge-text-success: #256816;
 
@@ -178,7 +179,7 @@
     --grid-max-width: 1900px;
     --side-sheet-width: 600px;   /* $sideSheet-md */
     --settings-gap: 20px;        /* gap between quick filters and action buttons */
-    --filter-gap: 16px;          /* gap between filter buttons */
+    --filter-gap: 12px;          /* gap between filter buttons */
     --filter-height: 32px;       /* Size=Small stateful button */
     --filter-padding-x: 12px;
     --filter-label-gap: 8px;     /* gap between check, label */
@@ -192,7 +193,7 @@
     --color-info-600: #0080c5;   /* $color-info-600 */
     --size-350: 10px;            /* $size-350 (indicator dot) */
     --chip-height: 20px;         /* $chip-height-md */
-    --chip-min-width: 24px;      /* $chip-minWidth-sm */
+    --chip-min-width: 32px;      /* $chip-minWidth-sm */
     --chip-btn-color: #78716c;   /* $chip-btn → Color/Neutral/600 */
     --card-padding: 16px;        /* $spacing-sm */
     --page-padding-y: 60px;
@@ -589,6 +590,20 @@
   .col-tags     { flex: 248 0 248px; }
   .col-actions  { flex: 80 0 80px; }
   .col-select   { flex: 44 0 44px; }   /* checkbox column (manager grid) */
+  .col-zip      { flex: 80 0 80px; }
+  .col-eta      { flex: 152 0 152px; }
+  .col-completed{ flex: 136 0 136px; }
+
+  /* Dispatch-only table layout from Figma node 2078:67247 */
+  .dispatch-layout .col-select    { flex: 46 0 46px; }
+  .dispatch-layout .col-zip       { flex: 64 0 64px; }
+  .dispatch-layout .col-order     { flex: 180 0 180px; }
+  .dispatch-layout .col-priority  { flex: 148 0 148px; }
+  .dispatch-layout .col-patient   { flex: 136 0 136px; }
+  .dispatch-layout .col-scheduled { flex: 152 0 152px; }
+  .dispatch-layout .col-eta       { flex: 152 0 152px; }
+  .dispatch-layout .col-completed { flex: 136 0 136px; }
+  .dispatch-layout .col-tags      { flex: 374 0 374px; }
 
   /* ---------- Rows ---------- */
   .grid-row { width: 100%; border-bottom: var(--border-width) solid var(--color-border-light); }
@@ -641,6 +656,8 @@
     color: var(--color-text-muted);
     white-space: nowrap;
   }
+  .eta-caption         { color: var(--color-text-warning); }  /* En route / Delayed */
+  .eta-caption--success { color: var(--badge-text-success); }  /* Arrived */
   .link {
     color: var(--color-text-link);
     cursor: pointer;
@@ -735,6 +752,15 @@
   .badge.bold.warning, .grid-row.selected .badge.warning { background: var(--badge-bg-bold-warning); }
   .badge.bold.error,   .grid-row.selected .badge.error   { background: var(--badge-bg-bold-error); }
   .badge.bold.caution, .grid-row.selected .badge.caution { background: var(--badge-bg-bold-caution); color: var(--badge-text-bold-caution); }
+
+  /* Dispatch order-status badge uses the compact meta text style from the mockup. */
+  .order-status-badge {
+    height: 14px;
+    min-width: 24px;
+    padding: 0 var(--spacing-tiny);
+    font-size: var(--font-meta);
+    line-height: var(--font-meta);
+  }
 
   .status-cell, .tags-cell { justify-content: flex-start; }
 

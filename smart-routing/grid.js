@@ -989,7 +989,7 @@
       }
 
       const assignedToHtml = variant === 'manager'
-        ? field('Assigned to', { search: true, required: true })
+        ? field('Assigned to', { search: true })
         : '<div class="filter-field"><span class="filter-field-label">Assigned to <span class="req">*</span></span><div class="filter-chips-row"><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Me</button><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Unassigned</button></div></div>';
 
       popEl.innerHTML =

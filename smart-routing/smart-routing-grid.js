@@ -755,7 +755,6 @@
       'Missed schedule': function (r) { return r.status && r.status.t === 'Escalated'; },
       'Delayed': function (r) { return (r.etaCaption || '').trim().toLowerCase() === 'delayed'; },
       'New note': function (r) { return r.note === true; },
-      'New Note': function (r) { return r.note === true; },
       'Rescheduled': function (r) { return r.status && r.status.t === 'Rescheduled'; }
     };
 

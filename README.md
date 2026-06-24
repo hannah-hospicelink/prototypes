@@ -8,10 +8,14 @@ HTML prototype gallery for stakeholder review, hosted on GitHub Pages.
 
 ## Repository Structure
 
-- `index.html` - Landing page with prototype cards
-- `smart-routing-grid-scheduling.html` - Current prototype
-- `password-gate.js` - Click-time password prompt for prototype links
-- `screenshots/` - Thumbnail images used by cards
+- `index.html` - Root landing page linking to project folders
+- `smart-routing/` - SMART Routing project area containing:
+  - A project landing page and multiple prototype screens
+  - Shared grid data/interaction scripts used by those screens
+  - Project-specific styling (`smart-routing.css`)
+- `styles/` - Shared gallery styling used across landing/detail pages
+- `screenshots/` - Thumbnail images used by prototype cards
+- `password-gate.js` - Lightweight access prompt used by protected prototype links/pages
 
 ## How Access Protection Works
 
@@ -42,22 +46,23 @@ Because this is static client-side code, passwords can be discovered by someone 
 
 ## Add a New Prototype
 
-1. Add your prototype file to the repo root, for example:
-   - `new-prototype.html`
+1. Add your prototype file in the location that fits your use case:
+   - Repo root for a standalone prototype (for example, `new-prototype.html`)
+   - A project folder for project-specific screens (for example, `project-name/new-prototype.html`)
 2. (Optional) Add a screenshot in `screenshots/`.
-3. Duplicate an existing card in `index.html` and update:
+3. Duplicate an existing card in the relevant `index.html` and update:
    - Card title and description
    - Link `href`
    - `data-prototype-title`
    - `data-prototype-password`
-4. Insert the new card before existing cards so the newest prototype appears first on the landing page.
+4. On the main landing page, insert the new card before existing cards so the newest prototype appears first. Project landing pages may have a more intuitive custom sort order.
 
 Example link:
 
 ```html
 <a
   class="card-link"
-  href="new-prototype.html"
+  href="./new-prototype.html"
   data-prototype-title="New Prototype"
   data-prototype-password="replace-with-password"
 >View prototype</a>

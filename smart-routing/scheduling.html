@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMART Routing - Scheduling Manager Grid</title>
+<title>SMART Routing - Scheduling Grid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="smart-routing.css?v=2026-06-23f">
-<meta name="prototype-title" content="SMART Routing — Scheduling Manager Grid">
-<meta name="prototype-password" content="wage-music-norm-yeah">
+<meta name="prototype-title" content="SMART Routing - Scheduling Grid">
+<meta name="prototype-password" content="employ-skip-pot-fault">
 <meta name="prototype-back" content="index.html">
 <script src="../password-gate.js?v=2026-06-18b"></script>
 </head>
@@ -40,12 +40,13 @@
     <div class="applied-filters" id="appliedFilters">
       <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Birmingham, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
       <span class="filter-chip"><span class="chip-text"><span class="chip-label">Warehouse:</span> <span class="chip-value">Gadsden, AL</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Me</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
+      <span class="filter-chip"><span class="chip-text"><span class="chip-label">Assigned to:</span> <span class="chip-value">Unassigned</span></span><button class="chip-remove" aria-label="Remove filter"></button></span>
     </div>
   </div>
   <div class="data-grid" id="grid">
     <div class="grid-track">
       <div class="grid-header">
-        <div class="header-cell col-select"><span class="checkbox" id="selectAll" role="checkbox" aria-checked="false" aria-label="Select all rows" tabindex="0"></span></div>
         <div class="header-cell col-assignee">Assignee</div>
         <div class="header-cell col-order">Order</div>
         <div class="header-cell col-priority">Priority / Reason</div>
@@ -61,12 +62,12 @@
     </div>
   </div>
 
-<script src="smart-routing-grid-data.js?v=2026-06-23d"></script>
-<script src="smart-routing-grid.js?v=2026-06-24a"></script>
+<script src="grid-data.js?v=2026-06-23d"></script>
+<script src="grid.js?v=2026-06-24a"></script>
 <script>
   SmartRoutingGrid.init({
-    variant: 'manager',
-    assigneeMode: 'search'
+    variant: 'scheduling',
+    assigneeMode: 'menu'
   });
 </script>
 </body>

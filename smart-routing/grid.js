@@ -155,7 +155,7 @@
   function linkValueOrDash(value) {
     var text = String(value || '').trim();
     if (!text) return '<span class="cell-main">–</span>';
-    return '<span class="cell-main link" tabindex="0">' + text + '</span>';
+    return '<span class="cell-main">' + text + '</span>';
   }
 
   function buildRowHtml(r, i, variant) {

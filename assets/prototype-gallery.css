@@ -292,53 +292,95 @@ body.details-page header {
   color: #1c1917;
 }
 
+.details-toc-list a.is-active {
+  background: #e5f2f9;
+  color: #00669E;
+  font-weight: 600;
+}
+
+/* Top-level TOC entries are bold to distinguish them from sub-headings */
+.details-toc-list > li > a {
+  font-weight: 600;
+  color: #1c1917;
+}
+
+/* Nested TOC: sub-headings under a top-level entry */
+.details-toc-sublist {
+  list-style: none;
+  margin: 2px 0 6px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid #e7e5e4;
+}
+
+.details-toc-sublist li + li {
+  margin-top: 2px;
+}
+
+.details-toc-sublist a {
+  font-size: 12px;
+  color: #78716c;
+}
+
+/* Content wrapper: semantic article, no card chrome */
 .details-article {
   max-width: 100%;
   margin: 0;
+}
+
+/* Each major section is its own card */
+.details-section {
   background: #ffffff;
   border: 1px solid #e7e5e4;
   border-radius: 8px;
   padding: 24px;
-}
-
-.details-article h2,
-.details-article h3,
-.details-article h4 {
-  color: #1c1917;
-  line-height: 1.35;
-}
-
-.details-article h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.details-article h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border-top: 1px solid #e7e5e4;
-  padding-top: 22px;
+  margin-bottom: 20px;
   scroll-margin-top: 16px;
 }
 
-.details-article h3:first-of-type {
-  margin-top: 26px;
-  border-top: none;
-  padding-top: 0;
+.details-section:last-child {
+  margin-bottom: 0;
 }
 
-.details-article h4 {
+.details-section-title,
+.details-subhead {
+  line-height: 1.35;
+}
+
+.details-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00669E;
+  margin-bottom: 14px;
+}
+
+.details-subhead {
   font-size: 16px;
   font-weight: 600;
-  margin-top: 20px;
+  color: #1c1917;
+  margin-top: 22px;
   margin-bottom: 8px;
 }
 
+.details-subhead:first-of-type {
+  margin-top: 4px;
+}
+
+/* Minor label heading (third level, e.g. "Available filters", "Behavior") */
+.details-article h4 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1c1917;
+  line-height: 1.35;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
 .details-article p,
-.details-article li {
+.details-article li,
+.details-article dt,
+.details-article dd {
   font-size: 14px;
   line-height: 1.65;
   color: #57534e;
@@ -348,6 +390,10 @@ body.details-page header {
   margin-bottom: 12px;
 }
 
+.details-lead {
+  font-size: 15px;
+}
+
 .details-article ul,
 .details-article ol {
   margin: 8px 0 12px 22px;
@@ -355,6 +401,70 @@ body.details-page header {
 
 .details-article li + li {
   margin-top: 4px;
+}
+
+/* Definition list rendered as a scannable two-column reference table:
+   term in a fixed left column, description on the right, hairline per row. */
+.details-deflist {
+  display: grid;
+  grid-template-columns: minmax(110px, 180px) 1fr;
+  margin: 12px 0;
+  border-top: 1px solid #e7e5e4;
+}
+
+.details-deflist dt {
+  grid-column: 1;
+  font-weight: 600;
+  color: #1c1917;
+  padding: 10px 0;
+  border-bottom: 1px solid #e7e5e4;
+}
+
+.details-deflist dd {
+  grid-column: 2;
+  margin: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #e7e5e4;
+}
+
+.details-deflist dd ul {
+  margin: 0 0 0 18px;
+}
+
+.details-deflist dd ul li:first-child {
+  margin-top: 0;
+}
+
+/* "Preview only" flag pill */
+.details-flag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #00669E;
+  background: #e5f2f9;
+  border-radius: 10px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* Note callout box (scoped under .details-article so it outweighs `.details-article p`) */
+.details-article .details-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #57534e;
+  background: #f7fbfd;
+  border-left: 3px solid #99cce8;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  display: flex;
+  gap: 6px;
+}
+
+.details-article .details-note strong {
+  color: #00669E;
 }
 
 @media (max-width: 720px) {
@@ -369,8 +479,21 @@ body.details-page header {
     margin-top: 16px;
   }
 
-  .details-article {
+  .details-section {
     padding: 16px;
+  }
+
+  .details-deflist {
+    grid-template-columns: 1fr;
+  }
+
+  .details-deflist dt {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .details-deflist dd {
+    padding-top: 4px;
   }
 
   .details-layout {

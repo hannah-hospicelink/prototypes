@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Management Dashboard Update - Scheduling</title>
+  <title>Order Management Dashboard Update - Dispatch and Site Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,8 +12,8 @@
 </head>
 <body class="subpage details-page">
   <header>
-    <h1>Order Management Dashboard Update - Scheduling</h1>
-    <p>Overview of scope, role behavior, filtering, and grid interactions for scheduling prototypes.</p>
+    <h1>Order Management Dashboard Update - Dispatch and Site Management</h1>
+    <p>Overview of scope, role behavior, filtering, and grid interactions for dispatch and site management prototypes.</p>
     <a class="crumb" href="./index.html" aria-label="Back to SMART Routing prototypes">
       <span class="crumb-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -44,16 +44,12 @@
           </ul>
         </li>
         <li><a href="#toolbar-actions">Table Toolbar Actions</a></li>
-        <li><a href="#grid-columns">Grid Columns</a>
-          <ul class="details-toc-sublist">
-            <li><a href="#all-scheduling-users">All Scheduling Users</a></li>
-            <li><a href="#scheduling-manager-users">Scheduling Manager Users</a></li>
-          </ul>
-        </li>
+        <li><a href="#grid-columns">Grid Columns</a></li>
         <li><a href="#expanded-row-content">Expanded Row Content</a></li>
         <li><a href="#grid-actions">Grid Actions</a>
           <ul class="details-toc-sublist">
-            <li><a href="#edit-assignee">Edit Assignee</a></li>
+            <li><a href="#edit-driver">Edit Driver</a></li>
+            <li><a href="#edit-route">Edit Route</a></li>
             <li><a href="#edit-tags">Edit Tags</a></li>
             <li><a href="#more-actions-menu">More Actions Menu</a></li>
           </ul>
@@ -61,7 +57,7 @@
       </ul>
     </aside>
 
-    <article class="details-article" aria-label="Scheduling details overview">
+    <article class="details-article" aria-label="Dispatch and Site Management details overview">
       <section class="details-section" id="overview">
         <h2 class="details-section-title">Overview</h2>
         <p class="details-lead">The goal of this project is to modernize and simplify the DMETrack order management dashboard to provide only information relevant to a user's role presented in an easy-to-digest manner.</p>
@@ -73,12 +69,11 @@
 
         <h3 class="details-subhead" id="roles">Roles</h3>
         <p>We're updating DMETrack to better assign users to roles, which will allow us to customize what content is displayed and unlock different sets of functionality.</p>
-        <p>The prototypes here demonstrate what the grid would look and act like for users with the <strong>Scheduling</strong> role alone as well as users with both <strong>Scheduling</strong> and <strong>Manager</strong> roles.</p>
+        <p>The prototypes here demonstrate what the grid would look and act like for users with <strong>Dispatch</strong> and <strong>Site Manager</strong> roles. The content and functionality available to these roles within the grid is the same. Differences come later as additional features &mdash; such as warehouse zoning &mdash; are introduced.</p>
 
         <h3 class="details-subhead" id="assignment">Assignment</h3>
-        <p>Scheduling users can claim orders to work on by assigning the order to themselves. This replaces the previous system of using the unreliable Viewed By data with a dedicated assignment mechanism or using the driver and route tags to indicate which department should work an order. Once claimed, the order is removed from the scheduling queue and added to the user's personal list of orders.</p>
-        <p>Users can also assign orders to other departments to move them from the scheduling queue to the appropriate department queue. Other departments in scope are Respiratory Therapy, Purchasing, and Dispatch.</p>
-        <p>The average scheduling user can only assign an order to themselves or another department. Scheduling users with manager roles have additional capabilities for assigning orders to other users or clearing the assignment to move the order back to the unassigned queue.</p>
+        <p>The new Assignment field is used to indicate which user or department is responsible for an order. When the scheduling team has finalized the schedule for an order and it's ready for fulfillment, they will assign it to Dispatch. It will then show up on the dispatch board.</p>
+        <p>If an order is reset or needs to be rescheduled, the assignment is cleared so it goes back to the scheduling board.</p>
 
         <h3 class="details-subhead" id="tagging">Tagging</h3>
         <p>Tags are used to display attributes about the order, patient, or client. They can be used to filter and sort orders in the grid.</p>
@@ -90,38 +85,52 @@
 
         <h3 class="details-subhead" id="standard-filters">Standard Filters</h3>
         <p>Standard filters can be added or removed using the filter button in the toolbar. When filters are applied, a red dot is displayed on the filter button.</p>
-        
+
         <h4>Available filters</h4>
         <ul>
           <li>Warehouses</li>
-          <li>Order type</li>
-          <li>Order priority</li>
+          <li>Order status</li>
+          <li>Schedule date</li>
           <li>Order reason</li>
-          <li>Schedule status</li>
+          <li>Order priority</li>
+          <li>Driver</li>
+          <li>Route</li>
           <li>Tags</li>
-          <li>Assigned to</li>
         </ul>
 
         <h4>Behavior</h4>
         <ul>
-          <li>Warehouse and tags filters are searchable autocompletes.</li>
-          <li>Order type, priority, reason, and schedule status are basic dropdowns.</li>
+          <li>Warehouse, driver, and tags filters are searchable autocompletes.</li>
+          <li>Order priority, reason, and route status are basic dropdowns.</li>
           <li>All dropdown and autocomplete inputs allow selecting multiple options.</li>
+          <li>Order status and schedule date are filter chips where the user can select one or more options. At least one selection is required.</li>
         </ul>
 
-        <p>The "Assigned to" field changes depending on the user's role:</p>
+        <h4>Order status options</h4>
         <ul>
-          <li><em>Standard scheduling users</em> can select "Me" and/or "Unassigned" to view orders they have claimed and/or orders that have not been claimed yet. At least one selection is required.</li>
-          <li><em>Scheduling manager users</em> see a searchable dropdown where they can select one or more scheduling users whose orders they would like to view and/or unassigned orders. If left blank, all orders are shown.</li>
+          <li><strong>Open:</strong> Orders in Received, Acknowledged, or En Route status with a confirmed schedule that are assigned to the Dispatch queue</li>
+          <li><strong>Closed last 48 hours:</strong> Orders completed within the last 48 hours</li>
         </ul>
+        <h4>Schedule date options</h4>
+        <ul>
+          <li>Yesterday</li>
+          <li>Today</li>
+          <li>Tomorrow</li>
+        </ul>
+
+        <p>To prevent latency of these critical functions, filtering on order status and schedule date is limited to a smaller subset of orders. This dashboard is intended for day-to-day order fulfillment operations. A wider selection of orders can be searched using a separate order report.</p>
+
         <p class="details-note"><strong>Note</strong> Filtering is not enabled in this limited prototype. It simply displays an example of the available filters.</p>
 
         <h3 class="details-subhead" id="quick-filters">Quick Filters</h3>
         <p>Quick filters are buttons that allow the user to further narrow down the results returned from the standard filters.</p>
         <h4>Available filters</h4>
         <ul>
+          <li>STAT / Urgent</li>
+          <li>SLA approaching</li>
+          <li>Missed schedule</li>
+          <li>Delayed</li>
           <li>Rescheduled</li>
-          <li>STAT/Urgent</li>
           <li>New note</li>
         </ul>
         <h4>Behavior</h4>
@@ -130,7 +139,6 @@
           <li>Clicking an active filter toggles it off</li>
           <li>Grid rows are shown/hidden by predicate logic tied to each filter</li>
           <li>Each filter displays a badge with the number of orders in the list that match the filter criteria</li>
-          <li>Count badges will be dynamically updated to reflect real-time order details</li>
         </ul>
 
         <h3 class="details-subhead" id="applied-filter-chips">Applied Filter Chips</h3>
@@ -147,14 +155,6 @@
         <dl class="details-deflist">
           <dt>Download</dt>
           <dd>Download a spreadsheet of the current order results. <span class="details-flag">Preview only</span></dd>
-
-          <dt>Order history</dt>
-          <dd>View a list of the last 5 orders changed by the user.
-            <ul>
-              <li>Error prevention should the user move the order into the dispatch queue prematurely</li>
-              <li>Displays high-level order details and links to the Edit Order page and Patient Profile</li>
-            </ul>
-          </dd>
 
           <dt>Column customization</dt>
           <dd>Allows the user to show or hide columns. <span class="details-flag">Preview only</span></dd>
@@ -173,22 +173,25 @@
       <section class="details-section" id="grid-columns">
         <h2 class="details-section-title">Grid Columns</h2>
 
-        <h3 class="details-subhead" id="all-scheduling-users">All Scheduling Users</h3>
         <dl class="details-deflist">
-          <dt>Assignee</dt>
+          <dt>Select checkbox</dt>
           <dd>
             <ul>
-              <li>Name of the user who is working the order (blank when unassigned)</li>
-              <li>Edit pencil button on hover to allow changing assignee (<em>see Grid Actions below</em>)</li>
+              <li>Row checkbox for selecting one or more orders</li>
+              <li>Header checkbox supports selecting/deselecting all</li>
+              <li>Users can perform bulk actions on the selected orders. <span class="details-flag">Preview only</span></li>
             </ul>
           </dd>
+
+          <dt>ZIP</dt>
+          <dd>Order ZIP code</dd>
 
           <dt>Order</dt>
           <dd>
             <ul>
               <li>Order ID (links to Edit Order page)</li>
               <li>Flashing "New Note" icon when applicable</li>
-              <li>Order type</li>
+              <li>Color-coded order status badge</li>
             </ul>
           </dd>
 
@@ -203,17 +206,36 @@
           <dt>Patient</dt>
           <dd>Patient name (links to Patient Profile)</dd>
 
-          <dt>Ordered</dt>
-          <dd>Date and time order was placed (dash if empty)</dd>
-
-          <dt>Requested</dt>
-          <dd>Date and time window requested by client, patient, or caregiver (dash if empty)</dd>
-
           <dt>Scheduled</dt>
-          <dd>Date and time window of order schedule (dash if empty)</dd>
+          <dd>Date and time window of order schedule</dd>
 
-          <dt>Schedule Status</dt>
-          <dd>Color-coded badge showing where the order is in the scheduling process</dd>
+          <dt>ETA</dt>
+          <dd>
+            <ul>
+              <li>Estimated arrival time or time window when available (dash if empty)</li>
+              <li>Optional status caption (for example: En route, Arrived, Delayed)</li>
+            </ul>
+          </dd>
+
+          <dt>Completed</dt>
+          <dd>Completion date/time when available (dash if empty)</dd>
+
+          <dt>Driver</dt>
+          <dd>
+            <ul>
+              <li>Assigned driver name (dash if unassigned)</li>
+              <li>Clicking driver name filters list to that driver's orders</li>
+              <li>Editable via dropdown with searchable, warehouse-grouped options</li>
+            </ul>
+          </dd>
+
+          <dt>Route</dt>
+          <dd>
+            <ul>
+              <li>Route value (dash if empty)</li>
+              <li>Editable via dropdown <span class="details-flag">Preview only</span></li>
+            </ul>
+          </dd>
 
           <dt>Tags</dt>
           <dd>
@@ -242,15 +264,12 @@
             </ul>
           </dd>
         </dl>
-
-        <h3 class="details-subhead" id="scheduling-manager-users">Scheduling Manager Users</h3>
-        <p>In addition to the content above, manager users have an additional column in the header and each row containing a checkbox. Users can perform bulk actions on the selected orders. <span class="details-flag">Preview only</span></p>
       </section>
 
       <section class="details-section" id="expanded-row-content">
         <h2 class="details-section-title">Expanded Row Content</h2>
         <p>The chevron button on the far right of the row allows the users to expand or collapse more content about the order.</p>
-        <p>When a row is expanded, two detail sections are displayed:</p>
+        <p>When a row is expanded, four detail sections are displayed:</p>
         <dl class="details-deflist">
           <dt>Client</dt>
           <dd>
@@ -262,52 +281,55 @@
 
           <dt>Provider</dt>
           <dd>Warehouse name</dd>
+
+          <dt>Address</dt>
+          <dd>
+            <ul>
+              <li>Address type</li>
+              <li>Full address lines</li>
+              <li>"View on map" button <span class="details-flag">Preview only</span></li>
+            </ul>
+          </dd>
+
+          <dt>Primary Contact</dt>
+          <dd>
+            <ul>
+              <li>Contact name</li>
+              <li>Relationship</li>
+              <li>Phone number and phone type (landline or mobile)</li>
+            </ul>
+          </dd>
         </dl>
       </section>
 
       <section class="details-section" id="grid-actions">
         <h2 class="details-section-title">Grid Actions</h2>
 
-        <h3 class="details-subhead" id="edit-assignee">Edit Assignee</h3>
-        <p>When hovering over an Assignee cell, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
-        <dl class="details-deflist">
-          <dt>Standard schedulers</dt>
-          <dd>
-            <ul>
-              <li>Basic dropdown with limited options</li>
-              <li>Can select "Me" to claim the order for working</li>
-              <li>Cannot assign to other users or unassign the order from themselves</li>
-            </ul>
-          </dd>
-          <dt>Scheduling managers</dt>
-          <dd>
-            <ul>
-              <li>Searchable dropdown listing all schedulers</li>
-              <li>Can assign the order to themselves or search a list of scheduling users to someone else</li>
-              <li>Can also clear the assignment to send the order back to the scheduling queue</li>
-            </ul>
-          </dd>
-          <dt>All schedulers</dt>
-          <dd>
-            <ul>
-              <li>Can assign the order to other user groups representing different departments</li>
-              <li>This removes the order from the scheduling queue and adds it to the boards for the selected user group</li>
-            </ul>
-          </dd>
-        </dl>
+        <h3 class="details-subhead" id="edit-driver">Edit Driver</h3>
+        <p>When hovering over a Driver cell, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
+        <p>Users can search a list of drivers and select one to assign. They may also remove the assigned driver.</p>
+        <p>Drivers are grouped by warehouse for easier selection. (A single driver may appear under multiple warehouses.)</p>
+        <p class="details-note"><strong>Note</strong> How drivers and warehouses are sorted is to be determined. Some ideas include sorting the warehouse groups by distance from ordering warehouse, sorting the order warehouse to the top then listing other warehouses after, only displaying warehouses zoned for the order address area, or simply alphabetizing.</p>
 
-        <h4>Department groups</h4>
-        <p>Orders can be assigned to <strong>Respiratory Therapy</strong>, <strong>Purchasing</strong>, or <strong>Dispatch</strong>. Orders can only be assigned to Dispatch if they have a schedule set and are in the Confirmed or Rescheduled schedule status.</p>
+        <h3 class="details-subhead" id="edit-route">Edit Route</h3>
+        <p>When hovering over a Route cell, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
+        <p>Users will be able to select a route from a list of available routes. They may also remove the assigned route.</p>
+        <p class="details-note"><strong>Note</strong> Route selection UI is still in development.</p>
 
         <h3 class="details-subhead" id="edit-tags">Edit Tags</h3>
-        <p>When hovering over a Tags cell, a pencil icon is displayed. Clicking this enters the cell into edit mode. Users can search a list of tags and select one or more to apply. They may also remove tags.</p>
+        <p>When hovering over a Tags cell, a pencil icon is displayed. Clicking this enters the cell into edit mode.</p>
+        <p>Users can search a list of tags and select one or more to apply. They may also remove tags.</p>
         <p class="details-note"><strong>Note</strong> The list of tags presented here is an example, not a comprehensive or finalized list of tags that will be available.</p>
 
         <h3 class="details-subhead" id="more-actions-menu">More Actions Menu</h3>
         <p>Clicking the 3 dots icon on the far right opens the row action menu.</p>
+        <p>Available actions:</p>
         <dl class="details-deflist">
-          <dt>Schedule order</dt>
-          <dd>Respond to the schedule request or set a schedule for the order. <span class="details-flag">Preview only</span></dd>
+          <dt>Edit driver / route</dt>
+          <dd>Opens a modal to allow editing of the driver, route, and tag values at one time. <span class="details-flag">Preview only</span></dd>
+
+          <dt>Add on</dt>
+          <dd>Place the order on an existing route as an add on. <span class="details-flag">Preview only</span></dd>
 
           <dt>Reset order</dt>
           <dd>Clear the order schedule and reset it to Received/Acknowledged status. <span class="details-flag">Preview only</span></dd>

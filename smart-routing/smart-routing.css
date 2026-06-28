@@ -669,7 +669,7 @@
   .col-tags     { flex: 248 0 248px; }
   .col-actions  { flex: 0 0 var(--density-actions-col-width); }
   .col-select   { flex: 0 0 var(--density-select-col-width); }   /* checkbox column hugs checkbox + density padding */
-  .col-zip      { flex: 80 0 80px; }
+  .col-address  { flex: 112 0 112px; }
   .col-eta      { flex: 152 0 152px; }
   .col-completed{ flex: 136 0 136px; }
   .col-driver   { flex: 124 0 124px; }
@@ -677,7 +677,7 @@
 
   /* Dispatch-only table layout — all fixed cols use flex-grow:0 so they stay at exact Figma basis */
   .dispatch-layout .col-select    { flex: 0 0 var(--density-select-col-width); }
-  .dispatch-layout .col-zip       { flex: 0 0 64px; }
+  .dispatch-layout .col-address   { flex: 0 0 112px; }
   .dispatch-layout .col-order     { flex: 0 0 152px; }
   .dispatch-layout .col-priority  { flex: 0 0 148px; }
   .dispatch-layout .col-patient   { flex: 0 0 136px; }

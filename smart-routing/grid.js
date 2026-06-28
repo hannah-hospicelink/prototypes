@@ -133,6 +133,16 @@
     return match ? match[0] : '';
   }
 
+  function extractCityState(r) {
+    if (!Array.isArray(r.addr)) return '';
+    var last = r.addr[r.addr.length - 1] || '';
+    var match = last.match(/^(.+?),\s*([A-Z]{2})[^a-zA-Z]/);
+    if (match) return match[1].trim() + ', ' + match[2];
+    match = last.match(/^(.+?),\s*([A-Z]{2})$/);
+    if (match) return match[1].trim() + ', ' + match[2];
+    return '';
+  }
+
   function getOrderStatusBadgeText(r) {
     if (r.dispatchBadgeText) return r.dispatchBadgeText;
     if (!r.status || !r.status.t) return r.orderType;
@@ -183,12 +193,13 @@
 
     if (dispatch) {
       const zip = extractZip(r);
+      const cityState = extractCityState(r);
       const orderBadgeText = getOrderStatusBadgeText(r);
       const orderBadgeVariant = getOrderStatusBadgeVariant(r);
 
       return '<div class="row-main" data-index="' + i + '">' +
         selectCell +
-        '<div class="row-cell col-zip"><span class="cell-main">' + (zip || '-') + '</span></div>' +
+        '<div class="row-cell col-address"><div class="cell-stack"><span class="cell-main">' + (zip || '-') + '</span>' + (cityState ? '<span class="cell-caption">' + cityState + '</span>' : '') + '</div></div>' +
         '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><div class="badges"><span class="badge order-status-badge ' + orderBadgeVariant + '">' + orderBadgeText + '</span></div></div></div>' +
         '<div class="row-cell col-priority"><div class="cell-stack"><span class="cell-main ' + priorityClass + '">' + r.priority + '</span><span class="cell-caption">' + r.reason + '</span></div></div>' +
         '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +

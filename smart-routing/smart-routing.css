@@ -820,11 +820,11 @@
   }
   .tags-overflow-pop-arrow {
     position: absolute;
-    top: -10px;
+    top: -6px;
     left: 50%;
     transform: translateX(-50%);
-    width: 28px;
-    height: 10px;
+    width: 16px;
+    height: 8px;
     display: block;
     pointer-events: none;
     filter: drop-shadow(0 -0.5px 1px rgba(0,0,0,0.16));

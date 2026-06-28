@@ -1069,6 +1069,7 @@
   .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); }
   .tag-option-check svg { width: var(--icon-xs); height: var(--icon-xs); display: block; }
   .tag-buttons { display: flex; align-items: center; justify-content: space-between; }
+  .assignee-actions { justify-content: flex-end; }
   /* Deselect all and Save reuse shared text-button classes (tertiary + primary). */
   .menu-heading {
     height: var(--menu-heading-height);

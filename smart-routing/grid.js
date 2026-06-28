@@ -443,8 +443,10 @@
 
   function setupEditableCellMenu(cell, config, state) {
     let selected = config.value || null;
+    let pendingSelected = selected;
     let menuOpen = false;
     let menuEl = null;
+    const requiresConfirm = !!config.requireConfirm;
 
     const api = { exitEdit: function () { if (cell.classList.contains('editing')) renderDisplay(); } };
     state.editableCells.add(api);
@@ -464,6 +466,7 @@
     function enterEdit(openMenu) {
       state.editableCells.forEach(function (other) { if (other !== api) other.exitEdit(); });
       cell.classList.add('editing', 'cell-edit-active');
+      pendingSelected = selected;
       cell.innerHTML = '<div class="cell-field" tabindex="0"><span class="cell-field-value">' + (selected || '') + '</span><span class="cell-field-chevron">' + ICON_COLLAPSE + '</span></div>';
       cell.querySelector('.cell-field').addEventListener('click', function (e) {
         e.stopPropagation();
@@ -489,8 +492,8 @@
         const option = normalizeOption(opt);
         const label = option.label;
         const disabled = option.disabled;
-        return '<div class="menu-option ' + (label === selected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '">' + label + '</div>';
-      }).join('');
+        return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '">' + label + '</div>';
+      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button">Confirm</button></div>' : '');
       document.body.appendChild(menuEl);
       cell.classList.add('menu-open');
       menuOpen = true;
@@ -500,13 +503,31 @@
       menuEl.querySelectorAll('.menu-option:not(.disabled)').forEach(function (o) {
         o.addEventListener('click', function (e) {
           e.stopPropagation();
-          selected = o.dataset.value;
-          if (config.onChange) config.onChange(selected);
-          closeMenu();
-          const val = cell.querySelector('.cell-field-value');
-          if (val) val.textContent = selected;
+          pendingSelected = o.dataset.value;
+          menuEl.querySelectorAll('.menu-option').forEach(function (optionEl) {
+            optionEl.classList.toggle('selected', optionEl === o);
+          });
+          if (!requiresConfirm) {
+            selected = pendingSelected;
+            if (config.onChange) config.onChange(selected);
+            closeMenu();
+            const val = cell.querySelector('.cell-field-value');
+            if (val) val.textContent = selected;
+          }
         });
       });
+
+      if (requiresConfirm) {
+        const confirmBtn = menuEl.querySelector('.assignee-confirm');
+        if (confirmBtn) {
+          confirmBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            selected = pendingSelected;
+            if (config.onChange) config.onChange(selected);
+            renderDisplay();
+          });
+        }
+      }
     }
 
     function closeMenu() {
@@ -663,7 +684,8 @@
       setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
         value: r.assignee || null,
         options: options,
-        heading: assigneeMode === 'search' ? null : 'Select assignee',
+        heading: null,
+        requireConfirm: assigneeMode === 'menu',
         ariaLabel: 'Edit assignee',
         onChange: function (v) { r.assignee = v; }
       }, state, assigneeMode);

@@ -53,6 +53,8 @@
     }
   ];
 
+  const ROUTE_OPTIONS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
   const RECENT_ORDERS = [
     { type: 'Delivery', id: '#123455789', patient: 'John Smith', client: 'HarborLight Hospice Care - HarborLight Hospice Care - Birmingham' },
     { type: 'Pickup', id: '#123455123', patient: 'Emily Johnson', client: 'Big Heart Hospice & Home Care - Big Heart Birmingham' },
@@ -347,6 +349,8 @@
     let working = null;
     let popEl = null;
     const optionHeadingClass = config.optionHeadingClass || 'menu-heading';
+    const popoverClass = config.popoverClass || 'assignee-popover';
+    const optionClass = config.optionClass || 'tag-option';
 
     const api = { exitEdit: function () { if (popEl) close(); } };
     state.editableCells.add(api);
@@ -383,7 +387,7 @@
             const label = option.label;
             const value = option.value;
             const disabled = option.disabled;
-            return '<div class="tag-option ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
+            return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
           }).join('');
         }).join('');
       } else {
@@ -394,13 +398,13 @@
           const value = entry.value || entry.label;
           const disabled = entry.disabled;
           if (q && label.toLowerCase().indexOf(q) === -1) return '';
-          return '<div class="tag-option ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
+          return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
         }).join('');
       }
-      list.querySelectorAll('.tag-option:not(.disabled)').forEach(function (o) {
+      list.querySelectorAll('[data-edit-option]:not(.disabled)').forEach(function (o) {
         o.addEventListener('click', function () {
           working = o.dataset.value;
-          list.querySelectorAll('.tag-option').forEach(function (x) { x.classList.toggle('selected', x === o); });
+          list.querySelectorAll('[data-edit-option]').forEach(function (x) { x.classList.toggle('selected', x === o); });
         });
       });
     }
@@ -410,7 +414,7 @@
       state.editableCells.forEach(function (c) { if (c !== api) c.exitEdit(); });
       working = selected;
       popEl = document.createElement('div');
-      popEl.className = 'assignee-popover';
+      popEl.className = popoverClass;
       popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
@@ -424,7 +428,7 @@
       popEl.querySelector('.assignee-clear').addEventListener('click', function (e) {
         e.stopPropagation();
         working = null;
-        popEl.querySelectorAll('.tag-option').forEach(function (x) { x.classList.remove('selected'); });
+        popEl.querySelectorAll('[data-edit-option]').forEach(function (x) { x.classList.remove('selected'); });
       });
       popEl.querySelector('.assignee-save').addEventListener('click', function (e) {
         e.stopPropagation();
@@ -501,7 +505,7 @@
     function openMenuList() {
       if (menuEl) return;
       menuEl = document.createElement('div');
-      menuEl.className = 'cell-menu';
+      menuEl.className = 'cell-menu inline-edit-menu';
       menuEl.innerHTML = (config.heading ? '<div class="menu-heading">' + config.heading + '</div>' : '') + config.options.map(function (opt) {
         const option = normalizeOption(opt);
         const label = option.label;
@@ -718,6 +722,20 @@
         },
         onChange: function (v) { r.driver = v || ''; }
       }, state, 'search');
+
+      setupEditableCell(row.querySelector('.col-route.editable-cell'), {
+        value: r.route || '',
+        options: ROUTE_OPTIONS,
+        clearLabel: 'Clear route',
+        saveLabel: 'Save',
+        ariaLabel: 'Edit route',
+        popoverClass: 'assignee-popover route-popover',
+        optionClass: 'tag-option route-option',
+        renderDisplay: function (value) {
+          return linkValueOrDash(value);
+        },
+        onChange: function (v) { r.route = v || ''; }
+      }, state, 'search');
     }
 
     setupTagCell(row.querySelector('.col-tags.editable-cell'), r, state);
@@ -854,6 +872,7 @@
     overlayEl.addEventListener('click', function (e) {
       if (!modalEl.contains(e.target)) close();
     });
+
     overlayEl.querySelector('.edit-driver-route-close').addEventListener('click', close);
     overlayEl.querySelector('.edit-driver-route-btn-cancel').addEventListener('click', close);
     overlayEl.querySelector('.edit-driver-route-btn-save').addEventListener('click', close);

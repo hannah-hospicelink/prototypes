@@ -1031,14 +1031,26 @@
     --_popover-width: 361px;
     --_popover-max-width: calc(100vw - 16px);
     --_popover-gap: var(--spacing-tiny);
-    --_popover-padding: var(--spacing-xxs);
+    --_popover-padding: var(--spacing-xs);
   }
   /* scheduling manager assignment popover (popover variant config) */
   .assignee-popover {
     --_popover-width: 300px;
     --_popover-max-width: calc(100vw - 16px);
     --_popover-gap: var(--spacing-tiny);
-    --_popover-padding: var(--spacing-xxs);
+    --_popover-padding: var(--spacing-xs);
+  }
+  .inline-edit-menu {
+    --_popover-padding: var(--spacing-xs);
+  }
+  .route-popover {
+    --_popover-width: 180px;
+    --_popover-max-width: calc(100vw - 16px);
+    --_popover-gap: var(--spacing-xxs);
+    --_popover-padding: var(--spacing-xs);
+  }
+  .route-popover .route-option {
+    justify-content: center;
   }
   /* field base (search variant, no pointer cursor) */
   .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); color: var(--input-text-adornment); }

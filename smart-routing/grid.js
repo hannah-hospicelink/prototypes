@@ -726,6 +726,7 @@
         clearLabel: 'Clear driver',
         saveLabel: 'Save',
         ariaLabel: 'Edit driver',
+        popoverClass: 'assignee-popover driver-popover',
         renderDisplay: function (value) {
           var text = String(value || '').trim();
           if (!text) return '<span class="cell-main">–</span>';
@@ -1033,6 +1034,8 @@
 
         popEl.innerHTML =
           field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
+          field('Order reason') +
+          field('Order priority') +
           chipGroupField('Order status', [
             { label: 'Open', active: true },
             { label: 'Closed last 48 hours', active: true }
@@ -1042,10 +1045,6 @@
             { label: 'Today', active: true },
             { label: 'Tomorrow', active: true }
           ]) +
-          field('Order reason') +
-          field('Order priority') +
-          field('Driver', { search: true }) +
-          field('Route') +
           field('Tags', { search: true }) +
           '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
 

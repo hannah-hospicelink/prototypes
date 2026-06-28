@@ -1028,7 +1028,7 @@
 
   /* tag edit popover (popover variant config) */
   .tag-popover {
-    --_popover-width: 361px;
+    --_popover-width: 256px;
     --_popover-max-width: calc(100vw - 16px);
     --_popover-gap: var(--spacing-tiny);
     --_popover-padding: var(--spacing-xs);
@@ -1039,6 +1039,9 @@
     --_popover-max-width: calc(100vw - 16px);
     --_popover-gap: var(--spacing-tiny);
     --_popover-padding: var(--spacing-xs);
+  }
+  .driver-popover {
+    --_popover-width: 240px;
   }
   .inline-edit-menu {
     --_popover-padding: var(--spacing-xs);

@@ -1072,14 +1072,17 @@
   .assignee-actions { justify-content: flex-end; }
   /* Deselect all and Save reuse shared text-button classes (tertiary + primary). */
   .menu-heading {
-    height: var(--menu-heading-height);
+    height: auto;
+    width: 100%;
     display: flex;
     align-items: center;
-    padding: var(--spacing-tiny) var(--menu-option-padding-x);
+    padding: var(--spacing-xs) var(--spacing-xxs) var(--spacing-xxs);
     font-size: var(--font-caption);
     line-height: var(--lh-compact);
-    color: var(--color-text-muted);
+    font-weight: 500;
+    color: var(--color-text-heading);
     text-transform: uppercase;
+    border-top: var(--border-width) solid var(--color-border-light);
   }
   .menu-divider {
     width: 100%;

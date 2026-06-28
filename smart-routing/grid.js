@@ -37,8 +37,20 @@
   ];
 
   const DRIVER_SECTIONS = [
-    { heading: 'Birmingham, AL', options: ['Eric E.', 'Hannah S.'] },
-    { heading: 'Gadsden, AL', options: ['Eric E.', 'Martin L.'] }
+    {
+      heading: 'Birmingham, AL',
+      options: [
+        { label: 'Eric Eilertsen', value: 'Eric E.' },
+        { label: 'Hannah Stein', value: 'Hannah S.' }
+      ]
+    },
+    {
+      heading: 'Gadsden, AL',
+      options: [
+        { label: 'Eric Eilertsen', value: 'Eric E.' },
+        { label: 'Oscar Rodriguez', value: 'Oscar R.' }
+      ]
+    }
   ];
 
   const RECENT_ORDERS = [
@@ -88,15 +100,15 @@
   }
 
   function normalizeOption(option) {
-    if (typeof option === 'string') return { label: option, disabled: false };
-    return { label: option.label, disabled: !!option.disabled };
+    if (typeof option === 'string') return { label: option, value: option, disabled: false };
+    return { label: option.label, value: option.value || option.label, disabled: !!option.disabled };
   }
 
   function normalizeSearchEntry(option) {
     if (typeof option === 'string') return { type: 'option', label: option, disabled: false };
     if (option && option.type === 'heading') return { type: 'heading', label: option.label };
     if (option && option.heading) return { type: 'heading', label: option.heading };
-    return { type: 'option', label: option.label, disabled: !!option.disabled };
+    return { type: 'option', label: option.label, value: option.value || option.label, disabled: !!option.disabled };
   }
 
   function clampPopoverLeft(left, popWidth) {
@@ -334,6 +346,7 @@
     let selected = config.value || null;
     let working = null;
     let popEl = null;
+    const optionHeadingClass = config.optionHeadingClass || 'menu-heading';
 
     const api = { exitEdit: function () { if (popEl) close(); } };
     state.editableCells.add(api);
@@ -366,21 +379,22 @@
             return option.label.toLowerCase().indexOf(q) !== -1;
           });
           if (!options.length) return '';
-          var divider = sectionIndex > 0 ? '<div class="menu-divider" role="presentation"></div>' : '';
-          return divider + '<div class="menu-heading">' + section.heading + '</div>' + options.map(function (option) {
+          return '<div class="' + optionHeadingClass + '">' + section.heading + '</div>' + options.map(function (option) {
             const label = option.label;
+            const value = option.value;
             const disabled = option.disabled;
-            return '<div class="tag-option ' + (label === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '"><span class="tag-option-label">' + label + '</span></div>';
+            return '<div class="tag-option ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
           }).join('');
         }).join('');
       } else {
         list.innerHTML = config.options.map(function (opt) {
           const entry = normalizeSearchEntry(opt);
-          if (entry.type === 'heading') return '<div class="menu-heading">' + entry.label + '</div>';
+          if (entry.type === 'heading') return '<div class="' + optionHeadingClass + '">' + entry.label + '</div>';
           const label = entry.label;
+          const value = entry.value || entry.label;
           const disabled = entry.disabled;
           if (q && label.toLowerCase().indexOf(q) === -1) return '';
-          return '<div class="tag-option ' + (label === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '"><span class="tag-option-label">' + label + '</span></div>';
+          return '<div class="tag-option ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
         }).join('');
       }
       list.querySelectorAll('.tag-option:not(.disabled)').forEach(function (o) {
@@ -397,7 +411,7 @@
       working = selected;
       popEl = document.createElement('div');
       popEl.className = 'assignee-popover';
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">Confirm</button></div>';
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
@@ -695,6 +709,7 @@
         options: [],
         sections: DRIVER_SECTIONS,
         clearLabel: 'Clear driver',
+        saveLabel: 'Save',
         ariaLabel: 'Edit driver',
         renderDisplay: function (value) {
           var text = String(value || '').trim();

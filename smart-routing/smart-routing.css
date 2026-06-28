@@ -411,6 +411,7 @@
   .cell-menu,
   .history-popover,
   .filter-popover,
+  .assignee-popover,
   .tag-popover {
     --_popover-width: auto;
     --_popover-max-width: none;
@@ -1032,6 +1033,13 @@
     --_popover-gap: var(--spacing-tiny);
     --_popover-padding: var(--spacing-xxs);
   }
+  /* scheduling manager assignment popover (popover variant config) */
+  .assignee-popover {
+    --_popover-width: 300px;
+    --_popover-max-width: calc(100vw - 16px);
+    --_popover-gap: var(--spacing-tiny);
+    --_popover-padding: var(--spacing-xxs);
+  }
   /* field base (search variant, no pointer cursor) */
   .tag-search-icon { width: var(--icon-sm); height: var(--icon-sm); color: var(--input-text-adornment); }
   .tag-search-icon svg { width: var(--icon-sm); height: var(--icon-sm); display: block; }
@@ -1051,7 +1059,11 @@
   .menu-option:hover,
   .tag-option:hover { background: var(--menu-option-hover); }
   .menu-option.selected,
-  .tag-option.selected { background: var(--menu-option-selected); }
+  .tag-option.selected {
+    background: var(--menu-option-selected);
+    color: var(--color-text-link-active);
+    font-weight: 500;
+  }
   .menu-option.disabled,
   .tag-option.disabled { opacity: 0.5; cursor: default; pointer-events: none; }
   .tag-option-check { width: var(--icon-xs); height: var(--icon-xs); }

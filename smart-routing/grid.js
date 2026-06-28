@@ -79,10 +79,10 @@
 
   function tagBadgesHtml(tags) {
     const sorted = sortTags(tags);
-    const visible = sorted.slice(0, 4);
-    const overflow = sorted.length - 4;
+    const visible = sorted.slice(0, 3);
+    const overflow = sorted.length - 3;
     if (overflow <= 0) return visible.map(badge).join('');
-    const overflowTags = sorted.slice(4);
+    const overflowTags = sorted.slice(3);
     const encoded = encodeURIComponent(JSON.stringify(overflowTags));
     return visible.map(badge).join('') + '<span class="tags-overflow" data-overflow="' + encoded + '">+' + overflow + ' more</span>';
   }
@@ -339,7 +339,8 @@
     state.editableCells.add(api);
 
     function renderDisplay() {
-      var displayHtml = config.renderDisplay ? config.renderDisplay(selected) : '<span class="cell-display-text">' + (selected || '') + '</span>';
+      var text = String(selected || '').trim();
+      var displayHtml = config.renderDisplay ? config.renderDisplay(selected) : '<span class="cell-display-text">' + (text || '-') + '</span>';
       cell.innerHTML = '<div class="cell-display">' + displayHtml + '<button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
       cell.querySelector('.edit-btn').addEventListener('click', function (e) {
         e.stopPropagation();
@@ -395,8 +396,8 @@
       state.editableCells.forEach(function (c) { if (c !== api) c.exitEdit(); });
       working = selected;
       popEl = document.createElement('div');
-      popEl.className = 'tag-popover';
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">Save</button></div>';
+      popEl.className = 'assignee-popover';
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">Confirm</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
@@ -452,7 +453,8 @@
       closeMenu();
       cell.classList.remove('editing', 'menu-open', 'cell-edit-active');
       menuOpen = false;
-      cell.innerHTML = '<div class="cell-display"><span class="cell-display-text">' + (selected || '') + '</span><button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
+      var text = String(selected || '').trim();
+      cell.innerHTML = '<div class="cell-display"><span class="cell-display-text">' + (text || '-') + '</span><button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
       cell.querySelector('.edit-btn').addEventListener('click', function (e) {
         e.stopPropagation();
         enterEdit(true);

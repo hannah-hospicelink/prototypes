@@ -694,7 +694,7 @@
     });
 
     const moreOptions = dispatch
-      ? ['Edit driver / route', 'Add on', 'Reset order', 'View equipment']
+      ? ['Edit driver / route', 'Add on', 'Set complete', 'Reset order', 'View equipment']
       : ['Schedule order', 'Reset order', 'View equipment'];
 
     setupMenuPopover(row.querySelector('.more-btn'), {

@@ -89,19 +89,17 @@
         <h4>Available filters</h4>
         <ul>
           <li>Warehouses</li>
-          <li>Order status</li>
-          <li>Schedule date</li>
           <li>Order reason</li>
           <li>Order priority</li>
-          <li>Driver</li>
-          <li>Route</li>
+          <li>Order status</li>
+          <li>Schedule date</li>
           <li>Tags</li>
         </ul>
 
         <h4>Behavior</h4>
         <ul>
-          <li>Warehouse, driver, and tags filters are searchable autocompletes.</li>
-          <li>Order priority, reason, and route status are basic dropdowns.</li>
+          <li>Warehouse and tags filters are searchable autocompletes.</li>
+          <li>Order status, priority, and reason are basic dropdowns.</li>
           <li>All dropdown and autocomplete inputs allow selecting multiple options.</li>
           <li>Order status and schedule date are filter chips where the user can select one or more options. At least one selection is required.</li>
         </ul>
@@ -183,8 +181,8 @@
             </ul>
           </dd>
 
-          <dt>ZIP</dt>
-          <dd>Order ZIP code</dd>
+          <dt>Address</dt>
+          <dd>Order ZIP and City, State</dd>
 
           <dt>Order</dt>
           <dd>
@@ -330,6 +328,9 @@
 
           <dt>Add on</dt>
           <dd>Place the order on an existing route as an add on. <span class="details-flag">Preview only</span></dd>
+
+          <dt>Set complete</dt>
+          <dd>Mark the order as complete with a date and time. If the order does not have a driver or route assigned, the user will be prompted to assign them first. <span class="details-flag">Preview only</span></dd>
 
           <dt>Reset order</dt>
           <dd>Clear the order schedule and reset it to Received/Acknowledged status. <span class="details-flag">Preview only</span></dd>

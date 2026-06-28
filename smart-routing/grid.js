@@ -102,15 +102,15 @@
   }
 
   function normalizeOption(option) {
-    if (typeof option === 'string') return { label: option, value: option, disabled: false };
-    return { label: option.label, value: option.value || option.label, disabled: !!option.disabled };
+    if (typeof option === 'string') return { label: option, value: option, disabled: false, tooltip: '' };
+    return { label: option.label, value: option.value || option.label, disabled: !!option.disabled, tooltip: option.tooltip || '' };
   }
 
   function normalizeSearchEntry(option) {
-    if (typeof option === 'string') return { type: 'option', label: option, disabled: false };
+    if (typeof option === 'string') return { type: 'option', label: option, disabled: false, tooltip: '' };
     if (option && option.type === 'heading') return { type: 'heading', label: option.label };
     if (option && option.heading) return { type: 'heading', label: option.heading };
-    return { type: 'option', label: option.label, value: option.value || option.label, disabled: !!option.disabled };
+    return { type: 'option', label: option.label, value: option.value || option.label, disabled: !!option.disabled, tooltip: option.tooltip || '' };
   }
 
   function clampPopoverLeft(left, popWidth) {
@@ -119,8 +119,81 @@
     return left;
   }
 
+  function escapeAttr(value) {
+    return String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Generic tooltip overlay. Shows a body-level tooltip when hovering/focusing
+  // any element carrying the configured attribute (default `data-tooltip`),
+  // reading its tooltip text from that attribute. Uses event delegation so it
+  // survives content re-renders. Attach to a container once, destroy on close.
+  // Options: { attr, className } — both optional.
+  function createTooltip(options) {
+    options = options || {};
+    const attr = options.attr || 'data-tooltip';
+    const selector = '[' + attr + ']';
+    const className = options.className || 'tooltip';
+    let tooltipEl = null;
+    let anchorEl = null;
+
+    function position() {
+      if (!tooltipEl || !anchorEl) return;
+      const r = anchorEl.getBoundingClientRect();
+      tooltipEl.style.top = r.bottom + 4 + 'px';
+      tooltipEl.style.left = clampPopoverLeft(r.left, tooltipEl.offsetWidth) + 'px';
+    }
+
+    function show(el) {
+      const text = el.getAttribute(attr);
+      if (!text) return;
+      if (anchorEl === el && tooltipEl) return;
+      hide();
+      anchorEl = el;
+      tooltipEl = document.createElement('div');
+      tooltipEl.className = className;
+      tooltipEl.setAttribute('role', 'tooltip');
+      tooltipEl.textContent = text;
+      document.body.appendChild(tooltipEl);
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+    }
+
+    function hide() {
+      if (tooltipEl) {
+        tooltipEl.remove();
+        tooltipEl = null;
+      }
+      anchorEl = null;
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+    }
+
+    function handleOver(e) {
+      const el = e.target.closest(selector);
+      if (el) show(el);
+    }
+    function handleOut(e) {
+      const el = e.target.closest(selector);
+      if (el && !el.contains(e.relatedTarget)) hide();
+    }
+
+    return {
+      attach: function (container) {
+        container.addEventListener('mouseover', handleOver);
+        container.addEventListener('mouseout', handleOut);
+        container.addEventListener('focusin', handleOver);
+        container.addEventListener('focusout', handleOut);
+      },
+      destroy: hide
+    };
+  }
+
   function buildAssigneeOptions(mode, dispatchEnabled) {
     const dispatchOption = { label: 'Dispatch', disabled: !dispatchEnabled };
+    if (!dispatchEnabled) {
+      dispatchOption.tooltip = 'Order must have a schedule in the Confirmed or Rescheduled status.';
+    }
     if (mode === 'search') {
       return ['Me', 'Carmen M.', 'Cece L.', 'Hannah S.', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
     }
@@ -359,6 +432,7 @@
     let selected = config.value || null;
     let working = null;
     let popEl = null;
+    let tooltip = null;
     const optionHeadingClass = config.optionHeadingClass || 'menu-heading';
     const popoverClass = config.popoverClass || 'assignee-popover';
     const optionClass = config.optionClass || 'tag-option';
@@ -398,7 +472,8 @@
             const label = option.label;
             const value = option.value;
             const disabled = option.disabled;
-            return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
+            const tooltipAttr = (disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
+            return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
           }).join('');
         }).join('');
       } else {
@@ -408,8 +483,9 @@
           const label = entry.label;
           const value = entry.value || entry.label;
           const disabled = entry.disabled;
+          const tooltipAttr = (disabled && entry.tooltip) ? ' data-tooltip="' + escapeAttr(entry.tooltip) + '"' : '';
           if (q && label.toLowerCase().indexOf(q) === -1) return '';
-          return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
+          return '<div class="' + optionClass + ' ' + (value === working ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" role="option" data-edit-option ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + value + '"><span class="tag-option-label">' + label + '</span></div>';
         }).join('');
       }
       list.querySelectorAll('[data-edit-option]:not(.disabled)').forEach(function (o) {
@@ -430,6 +506,8 @@
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
+      tooltip = createTooltip();
+      tooltip.attach(popEl.querySelector('.tag-list'));
       position();
       window.addEventListener('scroll', position, true);
       window.addEventListener('resize', position);
@@ -451,6 +529,10 @@
     }
 
     function close() {
+      if (tooltip) {
+        tooltip.destroy();
+        tooltip = null;
+      }
       if (popEl) {
         popEl.remove();
         popEl = null;
@@ -475,6 +557,7 @@
     let pendingSelected = selected;
     let menuOpen = false;
     let menuEl = null;
+    let tooltip = null;
     const requiresConfirm = !!config.requireConfirm;
 
     const api = { exitEdit: function () { if (cell.classList.contains('editing')) renderDisplay(); } };
@@ -521,11 +604,14 @@
         const option = normalizeOption(opt);
         const label = option.label;
         const disabled = option.disabled;
-        return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + ' data-value="' + label + '">' + label + '</div>';
+        const tooltipAttr = (disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
+        return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + label + '">' + label + '</div>';
       }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button">Confirm</button></div>' : '');
       document.body.appendChild(menuEl);
       cell.classList.add('menu-open');
       menuOpen = true;
+      tooltip = createTooltip();
+      tooltip.attach(menuEl);
       positionMenu();
       window.addEventListener('scroll', positionMenu, true);
       window.addEventListener('resize', positionMenu);
@@ -560,6 +646,10 @@
     }
 
     function closeMenu() {
+      if (tooltip) {
+        tooltip.destroy();
+        tooltip = null;
+      }
       if (menuEl) {
         menuEl.remove();
         menuEl = null;

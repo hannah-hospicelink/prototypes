@@ -200,6 +200,11 @@
     return ['Me', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
   }
 
+  function formatAssigneeDisplay(value) {
+    if (value === 'Respiratory Therapy') return 'RT';
+    return value;
+  }
+
   function extractZip(r) {
     const source = Array.isArray(r.addr) ? r.addr.join(' ') : '';
     const match = source.match(/\b\d{5}\b/);
@@ -317,15 +322,10 @@
     var orderId = row && row.order ? String(row.order) : '';
     var driver = row && row.driver ? String(row.driver) : '';
     var route = row && row.route ? String(row.route) : '';
-    var chips = ((row && row.tags) || []).map(function (tag) {
-      var text = tag && tag.t ? String(tag.t).replace(/-/g, ' ') : '';
-      if (!text) return '';
-      return '<span class="edit-driver-route-chip"><span class="edit-driver-route-chip-text">' + text + '</span></span>';
-    }).join('');
 
     return '<div class="edit-driver-route-modal" role="dialog" aria-modal="true" aria-label="Edit driver / route">' +
       '<div class="edit-driver-route-modal-header">' +
-      '<h2 class="edit-driver-route-modal-title">Order #' + orderId + '</h2>' +
+      '<h2 class="edit-driver-route-modal-title">Edit Driver / Route: Order #' + orderId + '</h2>' +
       '<button class="icon-btn edit-driver-route-close" type="button" aria-label="Close">' + ICON_CLOSE + '</button>' +
       '</div>' +
       '<div class="edit-driver-route-modal-body">' +
@@ -346,18 +346,13 @@
       '</div>' +
       '</div>' +
       '</div>' +
-      '<div class="edit-driver-route-field">' +
-      '<span class="edit-driver-route-label">Tags</span>' +
-      '<div class="edit-driver-route-input edit-driver-route-input-tags">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
-      '<span class="edit-driver-route-chip-list">' + chips + '</span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
-      '</div>' +
-      '</div>' +
       '</div>' +
       '<div class="edit-driver-route-modal-footer">' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel" type="button">Cancel</button>' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-save" type="button">Save</button>' +
+        '<div class="edit-driver-route-modal-footer-actions">' +
+        '<button class="edit-driver-route-btn edit-driver-route-btn-secondary edit-driver-route-btn-save-action" type="button">Save and close</button>' +
+        '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-driver-route-btn-save-action" type="button">Save and view route</button>' +
+        '</div>' +
       '</div>' +
       '</div>';
   }
@@ -367,6 +362,17 @@
     const selectable = Object.prototype.hasOwnProperty.call(config, 'selected');
     let menuEl = null;
     let selected = config.selected || null;
+
+    function normalizeMenuOption(option) {
+      if (typeof option === 'object') {
+        return {
+          label: option.label,
+          value: Object.prototype.hasOwnProperty.call(option, 'value') ? option.value : option.label,
+          disabled: !!option.disabled
+        };
+      }
+      return { label: option, value: option, disabled: false };
+    }
 
     function positionMenu() {
       if (!menuEl) return;
@@ -383,12 +389,11 @@
       if (menuEl) return;
       state.openMenuPopovers.forEach(function (closeOther) { closeOther(); });
       menuEl = document.createElement('div');
-      menuEl.className = 'cell-menu menu-popover';
-      menuEl.innerHTML = (config.heading ? '<div class="menu-heading">' + config.heading + '</div>' : '') +
+      menuEl.className = 'cell-menu menu-popover' + (config.menuClass ? ' ' + config.menuClass : '');
+      menuEl.innerHTML = (config.heading ? '<div class="menu-heading' + (config.headingClass ? ' ' + config.headingClass : '') + '">' + config.heading + '</div>' : '') +
         config.options.map(function (opt) {
-          var label = (typeof opt === 'object') ? opt.label : opt;
-          var disabled = (typeof opt === 'object') && opt.disabled;
-          return '<div class="menu-option' + (selectable && opt === selected ? ' selected' : '') + (disabled ? ' disabled' : '') + '" tabindex="' + (disabled ? '-1' : '0') + '" data-value="' + label + '" ' + (disabled ? 'aria-disabled="true"' : '') + '>' + label + '</div>';
+          var option = normalizeMenuOption(opt);
+          return '<div class="menu-option' + (selectable && option.value === selected ? ' selected' : '') + (option.disabled ? ' disabled' : '') + '" tabindex="' + (option.disabled ? '-1' : '0') + '" data-value="' + option.value + '" ' + (option.disabled ? 'aria-disabled="true"' : '') + '>' + option.label + '</div>';
         }).join('');
       document.body.appendChild(menuEl);
       trigger.classList.add('active');
@@ -567,7 +572,8 @@
       closeMenu();
       cell.classList.remove('editing', 'menu-open', 'cell-edit-active');
       menuOpen = false;
-      var text = String(selected || '').trim();
+      var displayValue = config.formatDisplayValue ? config.formatDisplayValue(selected) : selected;
+      var text = String(displayValue || '').trim();
       cell.innerHTML = '<div class="cell-display"><span class="cell-display-text">' + (text || '-') + '</span><button class="icon-btn icon-btn--reveal edit-btn" aria-label="' + (config.ariaLabel || 'Edit') + '">' + ICON_PENCIL + '</button></div>';
       cell.querySelector('.edit-btn').addEventListener('click', function (e) {
         e.stopPropagation();
@@ -606,7 +612,7 @@
         const disabled = option.disabled;
         const tooltipAttr = (disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
         return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + label + '">' + label + '</div>';
-      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button">Confirm</button></div>' : '');
+      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button">Assign</button></div>' : '');
       document.body.appendChild(menuEl);
       cell.classList.add('menu-open');
       menuOpen = true;
@@ -805,7 +811,13 @@
         options: options,
         heading: null,
         requireConfirm: assigneeMode === 'menu',
+        saveLabel: 'Assign',
         ariaLabel: 'Edit assignee',
+        formatDisplayValue: formatAssigneeDisplay,
+        renderDisplay: function (value) {
+          var text = String(formatAssigneeDisplay(value) || '').trim();
+          return '<span class="cell-display-text">' + (text || '-') + '</span>';
+        },
         onChange: function (v) { r.assignee = v; }
       }, state, assigneeMode);
     } else {
@@ -977,7 +989,9 @@
 
     overlayEl.querySelector('.edit-driver-route-close').addEventListener('click', close);
     overlayEl.querySelector('.edit-driver-route-btn-cancel').addEventListener('click', close);
-    overlayEl.querySelector('.edit-driver-route-btn-save').addEventListener('click', close);
+    overlayEl.querySelectorAll('.edit-driver-route-btn-save-action').forEach(function (btn) {
+      btn.addEventListener('click', close);
+    });
   }
 
   function closeEditDriverRouteModal(state) {
@@ -1153,10 +1167,10 @@
       popEl.innerHTML =
         field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
         field('Order type') +
-        field('Order priority') +
         field('Order reason') +
+        field('Order priority') +
         field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'], removable: true }) +
-        field('Tags') +
+        field('Tags', { search: true }) +
         assignedToHtml +
         '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
 
@@ -1223,10 +1237,15 @@
 
     setupMenuPopover(document.getElementById('settingsBtn'), {
       heading: 'Row density',
-      options: ['Condensed', 'Standard', 'Relaxed'],
-      selected: 'Standard',
+      headingClass: 'menu-heading--row-density',
+      options: [
+        { label: 'Compact', value: 'condensed' },
+        { label: 'Standard', value: 'standard' },
+        { label: 'Comfortable', value: 'relaxed' }
+      ],
+      selected: 'standard',
       align: 'right',
-      onSelect: function (value) { document.body.dataset.density = value.toLowerCase(); }
+      onSelect: function (value) { document.body.dataset.density = value; }
     }, state);
 
     setupTagsOverflowPopover();

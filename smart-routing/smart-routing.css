@@ -468,15 +468,8 @@
   .toolbar-row { display: flex; align-items: center; justify-content: space-between; gap: var(--settings-gap); width: 100%; }
   .toolbar-filters { display: flex; align-items: center; gap: var(--spacing-sm); flex: 1; min-width: 0; }
 
-  /* primary (leading) filter button — .icon-btn.icon-btn--lg, plus the indicator dot */
+  /* primary (leading) filter button — .icon-btn.icon-btn--lg */
   .filter-toggle-btn { position: relative; }
-  .filter-toggle-btn .filter-dot {
-    position: absolute;
-    top: -2px; right: -2px;
-    width: var(--size-350); height: var(--size-350);
-    border-radius: var(--radius-full);
-    background: var(--indicator-visibility-high);
-  }
 
   .quick-filters { display: flex; align-items: center; gap: var(--filter-gap); }
   .filter-btn {
@@ -1048,6 +1041,7 @@
     --_popover-width: 240px;
   }
   .inline-edit-menu {
+    --_popover-width: 172px;
     --_popover-padding: var(--spacing-xs);
   }
   .route-popover {
@@ -1102,6 +1096,13 @@
     color: var(--color-text-heading);
     text-transform: uppercase;
     border-top: var(--border-width) solid var(--color-border-light);
+  }
+  .menu-heading--row-density {
+    padding: var(--spacing-xxs);
+    font-weight: 400;
+    line-height: var(--lh-compact);
+    color: var(--color-text-muted);
+    border-top: none;
   }
   .menu-divider {
     width: 100%;
@@ -1510,12 +1511,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--spacing-sm);
     border-top: var(--border-width) solid var(--color-border-light);
     background: var(--color-bg-surface);
+  }
+  .edit-driver-route-modal-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    margin-left: auto;
   }
   .edit-driver-route-btn {
     min-height: var(--btn-size-md);
     padding: 0 var(--btn-padding-md);
+    white-space: nowrap;
     border-radius: var(--button-radius-text);
     border: none;
     cursor: pointer;
@@ -1531,13 +1540,21 @@
   }
   .edit-driver-route-btn-cancel:hover { background: var(--button-ghost-bg-hover); }
   .edit-driver-route-btn-cancel:active { background: var(--button-ghost-bg-active); }
-  .edit-driver-route-btn-save {
+  .edit-driver-route-btn-secondary {
+    background: var(--btn-bg-secondary);
+    border: var(--border-width) solid var(--btn-border-secondary);
+    color: var(--btn-content-secondary);
+    box-shadow: var(--btn-shadow-secondary);
+  }
+  .edit-driver-route-btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
+  .edit-driver-route-btn-secondary:active { background: var(--btn-bg-secondary-active); }
+  .edit-driver-route-btn-primary {
     background: var(--btn-bg-primary);
     color: var(--btn-content);
     box-shadow: var(--btn-shadow-primary);
   }
-  .edit-driver-route-btn-save:hover { background: var(--btn-bg-primary-hover); }
-  .edit-driver-route-btn-save:active { background: var(--btn-bg-primary-active); }
+  .edit-driver-route-btn-primary:hover { background: var(--btn-bg-primary-hover); }
+  .edit-driver-route-btn-primary:active { background: var(--btn-bg-primary-active); }
 
   @media (max-width: 900px) {
     .edit-driver-route-grid {

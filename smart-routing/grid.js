@@ -318,6 +318,16 @@
     }).join('') + '</div>';
   }
 
+  function buildColumnsPopoverHtml(columns) {
+    const optionItems = columns.map(function (columnName) {
+      return '<button class="columns-option is-selected" type="button" aria-pressed="true"><span class="columns-option-check">' + ICON_CHECKBOX_ON + '</span><span class="columns-option-label">' + columnName + '</span></button>';
+    }).join('');
+
+    return '<div class="columns-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="Search columns"></div>' +
+      '<div class="columns-list" role="listbox" aria-label="Visible columns">' + optionItems + '</div>' +
+      '<div class="columns-footer"><label class="columns-toggle-all"><span class="columns-option-check">' + ICON_CHECKBOX_ON + '</span><span>Show/hide all</span></label><button class="columns-reset" type="button" disabled>Reset</button></div>';
+  }
+
   function buildEditDriverRouteModalHtml(row) {
     var orderId = row && row.order ? String(row.order) : '';
     var driver = row && row.driver ? String(row.driver) : '';
@@ -1058,10 +1068,7 @@
       if (!popEl) return;
       const r = trigger.getBoundingClientRect();
       popEl.style.top = r.bottom + 4 + 'px';
-      let left = r.left + r.width / 2 - popEl.offsetWidth / 2;
-      if (left < 0) left = 0;
-      else if (left + popEl.offsetWidth > window.innerWidth) left = window.innerWidth - popEl.offsetWidth;
-      popEl.style.left = left + 'px';
+      popEl.style.left = clampPopoverLeft(r.right - popEl.offsetWidth, popEl.offsetWidth) + 'px';
     }
 
     function open() {
@@ -1200,6 +1207,66 @@
     });
   }
 
+  function setupColumnsPopover(columns) {
+    const trigger = Array.prototype.find.call(document.querySelectorAll('.table-actions .action-btn'), function (btn) {
+      const label = (btn.getAttribute('aria-label') || '').toLowerCase();
+      return label.indexOf('customize column') !== -1;
+    });
+    if (!trigger || !columns || !columns.length) return;
+
+    let popEl = null;
+
+    function position() {
+      if (!popEl) return;
+      const r = trigger.getBoundingClientRect();
+      popEl.style.top = r.bottom + 4 + 'px';
+      popEl.style.left = clampPopoverLeft(r.right - popEl.offsetWidth, popEl.offsetWidth) + 'px';
+    }
+
+    function open() {
+      if (popEl) return;
+      popEl = document.createElement('div');
+      popEl.className = 'columns-popover';
+      popEl.innerHTML = buildColumnsPopoverHtml(columns);
+      document.body.appendChild(popEl);
+      trigger.classList.add('active');
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+    }
+
+    function close() {
+      if (popEl) {
+        popEl.remove();
+        popEl = null;
+      }
+      window.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+      trigger.classList.remove('active');
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      popEl ? close() : open();
+    });
+
+    document.addEventListener('click', function (e) {
+      if (popEl && !popEl.contains(e.target) && e.target !== trigger) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  }
+
+  function getVisibleGridColumns() {
+    return Array.prototype.map.call(document.querySelectorAll('.grid-header .header-cell'), function (cell) {
+      return (cell.textContent || '').trim();
+    }).filter(function (label) {
+      return !!label;
+    });
+  }
+
   function cloneRows(rows) {
     return JSON.parse(JSON.stringify(rows));
   }
@@ -1251,6 +1318,7 @@
     setupTagsOverflowPopover();
     setupHistoryPopover();
     setupFilterPopover(variant);
+    setupColumnsPopover(getVisibleGridColumns());
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {

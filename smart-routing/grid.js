@@ -19,6 +19,9 @@
   const ICON_PHONE_MOBILE = '<svg viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5C0 0.679688 0.659091 0 1.45455 0H6.54545C7.34091 0 8 0.679688 8 1.5V10.5C8 11.3203 7.34091 12 6.54545 12H1.45455C0.659091 12 0 11.3203 0 10.5V1.5ZM1.45455 1.5V8.625H6.54545V1.5H1.45455ZM4 11.0625C4.40909 11.0625 4.72727 10.7344 4.72727 10.3125C4.72727 9.89062 4.40909 9.5625 4 9.5625C3.59091 9.5625 3.27273 9.89062 3.27273 10.3125C3.27273 10.7344 3.59091 11.0625 4 11.0625Z" fill="currentColor"/></svg>';
   const ICON_CHEVRON_DOWN = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 8.82143L0.321429 1.96429C-0.107143 1.5 -0.107143 0.785714 0.321429 0.321429C0.785714 -0.107143 1.5 -0.107143 1.96429 0.321429L8 6.39286L14.0357 0.321429C14.5 -0.107143 15.2143 -0.107143 15.6786 0.321429C16.1071 0.785714 16.1071 1.5 15.6786 1.96429L8.82143 8.82143C8.35714 9.25 7.64286 9.25 7.17857 8.82143Z"/></svg>';
   const ICON_CLOSE = '<svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.27828 2.375L10.0208 8.125L15.7217 2.375C16.2211 1.875 17.0949 1.875 17.5943 2.375C18.1352 2.91667 18.1352 3.75 17.5943 4.29167L11.8934 10L17.5943 15.7083C18.1352 16.25 18.1352 17.0833 17.5943 17.625C17.0949 18.125 16.2211 18.125 15.7217 17.625L10.0208 11.875L4.27828 17.625C3.77893 18.125 2.90507 18.125 2.40572 17.625C1.86476 17.0833 1.86476 16.25 2.40572 15.7083L8.10663 10L2.40572 4.29167C1.86476 3.75 1.86476 2.91667 2.40572 2.375C2.90507 1.875 3.77893 1.875 4.27828 2.375Z"/></svg>';
+  const ICON_USER_PEN = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.3905 5.06596C2.99736 5.06596 1.85752 3.92612 1.85752 2.53298C1.85752 1.13984 2.99736 0 4.3905 0C5.78364 0 6.92348 1.13984 6.92348 2.53298C6.92348 3.92612 5.78364 5.06596 4.3905 5.06596ZM3.75726 6.24802H5.02375C5.78364 6.24802 6.48021 6.48021 7.07124 6.86016L5.65699 8.27441C5.31926 8.61214 5.10818 9.0343 5.00264 9.49868L4.77045 10.6385H0.633245C0.274406 10.6385 0 10.3641 0 10.0053C0 7.93668 1.68865 6.24802 3.75726 6.24802ZM5.99472 9.68865C6.05805 9.43536 6.1847 9.18206 6.37467 8.99208L8.88654 6.48021L10.5752 8.16887L8.06332 10.6807C7.87335 10.8707 7.64116 10.9974 7.36676 11.0607L6.12137 11.314C6.10026 11.314 6.07916 11.314 6.05805 11.314C5.88918 11.314 5.74143 11.1662 5.74143 10.9974C5.74143 10.9763 5.74143 10.9551 5.74143 10.9551L5.99472 9.68865ZM11.6517 7.09235L11.0396 7.70448L9.35092 6.01583L9.96306 5.40369C10.4274 4.93931 11.1873 4.93931 11.6517 5.40369C12.1161 5.86807 12.1161 6.62797 11.6517 7.09235Z" fill="white"/></svg>';
+  const ICON_TAG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 1.63491C0 0.74082 0.715274 0 1.63491 0H5.44119C5.87547 0 6.28419 0.178819 6.59074 0.485365L11.4955 5.3901C12.1341 6.02874 12.1341 7.05056 11.4955 7.6892L7.6892 11.521C7.05056 12.1597 6.00319 12.1597 5.36456 11.521L0.459819 6.61628C0.153273 6.30974 0 5.90101 0 5.46674V1.63491ZM2.8611 2.04364C2.40128 2.04364 2.04364 2.40128 2.04364 2.8611C2.04364 3.32092 2.40128 3.67855 2.8611 3.67855C3.29537 3.67855 3.67855 3.32092 3.67855 2.8611C3.67855 2.40128 3.29537 2.04364 2.8611 2.04364Z" fill="white"/></svg>';
+  const ICON_WARNING = '<svg viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M569.5 440.1c18.6 32.2-4.8 71.9-41.9 71.9H48.4c-37 0-60.4-39.7-41.8-71.9L246.2 24c18.5-32 64.8-32 83.3 0l240 416.1zM288 354c-25.4 0-46 20.6-46 46s20.6 46 46 46 46-20.6 46-46-20.6-46-46-46zm-43.7-165.3l7.4 136c.8 14.9 13.1 26.6 28 26.6h16.4c14.9 0 27.2-11.7 28-26.6l7.4-136c.9-16.3-12.1-29.9-28.4-29.9h-30.5c-16.3 0-29.3 13.6-28.3 29.9z"/></svg>';
   const ICON_EXTERNAL = '<svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>';
   const ICON_COLLAPSE = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 0.321429C7.64286 -0.107143 8.35714 -0.107143 8.82143 0.321429L15.6786 7.17857C16.1071 7.64286 16.1071 8.35714 15.6786 8.82143C15.2143 9.25 14.5 9.25 14.0357 8.82143L8 2.75L1.96429 8.82143C1.5 9.25 0.785714 9.25 0.321429 8.82143C-0.107143 8.35714 -0.107143 7.64286 0.321429 7.17857L7.17857 0.321429Z"/></svg>';
 
@@ -70,8 +73,9 @@
     return '<div class="cell-stack"><span class="cell-main">' + date + '</span>' + (time ? '<span class="cell-caption">' + time + '</span>' : '') + '</div>';
   }
 
-  function badge(b) {
-    return '<span class="badge ' + b.v + '">' + b.t + '</span>';
+  function badge(b, sizeClass) {
+    var size = sizeClass ? ' ' + sizeClass : '';
+    return '<span class="badge' + size + ' ' + b.v + '">' + b.t + '</span>';
   }
 
   function sortTags(tags) {
@@ -205,6 +209,11 @@
     return value;
   }
 
+  function formatBulkAssigneeDisplay(value) {
+    var text = String(formatAssigneeDisplay(value) || '').trim();
+    return text || '–';
+  }
+
   function extractZip(r) {
     const source = Array.isArray(r.addr) ? r.addr.join(' ') : '';
     const match = source.match(/\b\d{5}\b/);
@@ -222,13 +231,11 @@
   }
 
   function getOrderStatusBadgeText(r) {
-    if (r.dispatchBadgeText) return r.dispatchBadgeText;
     if (!r.status || !r.status.t) return r.orderType;
     return r.orderType + ' ' + r.status.t;
   }
 
   function getOrderStatusBadgeVariant(r) {
-    if (r.dispatchBadgeVariant) return r.dispatchBadgeVariant;
     if (!r.status || !r.status.v) return 'neutral';
     if (r.status.v === 'warning') return 'warning';
     if (r.status.v === 'error') return 'error';
@@ -263,6 +270,7 @@
   function buildRowHtml(r, i, variant) {
     const managerLike = variant === 'manager' || variant === 'dispatch';
     const dispatch = variant === 'dispatch';
+    const purchasingRt = variant === 'purchasing-rt';
     const selectCell = managerLike
       ? '<div class="row-cell col-select"><span class="checkbox row-checkbox" role="checkbox" aria-checked="false" aria-label="Select row" tabindex="0">' + ICON_CHECKBOX_OFF + '</span></div>'
       : '';
@@ -292,6 +300,21 @@
         '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Client</div><div class="lv"><span class="label">Client:</span><span class="value">' + r.client + '</span></div><div class="lv"><span class="label">Branch:</span><span class="value">' + r.branch + '</span></div></div><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div><div class="detail-section"><div class="detail-heading">Address</div><div class="lv"><span class="label">Address type:</span><span class="value">' + r.addrType + '</span></div><div class="lv-stacked"><span class="label">Address:</span><span class="value">' + r.addr.join('<br>') + '</span></div><button class="view-map-btn" type="button"><span class="view-map-icon">' + ICON_MAP_PIN + '</span>View on map</button></div><div class="detail-section"><div class="detail-heading">Primary Contact</div><div class="lv"><span class="label">Name:</span><span class="value">' + r.contact + '</span></div><div class="lv"><span class="label">Relationship:</span><span class="value">' + r.rel + '</span></div><div class="phone-line"><div class="lv"><span class="label">Phone:</span><span class="value">' + r.phone + '</span></div>' + phoneTypeMarkup(r.phoneType) + '</div></div></div></div></div><div class="row-divider" aria-hidden="true"></div>';
     }
 
+    if (purchasingRt) {
+      const orderBadgeText = getOrderStatusBadgeText(r);
+      const orderBadgeVariant = getOrderStatusBadgeVariant(r);
+      return '<div class="row-main" data-index="' + i + '">' +
+        '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><div class="badges"><span class="badge order-status-badge ' + orderBadgeVariant + '">' + orderBadgeText + '</span></div></div></div>' +
+        '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +
+        '<div class="row-cell col-client"><div class="cell-stack"><span class="cell-main">' + r.branch + '</span><span class="cell-caption">' + r.client + '</span></div></div>' +
+        '<div class="row-cell col-ordered">' + dateCell(r.orderedDate, r.orderedTime) + '</div>' +
+        '<div class="row-cell col-completed">' + completedCell(r) + '</div>' +
+        '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
+        '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
+        '</div>' +
+        '<div class="expand-wrap"><div class="expand-inner"><div class="detail"><div class="detail-section"><div class="detail-heading">Provider</div><div class="lv"><span class="label">Warehouse:</span><span class="value">' + r.warehouse + '</span></div></div><div class="detail-section"><div class="detail-heading">Address</div><div class="lv"><span class="label">Address type:</span><span class="value">' + r.addrType + '</span></div><div class="lv-stacked"><span class="label">Address:</span><span class="value">' + r.addr.join('<br>') + '</span></div></div><div class="detail-section"><div class="detail-heading">Primary Contact</div><div class="lv"><span class="label">Name:</span><span class="value">' + r.contact + '</span></div><div class="lv"><span class="label">Relationship:</span><span class="value">' + r.rel + '</span></div><div class="phone-line"><div class="lv"><span class="label">Phone:</span><span class="value">' + r.phone + '</span></div>' + phoneTypeMarkup(r.phoneType) + '</div></div></div></div></div><div class="row-divider" aria-hidden="true"></div>';
+    }
+
     return '<div class="row-main" data-index="' + i + '">' +
       selectCell +
       '<div class="row-cell col-assignee editable-cell"></div>' +
@@ -301,7 +324,7 @@
       '<div class="row-cell col-ordered">' + dateCell(r.orderedDate, r.orderedTime) + '</div>' +
       '<div class="row-cell col-requested">' + dateCell(r.reqDate, r.reqTime) + '</div>' +
       '<div class="row-cell col-scheduled">' + dateCell(r.schedDate, r.schedTime) + '</div>' +
-      '<div class="row-cell col-status status-cell"><div class="badges">' + badge(r.status) + '</div></div>' +
+      '<div class="row-cell col-status status-cell"><div class="badges">' + badge(r.scheduleStatus) + '</div></div>' +
       '<div class="row-cell col-tags tags-cell editable-cell"><div class="badges">' + tagBadgesHtml(r.tags) + '</div><button class="icon-btn icon-btn--reveal edit-btn tags-edit-btn" aria-label="Edit tags">' + ICON_PENCIL + '</button></div>' +
       '<div class="row-cell col-actions"><div class="actions"><button class="icon-btn more-btn" aria-label="More actions">' + ICON_ELLIPSIS + '</button><button class="icon-btn toggle-btn" aria-label="Toggle details">' + ICON_CHEVRON + '</button></div></div>' +
         '</div>' +
@@ -310,6 +333,93 @@
 
   function buildSideSheetHtml(orderId) {
     return '<div class="side-sheet-header"><div class="side-sheet-title">Order #' + orderId + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div><div class="side-sheet-body">' + SIDE_SHEET_BODY + '</div>';
+  }
+
+  function buildEditAssigneeBulkSheetHtml(selectedRows) {
+    var count = selectedRows.length;
+    var cards = selectedRows.map(function (row) {
+      return '<div class="edit-assignee-sheet-card">' +
+        '<div class="edit-assignee-sheet-card-content">' +
+        '<div class="lv"><span class="label">Order #:</span><span class="value cell-main link" tabindex="0">' + row.order + '</span></div>' +
+        '<div class="lv"><span class="label">Assignee:</span><span class="value">' + formatBulkAssigneeDisplay(row.assignee) + '</span></div>' +
+        '<div class="badges edit-assignee-sheet-card-status">' + badge(row.scheduleStatus, 'large') + '</div>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Edit Assignee: ' + count + ' Order' + (count === 1 ? '' : 's') + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
+      '<div class="side-sheet-body side-sheet-body--bulk-edit">' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Assignee</span>' +
+      '<div class="edit-driver-route-input edit-assignee-sheet-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-input-value"></span>' +
+      '<button class="edit-assignee-sheet-input-btn" type="button" aria-label="Search assignee">' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</button>' +
+      '</div>' +
+      '</div>' +
+      '<p class="edit-assignee-sheet-help">Order must have a schedule in the Confirmed or Rescheduled status before they can be assigned to Dispatch.</p>' +
+      '<div class="edit-assignee-sheet-list">' + cards + '</div>' +
+      '</div>' +
+      '<div class="edit-assignee-sheet-footer">' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel edit-assignee-sheet-cancel" type="button">Cancel</button>' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-assignee-sheet-assign" type="button">Assign</button>' +
+      '</div>';
+  }
+
+  function buildResetOrderSheetHtml(r, variant) {
+    var dispatch = variant === 'dispatch';
+    var description = dispatch
+      ? 'Clear the driver, route, and schedule and return the order to the Received or Acknowledged status.'
+      : 'Clear the schedule and return the order to the Received or Acknowledged status.';
+
+    var statusBadge = badge({ t: getOrderStatusBadgeText(r), v: getOrderStatusBadgeVariant(r) }, 'large');
+
+    function dateValue(date, time) {
+      return date + (time ? ' (' + time + ')' : '');
+    }
+    function detailLine(label, value) {
+      return '<div class="lv"><span class="label">' + label + ':</span><span class="value">' + value + '</span></div>';
+    }
+
+    var details = '<div class="lv"><span class="label">Order #:</span><span class="value link" tabindex="0">' + r.order + '</span></div>';
+    if (r.reason) details += detailLine('Reason', r.reason);
+    if (r.priority) details += detailLine('Priority', r.priority);
+    if (r.reqDate) details += detailLine('Requested', dateValue(r.reqDate, r.reqTime));
+    if (r.schedDate) details += detailLine('Scheduled', dateValue(r.schedDate, r.schedTime));
+    if (r.completedDate) details += detailLine('Completed', dateValue(r.completedDate, r.completedTime));
+
+    var tagChips = sortTags(r.tags || []).map(function (t) {
+      return '<span class="edit-driver-route-chip"><span class="edit-driver-route-chip-text">' + t.t + '</span>' +
+        '<button class="edit-driver-route-chip-remove chip-remove" type="button" aria-label="Remove ' + t.t + '">' + ICON_CHIP_REMOVE + '</button></span>';
+    }).join('');
+
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Reset Order</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
+      '<div class="side-sheet-body reset-order-body">' +
+      '<p class="reset-order-description">' + description + '</p>' +
+      '<div class="badges">' + statusBadge + '</div>' +
+      '<div class="reset-order-details">' + details + '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Reason for reset <span class="req">*</span></span>' +
+      '<div class="edit-driver-route-input reset-order-select" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="edit-driver-route-input-value"></span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Tags</span>' +
+      '<div class="edit-driver-route-input edit-driver-route-input-tags" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-chip-list">' + tagChips + '</span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-assignee-sheet-footer reset-order-footer">' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel reset-order-cancel" type="button">Cancel</button>' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-destructive reset-order-confirm" type="button">Reset order</button>' +
+      '</div>';
   }
 
   function buildHistoryPopoverHtml() {
@@ -363,6 +473,75 @@
         '<button class="edit-driver-route-btn edit-driver-route-btn-secondary edit-driver-route-btn-save-action" type="button">Save and close</button>' +
         '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-driver-route-btn-save-action" type="button">Save and view route</button>' +
         '</div>' +
+      '</div>' +
+      '</div>';
+  }
+
+  function buildBulkActionsPopoverHtml(firstActionLabel) {
+    var primaryAction = firstActionLabel || 'Edit assignee';
+    return '<div class="bulk-actions-popover" id="bulkActionsPopover" hidden>' +
+      '<div class="bulk-actions-popover-left">' +
+      '<button class="icon-btn bulk-actions-clear-btn" type="button" aria-label="Deselect all">' + ICON_CLOSE + '</button>' +
+      '<span class="bulk-actions-count" id="bulkActionsCount">0 selected</span>' +
+      '</div>' +
+      '<div class="bulk-actions-popover-actions">' +
+      '<button class="bulk-actions-action" type="button" data-bulk-action="primary"><span class="bulk-actions-action-icon">' + ICON_USER_PEN + '</span><span>' + primaryAction + '</span></button>' +
+      '<button class="bulk-actions-action" type="button" data-bulk-action="tags"><span class="bulk-actions-action-icon">' + ICON_TAG + '</span><span>Edit tags</span></button>' +
+      '</div>' +
+      '</div>';
+  }
+
+  function buildSendTeamConfirmModalHtml(primaryActionLabel) {
+    return '<div class="send-team-confirm-modal" role="dialog" aria-modal="true" aria-label="Reassign order confirmation">' +
+      '<div class="send-team-confirm-header">' +
+      '<button class="icon-btn send-team-confirm-close" type="button" aria-label="Close">' + ICON_CLOSE + '</button>' +
+      '</div>' +
+      '<div class="send-team-confirm-body">' +
+      '<div class="send-team-confirm-alert">' +
+      '<span class="send-team-confirm-alert-icon">' + ICON_WARNING + '</span>' +
+      '<p class="send-team-confirm-alert-text">Sending this order another team will immediately remove it from your board.</p>' +
+      '</div>' +
+      '<p class="send-team-confirm-help">After reassigning, you can use the recent orders history button in the toolbar to view a list of orders you recently edited and navigate to an order\'s profile.</p>' +
+      '</div>' +
+      '<div class="send-team-confirm-footer">' +
+      '<button class="send-team-confirm-btn send-team-confirm-btn-cancel" type="button">Cancel</button>' +
+      '<button class="send-team-confirm-btn send-team-confirm-btn-primary" type="button">' + primaryActionLabel + '</button>' +
+      '</div>' +
+      '</div>';
+  }
+
+  function buildBulkEditTagsModalHtml(selectedRows) {
+    var count = Array.isArray(selectedRows) ? selectedRows.length : 0;
+    return '<div class="bulk-edit-tags-modal" role="dialog" aria-modal="true" aria-label="Edit tags">' +
+      '<div class="bulk-edit-tags-modal-header">' +
+      '<h2 class="bulk-edit-tags-modal-title">Edit Tags: ' + count + ' Order' + (count === 1 ? '' : 's') + '</h2>' +
+      '<button class="icon-btn bulk-edit-tags-close" type="button" aria-label="Close">' + ICON_CLOSE + '</button>' +
+      '</div>' +
+      '<div class="bulk-edit-tags-modal-body">' +
+      '<div class="bulk-edit-tags-modal-content">' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Add tags</span>' +
+      '<div class="edit-driver-route-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-input-value"></span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '<p class="bulk-edit-tags-help">These tags will be added to all selected orders if not already present.</p>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Remove tags</span>' +
+      '<div class="edit-driver-route-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="edit-driver-route-input-value"></span>' +
+      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '<p class="bulk-edit-tags-help">These tags will be removed from all selected orders if present.</p>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="bulk-edit-tags-modal-footer">' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel bulk-edit-tags-btn-cancel" type="button">Cancel</button>' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-primary bulk-edit-tags-btn-save" type="button">Save</button>' +
       '</div>' +
       '</div>';
   }
@@ -791,6 +970,7 @@
 
   function buildRow(r, i, state, variant, assigneeMode) {
     const dispatch = variant === 'dispatch';
+    const purchasingRt = variant === 'purchasing-rt';
     const row = document.createElement('div');
     row.className = 'grid-row';
     row.innerHTML = buildRowHtml(r, i, variant);
@@ -799,9 +979,21 @@
       row.classList.toggle('expanded');
     });
 
+    const dispatchEnabled = !!(r.schedDate && r.scheduleStatus && (r.scheduleStatus.t === 'Rescheduled' || r.scheduleStatus.t === 'Confirmed'));
     const moreOptions = dispatch
       ? ['Edit driver / route', 'Add on', 'Set complete', 'Reset order', 'View equipment']
-      : ['Schedule order', 'Reset order', 'View equipment'];
+      : purchasingRt
+        ? [
+          'Send to scheduling',
+          {
+            label: 'Send to dispatch',
+            disabled: !dispatchEnabled,
+            tooltip: 'Order must have a schedule in the Confirmed or Rescheduled status.'
+          },
+          'Set complete',
+          'View equipment'
+        ]
+        : ['Schedule order', 'Reset order', 'View equipment'];
 
     setupMenuPopover(row.querySelector('.more-btn'), {
       options: moreOptions,
@@ -809,11 +1001,13 @@
       onSelect: function (value) {
         if (value === 'View equipment') openSideSheet(r.order, state);
         if (value === 'Edit driver / route' && dispatch) openEditDriverRouteModal(r, state);
+        if (value === 'Send to scheduling') openSendTeamConfirmModal('Send to scheduling', state);
+        if (value === 'Send to dispatch') openSendTeamConfirmModal('Send to dispatch', state);
+        if (value === 'Reset order') openResetOrderSheet(r, state, variant);
       }
     }, state);
 
-    if (!dispatch) {
-      const dispatchEnabled = r.status && (r.status.t === 'Rescheduled' || r.status.t === 'Confirmed');
+    if (!dispatch && !purchasingRt) {
       const options = buildAssigneeOptions(assigneeMode, dispatchEnabled);
 
       setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
@@ -912,6 +1106,70 @@
       rowEls.forEach(function (el) { setRowSelected(el, !allOn); });
       updateSelectAll();
     });
+
+    state.clearAllSelections = function () {
+      rowEls.forEach(function (el) { setRowSelected(el, false); });
+      updateSelectAll();
+      emitSelectionChange();
+    };
+
+    state.getSelectedRows = function () {
+      return rowEls.filter(isSel).map(function (el) { return el._data; });
+    };
+
+    updateSelectAll();
+    emitSelectionChange();
+  }
+
+  function setupBulkActionsPopover(state, variant) {
+    const gridEl = document.getElementById('grid');
+    if (!gridEl) return;
+
+    const firstActionLabel = variant === 'dispatch' ? 'Edit driver and route' : 'Edit assignee';
+    gridEl.insertAdjacentHTML('beforeend', buildBulkActionsPopoverHtml(firstActionLabel));
+    const popoverEl = document.getElementById('bulkActionsPopover');
+    const countEl = document.getElementById('bulkActionsCount');
+    const clearBtn = popoverEl ? popoverEl.querySelector('.bulk-actions-clear-btn') : null;
+    if (!popoverEl || !countEl || !clearBtn) return;
+
+    clearBtn.addEventListener('click', function () {
+      if (typeof state.clearAllSelections === 'function') {
+        state.clearAllSelections();
+      }
+    });
+
+    const primaryActionBtn = popoverEl.querySelector('[data-bulk-action="primary"]');
+    if (variant === 'manager' && primaryActionBtn) {
+      primaryActionBtn.addEventListener('click', function () {
+        const selectedRows = typeof state.getSelectedRows === 'function' ? state.getSelectedRows() : [];
+        if (!selectedRows.length) return;
+        openEditAssigneeBulkSheet(selectedRows, state);
+      });
+    }
+
+    const tagsActionBtn = popoverEl.querySelector('[data-bulk-action="tags"]');
+    if (tagsActionBtn) {
+      tagsActionBtn.addEventListener('click', function () {
+        const selectedRows = typeof state.getSelectedRows === 'function' ? state.getSelectedRows() : [];
+        if (!selectedRows.length) return;
+        openBulkEditTagsModal(selectedRows, state);
+      });
+    }
+
+    function syncToolbarVisibility() {
+      var count = Number(state.selectionCount) || 0;
+      var shouldHide = count === 0 || !!state.isSideSheetOpen;
+      countEl.textContent = count + ' selected';
+      popoverEl.hidden = shouldHide;
+      popoverEl.setAttribute('aria-hidden', shouldHide ? 'true' : 'false');
+    }
+
+    state.syncSelectionToolbarVisibility = syncToolbarVisibility;
+
+    state.onSelectionChange = function (count) {
+      state.selectionCount = count;
+      syncToolbarVisibility();
+    };
   }
 
   function wireToolbarIcons() {
@@ -932,11 +1190,11 @@
     const FILTER_PREDICATES = {
       'STAT / Urgent': function (r) { return r.priority === 'STAT' || r.priority === 'Urgent'; },
       'STAT/Urgent': function (r) { return r.priority === 'STAT' || r.priority === 'Urgent'; },
-      'SLA approaching': function (r) { return r.status && (r.status.t === 'Patient Scheduling' || r.status.t === 'Patient Approval' || r.status.t === 'Provider Review'); },
-      'Missed schedule': function (r) { return r.status && r.status.t === 'Escalated'; },
+      'SLA approaching': function (r) { return r.scheduleStatus && (r.scheduleStatus.t === 'Patient Scheduling' || r.scheduleStatus.t === 'Patient Approval' || r.scheduleStatus.t === 'Provider Review'); },
+      'Missed schedule': function (r) { return r.scheduleStatus && r.scheduleStatus.t === 'Escalated'; },
       'Delayed': function (r) { return (r.etaCaption || '').trim().toLowerCase() === 'delayed'; },
       'New note': function (r) { return r.note === true; },
-      'Rescheduled': function (r) { return r.status && r.status.t === 'Rescheduled'; }
+      'Rescheduled': function (r) { return r.scheduleStatus && r.scheduleStatus.t === 'Rescheduled'; }
     };
 
     function applyFilter(activeFilter) {
@@ -964,6 +1222,10 @@
     if (state.sheetEl) state.sheetEl.remove();
     const sheetEl = document.createElement('div');
     state.sheetEl = sheetEl;
+    state.isSideSheetOpen = true;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
     sheetEl.className = 'side-sheet';
     sheetEl.innerHTML = buildSideSheetHtml(orderId);
     document.body.appendChild(sheetEl);
@@ -972,10 +1234,63 @@
     sheetEl.querySelector('.side-sheet-close').addEventListener('click', function () { closeSideSheet(state); });
   }
 
+  function openEditAssigneeBulkSheet(selectedRows, state) {
+    if (state.sheetEl) state.sheetEl.remove();
+    const sheetEl = document.createElement('div');
+    state.sheetEl = sheetEl;
+    state.isSideSheetOpen = true;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
+    sheetEl.className = 'side-sheet';
+    sheetEl.innerHTML = buildEditAssigneeBulkSheetHtml(selectedRows);
+    document.body.appendChild(sheetEl);
+    void sheetEl.offsetWidth;
+    sheetEl.classList.add('open');
+
+    function close() {
+      closeSideSheet(state);
+    }
+
+    sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
+    sheetEl.querySelector('.edit-assignee-sheet-cancel').addEventListener('click', close);
+    sheetEl.querySelector('.edit-assignee-sheet-assign').addEventListener('click', close);
+    sheetEl.querySelector('.edit-assignee-sheet-input-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  }
+
+  function openResetOrderSheet(r, state, variant) {
+    if (state.sheetEl) state.sheetEl.remove();
+    const sheetEl = document.createElement('div');
+    state.sheetEl = sheetEl;
+    state.isSideSheetOpen = true;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
+    sheetEl.className = 'side-sheet';
+    sheetEl.innerHTML = buildResetOrderSheetHtml(r, variant);
+    document.body.appendChild(sheetEl);
+    void sheetEl.offsetWidth;
+    sheetEl.classList.add('open');
+
+    function close() {
+      closeSideSheet(state);
+    }
+
+    sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
+    sheetEl.querySelector('.reset-order-cancel').addEventListener('click', close);
+    sheetEl.querySelector('.reset-order-confirm').addEventListener('click', close);
+  }
+
   function closeSideSheet(state) {
     if (!state.sheetEl) return;
     const el = state.sheetEl;
     state.sheetEl = null;
+    state.isSideSheetOpen = false;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
     el.classList.remove('open');
     el.addEventListener('transitionend', function () { el.remove(); }, { once: true });
   }
@@ -1008,6 +1323,62 @@
     if (!state.editDriverRouteModalEl) return;
     state.editDriverRouteModalEl.remove();
     state.editDriverRouteModalEl = null;
+  }
+
+  function openSendTeamConfirmModal(primaryActionLabel, state) {
+    closeSendTeamConfirmModal(state);
+    const overlayEl = document.createElement('div');
+    state.sendTeamConfirmModalEl = overlayEl;
+    overlayEl.className = 'send-team-confirm-overlay';
+    overlayEl.innerHTML = buildSendTeamConfirmModalHtml(primaryActionLabel);
+    document.body.appendChild(overlayEl);
+
+    function close() {
+      closeSendTeamConfirmModal(state);
+    }
+
+    const modalEl = overlayEl.querySelector('.send-team-confirm-modal');
+    overlayEl.addEventListener('click', function (e) {
+      if (!modalEl.contains(e.target)) close();
+    });
+
+    overlayEl.querySelector('.send-team-confirm-close').addEventListener('click', close);
+    overlayEl.querySelector('.send-team-confirm-btn-cancel').addEventListener('click', close);
+    overlayEl.querySelector('.send-team-confirm-btn-primary').addEventListener('click', close);
+  }
+
+  function closeSendTeamConfirmModal(state) {
+    if (!state.sendTeamConfirmModalEl) return;
+    state.sendTeamConfirmModalEl.remove();
+    state.sendTeamConfirmModalEl = null;
+  }
+
+  function openBulkEditTagsModal(selectedRows, state) {
+    closeBulkEditTagsModal(state);
+    const overlayEl = document.createElement('div');
+    state.bulkEditTagsModalEl = overlayEl;
+    overlayEl.className = 'bulk-edit-tags-overlay';
+    overlayEl.innerHTML = buildBulkEditTagsModalHtml(selectedRows);
+    document.body.appendChild(overlayEl);
+
+    function close() {
+      closeBulkEditTagsModal(state);
+    }
+
+    const modalEl = overlayEl.querySelector('.bulk-edit-tags-modal');
+    overlayEl.addEventListener('click', function (e) {
+      if (!modalEl.contains(e.target)) close();
+    });
+
+    overlayEl.querySelector('.bulk-edit-tags-close').addEventListener('click', close);
+    overlayEl.querySelector('.bulk-edit-tags-btn-cancel').addEventListener('click', close);
+    overlayEl.querySelector('.bulk-edit-tags-btn-save').addEventListener('click', close);
+  }
+
+  function closeBulkEditTagsModal(state) {
+    if (!state.bulkEditTagsModalEl) return;
+    state.bulkEditTagsModalEl.remove();
+    state.bulkEditTagsModalEl = null;
   }
 
   function setupTagsOverflowPopover() {
@@ -1167,6 +1538,37 @@
         return;
       }
 
+      if (variant === 'purchasing-rt') {
+        function chipGroupField(label, options, opts) {
+          var cfg = opts || {};
+          return '<div class="filter-field"><span class="filter-field-label">' + label + (cfg.required ? ' <span class="req">*</span>' : '') + '</span><div class="filter-chips-row">' +
+            options.map(function (opt) {
+              var active = !!opt.active;
+              return '<button class="filter-chip-toggle ' + (active ? 'is-active' : 'is-inactive') + '" type="button">' +
+                (active ? '<span class="chip-check">' + ICON_CHECK + '</span>' : '') +
+                '<span>' + opt.label + '</span></button>';
+            }).join('') +
+            '</div></div>';
+        }
+
+        popEl.innerHTML =
+          field('Warehouse', { search: true }) +
+          field('Client', { search: true, chips: ['3 clients selected'] }) +
+          chipGroupField('Order status', [
+            { label: 'Open', active: true },
+            { label: 'Closed last 48 hours', active: false }
+          ], { required: true }) +
+          field('Tags', { search: true }) +
+          '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
+
+        document.body.appendChild(popEl);
+        trigger.classList.add('active');
+        position();
+        window.addEventListener('scroll', position, true);
+        window.addEventListener('resize', position);
+        return;
+      }
+
       const assignedToHtml = variant === 'manager'
         ? field('Assigned to', { search: true })
         : '<div class="filter-field"><span class="filter-field-label">Assigned to <span class="req">*</span></span><div class="filter-chips-row"><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Me</button><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Unassigned</button></div></div>';
@@ -1273,10 +1675,16 @@
 
   function init(config) {
     const cfg = config || {};
-    const variant = cfg.variant === 'manager' ? 'manager' : cfg.variant === 'dispatch' ? 'dispatch' : 'scheduling';
+    const variant = cfg.variant === 'manager'
+      ? 'manager'
+      : cfg.variant === 'dispatch'
+        ? 'dispatch'
+        : cfg.variant === 'purchasing-rt'
+          ? 'purchasing-rt'
+          : 'scheduling';
     const assigneeMode = cfg.assigneeMode || (variant === 'manager' ? 'search' : 'menu');
     const DISPATCH_ROWS = window.SMART_ROUTING_DISPATCH_ROWS || DEFAULT_ROWS;
-    const rows = cloneRows(cfg.rows || (variant === 'dispatch' ? DISPATCH_ROWS : DEFAULT_ROWS));
+    const rows = cloneRows(cfg.rows || (variant === 'dispatch' || variant === 'purchasing-rt' ? DISPATCH_ROWS : DEFAULT_ROWS));
     const container = document.getElementById('rows');
     if (!container) return;
 
@@ -1284,7 +1692,16 @@
       editableCells: new Set(),
       openMenuPopovers: new Set(),
       sheetEl: null,
-      editDriverRouteModalEl: null
+      editDriverRouteModalEl: null,
+      isSideSheetOpen: false,
+      editDriverRouteModalEl: null,
+      sendTeamConfirmModalEl: null,
+      bulkEditTagsModalEl: null,
+      selectionCount: 0,
+      onSelectionChange: null,
+      syncSelectionToolbarVisibility: null,
+      clearAllSelections: null,
+      getSelectedRows: null
     };
 
     container.innerHTML = '';
@@ -1324,6 +1741,8 @@
       if (e.key === 'Escape') {
         closeSideSheet(state);
         closeEditDriverRouteModal(state);
+        closeSendTeamConfirmModal(state);
+        closeBulkEditTagsModal(state);
       }
     });
   }

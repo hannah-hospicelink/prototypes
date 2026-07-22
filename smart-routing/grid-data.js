@@ -53,4 +53,22 @@
   window.SMART_ROUTING_DISPATCH_ROWS = window.SMART_ROUTING_DEFAULT_ROWS.map(function (r) {
     return Object.assign({}, r, DISPATCH_OVERRIDES[r.order] || {});
   });
+
+  /* Workflow-specific overrides and row subset/order for the scheduling-workflow variant. */
+  var WORKFLOW_ORDER = ['123455003', '123455005', '123455015', '123455007', '123455009', '123455013', '123455017'];
+  var WORKFLOW_OVERRIDES = {
+    '123455015': {
+      reqDate: '',
+      reqTime: '',
+      priority: 'Coordination',
+      priorityStat: false,
+      reason: 'Hi-Tech Respiratory'
+    },
+    '123455013': { scheduleStatus: { t: 'Confirmed', v: 'success' } }
+  };
+  var allByOrder = {};
+  window.SMART_ROUTING_DEFAULT_ROWS.forEach(function (r) { allByOrder[r.order] = r; });
+  window.SMART_ROUTING_WORKFLOW_ROWS = WORKFLOW_ORDER.map(function (id) {
+    return Object.assign({}, allByOrder[id], { assignee: 'Me' }, WORKFLOW_OVERRIDES[id] || {});
+  });
 })();

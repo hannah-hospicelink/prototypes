@@ -467,6 +467,28 @@ body.details-page header {
   color: #00669E;
 }
 
+/* Warning variant — colors sourced from design-system warning tokens
+   (--badge-bg-warning #fff4e5, --color-text-warning #a64c01) */
+.details-article .details-note-warning {
+  color: #7a3a01;
+  background: #fff4e5;
+  border-left-color: #a64c01;
+  align-items: flex-start;
+}
+
+.details-article .details-note-warning strong {
+  color: #a64c01;
+  white-space: nowrap;
+}
+
+.details-article .details-note-warning .details-note-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: #a64c01;
+}
+
 @media (max-width: 720px) {
   main,
   body.subpage main,

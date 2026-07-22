@@ -53,6 +53,7 @@
 
     /* filter popover */
     --color-border-md: #d6d3d1;             /* $color-border-md → Color/Neutral/350 (input border) */
+    --color-border-error-md: #d34740;       /* $color-border-error-md */
     --input-text-adornment: #a8a29e;        /* $input-text-adornment → Color/Neutral/500 */
     --color-icon-inline-default: #57534e;   /* $color-icon-inline-default → Color/Neutral/700 */
     --color-error-600: #c8102e;             /* $color-error-600 */
@@ -383,7 +384,7 @@
   .view-map-btn:focus-visible,
   .filter-btn-tertiary:focus-visible,
   .filter-btn-reset:focus-visible,
-  .filter-btn-apply:focus-visible,
+  .btn-primary:focus-visible,
   .btn-secondary:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus-outline);
     outline-offset: var(--focus-ring-offset);
@@ -443,8 +444,7 @@
   }
 
   /* Text button — shared box + typography (Small). Override color/background/shadow per variant. */
-  .filter-btn-reset,
-  .filter-btn-apply {
+  .filter-btn-reset {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1221,21 +1221,7 @@
     background: none;
     color: var(--btn-ghost-content-tertiary);
   }
-  /* primary (filled) text button */
-  .filter-btn-apply {
-    background: var(--btn-bg-primary);
-    color: var(--btn-content);
-    box-shadow: var(--btn-shadow-primary);
-  }
-  .filter-btn-apply:hover { background: var(--btn-bg-primary-hover); }
-  .filter-btn-apply:active { background: var(--btn-bg-primary-active); }
-  .filter-btn-apply:disabled {
-    opacity: 0.4; /* $btn-disabled = 40 */
-    box-shadow: none;
-    cursor: default;
-  }
-  .filter-btn-apply:disabled:hover,
-  .filter-btn-apply:disabled:active { background: var(--btn-bg-primary); }
+  /* Filter/tag popover apply action now uses the shared .btn-primary + .btn-sm classes. */
 
   /* tag edit popover (popover variant config) */
   .tag-popover {
@@ -1554,6 +1540,22 @@
   .edit-assignee-sheet-search:focus {
     outline: none;
   }
+  .edit-driver-route-field.is-error .edit-driver-route-label {
+    color: var(--color-text-error);
+  }
+  .edit-driver-route-field.is-error .edit-assignee-sheet-input {
+    border-color: var(--color-border-error-md);
+  }
+  .edit-assignee-sheet-error {
+    margin: 0;
+    font-size: var(--font-caption);
+    line-height: var(--lh-default);
+    font-weight: 400;
+    color: var(--color-text-error);
+  }
+  .edit-assignee-sheet-error[hidden] {
+    display: none;
+  }
   .edit-assignee-sheet-input-btn {
     border: none;
     background: transparent;
@@ -1763,6 +1765,45 @@
   .btn-secondary:active { background: var(--btn-bg-secondary-active); }
   /* external-link icon frame uses the shared inline icon frame primitive */
 
+  /* Primary (filled brand) button — self-contained Medium. Focus ring handled by the shared outset primitive above. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap-md);
+    min-height: var(--btn-size-md);
+    padding: 0 var(--btn-padding-md);
+    background: var(--btn-bg-primary);
+    color: var(--btn-content);
+    box-shadow: var(--btn-shadow-primary);
+    border: none;
+    border-radius: var(--button-radius-text);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--btn-font-md);
+    line-height: 1;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+  }
+  .btn-primary:hover { background: var(--btn-bg-primary-hover); }
+  .btn-primary:active { background: var(--btn-bg-primary-active); }
+  .btn-primary:disabled {
+    opacity: 0.4; /* $btn-disabled = 40 */
+    box-shadow: none;
+    cursor: default;
+  }
+  .btn-primary:disabled:hover,
+  .btn-primary:disabled:active { background: var(--btn-bg-primary); }
+
+  /* Small size modifier — combine with any .btn-* variant. */
+  .btn-sm {
+    min-height: var(--btn-size-sm);
+    height: var(--btn-size-sm);
+    padding: 0 var(--btn-padding-sm);
+    font-size: var(--font-caption);
+  }
+
   /* ---------- Dispatch edit driver/route modal ---------- */
   .edit-driver-route-overlay {
     position: fixed;
@@ -1953,16 +1994,7 @@
   }
   .edit-driver-route-btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
   .edit-driver-route-btn-secondary:active { background: var(--btn-bg-secondary-active); }
-  .edit-driver-route-btn-primary {
-    background: var(--btn-bg-primary);
-    color: var(--btn-content);
-    box-shadow: var(--btn-shadow-primary);
-  }
-  .edit-driver-route-btn-primary:hover { background: var(--btn-bg-primary-hover); }
-  .edit-driver-route-btn-primary:active { background: var(--btn-bg-primary-active); }
-  .edit-driver-route-btn-primary:disabled { opacity: 0.4; box-shadow: none; cursor: default; }
-  .edit-driver-route-btn-primary:disabled:hover,
-  .edit-driver-route-btn-primary:disabled:active { background: var(--btn-bg-primary); }
+  /* Primary modal action now uses the shared .btn-primary class. */
   .edit-driver-route-btn-destructive {
     background: var(--btn-bg-destructive);
     color: var(--btn-content);
@@ -1986,6 +2018,25 @@
   .reset-order-footer { justify-content: space-between; }
   .reset-order-select { cursor: pointer; }
   .reset-order-select .select-input-value { min-height: var(--lh-default); }
+
+  /* ---------- Set order complete side sheet ---------- */
+  /* Content sections separate at 24px (Figma Content slot gap), matching the bulk-edit body. */
+  .side-sheet-body--set-complete { gap: var(--spacing-lg); }
+  .set-complete-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+  }
+  .set-complete-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 100%;
+  }
+  .set-complete-field-sm { width: 244px; } /* Figma date/time field width */
+  .set-complete-footer { justify-content: space-between; }
+  /* Date/time end adornment (calendar/clock) sizes to the 16px box by height. */
+  .select-input-icon--end svg { width: auto; height: 100%; }
 
   @media (max-width: 900px) {
     .edit-assignee-sheet-card-content {
@@ -2112,14 +2163,8 @@
   }
   .send-team-confirm-btn-cancel:hover { background: var(--button-ghost-bg-hover); }
   .send-team-confirm-btn-cancel:active { background: var(--button-ghost-bg-active); }
-  .send-team-confirm-btn-primary {
-    background: var(--btn-bg-primary);
-    color: var(--btn-content);
-    box-shadow: var(--btn-shadow-primary);
-    margin-left: auto;
-  }
-  .send-team-confirm-btn-primary:hover { background: var(--btn-bg-primary-hover); }
-  .send-team-confirm-btn-primary:active { background: var(--btn-bg-primary-active); }
+  /* Appearance from the shared .btn-primary class; this rule retains layout + JS hook only. */
+  .send-team-confirm-btn-primary { margin-left: auto; }
 
   /* ---------- Bulk edit tags modal ---------- */
   .bulk-edit-tags-overlay {

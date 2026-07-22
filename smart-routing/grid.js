@@ -26,6 +26,9 @@
   const ICON_WARNING = '<svg viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M569.5 440.1c18.6 32.2-4.8 71.9-41.9 71.9H48.4c-37 0-60.4-39.7-41.8-71.9L246.2 24c18.5-32 64.8-32 83.3 0l240 416.1zM288 354c-25.4 0-46 20.6-46 46s20.6 46 46 46 46-20.6 46-46-20.6-46-46-46zm-43.7-165.3l7.4 136c.8 14.9 13.1 26.6 28 26.6h16.4c14.9 0 27.2-11.7 28-26.6l7.4-136c.9-16.3-12.1-29.9-28.4-29.9h-30.5c-16.3 0-29.3 13.6-28.3 29.9z"/></svg>';
   const ICON_EXTERNAL = '<svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>';
   const ICON_COLLAPSE = '<svg viewBox="0 0 16 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.17857 0.321429C7.64286 -0.107143 8.35714 -0.107143 8.82143 0.321429L15.6786 7.17857C16.1071 7.64286 16.1071 8.35714 15.6786 8.82143C15.2143 9.25 14.5 9.25 14.0357 8.82143L8 2.75L1.96429 8.82143C1.5 9.25 0.785714 9.25 0.321429 8.82143C-0.107143 8.35714 -0.107143 7.64286 0.321429 7.17857L7.17857 0.321429Z"/></svg>';
+  // FontAwesome calendar-days (solid) / clock (regular) — date & time input end adornments (fill via currentColor)
+  const ICON_CALENDAR = '<svg viewBox="0 0 15 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.28571 0C4.88839 0 5.35714 0.466667 5.35714 1.06667V2.13333H9.64286V1.06667C9.64286 0.466667 10.1116 0 10.7143 0C11.317 0 11.7857 0.466667 11.7857 1.06667V2.13333H12.8571C14.029 2.13333 15 3.1 15 4.26667V13.8667C15 15.0333 14.029 16 12.8571 16H2.14286C0.970982 16 0 15.0333 0 13.8667V4.26667C0 3.1 0.970982 2.13333 2.14286 2.13333H3.21429V1.06667C3.21429 0.466667 3.68304 0 4.28571 0ZM2.14286 8V9.06667C2.14286 9.36667 2.37723 9.6 2.67857 9.6H3.75C4.05134 9.6 4.28571 9.36667 4.28571 9.06667V8C4.28571 7.7 4.05134 7.46667 3.75 7.46667H2.67857C2.37723 7.46667 2.14286 7.7 2.14286 8ZM6.42857 8V9.06667C6.42857 9.36667 6.66295 9.6 6.96429 9.6H8.03571C8.33705 9.6 8.57143 9.36667 8.57143 9.06667V8C8.57143 7.7 8.33705 7.46667 8.03571 7.46667H6.96429C6.66295 7.46667 6.42857 7.7 6.42857 8ZM11.25 7.46667C10.9487 7.46667 10.7143 7.7 10.7143 8V9.06667C10.7143 9.36667 10.9487 9.6 11.25 9.6H12.3214C12.6228 9.6 12.8571 9.36667 12.8571 9.06667V8C12.8571 7.7 12.6228 7.46667 12.3214 7.46667H11.25ZM2.14286 12.2667V13.3333C2.14286 13.6333 2.37723 13.8667 2.67857 13.8667H3.75C4.05134 13.8667 4.28571 13.6333 4.28571 13.3333V12.2667C4.28571 11.9667 4.05134 11.7333 3.75 11.7333H2.67857C2.37723 11.7333 2.14286 11.9667 2.14286 12.2667ZM6.96429 11.7333C6.66295 11.7333 6.42857 11.9667 6.42857 12.2667V13.3333C6.42857 13.6333 6.66295 13.8667 6.96429 13.8667H8.03571C8.33705 13.8667 8.57143 13.6333 8.57143 13.3333V12.2667C8.57143 11.9667 8.33705 11.7333 8.03571 11.7333H6.96429ZM10.7143 12.2667V13.3333C10.7143 13.6333 10.9487 13.8667 11.25 13.8667H12.3214C12.6228 13.8667 12.8571 13.6333 12.8571 13.3333V12.2667C12.8571 11.9667 12.6228 11.7333 12.3214 11.7333H11.25C10.9487 11.7333 10.7143 11.9667 10.7143 12.2667Z"/></svg>';
+  const ICON_CLOCK = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 8C14.5 4.40625 11.5938 1.5 8 1.5C4.40625 1.5 1.5 4.40625 1.5 8C1.5 11.5938 4.40625 14.5 8 14.5C11.5938 14.5 14.5 11.5938 14.5 8ZM0 8C0 3.59375 3.59375 0 8 0C12.4063 0 16 3.59375 16 8C16 12.4063 12.4063 16 8 16C3.59375 16 0 12.4063 0 8ZM7.25 3.75C7.25 3.34375 7.59375 3 8 3C8.40625 3 8.75 3.34375 8.75 3.75V7.59375L11.4063 9.375C11.75 9.59375 11.8438 10.0625 11.625 10.4063C11.4063 10.75 10.9375 10.8438 10.5938 10.625L7.59375 8.625C7.375 8.5 7.25 8.25 7.25 8V3.75Z"/></svg>';
 
   const DEFAULT_ROWS = window.SMART_ROUTING_DEFAULT_ROWS || [];
   const TAG_SORT_ORDER = ['Time-Sensitive', 'Facility', 'Service', 'Liquid O2'];
@@ -391,6 +394,7 @@
       '</div>' +
       '<div class="edit-assignee-sheet-options" id="editAssigneeOptions" role="listbox" aria-label="Assignee" hidden></div>' +
       '</div>' +
+      '<p class="edit-assignee-sheet-error" hidden>Assignee is required</p>' +
       '</div>' +
       '<p class="edit-assignee-sheet-help">All orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.</p>' +
       '<div class="edit-assignee-sheet-alert" hidden>' +
@@ -401,7 +405,7 @@
       '</div>' +
       '<div class="edit-assignee-sheet-footer">' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel edit-assignee-sheet-cancel" type="button">Cancel</button>' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-assignee-sheet-assign" type="button" disabled>Assign</button>' +
+      '<button class="btn-primary edit-assignee-sheet-assign" type="button">Assign</button>' +
       '</div>';
   }
 
@@ -457,6 +461,97 @@
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel reset-order-cancel" type="button">Cancel</button>' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-destructive reset-order-confirm" type="button">Reset order</button>' +
       '</div>';
+  }
+
+  function buildSetCompleteSheetHtml(r) {
+    var statusBadge = badge({ t: getOrderStatusBadgeText(r), v: getOrderStatusBadgeVariant(r) }, 'large');
+
+    function dateValue(date, time) {
+      return date + (time ? ' (' + time + ')' : '');
+    }
+    function detailLine(label, value) {
+      return '<div class="lv"><span class="label">' + label + ':</span><span class="value">' + value + '</span></div>';
+    }
+
+    // Order data line items render only when the underlying value exists (req 1).
+    var details = '<div class="lv"><span class="label">Order #:</span><span class="value link" tabindex="0">' + r.order + '</span></div>';
+    if (r.reason) details += detailLine('Reason', r.reason);
+    if (r.priority) details += detailLine('Priority', r.priority);
+    if (r.orderedDate) details += detailLine('Ordered', dateValue(r.orderedDate, r.orderedTime));
+    if (r.reqDate) details += detailLine('Requested', dateValue(r.reqDate, r.reqTime));
+    if (r.schedDate) details += detailLine('Scheduled', dateValue(r.schedDate, r.schedTime));
+
+    // Driver / route autofill from the order when present (req 2 & 3).
+    var driverValue = r.driver || '';
+    var routeValue = r.route || '';
+    // Completed date/time default to today / now (req 4 & 5).
+    var completedDate = formatTodayDate();
+    var completedTime = formatNowTime();
+
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Set Order Complete</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
+      '<div class="side-sheet-body side-sheet-body--set-complete">' +
+      '<div class="set-complete-intro">' +
+      '<p class="reset-order-description">Orders completed with today\'s date must be scheduled with a driver and route assigned.</p>' +
+      '<p class="reset-order-description">Backdated orders must include both a date and time of completion.</p>' +
+      '</div>' +
+      '<div class="badges">' + statusBadge + '</div>' +
+      '<div class="reset-order-details">' + details + '</div>' +
+      '<div class="set-complete-fields">' +
+      '<div class="edit-driver-route-grid">' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Driver <span class="req">*</span></span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="select-input-value">' + driverValue + '</span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Route <span class="req">*</span></span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-value">' + routeValue + '</span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field set-complete-field-sm">' +
+      '<span class="edit-driver-route-label">Completed date <span class="req">*</span></span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-value">' + completedDate + '</span>' +
+      '<span class="select-input-icon select-input-icon--end">' + ICON_CALENDAR + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field set-complete-field-sm">' +
+      '<span class="edit-driver-route-label">Completed time</span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-value">' + completedTime + '</span>' +
+      '<span class="select-input-icon select-input-icon--end">' + ICON_CLOCK + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-assignee-sheet-footer set-complete-footer">' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel set-complete-cancel" type="button">Cancel</button>' +
+      '<button class="btn-primary set-complete-confirm" type="button">Set complete</button>' +
+      '</div>';
+  }
+
+  // Completed-date default: today as MM/DD/YYYY (matches the design's date field format).
+  function formatTodayDate() {
+    var d = new Date();
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return mm + '/' + dd + '/' + d.getFullYear();
+  }
+  // Completed-time default: now as h:mm AM/PM (matches the design's time field format).
+  function formatNowTime() {
+    var d = new Date();
+    var h = d.getHours();
+    var m = String(d.getMinutes()).padStart(2, '0');
+    var suffix = h >= 12 ? 'PM' : 'AM';
+    var h12 = h % 12;
+    if (h12 === 0) h12 = 12;
+    return h12 + ':' + m + ' ' + suffix;
   }
 
   function buildHistoryPopoverHtml() {
@@ -515,7 +610,7 @@
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel" type="button">Cancel</button>' +
         '<div class="edit-driver-route-modal-footer-actions">' +
         '<button class="edit-driver-route-btn edit-driver-route-btn-secondary edit-driver-route-btn-save-action" type="button">Save and close</button>' +
-        '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-driver-route-btn-save-action" type="button">Save and view route</button>' +
+        '<button class="btn-primary edit-driver-route-btn-save-action" type="button">Save and view route</button>' +
         '</div>' +
       '</div>' +
       '</div>';
@@ -549,7 +644,7 @@
       '</div>' +
       '<div class="send-team-confirm-footer">' +
       '<button class="send-team-confirm-btn send-team-confirm-btn-cancel" type="button">Cancel</button>' +
-      '<button class="send-team-confirm-btn send-team-confirm-btn-primary" type="button">' + primaryActionLabel + '</button>' +
+      '<button class="btn-primary send-team-confirm-btn-primary" type="button">' + primaryActionLabel + '</button>' +
       '</div>' +
       '</div>';
   }
@@ -585,7 +680,7 @@
       '</div>' +
       '<div class="bulk-edit-tags-modal-footer">' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel bulk-edit-tags-btn-cancel" type="button">Cancel</button>' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-primary bulk-edit-tags-btn-save" type="button">Save</button>' +
+      '<button class="btn-primary bulk-edit-tags-btn-save" type="button">Save</button>' +
       '</div>' +
       '</div>';
   }
@@ -767,7 +862,7 @@
       popEl.className = popoverClass;
       const clearBtnHtml = config.clearLabel ? '<button class="filter-btn-reset assignee-clear">' + config.clearLabel + '</button>' : '';
       const buttonsClass = 'tag-buttons' + (clearBtnHtml ? '' : ' assignee-actions');
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="' + buttonsClass + '">' + clearBtnHtml + '<button class="filter-btn-apply assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="' + buttonsClass + '">' + clearBtnHtml + '<button class="btn-primary btn-sm assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
@@ -1043,7 +1138,7 @@
         const disabled = option.disabled;
         const tooltipAttr = (disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
         return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + label + '">' + label + '</div>';
-      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button"' + (config.disableUntilChanged ? ' disabled' : '') + '>' + (config.saveLabel || 'Assign') + '</button></div>' : '');
+      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="btn-primary btn-sm assignee-confirm" type="button"' + (config.disableUntilChanged ? ' disabled' : '') + '>' + (config.saveLabel || 'Assign') + '</button></div>' : '');
       document.body.appendChild(menuEl);
       const field = cell.querySelector('.cell-field');
       if (field) field.setAttribute('aria-expanded', 'true');
@@ -1173,7 +1268,7 @@
       working = row.tags.map(function (t) { return t.t; });
       popEl = document.createElement('div');
       popEl.className = 'tag-popover';
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span></div><div class="tag-list" role="listbox" aria-multiselectable="true"></div><div class="tag-buttons"><button class="filter-btn-reset tag-deselect">Deselect all</button><button class="filter-btn-apply tag-save">Save</button></div>';
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span></div><div class="tag-list" role="listbox" aria-multiselectable="true"></div><div class="tag-buttons"><button class="filter-btn-reset tag-deselect">Deselect all</button><button class="btn-primary btn-sm tag-save">Save</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions();
@@ -1228,6 +1323,7 @@
     });
 
     const dispatchEnabled = !!(r.schedDate && r.scheduleStatus && (r.scheduleStatus.t === 'Rescheduled' || r.scheduleStatus.t === 'Confirmed'));
+    const isCompleted = !!(r.status && r.status.t === 'Completed');
     const moreOptions = dispatch
       ? ['Edit driver / route', 'Add on', 'Set complete', 'Reset order', 'View equipment']
       : purchasingRt
@@ -1236,12 +1332,27 @@
           {
             label: 'Send to dispatch',
             disabled: !dispatchEnabled,
-            tooltip: 'Orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.'
+            tooltip: 'Order must have a schedule in the Confirmed or Rescheduled status.'
           },
           'Set complete',
           'View equipment'
         ]
-        : ['Schedule order', 'Reset order', 'View equipment'];
+        : [
+          'Schedule order',
+          {
+            label: 'Set complete',
+            disabled: !dispatchEnabled,
+            tooltip: 'Order must have a schedule in the Confirmed or Rescheduled status.'
+          },
+          'Reset order',
+          'View equipment'
+        ];
+    if (isCompleted) {
+      for (let mi = moreOptions.length - 1; mi >= 0; mi--) {
+        const optLabel = typeof moreOptions[mi] === 'string' ? moreOptions[mi] : moreOptions[mi].label;
+        if (optLabel === 'Set complete') moreOptions.splice(mi, 1);
+      }
+    }
 
     setupMenuPopover(row.querySelector('.more-btn'), {
       options: moreOptions,
@@ -1252,6 +1363,7 @@
         if (value === 'Send to scheduling') openSendTeamConfirmModal('Send to scheduling', state);
         if (value === 'Send to dispatch') openSendTeamConfirmModal('Send to dispatch', state);
         if (value === 'Reset order') openResetOrderSheet(r, state, variant);
+        if (value === 'Set complete') openSetCompleteSheet(r, state);
       }
     }, state);
 
@@ -1523,15 +1635,20 @@
     let stagedAssignee = null;
     const alertEl = sheetEl.querySelector('.edit-assignee-sheet-alert');
     const assignBtn = sheetEl.querySelector('.edit-assignee-sheet-assign');
-    const combobox = setupCombobox(sheetEl.querySelector('.edit-assignee-sheet-combobox'), {
+    const comboboxEl = sheetEl.querySelector('.edit-assignee-sheet-combobox');
+    const fieldEl = comboboxEl.closest('.edit-driver-route-field');
+    const errorEl = sheetEl.querySelector('.edit-assignee-sheet-error');
+    const combobox = setupCombobox(comboboxEl, {
       options: assigneeOptions,
       value: null,
       onSelect: function (v) {
         // Stage only — the assignment is committed when the footer button is clicked.
         stagedAssignee = v;
+        // Selecting a value clears any prior validation error.
+        fieldEl.classList.remove('is-error');
+        errorEl.hidden = true;
         // Reassigning to another team removes orders from the current assignee's board.
         alertEl.hidden = ASSIGNEE_TEAMS.indexOf(v) === -1;
-        assignBtn.disabled = false;
         assignBtn.textContent = v === 'Unassigned' ? 'Unassign' : 'Assign';
       }
     });
@@ -1542,10 +1659,14 @@
     }
 
     function assign() {
-      if (stagedAssignee !== null) {
-        var value = stagedAssignee === 'Unassigned' ? null : stagedAssignee;
-        selectedRows.forEach(function (r) { r.assignee = value; });
+      if (stagedAssignee === null) {
+        // Nothing selected — surface the validation error instead of closing.
+        fieldEl.classList.add('is-error');
+        errorEl.hidden = false;
+        return;
       }
+      var value = stagedAssignee === 'Unassigned' ? null : stagedAssignee;
+      selectedRows.forEach(function (r) { r.assignee = value; });
       close();
     }
 
@@ -1575,6 +1696,29 @@
     sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
     sheetEl.querySelector('.reset-order-cancel').addEventListener('click', close);
     sheetEl.querySelector('.reset-order-confirm').addEventListener('click', close);
+  }
+
+  function openSetCompleteSheet(r, state) {
+    if (state.sheetEl) state.sheetEl.remove();
+    const sheetEl = document.createElement('div');
+    state.sheetEl = sheetEl;
+    state.isSideSheetOpen = true;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
+    sheetEl.className = 'side-sheet';
+    sheetEl.innerHTML = buildSetCompleteSheetHtml(r);
+    document.body.appendChild(sheetEl);
+    void sheetEl.offsetWidth;
+    sheetEl.classList.add('open');
+
+    function close() {
+      closeSideSheet(state);
+    }
+
+    sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
+    sheetEl.querySelector('.set-complete-cancel').addEventListener('click', close);
+    sheetEl.querySelector('.set-complete-confirm').addEventListener('click', close);
   }
 
   function closeSideSheet(state) {
@@ -1845,7 +1989,7 @@
 
     function buildFilterPopoverMarkup(bodyHtml) {
       return '<div class="filter-popover-body">' + bodyHtml + '</div>' +
-        '<div class="filter-popover-footer"><div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div></div>';
+        '<div class="filter-popover-footer"><div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="btn-primary btn-sm">Filter</button></div></div>';
     }
 
     function buildManagerLikePopoverHtml() {
@@ -1944,7 +2088,7 @@
             { label: 'Closed last 48 hours', active: false }
           ], { required: true }) +
           field('Tags', { search: true }) +
-          '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
+          '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="btn-primary btn-sm">Filter</button></div>';
 
         document.body.appendChild(popEl);
         trigger.classList.add('active');

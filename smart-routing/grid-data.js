@@ -28,20 +28,26 @@
 
   /* Dispatch-specific overrides — applied on top of DEFAULT_ROWS for the dispatch variant.
      Only fields that differ from (or are absent in) the scheduling/manager view are listed here.
+     Every dispatch order carries its own schedDate/schedTime (no fallback to requested).
      Order status lives on the main row (status); the dispatch badge is derived from it. */
   var DISPATCH_OVERRIDES = {
-    '123455005': { etaTime: '11:12 - 11:54 AM', etaCaption: 'En route', etaCaptionColor: 'warning',  completedDate: '',           completedTime: '',        driver: 'Hannah S.', route: '12' },
+    '123455005': { schedDate: '06/04/2026', schedTime: '10:00 AM - 2:00 PM CT',
+                   etaTime: '11:12 - 11:54 AM', etaCaption: 'En route', etaCaptionColor: 'warning',  completedDate: '',           completedTime: '',        driver: 'Hannah S.', route: '12' },
     '123455003': { schedDate: '06/04/2026', schedTime: '11:00 AM - 3:00 PM CT',
                    etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       },
     '123455007': { etaTime: '',              etaCaption: 'Delayed', etaCaptionColor: 'warning',  completedDate: '',           completedTime: '',        driver: 'Eric E.', route: '4'  },
-    '123455009': { etaTime: '4:04 PM',       etaCaption: 'Arrived', etaCaptionColor: 'success',  completedDate: '06/04/2026', completedTime: '4:26 PM', driver: 'Eric E.', route: '4'  },
-    '123455011': { etaTime: '10:11 AM',      etaCaption: 'En route', etaCaptionColor: 'warning', completedDate: '',           completedTime: '',        driver: 'Oscar R.', route: '8'  },
-    '123455015': { etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: '',        driver: 'Eric E.', route: '4'  },
+    '123455009': { schedDate: '06/04/2026', schedTime: '1:00 - 5:00 PM CT',
+                   etaTime: '4:04 PM',       etaCaption: 'Arrived', etaCaptionColor: 'success',  completedDate: '06/04/2026', completedTime: '4:26 PM', driver: 'Eric E.', route: '4'  },
+    '123455011': { schedDate: '06/04/2026', schedTime: '8:00 AM - 12:00 PM CT',
+                   etaTime: '10:11 AM',      etaCaption: 'En route', etaCaptionColor: 'warning', completedDate: '',           completedTime: '',        driver: 'Oscar R.', route: '8'  },
+    '123455015': { schedDate: '06/04/2026', schedTime: '9:00 AM - 1:00 PM CT',
+                   etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: '',        driver: 'Eric E.', route: '4'  },
     '123455017': { etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       },
     '123455013': { etaTime: '6:54 PM',       etaCaption: 'Arrived', etaCaptionColor: 'success',  completedDate: '',           completedTime: '',        driver: 'Eric E.', route: '4'  },
     '123455019': { schedDate: '06/05/2026', schedTime: '6:00 - 10:00 PM',
                    etaDate: '06/04/2026', etaTime: '1:22 PM',   completedDate: '06/04/2026', completedTime: '1:22 PM', driver: 'Hannah S.', route: '12' },
-    '123455021': { etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       }
+    '123455021': { schedDate: '06/05/2026', schedTime: '6:00 - 10:00 PM CT',
+                   etaTime: '',              etaCaption: '',        etaCaptionColor: '',         completedDate: '',           completedTime: ''       }
   };
 
   window.SMART_ROUTING_DISPATCH_ROWS = window.SMART_ROUTING_DEFAULT_ROWS.map(function (r) {

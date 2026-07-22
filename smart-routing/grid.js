@@ -9,6 +9,8 @@
   const ICON_CHECK = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M15.28 3.03L5.53 12.78a.75.75 0 0 1-1.06 0L.72 9.03a.75.75 0 1 1 1.06-1.06l3.22 3.22L14.22 1.97a.75.75 0 1 1 1.06 1.06Z"/></svg>';
   const ICON_FILTER = '<svg viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.01116 0H14.9888C15.3944 0 15.7688 0.249772 15.9248 0.62443C16.0809 0.999089 15.9872 1.43619 15.7064 1.71718L9.99681 7.3995V12.9882C9.99681 13.394 9.74721 13.7687 9.37281 13.9248C8.99841 14.0809 8.5928 13.9872 8.2808 13.7062L6.28399 11.7081C6.09679 11.5207 6.00319 11.271 6.00319 10.99V7.3995L0.293552 1.71718C0.0127506 1.43619 -0.08085 0.999089 0.0751509 0.62443C0.231152 0.249772 0.605554 0 1.01116 0Z"/></svg>';
   const ICON_HISTORY = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8.24242 1.93939C6.09091 1.93939 4.21212 3.12121 3.21212 4.84848H4.36364C4.90909 4.84848 5.33333 5.27273 5.33333 5.81818C5.33333 6.36364 4.90909 6.78788 4.36364 6.78788H0.969697C0.424242 6.78788 0 6.36364 0 5.81818V2.42424C0 1.87879 0.424242 1.45455 0.969697 1.45455C1.51515 1.45455 1.93939 1.87879 1.93939 2.42424V3.24242C3.36364 1.27273 5.63636 0 8.24242 0C12.5152 0 16 3.48485 16 7.75758C16 12.0303 12.5152 15.5152 8.24242 15.5152C5.60606 15.5152 3.27273 14.2121 1.87879 12.1818C1.57576 11.7576 1.66667 11.1515 2.12121 10.8485C2.54545 10.5455 3.15152 10.6364 3.45455 11.0909C4.51515 12.6061 6.27273 13.5758 8.24242 13.5758C11.4545 13.5758 14.0606 10.9697 14.0606 7.75758C14.0606 4.54545 11.4545 1.93939 8.24242 1.93939ZM8.9697 4.60606V7.45455L10.9394 9.42424C11.2121 9.69697 11.2121 10.1818 10.9394 10.4545C10.6667 10.7273 10.1818 10.7273 9.90909 10.4545L7.72727 8.27273C7.60606 8.15152 7.51515 7.93939 7.51515 7.75758V4.60606C7.51515 4.21212 7.84848 3.87879 8.24242 3.87879C8.63636 3.87879 8.9697 4.21212 8.9697 4.60606Z"/></svg>';
+  const ICON_VIEW = '<svg viewBox="0 0 12 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6 0C7.68604 0 9.03903 0.770165 10.0173 1.68604C10.9748 2.58109 11.6409 3.66349 11.9532 4.41284C12.0156 4.57936 12.0156 4.74588 11.9532 4.9124C11.6409 5.66175 10.9748 6.74415 10.0173 7.6392C9.03903 8.55507 7.68604 9.32524 6 9.32524C4.31396 9.32524 2.98179 8.55507 1.98265 7.6392C1.02515 6.74415 0.359063 5.66175 0.0468343 4.9124C-0.0156114 4.74588 -0.0156114 4.57936 0.0468343 4.41284C0.359063 3.66349 1.02515 2.58109 1.98265 1.68604C2.98179 0.770165 4.31396 0 6 0ZM3.0026 4.66262C3.0026 6.32784 4.33478 7.66002 6 7.66002C7.66522 7.66002 8.9974 6.32784 8.9974 4.66262C8.9974 2.9974 7.66522 1.66522 6 1.66522C4.33478 1.66522 3.0026 2.9974 3.0026 4.66262ZM6 3.33044C6 3.08066 5.93755 2.87251 5.83348 2.66435C6.77016 2.58109 7.68604 3.18474 7.93582 4.14224C8.20642 5.20382 7.58196 6.30703 6.52038 6.59844C5.4588 6.86904 4.35559 6.24458 4.06418 5.183C4.00173 4.95403 3.98092 4.72507 4.00173 4.4961C4.20989 4.60017 4.43886 4.66262 4.66782 4.66262C5.39636 4.66262 6 4.05898 6 3.33044Z"/></svg>';
+  const ICON_VIEW_SLASH = '<svg viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M0.853796 0.140564L2.95705 2.24382C3.79002 1.70239 4.81041 1.32755 5.9974 1.32755C7.68416 1.32755 9.01692 2.09805 10.0165 3.01432C10.9744 3.90976 11.6408 4.99262 11.9531 5.7423C12.0156 5.90889 12.0156 6.09631 11.9531 6.26291C11.6408 6.99176 10.9744 8.07462 10.0165 8.99089C9.95401 9.03254 9.89154 9.07419 9.84989 9.13666L11.849 11.1358C12.0364 11.344 12.0364 11.6564 11.849 11.8438C11.6616 12.0521 11.3284 12.0521 11.141 11.8438L0.14577 0.84859C-0.0416486 0.661171 -0.0416486 0.327983 0.14577 0.140564C0.333189 -0.0468547 0.666377 -0.0468547 0.853796 0.140564ZM4.26898 3.55575H4.24816L4.97701 4.26377C5.12278 4.18048 5.3102 4.118 5.47679 4.05553C6.53883 3.78482 7.64252 4.40954 7.93406 5.47158C8.07983 6.01302 7.9757 6.55445 7.72581 7.01258L8.43384 7.74143C8.78785 7.24165 8.9961 6.63774 8.9961 5.99219C8.9961 4.34707 7.66334 2.99349 5.9974 2.99349C5.35184 2.99349 4.74794 3.20174 4.26898 3.55575ZM6.7679 8.88677L8.12148 10.2195C7.47592 10.4902 6.7679 10.6568 5.9974 10.6568C4.31063 10.6568 2.97787 9.88633 1.99913 8.97007C1.02039 8.07462 0.354013 6.99176 0.0624729 6.24208C-0.0208243 6.07549 -0.0208243 5.90889 0.0624729 5.7423C0.29154 5.13839 0.770499 4.32625 1.43688 3.55575L3.10282 5.22169C3.04035 5.47158 2.9987 5.72148 2.9987 5.99219C2.9987 7.65813 4.35228 8.99089 5.9974 8.99089C6.26811 8.99089 6.518 8.94924 6.7679 8.88677Z"/></svg>';
   const ICON_SEARCH = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M13 6.5C13 7.9375 12.5312 9.25 11.75 10.3438L15.7188 14.2812C16.0938 14.6875 16.0938 15.3125 15.7188 15.7188C15.3125 16.0938 14.6875 16.0938 14.2812 15.7188L10.3438 11.75C9.25 12.5312 7.9375 13 6.5 13C2.90625 13 0 10.0938 0 6.5C0 2.90625 2.90625 0 6.5 0C10.0938 0 13 2.90625 13 6.5ZM6.5 11C9 11 11 9 11 6.5C11 4 9 2 6.5 2C4 2 2 4 2 6.5C2 9 4 11 6.5 11Z"/></svg>';
   const ICON_CHECKBOX_OFF = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 1.56771H1.56771V12.4323H12.4323V1.56771ZM12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323Z" fill="#A8A29E"/></svg>';
   const ICON_CHECKBOX_ON = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323ZM5.97917 10.3542L11.8854 4.44792C12.2135 4.11979 12.2135 3.64583 11.8854 3.35417C11.5938 3.02604 11.0833 3.02604 10.7917 3.35417L5.43229 8.67708L3.20833 6.45312C2.91667 6.16146 2.40625 6.16146 2.11458 6.45312C1.78646 6.74479 1.78646 7.25521 2.11458 7.54688L4.88542 10.3542C5.21354 10.6458 5.6875 10.6458 5.97917 10.3542Z" fill="#3399D1"/></svg>';
@@ -112,6 +114,7 @@
 
   function normalizeSearchEntry(option) {
     if (typeof option === 'string') return { type: 'option', label: option, disabled: false, tooltip: '' };
+    if (option && option.type === 'divider') return { type: 'divider' };
     if (option && option.type === 'heading') return { type: 'heading', label: option.label };
     if (option && option.heading) return { type: 'heading', label: option.heading };
     return { type: 'option', label: option.label, value: option.value || option.label, disabled: !!option.disabled, tooltip: option.tooltip || '' };
@@ -193,10 +196,12 @@
     };
   }
 
+  const ASSIGNEE_TEAMS = ['Dispatch', 'Purchasing', 'Respiratory Therapy'];
+
   function buildAssigneeOptions(mode, dispatchEnabled) {
     const dispatchOption = { label: 'Dispatch', disabled: !dispatchEnabled };
     if (!dispatchEnabled) {
-      dispatchOption.tooltip = 'Order must have a schedule in the Confirmed or Rescheduled status.';
+      dispatchOption.tooltip = 'Orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.';
     }
     if (mode === 'search') {
       return ['Me', 'Carmen M.', 'Cece L.', 'Hannah S.', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
@@ -204,7 +209,32 @@
     return ['Me', dispatchOption, 'Purchasing', 'Respiratory Therapy'];
   }
 
+  // Assignee picker entries: for search mode "Unassigned" is pinned on top, then
+  // individuals, then teams/roles, each group set off by a divider (reuses the
+  // existing .menu-divider style). The basic 'menu' mode omits the "Unassigned"
+  // option entirely. Sourced from buildAssigneeOptions so both inline and bulk stay
+  // in sync.
+  function buildAssigneeEntries(mode, dispatchEnabled) {
+    const individuals = [];
+    const teams = [];
+    buildAssigneeOptions(mode, dispatchEnabled).forEach(function (opt) {
+      const label = typeof opt === 'string' ? opt : opt.label;
+      (ASSIGNEE_TEAMS.indexOf(label) !== -1 ? teams : individuals).push(opt);
+    });
+    const groups = [];
+    if (mode !== 'menu') groups.push(['Unassigned']);
+    if (individuals.length) groups.push(individuals);
+    if (teams.length) groups.push(teams);
+    let entries = [];
+    groups.forEach(function (group, i) {
+      if (i > 0) entries.push({ type: 'divider' });
+      entries = entries.concat(group);
+    });
+    return entries;
+  }
+
   function formatAssigneeDisplay(value) {
+    if (value === 'Unassigned') return '';
     if (value === 'Respiratory Therapy') return 'RT';
     return value;
   }
@@ -289,7 +319,7 @@
         '<div class="row-cell col-order"><div class="cell-stack"><div class="order-main"><span class="cell-main link" tabindex="0">' + r.order + '</span>' + (r.note ? ICON_NOTE : '') + '</div><div class="badges"><span class="badge order-status-badge ' + orderBadgeVariant + '">' + orderBadgeText + '</span></div></div></div>' +
         '<div class="row-cell col-priority"><div class="cell-stack"><span class="cell-main ' + priorityClass + '">' + r.priority + '</span><span class="cell-caption">' + r.reason + '</span></div></div>' +
         '<div class="row-cell col-patient"><span class="cell-main link" tabindex="0">' + r.patient + '</span></div>' +
-        '<div class="row-cell col-scheduled">' + dateCell(r.schedDate || r.reqDate, r.schedTime || r.reqTime) + '</div>' +
+        '<div class="row-cell col-scheduled">' + dateCell(r.schedDate, r.schedTime) + '</div>' +
         '<div class="row-cell col-eta">' + etaCell(r) + '</div>' +
         '<div class="row-cell col-completed">' + completedCell(r) + '</div>' +
         '<div class="row-cell col-driver editable-cell"></div>' +
@@ -350,21 +380,28 @@
     return '<div class="side-sheet-header"><div class="side-sheet-title">Edit Assignee: ' + count + ' Order' + (count === 1 ? '' : 's') + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
       '<div class="side-sheet-body side-sheet-body--bulk-edit">' +
       '<div class="edit-driver-route-field">' +
-      '<span class="edit-driver-route-label">Assignee</span>' +
-      '<div class="edit-driver-route-input edit-assignee-sheet-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
-      '<span class="edit-driver-route-input-value"></span>' +
-      '<button class="edit-assignee-sheet-input-btn" type="button" aria-label="Search assignee">' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<span class="edit-driver-route-label" id="editAssigneeLabel">Assignee</span>' +
+      '<div class="edit-assignee-sheet-combobox">' +
+      '<div class="select-input edit-assignee-sheet-input">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
+      '<input class="edit-assignee-sheet-search" type="text" role="combobox" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-controls="editAssigneeOptions" aria-labelledby="editAssigneeLabel">' +
+      '<button class="edit-assignee-sheet-input-btn" type="button" tabindex="-1" aria-label="Toggle assignee list">' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</button>' +
       '</div>' +
+      '<div class="edit-assignee-sheet-options" id="editAssigneeOptions" role="listbox" aria-label="Assignee" hidden></div>' +
       '</div>' +
-      '<p class="edit-assignee-sheet-help">Order must have a schedule in the Confirmed or Rescheduled status before they can be assigned to Dispatch.</p>' +
+      '</div>' +
+      '<p class="edit-assignee-sheet-help">All orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.</p>' +
+      '<div class="edit-assignee-sheet-alert" hidden>' +
+      '<span class="edit-assignee-sheet-alert-icon">' + ICON_WARNING + '</span>' +
+      '<p class="edit-assignee-sheet-alert-text">Assigning orders to another team will immediately remove them from the current assignee\'s board.</p>' +
+      '</div>' +
       '<div class="edit-assignee-sheet-list">' + cards + '</div>' +
       '</div>' +
       '<div class="edit-assignee-sheet-footer">' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-cancel edit-assignee-sheet-cancel" type="button">Cancel</button>' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-assignee-sheet-assign" type="button">Assign</button>' +
+      '<button class="edit-driver-route-btn edit-driver-route-btn-primary edit-assignee-sheet-assign" type="button" disabled>Assign</button>' +
       '</div>';
   }
 
@@ -402,17 +439,17 @@
       '<div class="reset-order-details">' + details + '</div>' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Reason for reset <span class="req">*</span></span>' +
-      '<div class="edit-driver-route-input reset-order-select" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
-      '<span class="edit-driver-route-input-value"></span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<div class="select-input reset-order-select" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '</div>' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Tags</span>' +
-      '<div class="edit-driver-route-input edit-driver-route-input-tags" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
+      '<div class="select-input select-input-tags" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
       '<span class="edit-driver-route-chip-list">' + tagChips + '</span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '</div>' +
       '</div>' +
@@ -438,6 +475,13 @@
       '<div class="columns-footer"><label class="columns-toggle-all"><span class="columns-option-check">' + ICON_CHECKBOX_ON + '</span><span>Show/hide all</span></label><button class="columns-reset" type="button" disabled>Reset</button></div>';
   }
 
+  function buildAdvancedFiltersButtonHtml(isExpanded) {
+    var expanded = !!isExpanded;
+    var label = expanded ? 'Hide advanced filters' : 'Show advanced filters';
+    var icon = expanded ? ICON_VIEW_SLASH : ICON_VIEW;
+    return '<div class="filter-secondary-action"><button class="filter-btn-tertiary" type="button" aria-label="' + label + '" aria-pressed="' + expanded + '" data-advanced-filters-toggle="true"><span class="filter-btn-tertiary-icon">' + icon + '</span><span class="filter-btn-tertiary-label">' + label + '</span></button></div>';
+  }
+
   function buildEditDriverRouteModalHtml(row) {
     var orderId = row && row.order ? String(row.order) : '';
     var driver = row && row.driver ? String(row.driver) : '';
@@ -452,17 +496,17 @@
       '<div class="edit-driver-route-grid">' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Driver</span>' +
-      '<div class="edit-driver-route-input">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
-      '<span class="edit-driver-route-input-value">' + (driver || '') + '</span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="select-input-value">' + (driver || '') + '</span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '</div>' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Route</span>' +
-      '<div class="edit-driver-route-input">' +
-      '<span class="edit-driver-route-input-value">' + (route || '') + '</span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-value">' + (route || '') + '</span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '</div>' +
       '</div>' +
@@ -521,19 +565,19 @@
       '<div class="bulk-edit-tags-modal-content">' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Add tags</span>' +
-      '<div class="edit-driver-route-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
-      '<span class="edit-driver-route-input-value"></span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<div class="select-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '<p class="bulk-edit-tags-help">These tags will be added to all selected orders if not already present.</p>' +
       '</div>' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label">Remove tags</span>' +
-      '<div class="edit-driver-route-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
-      '<span class="edit-driver-route-input-icon">' + ICON_SEARCH + '</span>' +
-      '<span class="edit-driver-route-input-value"></span>' +
-      '<span class="edit-driver-route-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '<div class="select-input bulk-edit-tags-input" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0">' +
+      '<span class="select-input-icon">' + ICON_SEARCH + '</span>' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
       '</div>' +
       '<p class="bulk-edit-tags-help">These tags will be removed from all selected orders if present.</p>' +
       '</div>' +
@@ -551,16 +595,18 @@
     const selectable = Object.prototype.hasOwnProperty.call(config, 'selected');
     let menuEl = null;
     let selected = config.selected || null;
+    let tooltip = null;
 
     function normalizeMenuOption(option) {
       if (typeof option === 'object') {
         return {
           label: option.label,
           value: Object.prototype.hasOwnProperty.call(option, 'value') ? option.value : option.label,
-          disabled: !!option.disabled
+          disabled: !!option.disabled,
+          tooltip: option.tooltip || ''
         };
       }
-      return { label: option, value: option, disabled: false };
+      return { label: option, value: option, disabled: false, tooltip: '' };
     }
 
     function positionMenu() {
@@ -582,9 +628,12 @@
       menuEl.innerHTML = (config.heading ? '<div class="menu-heading' + (config.headingClass ? ' ' + config.headingClass : '') + '">' + config.heading + '</div>' : '') +
         config.options.map(function (opt) {
           var option = normalizeMenuOption(opt);
-          return '<div class="menu-option' + (selectable && option.value === selected ? ' selected' : '') + (option.disabled ? ' disabled' : '') + '" tabindex="' + (option.disabled ? '-1' : '0') + '" data-value="' + option.value + '" ' + (option.disabled ? 'aria-disabled="true"' : '') + '>' + option.label + '</div>';
+          var tooltipAttr = (option.disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
+          return '<div class="menu-option' + (selectable && option.value === selected ? ' selected' : '') + (option.disabled ? ' disabled' : '') + '" tabindex="' + (option.disabled ? '-1' : '0') + '" data-value="' + option.value + '" ' + (option.disabled ? 'aria-disabled="true"' : '') + tooltipAttr + '>' + option.label + '</div>';
         }).join('');
       document.body.appendChild(menuEl);
+      tooltip = createTooltip();
+      tooltip.attach(menuEl);
       trigger.classList.add('active');
       state.openMenuPopovers.add(close);
       positionMenu();
@@ -603,6 +652,10 @@
     }
 
     function close() {
+      if (tooltip) {
+        tooltip.destroy();
+        tooltip = null;
+      }
       if (menuEl) {
         menuEl.remove();
         menuEl = null;
@@ -626,6 +679,7 @@
     let selected = config.value || null;
     let working = null;
     let popEl = null;
+    let saveBtn = null;
     let tooltip = null;
     const optionHeadingClass = config.optionHeadingClass || 'menu-heading';
     const popoverClass = config.popoverClass || 'assignee-popover';
@@ -633,6 +687,12 @@
 
     const api = { exitEdit: function () { if (popEl) close(); } };
     state.editableCells.add(api);
+
+    function updateSaveBtn() {
+      if (!saveBtn) return;
+      if (config.saveLabelFor) saveBtn.textContent = config.saveLabelFor(working);
+      if (config.disableUntilChanged) saveBtn.disabled = (working === selected);
+    }
 
     function renderDisplay() {
       var text = String(selected || '').trim();
@@ -656,7 +716,14 @@
       const q = (query || '').trim().toLowerCase();
       const list = popEl.querySelector('.tag-list');
       if (config.sections && config.sections.length) {
-        list.innerHTML = config.sections.map(function (section, sectionIndex) {
+        var leadingHtml = '';
+        if (config.leadingUnassigned) {
+          const showUnassigned = !q || 'unassigned'.indexOf(q) !== -1;
+          if (showUnassigned) {
+            leadingHtml += '<div class="' + optionClass + ' ' + ('Unassigned' === working ? 'selected' : '') + '" role="option" data-edit-option tabindex="0" data-value="Unassigned"><span class="tag-option-label">Unassigned</span></div>';
+          }
+        }
+        list.innerHTML = leadingHtml + config.sections.map(function (section, sectionIndex) {
           const options = section.options.map(normalizeOption).filter(function (option) {
             if (!q) return true;
             return option.label.toLowerCase().indexOf(q) !== -1;
@@ -673,6 +740,7 @@
       } else {
         list.innerHTML = config.options.map(function (opt) {
           const entry = normalizeSearchEntry(opt);
+          if (entry.type === 'divider') return q ? '' : '<div class="menu-divider"></div>';
           if (entry.type === 'heading') return '<div class="' + optionHeadingClass + '">' + entry.label + '</div>';
           const label = entry.label;
           const value = entry.value || entry.label;
@@ -686,6 +754,7 @@
         o.addEventListener('click', function () {
           working = o.dataset.value;
           list.querySelectorAll('[data-edit-option]').forEach(function (x) { x.classList.toggle('selected', x === o); });
+          updateSaveBtn();
         });
       });
     }
@@ -696,7 +765,9 @@
       working = selected;
       popEl = document.createElement('div');
       popEl.className = popoverClass;
-      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="tag-buttons"><button class="filter-btn-reset assignee-clear">' + (config.clearLabel || 'Clear assignment') + '</button><button class="filter-btn-apply assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
+      const clearBtnHtml = config.clearLabel ? '<button class="filter-btn-reset assignee-clear">' + config.clearLabel + '</button>' : '';
+      const buttonsClass = 'tag-buttons' + (clearBtnHtml ? '' : ' assignee-actions');
+      popEl.innerHTML = '<div class="tag-search"><span class="tag-search-icon">' + ICON_SEARCH + '</span><input class="tag-search-input" type="text" aria-label="' + (config.ariaLabel || 'Search') + '"></div><div class="tag-list" role="listbox"></div><div class="' + buttonsClass + '">' + clearBtnHtml + '<button class="filter-btn-apply assignee-save">' + (config.saveLabel || 'Confirm') + '</button></div>';
       document.body.appendChild(popEl);
       cell.classList.add('cell-edit-active');
       renderOptions('');
@@ -708,11 +779,17 @@
       const input = popEl.querySelector('.tag-search-input');
       input.addEventListener('input', function () { renderOptions(input.value); });
       input.focus();
-      popEl.querySelector('.assignee-clear').addEventListener('click', function (e) {
-        e.stopPropagation();
-        working = null;
-        popEl.querySelectorAll('[data-edit-option]').forEach(function (x) { x.classList.remove('selected'); });
-      });
+      saveBtn = popEl.querySelector('.assignee-save');
+      updateSaveBtn();
+      const clearEl = popEl.querySelector('.assignee-clear');
+      if (clearEl) {
+        clearEl.addEventListener('click', function (e) {
+          e.stopPropagation();
+          working = null;
+          popEl.querySelectorAll('[data-edit-option]').forEach(function (x) { x.classList.remove('selected'); });
+          updateSaveBtn();
+        });
+      }
       popEl.querySelector('.assignee-save').addEventListener('click', function (e) {
         e.stopPropagation();
         selected = working;
@@ -731,6 +808,7 @@
         popEl.remove();
         popEl = null;
       }
+      saveBtn = null;
       window.removeEventListener('scroll', position, true);
       window.removeEventListener('resize', position);
       cell.classList.remove('cell-edit-active');
@@ -746,6 +824,168 @@
     renderDisplay();
   }
 
+  // Generic autocomplete combobox for a traditional text-input field (distinct
+  // from the inline-cell popover). Renders a filtered list anchored below the
+  // input; selection fills the input and calls config.onSelect — the caller
+  // decides whether that stages or commits. Field-agnostic: pass any option set.
+  // fieldEl must contain an <input>, a [role="listbox"] container, and
+  // (optionally) a toggle <button>; or supply inputEl/listEl/toggleEl in config.
+  // Config: { options, value, onSelect, formatDisplay, optionClass,
+  //           inputEl, listEl, toggleEl }
+  // Returns: { getValue, setValue, destroy }.
+  function setupCombobox(fieldEl, config) {
+    config = config || {};
+    const input = config.inputEl || fieldEl.querySelector('input');
+    const list = config.listEl || fieldEl.querySelector('[role="listbox"]');
+    const toggleBtn = config.toggleEl || fieldEl.querySelector('button');
+    const optionClass = config.optionClass || 'tag-option';
+    const formatDisplay = config.formatDisplay || function (v) { return v == null ? '' : String(v); };
+    // Keep divider entries so the popover mirrors the inline picker's grouping
+    // (Unassigned / individuals / teams, each set off by a .menu-divider).
+    const entries = (config.options || [])
+      .map(normalizeSearchEntry)
+      .filter(function (e) { return e.type === 'option' || e.type === 'divider'; })
+      .map(function (e) {
+        if (e.type === 'divider') return { type: 'divider' };
+        // normalizeSearchEntry omits `value` for string entries; fall back to the label.
+        return { type: 'option', label: e.label, value: e.value != null ? e.value : e.label, disabled: e.disabled, tooltip: e.tooltip };
+      });
+
+    let value = config.value != null ? config.value : null;
+    let open = false;
+    let activeIndex = -1;
+    let filtered = [];
+    let tooltip = null;
+
+    input.value = value != null ? formatDisplay(value) : '';
+
+    function renderList(query) {
+      const q = (query || '').trim().toLowerCase();
+      filtered = [];
+      let html = '';
+      entries.forEach(function (entry) {
+        if (entry.type === 'divider') {
+          // Hide dividers while filtering so no stray separators are left behind.
+          if (!q) html += '<div class="menu-divider"></div>';
+          return;
+        }
+        if (q && entry.label.toLowerCase().indexOf(q) === -1) return;
+        const o = entry;
+        const i = filtered.length;
+        filtered.push(o);
+        const tip = (o.disabled && o.tooltip) ? ' data-tooltip="' + escapeAttr(o.tooltip) + '"' : '';
+        html += '<div class="' + optionClass +
+          (o.value === value ? ' selected' : '') +
+          (o.disabled ? ' disabled' : '') +
+          (i === activeIndex ? ' active' : '') +
+          '" role="option" data-combobox-option data-index="' + i + '"' +
+          (o.disabled ? ' aria-disabled="true"' : '') + tip +
+          ' data-value="' + escapeAttr(o.value) + '"><span class="tag-option-label">' + o.label + '</span></div>';
+      });
+      list.innerHTML = html;
+    }
+
+    function updateActive() {
+      const els = list.querySelectorAll('[data-combobox-option]');
+      els.forEach(function (el, i) {
+        el.classList.toggle('active', i === activeIndex);
+        if (i === activeIndex) el.scrollIntoView({ block: 'nearest' });
+      });
+    }
+
+    function moveActive(dir) {
+      if (!filtered.length) return;
+      let i = activeIndex;
+      for (let step = 0; step < filtered.length; step++) {
+        i = (i + dir + filtered.length) % filtered.length;
+        if (!filtered[i].disabled) { activeIndex = i; updateActive(); return; }
+      }
+    }
+
+    function openList() {
+      if (open) return;
+      open = true;
+      activeIndex = -1;
+      list.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      if (!tooltip) { tooltip = createTooltip(); tooltip.attach(list); }
+      renderList('');
+    }
+
+    function closeList() {
+      if (!open) return;
+      open = false;
+      activeIndex = -1;
+      list.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+    }
+
+    function selectOption(entry) {
+      if (!entry || entry.disabled) return;
+      value = entry.value;
+      input.value = formatDisplay(value);
+      if (config.onSelect) config.onSelect(value);
+      closeList();
+    }
+
+    input.addEventListener('focus', openList);
+    input.addEventListener('input', function () {
+      if (!open) openList();
+      activeIndex = -1;
+      renderList(input.value);
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!open) { openList(); return; }
+        moveActive(1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        moveActive(-1);
+      } else if (e.key === 'Enter') {
+        if (open && activeIndex >= 0) { e.preventDefault(); selectOption(filtered[activeIndex]); }
+      } else if (e.key === 'Escape') {
+        if (open) { e.preventDefault(); closeList(); }
+      }
+    });
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        if (open) { closeList(); return; }
+        input.focus();
+        openList();
+      });
+    }
+
+    list.addEventListener('mousedown', function (e) {
+      // keep focus on the input so the selection click resolves before blur
+      if (e.target.closest('[data-combobox-option]')) e.preventDefault();
+    });
+    list.addEventListener('click', function (e) {
+      const opt = e.target.closest('[data-combobox-option]');
+      if (!opt || opt.classList.contains('disabled')) return;
+      selectOption(filtered[parseInt(opt.dataset.index, 10)]);
+    });
+
+    function onDocMouseDown(e) {
+      if (open && !fieldEl.contains(e.target)) closeList();
+    }
+    document.addEventListener('mousedown', onDocMouseDown);
+
+    return {
+      getValue: function () { return value; },
+      setValue: function (v) {
+        value = v != null ? v : null;
+        input.value = value != null ? formatDisplay(value) : '';
+      },
+      destroy: function () {
+        document.removeEventListener('mousedown', onDocMouseDown);
+        if (tooltip) { tooltip.destroy(); tooltip = null; }
+      }
+    };
+  }
+
   function setupEditableCellMenu(cell, config, state) {
     let selected = config.value || null;
     let pendingSelected = selected;
@@ -759,7 +999,7 @@
 
     function renderDisplay() {
       closeMenu();
-      cell.classList.remove('editing', 'menu-open', 'cell-edit-active');
+      cell.classList.remove('editing', 'cell-edit-active');
       menuOpen = false;
       var displayValue = config.formatDisplayValue ? config.formatDisplayValue(selected) : selected;
       var text = String(displayValue || '').trim();
@@ -774,7 +1014,8 @@
       state.editableCells.forEach(function (other) { if (other !== api) other.exitEdit(); });
       cell.classList.add('editing', 'cell-edit-active');
       pendingSelected = selected;
-      cell.innerHTML = '<div class="cell-field" tabindex="0"><span class="cell-field-value">' + (selected || '') + '</span><span class="cell-field-chevron">' + ICON_COLLAPSE + '</span></div>';
+      var fieldText = config.formatDisplayValue ? config.formatDisplayValue(selected) : selected;
+      cell.innerHTML = '<div class="cell-field" role="combobox" aria-expanded="false" aria-haspopup="listbox" tabindex="0"><span class="cell-field-value">' + (fieldText || '') + '</span><span class="cell-field-chevron">' + ICON_COLLAPSE + '</span></div>';
       cell.querySelector('.cell-field').addEventListener('click', function (e) {
         e.stopPropagation();
         menuOpen ? closeMenu() : openMenuList();
@@ -796,14 +1037,16 @@
       menuEl = document.createElement('div');
       menuEl.className = 'cell-menu inline-edit-menu';
       menuEl.innerHTML = (config.heading ? '<div class="menu-heading">' + config.heading + '</div>' : '') + config.options.map(function (opt) {
+        if (opt && opt.type === 'divider') return '<div class="menu-divider"></div>';
         const option = normalizeOption(opt);
         const label = option.label;
         const disabled = option.disabled;
         const tooltipAttr = (disabled && option.tooltip) ? ' data-tooltip="' + escapeAttr(option.tooltip) + '"' : '';
         return '<div class="menu-option ' + (label === pendingSelected ? 'selected' : '') + ' ' + (disabled ? 'disabled' : '') + '" ' + (disabled ? 'aria-disabled="true"' : 'tabindex="0"') + tooltipAttr + ' data-value="' + label + '">' + label + '</div>';
-      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button">Assign</button></div>' : '');
+      }).join('') + (requiresConfirm ? '<div class="tag-buttons assignee-actions"><button class="filter-btn-apply assignee-confirm" type="button"' + (config.disableUntilChanged ? ' disabled' : '') + '>' + (config.saveLabel || 'Assign') + '</button></div>' : '');
       document.body.appendChild(menuEl);
-      cell.classList.add('menu-open');
+      const field = cell.querySelector('.cell-field');
+      if (field) field.setAttribute('aria-expanded', 'true');
       menuOpen = true;
       tooltip = createTooltip();
       tooltip.attach(menuEl);
@@ -817,6 +1060,10 @@
           menuEl.querySelectorAll('.menu-option').forEach(function (optionEl) {
             optionEl.classList.toggle('selected', optionEl === o);
           });
+          if (requiresConfirm && config.disableUntilChanged) {
+            const btn = menuEl.querySelector('.assignee-confirm');
+            if (btn) btn.disabled = (pendingSelected === selected);
+          }
           if (!requiresConfirm) {
             selected = pendingSelected;
             if (config.onChange) config.onChange(selected);
@@ -851,7 +1098,8 @@
       }
       window.removeEventListener('scroll', positionMenu, true);
       window.removeEventListener('resize', positionMenu);
-      cell.classList.remove('menu-open');
+      const field = cell.querySelector('.cell-field');
+      if (field) field.setAttribute('aria-expanded', 'false');
       menuOpen = false;
     }
 
@@ -988,7 +1236,7 @@
           {
             label: 'Send to dispatch',
             disabled: !dispatchEnabled,
-            tooltip: 'Order must have a schedule in the Confirmed or Rescheduled status.'
+            tooltip: 'Orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.'
           },
           'Set complete',
           'View equipment'
@@ -1008,51 +1256,56 @@
     }, state);
 
     if (!dispatch && !purchasingRt) {
-      const options = buildAssigneeOptions(assigneeMode, dispatchEnabled);
+      const options = buildAssigneeEntries(assigneeMode, dispatchEnabled);
 
       setupEditableCell(row.querySelector('.col-assignee.editable-cell'), {
-        value: r.assignee || null,
+        value: r.assignee || 'Unassigned',
         options: options,
         heading: null,
         requireConfirm: assigneeMode === 'menu',
         saveLabel: 'Assign',
+        saveLabelFor: function (v) { return v === 'Unassigned' ? 'Unassign' : 'Assign'; },
+        disableUntilChanged: true,
         ariaLabel: 'Edit assignee',
         formatDisplayValue: formatAssigneeDisplay,
         renderDisplay: function (value) {
           var text = String(formatAssigneeDisplay(value) || '').trim();
           return '<span class="cell-display-text">' + (text || '-') + '</span>';
         },
-        onChange: function (v) { r.assignee = v; }
+        onChange: function (v) { r.assignee = (v === 'Unassigned') ? null : v; }
       }, state, assigneeMode);
     } else {
       setupEditableCell(row.querySelector('.col-driver.editable-cell'), {
-        value: r.driver || null,
+        value: r.driver || 'Unassigned',
         options: [],
         sections: DRIVER_SECTIONS,
-        clearLabel: 'Clear driver',
-        saveLabel: 'Save',
+        leadingUnassigned: true,
+        saveLabel: 'Assign',
+        saveLabelFor: function (v) { return v === 'Unassigned' ? 'Unassign' : 'Assign'; },
+        disableUntilChanged: true,
         ariaLabel: 'Edit driver',
         popoverClass: 'assignee-popover driver-popover',
         renderDisplay: function (value) {
-          var text = String(value || '').trim();
+          var text = (value && value !== 'Unassigned') ? String(value).trim() : '';
           if (!text) return '<span class="cell-main">–</span>';
           return '<span class="cell-main link" tabindex="0">' + text + '</span>';
         },
-        onChange: function (v) { r.driver = v || ''; }
+        onChange: function (v) { r.driver = (v === 'Unassigned') ? '' : (v || ''); }
       }, state, 'search');
 
       setupEditableCell(row.querySelector('.col-route.editable-cell'), {
-        value: r.route || '',
-        options: ROUTE_OPTIONS,
-        clearLabel: 'Clear route',
-        saveLabel: 'Save',
+        value: r.route || 'None',
+        options: ['None', { type: 'divider' }].concat(ROUTE_OPTIONS),
+        saveLabel: 'Set route',
+        saveLabelFor: function (v) { return v === 'None' ? 'Clear route' : 'Set route'; },
+        disableUntilChanged: true,
         ariaLabel: 'Edit route',
         popoverClass: 'assignee-popover route-popover',
         optionClass: 'tag-option route-option',
         renderDisplay: function (value) {
-          return linkValueOrDash(value);
+          return linkValueOrDash(value === 'None' ? '' : value);
         },
-        onChange: function (v) { r.route = v || ''; }
+        onChange: function (v) { r.route = (v === 'None') ? '' : (v || ''); }
       }, state, 'search');
     }
 
@@ -1071,8 +1324,19 @@
     function setRowSelected(el, on) {
       el.classList.toggle('selected', on);
       const cb = el.querySelector('.row-checkbox');
+      if (!cb) return;
       cb.innerHTML = on ? ICON_CHECKBOX_ON : ICON_CHECKBOX_OFF;
       cb.setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+
+    function selectedCount() {
+      return rowEls.filter(isSel).length;
+    }
+
+    function emitSelectionChange() {
+      if (typeof state.onSelectionChange === 'function') {
+        state.onSelectionChange(selectedCount());
+      }
     }
 
     function updateSelectAll() {
@@ -1097,6 +1361,7 @@
       attachCheckbox(el.querySelector('.row-checkbox'), function () {
         setRowSelected(el, !isSel(el));
         updateSelectAll();
+        emitSelectionChange();
       });
     });
 
@@ -1105,6 +1370,7 @@
       const allOn = rowEls.every(isSel);
       rowEls.forEach(function (el) { setRowSelected(el, !allOn); });
       updateSelectAll();
+      emitSelectionChange();
     });
 
     state.clearAllSelections = function () {
@@ -1248,16 +1514,44 @@
     void sheetEl.offsetWidth;
     sheetEl.classList.add('open');
 
+    // Dispatch is only selectable in bulk when every selected order is eligible.
+    const dispatchEnabled = selectedRows.every(function (r) {
+      return !!(r.schedDate && r.scheduleStatus && (r.scheduleStatus.t === 'Rescheduled' || r.scheduleStatus.t === 'Confirmed'));
+    });
+    const assigneeOptions = buildAssigneeEntries('search', dispatchEnabled);
+
+    let stagedAssignee = null;
+    const alertEl = sheetEl.querySelector('.edit-assignee-sheet-alert');
+    const assignBtn = sheetEl.querySelector('.edit-assignee-sheet-assign');
+    const combobox = setupCombobox(sheetEl.querySelector('.edit-assignee-sheet-combobox'), {
+      options: assigneeOptions,
+      value: null,
+      onSelect: function (v) {
+        // Stage only — the assignment is committed when the footer button is clicked.
+        stagedAssignee = v;
+        // Reassigning to another team removes orders from the current assignee's board.
+        alertEl.hidden = ASSIGNEE_TEAMS.indexOf(v) === -1;
+        assignBtn.disabled = false;
+        assignBtn.textContent = v === 'Unassigned' ? 'Unassign' : 'Assign';
+      }
+    });
+
     function close() {
+      combobox.destroy();
       closeSideSheet(state);
+    }
+
+    function assign() {
+      if (stagedAssignee !== null) {
+        var value = stagedAssignee === 'Unassigned' ? null : stagedAssignee;
+        selectedRows.forEach(function (r) { r.assignee = value; });
+      }
+      close();
     }
 
     sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
     sheetEl.querySelector('.edit-assignee-sheet-cancel').addEventListener('click', close);
-    sheetEl.querySelector('.edit-assignee-sheet-assign').addEventListener('click', close);
-    sheetEl.querySelector('.edit-assignee-sheet-input-btn').addEventListener('click', function (e) {
-      e.preventDefault();
-    });
+    sheetEl.querySelector('.edit-assignee-sheet-assign').addEventListener('click', assign);
   }
 
   function openResetOrderSheet(r, state, variant) {
@@ -1477,16 +1771,23 @@
     const trigger = document.getElementById('filterToggleBtn');
     if (!trigger) return;
     let popEl = null;
+    let advancedFiltersExpanded = false;
+    const managerLike = variant === 'manager' || variant === 'scheduling';
+    const dispatchLike = variant === 'dispatch';
 
     function field(label, options) {
       const opts = options || {};
       const chips = opts.chips || [];
+      const fieldClass = opts.fieldClass ? ' ' + opts.fieldClass : '';
       const chipHtml = chips.map(function (c) {
         return '<span class="filter-chip">' + c + (opts.removable ? '<button class="chip-remove">' + ICON_CHIP_REMOVE + '</button>' : '') + '</span>';
       }).join('');
-      return '<div class="filter-field"><span class="filter-field-label">' + label + (opts.required ? ' <span class="req">*</span>' : '') + '</span><div class="filter-input">' +
+      const contentHtml = opts.placeholder
+        ? '<span class="filter-input-placeholder">' + opts.placeholder + '</span>'
+        : chipHtml;
+      return '<div class="filter-field' + fieldClass + '"><span class="filter-field-label">' + label + (opts.required ? ' <span class="req">*</span>' : '') + '</span><div class="filter-input">' +
         (opts.search ? '<span class="filter-input-search">' + ICON_SEARCH + '</span>' : '') +
-        '<span class="filter-input-content">' + chipHtml + '</span><span class="filter-input-chevron">' + ICON_CHEVRON_DOWN + '</span></div></div>';
+        '<span class="filter-input-content">' + contentHtml + '</span><span class="filter-input-chevron">' + ICON_CHEVRON_DOWN + '</span></div></div>';
     }
 
     function position() {
@@ -1497,44 +1798,128 @@
       popEl.style.left = left + 'px';
     }
 
+    function syncAdvancedFiltersButton() {
+      if (!popEl) return;
+      const btn = popEl.querySelector('[data-advanced-filters-toggle="true"]');
+      if (!btn) return;
+      const label = advancedFiltersExpanded ? 'Hide advanced filters' : 'Show advanced filters';
+      const icon = advancedFiltersExpanded ? ICON_VIEW_SLASH : ICON_VIEW;
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('aria-pressed', advancedFiltersExpanded ? 'true' : 'false');
+      const labelEl = btn.querySelector('.filter-btn-tertiary-label');
+      if (labelEl) labelEl.textContent = label;
+      const iconEl = btn.querySelector('.filter-btn-tertiary-icon');
+      if (iconEl) iconEl.innerHTML = icon;
+    }
+
+    function chipGroupField(label, options, config) {
+      const cfg = config || {};
+      const requiredHtml = cfg.required ? ' <span class="req">*</span>' : '';
+      return '<div class="filter-field"><span class="filter-field-label">' + label + requiredHtml + '</span><div class="filter-chips-row">' +
+        options.map(function (opt) {
+          var active = !!opt.active;
+          return '<button class="filter-chip-toggle ' + (active ? 'is-active' : 'is-inactive') + '" type="button">' +
+            (active ? '<span class="chip-check">' + ICON_CHECK + '</span>' : '') +
+            '<span>' + opt.label + '</span></button>';
+        }).join('') +
+        '</div></div>';
+    }
+
+    function buildAdvancedManagerFieldsHtml() {
+      return '<div class="filter-advanced-divider" aria-hidden="true"></div>' +
+        field('Client', { search: true }) +
+        chipGroupField('Requested date', [
+          { label: 'Yesterday', active: false },
+          { label: 'Today', active: false },
+          { label: 'Tomorrow', active: false }
+        ]);
+    }
+
+    function buildAdvancedDispatchFieldsHtml() {
+      return '<div class="filter-advanced-divider" aria-hidden="true"></div>' +
+        field('Client', { search: true }) +
+        field('Driver', { search: true }) +
+        field('Route', { fieldClass: 'filter-field--narrow' }) +
+        field('Schedule end time', { placeholder: 'By', fieldClass: 'filter-field--narrow' });
+    }
+
+    function buildFilterPopoverMarkup(bodyHtml) {
+      return '<div class="filter-popover-body">' + bodyHtml + '</div>' +
+        '<div class="filter-popover-footer"><div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div></div>';
+    }
+
+    function buildManagerLikePopoverHtml() {
+      const assignedToHtml = variant === 'manager'
+        ? field('Assigned to', { search: true })
+        : chipGroupField('Assigned to', [
+          { label: 'Me', active: true },
+          { label: 'Unassigned', active: true }
+        ], { required: true });
+
+      return field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
+        field('Order type') +
+        field('Order reason') +
+        field('Order priority') +
+        field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'], removable: true }) +
+        field('Tags', { search: true }) +
+        assignedToHtml +
+        buildAdvancedFiltersButtonHtml(advancedFiltersExpanded) +
+        (advancedFiltersExpanded ? buildAdvancedManagerFieldsHtml() : '');
+    }
+
+    function buildDispatchPopoverHtml() {
+      return field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
+        field('Order reason') +
+        field('Order priority') +
+        chipGroupField('Order status', [
+          { label: 'Open', active: true },
+          { label: 'Closed last 48 hours', active: true }
+        ], { required: true }) +
+        chipGroupField('Schedule date', [
+          { label: 'Yesterday', active: false },
+          { label: 'Today', active: true },
+          { label: 'Tomorrow', active: true }
+        ], { required: true }) +
+        field('Tags', { search: true }) +
+        buildAdvancedFiltersButtonHtml(advancedFiltersExpanded) +
+        (advancedFiltersExpanded ? buildAdvancedDispatchFieldsHtml() : '');
+    }
+
+    function activatePopover() {
+      document.body.appendChild(popEl);
+      popEl.addEventListener('click', function (e) {
+        const toggleBtn = e.target.closest('[data-advanced-filters-toggle="true"]');
+        if (!toggleBtn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        advancedFiltersExpanded = !advancedFiltersExpanded;
+        if (managerLike || dispatchLike) {
+          const bodyEl = popEl.querySelector('.filter-popover-body');
+          const bodyScrollTop = bodyEl ? bodyEl.scrollTop : 0;
+          const bodyHtml = managerLike ? buildManagerLikePopoverHtml() : buildDispatchPopoverHtml();
+          popEl.innerHTML = buildFilterPopoverMarkup(bodyHtml);
+          const nextBodyEl = popEl.querySelector('.filter-popover-body');
+          if (nextBodyEl) nextBodyEl.scrollTop = bodyScrollTop;
+          position();
+          return;
+        }
+        syncAdvancedFiltersButton();
+      });
+      trigger.classList.add('active');
+      position();
+      window.addEventListener('scroll', position, true);
+      window.addEventListener('resize', position);
+    }
+
     function open() {
       if (popEl) return;
       popEl = document.createElement('div');
       popEl.className = 'filter-popover';
 
       if (variant === 'dispatch') {
-        function chipGroupField(label, options) {
-          return '<div class="filter-field"><span class="filter-field-label">' + label + ' <span class="req">*</span></span><div class="filter-chips-row">' +
-            options.map(function (opt) {
-              var active = !!opt.active;
-              return '<button class="filter-chip-toggle ' + (active ? 'is-active' : 'is-inactive') + '" type="button">' +
-                (active ? '<span class="chip-check">' + ICON_CHECK + '</span>' : '') +
-                '<span>' + opt.label + '</span></button>';
-            }).join('') +
-            '</div></div>';
-        }
+        popEl.innerHTML = buildFilterPopoverMarkup(buildDispatchPopoverHtml());
 
-        popEl.innerHTML =
-          field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
-          field('Order reason') +
-          field('Order priority') +
-          chipGroupField('Order status', [
-            { label: 'Open', active: true },
-            { label: 'Closed last 48 hours', active: true }
-          ]) +
-          chipGroupField('Schedule date', [
-            { label: 'Yesterday', active: false },
-            { label: 'Today', active: true },
-            { label: 'Tomorrow', active: true }
-          ]) +
-          field('Tags', { search: true }) +
-          '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
-
-        document.body.appendChild(popEl);
-        trigger.classList.add('active');
-        position();
-        window.addEventListener('scroll', position, true);
-        window.addEventListener('resize', position);
+        activatePopover();
         return;
       }
 
@@ -1569,25 +1954,9 @@
         return;
       }
 
-      const assignedToHtml = variant === 'manager'
-        ? field('Assigned to', { search: true })
-        : '<div class="filter-field"><span class="filter-field-label">Assigned to <span class="req">*</span></span><div class="filter-chips-row"><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Me</button><button class="filter-chip-toggle"><span class="chip-check">' + ICON_CHECK + '</span>Unassigned</button></div></div>';
+      popEl.innerHTML = buildFilterPopoverMarkup(buildManagerLikePopoverHtml());
 
-      popEl.innerHTML =
-        field('Warehouses', { search: true, chips: ['2 warehouses selected'] }) +
-        field('Order type') +
-        field('Order reason') +
-        field('Order priority') +
-        field('Schedule status', { chips: ['Patient Scheduling', 'Patient Approval', 'Provider Review', 'Escalated', 'Rescheduled'], removable: true }) +
-        field('Tags', { search: true }) +
-        assignedToHtml +
-        '<div class="filter-buttons"><button class="filter-btn-reset">Reset</button><button class="filter-btn-apply">Filter</button></div>';
-
-      document.body.appendChild(popEl);
-      trigger.classList.add('active');
-      position();
-      window.addEventListener('scroll', position, true);
-      window.addEventListener('resize', position);
+      activatePopover();
     }
 
     function close() {
@@ -1694,7 +2063,6 @@
       sheetEl: null,
       editDriverRouteModalEl: null,
       isSideSheetOpen: false,
-      editDriverRouteModalEl: null,
       sendTeamConfirmModalEl: null,
       bulkEditTagsModalEl: null,
       selectionCount: 0,
@@ -1711,6 +2079,10 @@
       container.appendChild(el);
       return el;
     });
+
+    if (variant === 'manager' || variant === 'dispatch') {
+      setupBulkActionsPopover(state, variant);
+    }
 
     if (variant === 'manager' || variant === 'dispatch') {
       wireRowSelection(rowEls, state);

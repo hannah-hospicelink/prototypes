@@ -60,6 +60,16 @@
     --btn-bg-primary: #0080c5;              /* $btn-bg-primary → Color/Primary/600 */
     --btn-bg-primary-hover: #3399d1;        /* Button/Filled/Background/Primary/Hover → Color/Primary/500 */
     --btn-bg-primary-active: #00669e;       /* Button/Filled/Background/Primary/Active → Color/Primary/700 */
+
+    /* selection cards (radio) */
+    --selection-off: #a8a29e;               /* $selection-off → Color/Neutral/500 */
+    --selection-on: #3399d1;                /* $selection-on → Color/Primary/500 */
+    --card-selection-bg-off: #ffffff;       /* $card-selection-bg-off → Color/Neutral/White */
+    --card-selection-border-off: #e7e5e4;   /* $card-selection-border-off → Color/Neutral/200 */
+    --card-selection-bg-on: #f2f9fc;        /* $card-selection-bg-on → Color/Info/50 */
+    --card-selection-border-on: #3399d1;    /* $card-selection-border-on → Color/Primary/500 */
+    --card-selection-label: #292524;        /* selection card label → Color/Neutral/900 */
+    --text-active: #00669e;                 /* $text-active → Color/Primary/700 */
     --btn-shadow-primary: 0 0.5px 2px rgba(0,128,197,0.2), 0 0.5px 1px rgba(0,128,197,0.16), 0 2px 4px rgba(0,128,197,0.12);
     --btn-content: #ffffff;                 /* $btn-content → on-primary */
     --btn-bg-destructive: #c8102e;          /* $btn-bg-destructive → Color/Error/600 */
@@ -385,7 +395,8 @@
   .filter-btn-tertiary:focus-visible,
   .filter-btn-reset:focus-visible,
   .btn-primary:focus-visible,
-  .btn-secondary:focus-visible {
+  .btn-secondary:focus-visible,
+  .btn-tertiary:focus-visible {
     outline: var(--focus-ring-width) solid var(--color-focus-outline);
     outline-offset: var(--focus-ring-offset);
   }
@@ -1514,7 +1525,8 @@
     padding: var(--spacing-xs) var(--spacing-lg) var(--size-1200);
     overflow-y: auto;
   }
-  .side-sheet-body--bulk-edit {
+  /* Wider content-section gap (24px) — matches Figma Content slot spacing. */
+  .side-sheet-body--spaced {
     gap: var(--spacing-lg);
   }
 
@@ -1629,7 +1641,8 @@
   .edit-assignee-sheet-card-status {
     justify-content: flex-start;
   }
-  .edit-assignee-sheet-footer {
+  /* Generic side-sheet footer — action bar pinned below the scrollable body. */
+  .side-sheet-footer {
     padding: var(--spacing-lg);
     display: flex;
     align-items: center;
@@ -1637,8 +1650,13 @@
     border-top: var(--border-width) solid var(--color-border-light);
     background: var(--color-bg-surface);
   }
-  .edit-assignee-sheet-assign {
-    margin-left: auto;
+  /* Split layout: leading action (Cancel) left, trailing action(s) right. */
+  .side-sheet-footer--split { justify-content: space-between; }
+  /* Grouped trailing actions (e.g. secondary + primary). */
+  .side-sheet-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs); /* Figma button group gap */
   }
 
   /* equipment group (Delivery / Pick up / Service) */
@@ -1795,6 +1813,30 @@
   }
   .btn-primary:disabled:hover,
   .btn-primary:disabled:active { background: var(--btn-bg-primary); }
+
+  /* Tertiary (ghost text) button — self-contained Medium, part of the .btn-* family.
+     Reused by every side-sheet/modal Cancel action. Focus ring handled by the shared primitive above. */
+  .btn-tertiary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap-md);
+    min-height: var(--btn-size-md);
+    padding: 0 var(--btn-padding-md);
+    background: none;
+    color: var(--btn-ghost-content-tertiary);
+    border: none;
+    border-radius: var(--button-radius-text);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--btn-font-md);
+    line-height: 1;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+  }
+  .btn-tertiary:hover { background: var(--button-ghost-bg-hover); }
+  .btn-tertiary:active { background: var(--button-ghost-bg-active); }
 
   /* Small size modifier — combine with any .btn-* variant. */
   .btn-sm {
@@ -1980,20 +2022,7 @@
     font-weight: 400;
     transition: background var(--transition-fast);
   }
-  .edit-driver-route-btn-cancel {
-    background: none;
-    color: var(--btn-ghost-content-tertiary);
-  }
-  .edit-driver-route-btn-cancel:hover { background: var(--button-ghost-bg-hover); }
-  .edit-driver-route-btn-cancel:active { background: var(--button-ghost-bg-active); }
-  .edit-driver-route-btn-secondary {
-    background: var(--btn-bg-secondary);
-    border: var(--border-width) solid var(--btn-border-secondary);
-    color: var(--btn-content-secondary);
-    box-shadow: var(--btn-shadow-secondary);
-  }
-  .edit-driver-route-btn-secondary:hover { background: var(--btn-bg-secondary-hover); }
-  .edit-driver-route-btn-secondary:active { background: var(--btn-bg-secondary-active); }
+  /* Cancel (tertiary) and secondary modal actions now use the shared .btn-tertiary / .btn-secondary classes. */
   /* Primary modal action now uses the shared .btn-primary class. */
   .edit-driver-route-btn-destructive {
     background: var(--btn-bg-destructive);
@@ -2015,13 +2044,10 @@
     flex-direction: column;
     gap: var(--spacing-tiny);
   }
-  .reset-order-footer { justify-content: space-between; }
   .reset-order-select { cursor: pointer; }
   .reset-order-select .select-input-value { min-height: var(--lh-default); }
 
   /* ---------- Set order complete side sheet ---------- */
-  /* Content sections separate at 24px (Figma Content slot gap), matching the bulk-edit body. */
-  .side-sheet-body--set-complete { gap: var(--spacing-lg); }
   .set-complete-intro {
     display: flex;
     flex-direction: column;
@@ -2034,9 +2060,102 @@
     width: 100%;
   }
   .set-complete-field-sm { width: 244px; } /* Figma date/time field width */
-  .set-complete-footer { justify-content: space-between; }
+  /* Section heading inside a side sheet (Heading 5 / 16px). */
+  .sheet-section-heading {
+    font-size: var(--font-heading-sm);
+    line-height: var(--lh-heading-sm);
+    font-weight: 600;
+    color: var(--color-text-heading);
+  }
+  /* Leading icon inside a text/tertiary button (e.g. Back chevron). */
+  .btn-icon-leading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+  }
+  .btn-icon-leading svg { width: auto; height: 100%; display: block; }
   /* Date/time end adornment (calendar/clock) sizes to the 16px box by height. */
   .select-input-icon--end svg { width: auto; height: 100%; }
+
+  /* ---------- Schedule date selection cards (radio) ---------- */
+  .selection-card-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+  }
+  .selection-cards-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-tiny);
+  }
+  .selection-cards {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+  /* "Other" date picker: right-aligned beneath the cards, matching the third card column. */
+  .schedule-date-other {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .schedule-date-other[hidden] { display: none; }
+  .schedule-date-picker { width: 176px; } /* Figma date picker width */
+  .selection-card {
+    flex: 1;
+    min-width: 0;
+    min-height: 40px; /* $card-size-selection-sm */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border: var(--border-width) solid var(--card-selection-border-off);
+    border-radius: var(--radius-md);
+    background: var(--card-selection-bg-off);
+    color: var(--card-selection-label);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+  }
+  .selection-card.is-selected {
+    border-color: var(--card-selection-border-on);
+    background: var(--card-selection-bg-on);
+    color: var(--text-active);
+  }
+  .selection-card-radio {
+    flex-shrink: 0;
+    width: var(--icon-sm); /* $selection-md = 16px */
+    height: var(--icon-sm);
+    color: var(--selection-off);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .selection-card.is-selected .selection-card-radio { color: var(--selection-on); }
+  .selection-card-radio svg { width: 100%; height: 100%; display: block; }
+  .selection-card-label {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 500;
+  }
+
+  /* ---------- Schedule time range ---------- */
+  .time-range {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+  }
+  .time-range-input { width: 170px; } /* Figma time picker width */
+  .time-range-sep { color: var(--color-text-default); }
+  /* Caption/helper text beneath a field. */
+  .field-caption {
+    margin: var(--spacing-xxs) 0 0;
+    font-size: var(--font-caption);
+    line-height: var(--lh-default);
+    color: var(--color-text-muted);
+  }
 
   @media (max-width: 900px) {
     .edit-assignee-sheet-card-content {
@@ -2091,20 +2210,18 @@
     gap: var(--spacing-xxs);
     padding: 0 var(--spacing-xs) var(--spacing-xs);
   }
-  .send-team-confirm-alert,
-  .edit-assignee-sheet-alert {
+  /* Reusable inline warning alert — used across side sheets and modals. */
+  .sheet-alert {
     display: flex;
     align-items: flex-start;
     gap: 0;
     width: 100%;
-    min-height: 64px;
     padding: var(--spacing-tiny) var(--spacing-xs);
     border-radius: var(--radius-md);
     background: #fff4e5;
   }
-  .edit-assignee-sheet-alert[hidden] { display: none; }
-  .send-team-confirm-alert-icon,
-  .edit-assignee-sheet-alert-icon {
+  .sheet-alert[hidden] { display: none; }
+  .sheet-alert-icon {
     width: var(--icon-sm);
     height: var(--icon-sm);
     color: #ec7a08;
@@ -2113,19 +2230,25 @@
     margin-top: 0;
     box-sizing: content-box;
   }
-  .send-team-confirm-alert-icon svg,
-  .edit-assignee-sheet-alert-icon svg {
+  .sheet-alert-icon svg {
     width: 100%;
     height: 100%;
     display: block;
   }
-  .send-team-confirm-alert-text,
-  .edit-assignee-sheet-alert-text {
+  .sheet-alert-text {
     font-size: var(--font-body);
     line-height: var(--lh-default);
     font-weight: 400;
     color: var(--color-text-warning);
     padding: var(--spacing-xxs) 0;
+  }
+  /* Explanatory note for Patient Scheduling / Patient Approval schedule-order sheets. */
+  .schedule-order-status-note {
+    font-size: var(--font-body);
+    line-height: var(--lh-default);
+    font-weight: 400;
+    color: var(--color-text-default);
+    margin: 0;
   }
   .send-team-confirm-help {
     font-size: var(--font-body);
@@ -2144,25 +2267,7 @@
     border-top: var(--border-width) solid var(--color-border-light);
     background: var(--color-bg-surface);
   }
-  .send-team-confirm-btn {
-    min-height: var(--btn-size-md);
-    padding: 0 var(--btn-padding-md);
-    white-space: nowrap;
-    border-radius: var(--button-radius-text);
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: var(--btn-font-md);
-    line-height: 1;
-    font-weight: 400;
-    transition: background var(--transition-fast);
-  }
-  .send-team-confirm-btn-cancel {
-    background: none;
-    color: var(--btn-ghost-content-tertiary);
-  }
-  .send-team-confirm-btn-cancel:hover { background: var(--button-ghost-bg-hover); }
-  .send-team-confirm-btn-cancel:active { background: var(--button-ghost-bg-active); }
+  /* Cancel action now uses the shared .btn-tertiary class. */
   /* Appearance from the shared .btn-primary class; this rule retains layout + JS hook only. */
   .send-team-confirm-btn-primary { margin-left: auto; }
 

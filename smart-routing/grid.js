@@ -1,5 +1,6 @@
 (function () {
   const ICON_ELLIPSIS = '<svg viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 40C22 38.8929 22.8929 38 24 38C25.1071 38 26 38.8929 26 40C26 41.1071 25.1071 42 24 42C22.8929 42 22 41.1071 22 40ZM28 40C28 38.8929 28.8929 38 30 38C31.1071 38 32 38.8929 32 40C32 41.1071 31.1071 42 30 42C28.8929 42 28 41.1071 28 40ZM36 38C37.1071 38 38 38.8929 38 40C38 41.1071 37.1071 42 36 42C34.8929 42 34 41.1071 34 40C34 38.8929 34.8929 38 36 38Z"/></svg>';
+  const ICON_CHEVRON_LEFT = '<svg viewBox="0 0 320 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>';
   const ICON_CHEVRON = '<svg class="chevron" viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M29.1786 35.75C29.6429 35.3214 30.3571 35.3214 30.8214 35.75L37.6786 42.6071C38.1071 43.0714 38.1071 43.7857 37.6786 44.25C37.2143 44.6786 36.5 44.6786 36.0357 44.25L30 38.1786L23.9643 44.25C23.5 44.6786 22.7857 44.6786 22.3214 44.25C21.8929 43.7857 21.8929 43.0714 22.3214 42.6071L29.1786 35.75Z"/></svg>';
   const ICON_NOTE = '<svg class="note-icon" viewBox="22 32 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 35C22 33.3438 23.3438 32 25 32H35C36.6562 32 38 33.3438 38 35V42C38 43.6562 36.6562 45 35 45H31.25C31.0938 45 30.9375 45.0625 30.8125 45.1562L27.1875 47.8438C27.0625 47.9375 26.9062 48 26.75 48C26.3438 48 26 47.6562 26 47.25V45H25C23.3438 45 22 43.6562 22 42V35ZM30 34.75C29.5938 34.75 29.25 35.0938 29.25 35.5V39C29.25 39.4062 29.5938 39.75 30 39.75C30.4062 39.75 30.75 39.4062 30.75 39V35.5C30.75 35.0938 30.4062 34.75 30 34.75ZM29.1562 41.5C29.1562 41.8125 29.3125 42.0938 29.5625 42.25C29.8438 42.4375 30.1562 42.4375 30.4375 42.25C30.6875 42.0938 30.8438 41.8125 30.8438 41.5C30.8438 41.1875 30.6875 40.9062 30.4375 40.75C30.1562 40.5625 29.8438 40.5625 29.5625 40.75C29.3125 40.9062 29.1562 41.1875 29.1562 41.5Z"/></svg>';
   const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M1.11773 11.0466C1.27406 10.6098 1.49292 10.1729 1.83683 9.86084L7.49585 4.1815L8.55887 3.12052C9.09038 3.65101 10.1534 4.74319 11.8105 6.36586L12.8735 7.42684L6.15144 14.136C5.80752 14.4792 5.40107 14.7289 4.9321 14.8537L0.930142 15.9771C0.68002 16.0395 0.398632 15.9771 0.211041 15.7586C0.023449 15.5714 -0.0390816 15.2905 0.023449 15.0409L1.11773 11.0466ZM2.86859 10.953C2.74353 11.0778 2.61847 11.2651 2.5872 11.4523L1.83683 14.1672L4.55691 13.4182C4.7445 13.3558 4.9321 13.2622 5.08842 13.1062L2.86859 10.953ZM13.9365 6.36586C13.405 5.86658 12.342 4.7744 10.6849 3.12052L9.62189 2.09075C10.466 1.24821 10.9038 0.78013 11.0288 0.686514C11.4353 0.249642 12.0293 0 12.6234 0C13.2174 0 13.8114 0.249642 14.2179 0.686514L15.3434 1.7787C15.7499 2.21557 16 2.77726 16 3.37016C16 3.99427 15.7499 4.55596 15.3434 4.99283C15.2184 5.08645 14.7494 5.55453 13.9365 6.36586Z"/></svg>';
@@ -15,6 +16,8 @@
   const ICON_CHECKBOX_OFF = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 1.56771H1.56771V12.4323H12.4323V1.56771ZM12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323Z" fill="#A8A29E"/></svg>';
   const ICON_CHECKBOX_ON = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.4323 0C13.3073 0 14 0.692708 14 1.56771V12.4323C14 13.3073 13.3073 14 12.4323 14H1.56771C0.692708 14 0 13.3073 0 12.4323V1.56771C0 0.692708 0.692708 0 1.56771 0H12.4323ZM5.97917 10.3542L11.8854 4.44792C12.2135 4.11979 12.2135 3.64583 11.8854 3.35417C11.5938 3.02604 11.0833 3.02604 10.7917 3.35417L5.43229 8.67708L3.20833 6.45312C2.91667 6.16146 2.40625 6.16146 2.11458 6.45312C1.78646 6.74479 1.78646 7.25521 2.11458 7.54688L4.88542 10.3542C5.21354 10.6458 5.6875 10.6458 5.97917 10.3542Z" fill="#3399D1"/></svg>';
   const ICON_CHECKBOX_INDETERMINATE = '<svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="14" rx="1.56771" fill="#3399D1"/><rect x="3.20833" y="6.29167" width="7.58333" height="1.41667" rx="0.708333" fill="white"/></svg>';
+  const ICON_RADIO_OFF = '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/></svg>';
+  const ICON_RADIO_ON = '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="3.25" fill="currentColor"/></svg>';
   const ICON_CHIP_REMOVE = '<svg viewBox="0 0 14 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 14C3.14453 14 0 10.8555 0 7C0 3.14453 3.14453 0 7 0C10.8555 0 14 3.14453 14 7C14 10.8555 10.8555 14 7 14ZM4.56641 4.56641C4.32031 4.8125 4.32031 5.25 4.56641 5.49609L6.07031 7L4.56641 8.50391C4.32031 8.75 4.32031 9.16016 4.56641 9.43359C4.8125 9.67969 5.25 9.67969 5.49609 9.43359L7 7.92969L8.50391 9.43359C8.75 9.67969 9.16016 9.67969 9.43359 9.43359C9.67969 9.1875 9.67969 8.75 9.43359 8.50391L7.92969 7L9.43359 5.49609C9.67969 5.25 9.67969 4.8125 9.43359 4.56641C9.1875 4.32031 8.75 4.32031 8.50391 4.56641L7 6.07031L5.49609 4.56641C5.25 4.32031 4.8125 4.32031 4.56641 4.56641Z"/></svg>';
   const ICON_MAP_PIN = '<svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.8169 0.7361V3.95926C10.3944 3.75352 9.9507 3.66209 9.46479 3.66209C8.38732 3.66209 7.41549 4.18785 6.76056 4.98792V2.72486L4.05634 1.74191V8.2568L6.19014 9.03401C6.35915 9.53691 6.59155 10.017 6.82394 10.4284C6.9084 10.5884 6.99296 10.7485 7.09859 10.8856L3.42254 9.58263L0.971831 10.9085C0.760563 11.0228 0.528169 10.9999 0.316901 10.8628C0.126761 10.7256 0 10.497 0 10.2456V2.19909C0 1.92478 0.147887 1.67333 0.380282 1.53617L3.08451 0.0731814C3.23239 0.00460364 3.42254 -0.0182556 3.59155 0.0503222L7.39437 1.42188L9.84507 0.0731814C10.0563 -0.0411149 10.2887 -0.0182556 10.5 0.1189C10.6901 0.256056 10.8169 0.484648 10.8169 0.7361ZM9.46479 4.75933C10.8592 4.75933 12 5.97087 12 7.45672C12 9.03401 10.6479 10.8856 9.92958 11.7771C9.67606 12.0743 9.25352 12.0743 9.02113 11.7771C8.28169 10.8856 6.92958 9.03401 6.92958 7.45672C6.92958 5.97087 8.07042 4.75933 9.46479 4.75933ZM8.61972 7.50244C8.61972 8.00534 9 8.41681 9.46479 8.41681C9.92958 8.41681 10.3099 8.00534 10.3099 7.50244C10.3099 6.99954 9.92958 6.58807 9.46479 6.58807C9 6.58807 8.61972 6.99954 8.61972 7.50244Z" fill="currentColor"/></svg>';
   const ICON_PHONE_LANDLINE = '<svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.74471 0.592393L4.7055 2.86548C4.86954 3.26386 4.75237 3.70911 4.42429 3.96688L3.3932 4.8105C4.14309 6.49775 5.47882 7.85691 7.1192 8.6771L8.03312 7.57571C8.29089 7.24763 8.73614 7.13046 9.13451 7.2945L11.4076 8.25529C11.8529 8.44276 12.0872 8.91144 11.97 9.38012L11.9232 9.49729C11.5248 11.0205 10.0484 12.3094 8.26746 11.9344C4.16652 11.0674 0.932636 7.83348 0.0655802 3.73254C-0.309363 1.95156 0.979504 0.498657 2.50271 0.0768461L2.61988 0.0299783C3.0885 -0.0871914 3.55724 0.147148 3.74471 0.592393Z" fill="currentColor"/></svg>';
@@ -381,7 +384,7 @@
     }).join('');
 
     return '<div class="side-sheet-header"><div class="side-sheet-title">Edit Assignee: ' + count + ' Order' + (count === 1 ? '' : 's') + '</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
-      '<div class="side-sheet-body side-sheet-body--bulk-edit">' +
+      '<div class="side-sheet-body side-sheet-body--spaced">' +
       '<div class="edit-driver-route-field">' +
       '<span class="edit-driver-route-label" id="editAssigneeLabel">Assignee</span>' +
       '<div class="edit-assignee-sheet-combobox">' +
@@ -397,14 +400,14 @@
       '<p class="edit-assignee-sheet-error" hidden>Assignee is required</p>' +
       '</div>' +
       '<p class="edit-assignee-sheet-help">All orders must have a schedule in the Confirmed or Rescheduled status before they can be sent to dispatch.</p>' +
-      '<div class="edit-assignee-sheet-alert" hidden>' +
-      '<span class="edit-assignee-sheet-alert-icon">' + ICON_WARNING + '</span>' +
-      '<p class="edit-assignee-sheet-alert-text">Assigning orders to another team will immediately remove them from the current assignee\'s board.</p>' +
+      '<div class="sheet-alert edit-assignee-sheet-alert" hidden>' +
+      '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
+      '<p class="sheet-alert-text">Assigning orders to another team will immediately remove them from the current assignee\'s board.</p>' +
       '</div>' +
       '<div class="edit-assignee-sheet-list">' + cards + '</div>' +
       '</div>' +
-      '<div class="edit-assignee-sheet-footer">' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel edit-assignee-sheet-cancel" type="button">Cancel</button>' +
+      '<div class="side-sheet-footer side-sheet-footer--split">' +
+      '<button class="btn-tertiary edit-assignee-sheet-cancel" type="button">Cancel</button>' +
       '<button class="btn-primary edit-assignee-sheet-assign" type="button">Assign</button>' +
       '</div>';
   }
@@ -457,8 +460,8 @@
       '</div>' +
       '</div>' +
       '</div>' +
-      '<div class="edit-assignee-sheet-footer reset-order-footer">' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel reset-order-cancel" type="button">Cancel</button>' +
+      '<div class="side-sheet-footer side-sheet-footer--split">' +
+      '<button class="btn-tertiary reset-order-cancel" type="button">Cancel</button>' +
       '<button class="edit-driver-route-btn edit-driver-route-btn-destructive reset-order-confirm" type="button">Reset order</button>' +
       '</div>';
   }
@@ -489,7 +492,7 @@
     var completedTime = formatNowTime();
 
     return '<div class="side-sheet-header"><div class="side-sheet-title">Set Order Complete</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
-      '<div class="side-sheet-body side-sheet-body--set-complete">' +
+      '<div class="side-sheet-body side-sheet-body--spaced">' +
       '<div class="set-complete-intro">' +
       '<p class="reset-order-description">Orders completed with today\'s date must be scheduled with a driver and route assigned.</p>' +
       '<p class="reset-order-description">Backdated orders must include both a date and time of completion.</p>' +
@@ -530,9 +533,173 @@
       '</div>' +
       '</div>' +
       '</div>' +
-      '<div class="edit-assignee-sheet-footer set-complete-footer">' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel set-complete-cancel" type="button">Cancel</button>' +
+      '<div class="side-sheet-footer side-sheet-footer--split">' +
+      '<button class="btn-tertiary set-complete-cancel" type="button">Cancel</button>' +
       '<button class="btn-primary set-complete-confirm" type="button">Set complete</button>' +
+      '</div>';
+  }
+
+  // Schedule order side sheet. The full content below (approval alert + action footer)
+  // applies only to Provider Review orders that have a requested date. Other schedule
+  // statuses show header + status + details only; their alert/footer variants are TBD.
+  function isScheduleOrderProviderReview(r) {
+    return !!(r.scheduleStatus && r.scheduleStatus.t === 'Provider Review' && r.reqDate);
+  }
+
+  // Patient Scheduling and Patient Approval statuses show an explanatory note (no actions)
+  // in place of the Provider Review alert/footer. Returns the note text, or '' otherwise.
+  function scheduleOrderStatusNote(r) {
+    var t = r.scheduleStatus && r.scheduleStatus.t;
+    if (t === 'Patient Scheduling') return 'This order cannot be scheduled until the patient or caregiver provides a requested schedule.';
+    if (t === 'Patient Approval') return 'The order schedule can’t be updated until it’s reviewed by the patient or caregiver.';
+    return '';
+  }
+
+  // Order data line items render only when the underlying value exists (matches other sheets).
+  // Shared by both the Schedule Order confirm view and the Propose new schedule view.
+  function scheduleOrderDetailsHtml(r) {
+    function dateValue(date, time) {
+      return date + (time ? ' (' + time + ')' : '');
+    }
+    function detailLine(label, value) {
+      return '<div class="lv"><span class="label">' + label + ':</span><span class="value">' + value + '</span></div>';
+    }
+    var details = '<div class="lv"><span class="label">Order #:</span><span class="value link" tabindex="0">' + r.order + '</span></div>';
+    if (r.reason) details += detailLine('Reason', r.reason);
+    if (r.priority) details += detailLine('Priority', r.priority);
+    if (r.reqDate) details += detailLine('Requested', dateValue(r.reqDate, r.reqTime));
+    return details;
+  }
+
+  function buildScheduleOrderSheetHtml(r) {
+    var statusBadge = badge(r.scheduleStatus, 'large');
+    var providerReview = isScheduleOrderProviderReview(r);
+    var status = r.scheduleStatus && r.scheduleStatus.t;
+    // Simple Cancel / Schedule footer variant: Provider Review without a requested date,
+    // or Escalated. (Provider Review + requested date uses the full three-button footer.)
+    var simpleSchedule = (status === 'Provider Review' && !r.reqDate) || status === 'Escalated';
+
+    var details = scheduleOrderDetailsHtml(r);
+
+    // Patient Scheduling / Patient Approval: single explanatory note above the details, no actions.
+    var note = scheduleOrderStatusNote(r);
+    var noteHtml = note ? '<p class="schedule-order-status-note">' + note + '</p>' : '';
+
+    // Approval alert shown for any Provider Review order (with or without a requested date).
+    var alertHtml = status === 'Provider Review'
+      ? '<div class="sheet-alert">' +
+        '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
+        '<p class="sheet-alert-text">This schedule will be sent to the patient or caregiver for approval.</p>' +
+        '</div>'
+      : '';
+
+    var footerHtml;
+    if (providerReview) {
+      // Provider Review + requested date: full three-button action footer.
+      footerHtml = '<div class="side-sheet-footer side-sheet-footer--split">' +
+        '<button class="btn-tertiary schedule-order-cancel" type="button">Cancel</button>' +
+        '<div class="side-sheet-footer-actions">' +
+        '<button class="btn-secondary schedule-order-propose" type="button">Propose new schedule</button>' +
+        '<button class="btn-primary schedule-order-confirm" type="button">Confirm requested schedule</button>' +
+        '</div>' +
+        '</div>';
+    } else if (simpleSchedule) {
+      // Provider Review (no requested date) or Escalated: Cancel + Schedule only.
+      footerHtml = '<div class="side-sheet-footer side-sheet-footer--split">' +
+        '<button class="btn-tertiary schedule-order-cancel" type="button">Cancel</button>' +
+        '<button class="btn-primary schedule-order-schedule" type="button">Schedule</button>' +
+        '</div>';
+    } else {
+      footerHtml = '';
+    }
+
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Schedule Order</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
+      '<div class="side-sheet-body side-sheet-body--spaced">' +
+      '<div class="badges">' + statusBadge + '</div>' +
+      noteHtml +
+      '<div class="reset-order-details">' + details + '</div>' +
+      alertHtml +
+      '</div>' +
+      footerHtml;
+  }
+
+  // Propose new schedule view (Provider Review + requested-date variant). Reached from the
+  // Schedule Order confirm view via "Propose new schedule"; lets the user enter a new
+  // schedule window and reason before sending it to the patient/caregiver for approval.
+  // Short date (M/D) offset from today, e.g. formatShortDate(1) => tomorrow. Used by the
+  // Schedule date selection cards so "Today"/"Tomorrow" always reflect the current date.
+  function formatShortDate(dayOffset) {
+    var d = new Date();
+    d.setDate(d.getDate() + (dayOffset || 0));
+    return (d.getMonth() + 1) + '/' + d.getDate();
+  }
+
+  // One radio selection card in the Schedule date group. Rendered unselected to match the
+  // mockup; click behavior (single selection within the group) is wired in renderProposeView.
+  function scheduleDateCard(value, label) {
+    return '<button class="selection-card" type="button" role="radio" aria-checked="false" data-schedule-date="' + value + '">' +
+      '<span class="selection-card-radio">' + ICON_RADIO_OFF + '</span>' +
+      '<span class="selection-card-label">' + label + '</span>' +
+      '</button>';
+  }
+
+  function buildScheduleOrderProposeSheetHtml(r) {
+    var statusBadge = badge(r.scheduleStatus, 'large');
+    var details = scheduleOrderDetailsHtml(r);
+
+    return '<div class="side-sheet-header"><div class="side-sheet-title">Schedule Order</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
+      '<div class="side-sheet-body side-sheet-body--spaced">' +
+      '<div class="badges">' + statusBadge + '</div>' +
+      '<div class="reset-order-details">' + details + '</div>' +
+      '<div class="set-complete-fields">' +
+      '<div class="sheet-section-heading">Schedule Details</div>' +
+      '<div class="selection-card-group">' +
+      '<div class="selection-cards-block">' +
+      '<span class="edit-driver-route-label">Schedule date <span class="req">*</span></span>' +
+      '<div class="selection-cards" role="radiogroup" aria-label="Schedule date">' +
+      scheduleDateCard('today', 'Today (' + formatShortDate(0) + ')') +
+      scheduleDateCard('tomorrow', 'Tomorrow (' + formatShortDate(1) + ')') +
+      scheduleDateCard('other', 'Other (Select date)') +
+      '</div>' +
+      '</div>' +
+      '<div class="schedule-date-other" hidden>' +
+      '<div class="select-input schedule-date-picker">' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-icon select-input-icon--end">' + ICON_CALENDAR + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Schedule time <span class="req">*</span></span>' +
+      '<div class="time-range">' +
+      '<div class="select-input time-range-input">' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-icon select-input-icon--end">' + ICON_CLOCK + '</span>' +
+      '</div>' +
+      '<span class="time-range-sep">–</span>' +
+      '<div class="select-input time-range-input">' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-icon select-input-icon--end">' + ICON_CLOCK + '</span>' +
+      '</div>' +
+      '</div>' +
+      '<p class="field-caption">Scheduling options reflect the patient’s local time: Central Time (CT)</p>' +
+      '</div>' +
+      '<div class="edit-driver-route-field">' +
+      '<span class="edit-driver-route-label">Reason for schedule change <span class="req">*</span></span>' +
+      '<div class="select-input">' +
+      '<span class="select-input-value"></span>' +
+      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="sheet-alert">' +
+      '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
+      '<p class="sheet-alert-text">This schedule will be sent to the patient or caregiver for approval.</p>' +
+      '</div>' +
+      '</div>' +
+      '<div class="side-sheet-footer side-sheet-footer--split">' +
+      '<button class="btn-tertiary schedule-order-back" type="button"><span class="btn-icon-leading">' + ICON_CHEVRON_LEFT + '</span>Back</button>' +
+      '<button class="btn-primary schedule-order-send" type="button">Send schedule</button>' +
       '</div>';
   }
 
@@ -607,9 +774,9 @@
       '</div>' +
       '</div>' +
       '<div class="edit-driver-route-modal-footer">' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel" type="button">Cancel</button>' +
+      '<button class="btn-tertiary edit-driver-route-btn-cancel" type="button">Cancel</button>' +
         '<div class="edit-driver-route-modal-footer-actions">' +
-        '<button class="edit-driver-route-btn edit-driver-route-btn-secondary edit-driver-route-btn-save-action" type="button">Save and close</button>' +
+        '<button class="btn-secondary edit-driver-route-btn-save-action" type="button">Save and close</button>' +
         '<button class="btn-primary edit-driver-route-btn-save-action" type="button">Save and view route</button>' +
         '</div>' +
       '</div>' +
@@ -636,14 +803,14 @@
       '<button class="icon-btn send-team-confirm-close" type="button" aria-label="Close">' + ICON_CLOSE + '</button>' +
       '</div>' +
       '<div class="send-team-confirm-body">' +
-      '<div class="send-team-confirm-alert">' +
-      '<span class="send-team-confirm-alert-icon">' + ICON_WARNING + '</span>' +
-      '<p class="send-team-confirm-alert-text">Sending this order another team will immediately remove it from your board.</p>' +
+      '<div class="sheet-alert">' +
+      '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
+      '<p class="sheet-alert-text">Sending this order another team will immediately remove it from your board.</p>' +
       '</div>' +
       '<p class="send-team-confirm-help">After reassigning, you can use the recent orders history button in the toolbar to view a list of orders you recently edited and navigate to an order\'s profile.</p>' +
       '</div>' +
       '<div class="send-team-confirm-footer">' +
-      '<button class="send-team-confirm-btn send-team-confirm-btn-cancel" type="button">Cancel</button>' +
+      '<button class="btn-tertiary send-team-confirm-btn-cancel" type="button">Cancel</button>' +
       '<button class="btn-primary send-team-confirm-btn-primary" type="button">' + primaryActionLabel + '</button>' +
       '</div>' +
       '</div>';
@@ -679,7 +846,7 @@
       '</div>' +
       '</div>' +
       '<div class="bulk-edit-tags-modal-footer">' +
-      '<button class="edit-driver-route-btn edit-driver-route-btn-cancel bulk-edit-tags-btn-cancel" type="button">Cancel</button>' +
+      '<button class="btn-tertiary bulk-edit-tags-btn-cancel" type="button">Cancel</button>' +
       '<button class="btn-primary bulk-edit-tags-btn-save" type="button">Save</button>' +
       '</div>' +
       '</div>';
@@ -1359,11 +1526,12 @@
       align: 'right',
       onSelect: function (value) {
         if (value === 'View equipment') openSideSheet(r.order, state);
-        if (value === 'Edit driver / route' && dispatch) openEditDriverRouteModal(r, state);
+        // if (value === 'Edit driver / route' && dispatch) openEditDriverRouteModal(r, state);
         if (value === 'Send to scheduling') openSendTeamConfirmModal('Send to scheduling', state);
         if (value === 'Send to dispatch') openSendTeamConfirmModal('Send to dispatch', state);
         if (value === 'Reset order') openResetOrderSheet(r, state, variant);
         if (value === 'Set complete') openSetCompleteSheet(r, state);
+        if (value === 'Schedule order') openScheduleOrderSheet(r, state);
       }
     }, state);
 
@@ -1719,6 +1887,63 @@
     sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
     sheetEl.querySelector('.set-complete-cancel').addEventListener('click', close);
     sheetEl.querySelector('.set-complete-confirm').addEventListener('click', close);
+  }
+
+  function openScheduleOrderSheet(r, state) {
+    if (state.sheetEl) state.sheetEl.remove();
+    const sheetEl = document.createElement('div');
+    state.sheetEl = sheetEl;
+    state.isSideSheetOpen = true;
+    if (typeof state.syncSelectionToolbarVisibility === 'function') {
+      state.syncSelectionToolbarVisibility();
+    }
+    sheetEl.className = 'side-sheet';
+    document.body.appendChild(sheetEl);
+
+    function close() {
+      closeSideSheet(state);
+    }
+
+    // Renders the confirm view; "Propose new schedule" swaps in the propose view in place,
+    // and its "Back" button returns here (Provider Review + requested-date variant only).
+    function renderConfirmView() {
+      sheetEl.innerHTML = buildScheduleOrderSheetHtml(r);
+      sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
+      var cancelBtn = sheetEl.querySelector('.schedule-order-cancel');
+      if (cancelBtn) cancelBtn.addEventListener('click', close);
+      var confirmBtn = sheetEl.querySelector('.schedule-order-confirm');
+      if (confirmBtn) confirmBtn.addEventListener('click', close);
+      var proposeBtn = sheetEl.querySelector('.schedule-order-propose');
+      if (proposeBtn) proposeBtn.addEventListener('click', renderProposeView);
+      // Schedule button (Provider Review w/o requested date, Escalated) is not wired up yet.
+    }
+
+    function renderProposeView() {
+      sheetEl.innerHTML = buildScheduleOrderProposeSheetHtml(r);
+      sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
+      sheetEl.querySelector('.schedule-order-back').addEventListener('click', renderConfirmView);
+      // Send schedule closes the sheet (submission is out of scope for the prototype).
+      sheetEl.querySelector('.schedule-order-send').addEventListener('click', close);
+      // Schedule date selection cards: single selection within the radio group.
+      // Selecting "Other" reveals a date picker beneath the cards.
+      var dateCards = sheetEl.querySelectorAll('.selection-card');
+      var otherDatePicker = sheetEl.querySelector('.schedule-date-other');
+      dateCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          dateCards.forEach(function (other) {
+            var on = other === card;
+            other.classList.toggle('is-selected', on);
+            other.setAttribute('aria-checked', on ? 'true' : 'false');
+            other.querySelector('.selection-card-radio').innerHTML = on ? ICON_RADIO_ON : ICON_RADIO_OFF;
+          });
+          if (otherDatePicker) otherDatePicker.hidden = card.dataset.scheduleDate !== 'other';
+        });
+      });
+    }
+
+    renderConfirmView();
+    void sheetEl.offsetWidth;
+    sheetEl.classList.add('open');
   }
 
   function closeSideSheet(state) {

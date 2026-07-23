@@ -578,6 +578,8 @@
     // Simple Cancel / Schedule footer variant: Provider Review without a requested date,
     // or Escalated. (Provider Review + requested date uses the full three-button footer.)
     var simpleSchedule = (status === 'Provider Review' && !r.reqDate) || status === 'Escalated';
+    // Confirmed / Rescheduled: an already-scheduled order. Cancel + Reschedule footer, no alert.
+    var scheduled = status === 'Confirmed' || status === 'Rescheduled';
 
     var details = scheduleOrderDetailsHtml(r);
 
@@ -609,6 +611,12 @@
         '<button class="btn-tertiary schedule-order-cancel" type="button">Cancel</button>' +
         '<button class="btn-primary schedule-order-schedule" type="button">Schedule</button>' +
         '</div>';
+    } else if (scheduled) {
+      // Confirmed / Rescheduled: Cancel + Reschedule (Reschedule opens the card-options view).
+      footerHtml = '<div class="side-sheet-footer side-sheet-footer--split">' +
+        '<button class="btn-tertiary schedule-order-cancel" type="button">Cancel</button>' +
+        '<button class="btn-primary schedule-order-reschedule" type="button">Reschedule</button>' +
+        '</div>';
     } else {
       footerHtml = '';
     }
@@ -623,9 +631,10 @@
       footerHtml;
   }
 
-  // Propose new schedule view (Provider Review + requested-date variant). Reached from the
-  // Schedule Order confirm view via "Propose new schedule"; lets the user enter a new
-  // schedule window and reason before sending it to the patient/caregiver for approval.
+  // Card-options view (schedule date/time selection). Reached from the Schedule Order confirm
+  // view via "Propose new schedule" (Provider Review + requested date; full variant with the
+  // reason field) or via "Schedule" (Escalated / Provider Review w/o requested date; no reason
+  // field). See buildScheduleOrderProposeSheetHtml opts for the per-variant differences.
   // Short date (M/D) offset from today, e.g. formatShortDate(1) => tomorrow. Used by the
   // Schedule date selection cards so "Today"/"Tomorrow" always reflect the current date.
   function formatShortDate(dayOffset) {
@@ -643,9 +652,34 @@
       '</button>';
   }
 
-  function buildScheduleOrderProposeSheetHtml(r) {
+  // opts controls the variants that share this card-options layout:
+  //   includeReason - render the "Reason for schedule change" field (Provider Review + requested date)
+  //   includeAlert  - render the patient/caregiver approval alert
+  //   primaryLabel  - primary button text ("Send schedule" vs "Set schedule")
+  function buildScheduleOrderProposeSheetHtml(r, opts) {
+    opts = opts || {};
+    var includeReason = opts.includeReason !== false;
+    var includeAlert = opts.includeAlert !== false;
+    var primaryLabel = opts.primaryLabel || 'Send schedule';
     var statusBadge = badge(r.scheduleStatus, 'large');
     var details = scheduleOrderDetailsHtml(r);
+
+    var reasonHtml = includeReason
+      ? '<div class="edit-driver-route-field">' +
+        '<span class="edit-driver-route-label">Reason for schedule change <span class="req">*</span></span>' +
+        '<div class="select-input">' +
+        '<span class="select-input-value"></span>' +
+        '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+        '</div>' +
+        '</div>'
+      : '';
+
+    var alertHtml = includeAlert
+      ? '<div class="sheet-alert">' +
+        '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
+        '<p class="sheet-alert-text">This schedule will be sent to the patient or caregiver for approval.</p>' +
+        '</div>'
+      : '';
 
     return '<div class="side-sheet-header"><div class="side-sheet-title">Schedule Order</div><button class="icon-btn side-sheet-close" aria-label="Close">' + ICON_CLOSE + '</button></div>' +
       '<div class="side-sheet-body side-sheet-body--spaced">' +
@@ -684,22 +718,13 @@
       '</div>' +
       '<p class="field-caption">Scheduling options reflect the patient’s local time: Central Time (CT)</p>' +
       '</div>' +
-      '<div class="edit-driver-route-field">' +
-      '<span class="edit-driver-route-label">Reason for schedule change <span class="req">*</span></span>' +
-      '<div class="select-input">' +
-      '<span class="select-input-value"></span>' +
-      '<span class="select-input-chevron">' + ICON_CHEVRON_DOWN + '</span>' +
+      reasonHtml +
       '</div>' +
-      '</div>' +
-      '</div>' +
-      '<div class="sheet-alert">' +
-      '<span class="sheet-alert-icon">' + ICON_WARNING + '</span>' +
-      '<p class="sheet-alert-text">This schedule will be sent to the patient or caregiver for approval.</p>' +
-      '</div>' +
+      alertHtml +
       '</div>' +
       '<div class="side-sheet-footer side-sheet-footer--split">' +
       '<button class="btn-tertiary schedule-order-back" type="button"><span class="btn-icon-leading">' + ICON_CHEVRON_LEFT + '</span>Back</button>' +
-      '<button class="btn-primary schedule-order-send" type="button">Send schedule</button>' +
+      '<button class="btn-primary schedule-order-send" type="button">' + primaryLabel + '</button>' +
       '</div>';
   }
 
@@ -1915,11 +1940,38 @@
       if (confirmBtn) confirmBtn.addEventListener('click', close);
       var proposeBtn = sheetEl.querySelector('.schedule-order-propose');
       if (proposeBtn) proposeBtn.addEventListener('click', renderProposeView);
-      // Schedule button (Provider Review w/o requested date, Escalated) is not wired up yet.
+      // Schedule button (Provider Review w/o requested date, Escalated): swaps in the same
+      // card-options view as Propose, minus the reason field. The approval alert only shows
+      // for Provider Review; Escalated has no alert.
+      var scheduleBtn = sheetEl.querySelector('.schedule-order-schedule');
+      if (scheduleBtn) scheduleBtn.addEventListener('click', function () {
+        var status = r.scheduleStatus && r.scheduleStatus.t;
+        renderCardOptionsView({
+          includeReason: false,
+          includeAlert: status === 'Provider Review',
+          primaryLabel: 'Set schedule'
+        });
+      });
+      // Reschedule (Confirmed / Rescheduled): card-options view with the reason field,
+      // no approval alert, "Back" + "Set schedule" footer.
+      var rescheduleBtn = sheetEl.querySelector('.schedule-order-reschedule');
+      if (rescheduleBtn) rescheduleBtn.addEventListener('click', function () {
+        renderCardOptionsView({
+          includeReason: true,
+          includeAlert: false,
+          primaryLabel: 'Set schedule'
+        });
+      });
     }
 
+    // Provider Review + requested date "Propose new schedule": full card-options view
+    // (reason field + approval alert + "Send schedule").
     function renderProposeView() {
-      sheetEl.innerHTML = buildScheduleOrderProposeSheetHtml(r);
+      renderCardOptionsView();
+    }
+
+    function renderCardOptionsView(opts) {
+      sheetEl.innerHTML = buildScheduleOrderProposeSheetHtml(r, opts);
       sheetEl.querySelector('.side-sheet-close').addEventListener('click', close);
       sheetEl.querySelector('.schedule-order-back').addEventListener('click', renderConfirmView);
       // Send schedule closes the sheet (submission is out of scope for the prototype).
